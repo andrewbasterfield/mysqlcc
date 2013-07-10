@@ -1,0 +1,26 @@
+/* XPM */
+static const char* const bits8Icon_data[] = {
+"16 16 5 1",
+"b c #0000ff",
+". c None",
+"a c #1fff29",
+"c c #4a4a4a",
+"# c #ff0000",
+"................",
+"#####aaaaaabbbbb",
+"#####aaaaaabbbbb",
+"#####aaaaaabbbbb",
+"#####aaaaaabbbbb",
+"#####aaaaaabbbbb",
+"#####aaaaaabbbbb",
+"................",
+"................",
+"......ccc.......",
+".....cc.cc......",
+"......ccc.......",
+".....cc.cc......",
+".....cc.cc......",
+"......ccc.......",
+"................"};
+
+

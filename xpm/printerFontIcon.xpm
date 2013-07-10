@@ -1,0 +1,26 @@
+/* XPM */
+static const char* const printerFontIcon_data[] = { 
+"16 16 6 1",
+". c None",
+"# c #4a4a4a",
+"b c #4a4aa5",
+"c c #d6d6ce",
+"d c #d6e7ff",
+"a c #ffffff",
+".....#########..",
+"....#aaaaaaaa#..",
+"....#abbbbba#...",
+"...#aaaaaaaa#...",
+"...#abb#########",
+"..#aaaa#aaaaaaa#",
+".#######aaabaaa#",
+"#cccccc#aadbdaa#",
+"########adbabda#",
+"#cccccc#adbabda#",
+"#cccccc#dbaaabd#",
+"########dbbbbbd#",
+".#ccccc#dbaaabd#",
+"..######baaaaab#",
+".......#########",
+"................"};
+

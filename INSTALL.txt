@@ -1,0 +1,229 @@
+}Installing MySQL Control Center
+===============================
+
+* Linux Binary Installation
+
+* Windows Binary Installation
+
+* Building MySQL Control Center
+   -Notes on Qt
+   -Compiling under Linux/Unix
+   -Compiling under Windows
+
+* Contributors to MySQL Control Center
+
+
+Linux Binary Installation
+=========================
+
+To install a binary distribution, follow the steps below:
+
+  1. Obtain a distribution file from one of the sites listed in *Note
+     Getting MySQL: Getting MySQL.
+
+     MySQL Control Center  binary distributions are provided as compressed
+     `tar' archives and have names like `mysqlcc-VERSION-OS.tar.gz', where
+     `VERSION' is a number (for example, `0.9.1'), and `OS' indicates
+     the type of operating system for which the distribution is intended
+     (for example, `linux').
+
+  2. Pick the directory under which you want to unpack the
+     distribution, and move into it.  In the example below, we unpack
+     the distribution under `/usr/local' and create a directory
+     `/usr/local/mysqlcc' into which MySQL Control Center is installed.
+     (The following instructions therefore assume you have permission to
+     create files in `/usr/local'.  If that directory is protected, you
+     will need to perform the installation as `root'.)
+
+  3. Change into the intended installation directory:
+
+          shell> cd /usr/local
+
+  4. Unpack the distribution and create the installation directory:
+
+          shell> gunzip < /path/to/mysqlcc-VERSION-OS.tar.gz | tar xvf -
+          shell> ln -s mysqlcc-VERSION-OS mysqlcc
+
+     The first command creates a directory named `mysqlcc-VERSION-OS'.
+     The second command makes a symbolic link to that directory.  This
+     lets you refer more easily to the installation directory as
+     `/usr/local/mysqlcc'.
+
+  5. Change into the installation directory:
+
+          shell> cd mysqlcc
+
+After everything has been unpacked and installed, you should now be
+able to execute mysqlcc and test your distribution.
+
+You can start MySQL Control Center with the following command:
+
+     shell> /usr/local/mysqlcc/mysqlcc
+
+
+Note:  MySQL Control Center  is a Graphical GUI Client.  This means you
+       will need to be running in an X environment before starting
+       MySQL Control Center with the above command.
+
+
+Windows Binary Installation
+===========================
+
+To install a binary distribution under Windows, follow the steps below:
+
+  1. Obtain a Windows distribution file from one of the sites listed in
+     *Note Getting MySQL: Getting MySQL.
+
+     MySQL Control Center binary distributions for Windows are provided
+     as compressed `zip' archives and have names like
+     `mysqlcc-VERSION-OS.zip', where `VERSION' is a number (for example,
+     `0.9.1'), and `OS' indicates the type of operating system for which
+     the distribution is intended (for example, `win32').
+
+  2. Unzip the Windows binary distribution to a directory  of it's own.
+
+  3. Click on `Setup.exe` and follow the installation wizard.
+
+
+Building MySQL Control Center
+=============================
+
+You need the following tools to create a MySQL Control Center binary from
+the source distribution:
+
+   * MySQL Control Center source distribution.
+  
+   * GNU `gunzip' to uncompress the distribution.  Windows users can use
+     applications such as WinZip (C) and/or WinRAR (C).
+
+   * A reasonable `tar' to unpack the distribution.  GNU `tar' is known
+     to work.  Sun `tar' is known to have problems.  Windows users can
+     use applications such as WinZip (C) and/or WinRAR (C).
+     
+   * A working ANSI C++ compiler.  gcc >= 2.95.3 < 3.2 are some of
+     the compilers that are known to work.
+
+     For Microsoft Windows Operating Systems, Microsoft Visual C++ 6.0
+     with the latest service pack is highly recommended.
+
+   * A good `make' program.  GNU `make' is always recommended and is
+     sometimes required.  If you have problems, we recommend trying GNU
+     `make' 3.75 or newer.  Windows users will not need this.
+
+   * MySQL Client libraries and headers need to be installed.  For more
+     information, check http://www.mysql.com
+
+   * Trolltech's Qt 3.0.5 or greater library is required to build this
+     application from source.  For more information regarding Qt visit
+     http://www.trolltech.com
+
+   * MySQL 4.0.12 or greater is required to compile MySQLCC under Win32
+     platforms.
+
+   * MySQL 4.0.3 or greater is required to compile MySQLCC under Linux
+     and Unix platforms.
+
+Notes on Qt
+-----------
+
+It is highly recommended that you compile Qt with the following options
+enabled:
+
+     -thread
+     -shared
+
+The source distribution of MySQL Control Center assumes you have compiled
+Qt with the above settings.  If Qt was compiled differently, you will have
+to modify mysqlcc.pro.in and the generated Makefile in order to compile
+MySQL Control Center correctly.
+
+You probably also want to add the following options to fully enable
+graphics support in MySQL Control Center:
+
+     -qt-gif
+     -qt-imgfmt-png
+     -qt-imgfmt-jpeg
+     -qt-imgfmt-mng
+
+Our statically built binary links against Qt compiled in the with the
+following configure arguments:
+
+     -static
+     -qt-gif
+     -thread
+     -no-stl
+     -qt-imgfmt-png
+     -qt-imgfmt-jpeg
+     -qt-imgfmt-mng
+
+For more information on building the Qt library, read the "Installation"
+section of the Qt manual.
+
+
+Compiling MySQL Control Center under Linux/Unix
+-----------------------------------------------
+
+The basic commands you must execute to install a *MySQL Control Center*
+source distribution are:
+
+     shell> gunzip < mysqlcc-VERSION.tar.gz | tar -xvf -
+     shell> cd mysqlcc-VERSION
+     shell> ./configure
+     shell> make
+
+For a list of possible configure options type:
+     shell> ./configure --help
+
+
+Compiling MySQL Control Center under Microsoft Windows
+------------------------------------------------------
+
+The basic steps for compiling *MySQL Control Center* under a Windows
+environment are:
+
+     * Unzip the source distribution.
+
+     * copy the file win32/mysqlcc.pro to the root directory of
+       the unziped source distribution
+
+     * Edit mysqlcc.pro and make sure the `LIBS` and `INCLUDEPATH`
+       directives point to the correct places.
+
+     * from the command prompt, type:
+       C:\path>qmake -t vcapp -o mysqlcc.dsp mysqlcc.pro
+
+       The above command will create a file called mysqlcc.dsp
+
+     * Open the newly created file `mysqlcc.dsp' in Microsoft Visual C++
+       and select the `Build' option from the `Project' menu.
+
+
+Contributors to MySQL Control Center
+====================================
+
+Below are the contributors who have taken an active role in the development
+of MySQL Control Center:
+
+Jorge del Conde <jorge@mysql.com>
+Main concept, programming, design, GUI
+
+Alexander M. Stetsenko <ams@yandex.ru>
+Inline Field Editing for CSqlTable
+
+Sasha Pachev <sasha@mysql.com>
+Unix configuration scripts, optimizing, bug fixing
+
+Michael (Monty) Widenius <monty@mysql.com>
+Main concept, design
+
+Reginald Stadlbauer <reggie@trolltech.com>
+Several parts of the Syntax Highlighing Editor
+
+Adam Hooper <adamh@densi.com>
+Several bug-reports and MySQL Control Center's mailing list
+
+MySQL AB
+MySQL Server, Client libraries, etc, etc, etc... :)
+
+Trolltech AS <info@trolltech.com>
+Qt Toolkit, support

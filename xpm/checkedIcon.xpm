@@ -1,0 +1,23 @@
+/* XPM */
+static const char* const checkedIcon_data[] = { 
+"16 16 4 1",
+"b c #000000",
+". c None",
+"# c #848484",
+"a c #ffffff",
+"................",
+"................",
+".############a..",
+".#bbbbbbbbbb.a..",
+".#baaaaaaaaa.a..",
+".#baaaaaaaba.a..",
+".#baaaaaabba.a..",
+".#babaaabbba.a..",
+".#babbabbbaa.a..",
+".#babbbbbaaa.a..",
+".#baabbbaaaa.a..",
+".#baaabaaaaa.a..",
+".#baaaaaaaaa.a..",
+".#...........a..",
+".aaaaaaaaaaaaa..",
+"................"};

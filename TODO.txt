@@ -1,0 +1,62 @@
+Things that need to be done in MySQL Control Center
+===================================================
+The following are a list of things that need to be done in MySQL Control Center.
+Since MySQL Control Center is still in early development stages, this file will
+be modified constantly upon user input.
+Things that need to be done
+===========================
+
+*filter out/in various types of threads from the 
+process list. For example, I'd like to look at only threads with a Command of 
+"Query" or only ones that aren't locked or asleep.
+
+*Write Documentation
+  Instructions
+  FAQ
+  HTML Help (manual)
+  Make each Widget respond to "What's This ?" 
+
+*Currently MySQL Control Center accesses the mysql database to get a list of
+usernames. This needs to be rewritten as soon as the Server supports
+SHOW GRANTS FOR '%' .
+
+*Add SSL support for MySQL 4
+
+*Add REQUIRE to CUserAdminWindow
+
+*Have an option for "One connection only" for each registered
+server.
+
+*CQueryWindow
+  Open Results in new window.
+  Print Query Results
+
+*MySQLDump Wrapper
+  Backup & Restore Tables using MySQLDump (With "Use Transaction" option)
+  Copy tables between DB's / Servers
+  Add BACKUP Capabilities (Depends on MySQLDump Wrapper)
+
+*Reporting Engine 
+
+*Replication Wrapper
+
+*MySQLMulti Wrapper
+
+*Need option "Hide Disconnected Items" for CDatabaseTree
+
+THINGS WE DON'T HAVE PLANS FOR
+==============================
+* Support for MySQL <= 3.21
+
+
+KNOWN BUGS FOR THIS VERSION
+===========================
+*Inserting a precision value in a integer field will cause some errors when trying to
+modify that record again unless the query is refreshed. This is because mysql rounds
+precision values to the nearest integer when inserted into an integer field.
+
+*A similar problem to the above happens when inserting negative values to unsigned fields.
+mysql treats negative values in unsigned columns as 0 which is misleading!
+
+*Sound not working in Linux ... It can only be enabled when QT is compiled with
+the NAS option. It would be nice if QT didn't depend on it.

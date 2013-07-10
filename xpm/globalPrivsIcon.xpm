@@ -1,0 +1,33 @@
+/* XPM */
+static const char* const globalPrivsIcon_data[] = { 
+"16 16 11 1",
+"g c #0000ff",
+"h c #008400",
+"f c #008484",
+". c None",
+"d c #4a4a4a",
+"# c #848484",
+"a c #947bf7",
+"e c #c6c6c6",
+"c c #ded6ff",
+"i c #ff0000",
+"b c #ffffff",
+"................",
+"....##aaaaaaaa..",
+"...#bacccccccad.",
+"..#beabbbbbbaad.",
+"..#bbaccccccadd.",
+".#bfgaaaaaaadad.",
+".#fggabbbbbbbad.",
+".#fggacccccccad.",
+".#fggaaaaaaaaad.",
+".#hggabbbbbbbad.",
+"..#hgacccccccad.",
+"..#fgacccccccad.",
+"...#gacccccccad.",
+"....#acccicccad.",
+".....acccccccad.",
+"......ddddddddd."};
+
+
+

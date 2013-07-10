@@ -1,0 +1,25 @@
+/* XPM */
+static const char* const exportTableIcon_data[] = { 
+"16 16 5 1",
+"# c #000000",
+". c None",
+"a c #4a4a4a",
+"b c #4a4aa5",
+"c c #ffffff",
+"................",
+".......#........",
+"......###.......",
+".....#####......",
+"....#######.....",
+"...aaaaaaaaa....",
+"................",
+"...bbbbbb.......",
+"...bbbbbb.......",
+"...acccca.......",
+"...acaabbbbbb...",
+"...acccbbbbbb...",
+"...aaaaacccca...",
+".......acaaca...",
+".......acccca...",
+".......aaaaaa..."};
+

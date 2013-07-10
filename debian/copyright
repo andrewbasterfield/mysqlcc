@@ -1,0 +1,12 @@
+MySQL CC was originally debianized by Adam Majer <adamm@galacticasoftware.com> 
+
+Upstream homepage:
+    http://www.mysql.com/products/mysqlcc/index.html
+
+MySQL CC is copyright by Jorge del Conde and the MySQL AB team.
+Upstream authors include Lenz Grimmer <lenz@mysql.com>
+
+MySQL Control Center was released under the terms of GPL ver.2.
+For more details see "/usr/share/common-licenses/GPL" or 
+http://www.gnu.org/licenses/gpl.txt
+

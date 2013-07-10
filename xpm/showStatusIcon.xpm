@@ -1,0 +1,25 @@
+/* XPM */
+static const char* const showStatusIcon_data[] = { 
+"16 16 5 1",
+"a c #000000",
+". c None",
+"c c #00ffff",
+"# c #848484",
+"b c #ffffff",
+"...#############",
+"...############a",
+"...#bbbbbbbbbbba",
+"...#b###b##bbbba",
+"...#bbbbbbbbbbba",
+"...#b##b##bbbbba",
+"...#aabbbbbbbbba",
+"...aba##b#bbaaba",
+"..a#babbbbbababa",
+".a.#b..bbbabbaba",
+"aaa#bbbaaabbbbba",
+"accaaaaccaaaaaaa",
+"acba..acba......",
+"a..a..a..a......",
+".aa....aa.......",
+"................"};
+

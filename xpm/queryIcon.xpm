@@ -1,0 +1,26 @@
+/* XPM */
+static const char* const queryIcon_data[] = { 
+"16 16 6 1",
+"d c #000000",
+"a c #000084",
+". c None",
+"# c #4a4a4a",
+"b c #b5c6ef",
+"c c #ffffff",
+"................",
+"................",
+".##############.",
+".#aaababababab#.",
+".#aaababababab#.",
+".#aa###########.",
+".#bb#ccccccccc#.",
+".#aa#cdcdcdcdc#.",
+".#bb#ccccccccc#.",
+".#aa#cdcdcdcdc#.",
+".#bb#ccccccccc#.",
+".#aa#cdcdcdcdc#.",
+".#bb#ccccccccc#.",
+".##############.",
+"................",
+"................"};
+

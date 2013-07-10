@@ -1,0 +1,26 @@
+/* XPM */
+static const char* const closedFolderIcon_data[] = { 
+"17 16 6 1",
+". c None",
+"d c #4a4a4a",
+"# c #949494",
+"a c #c6c6c6",
+"b c #ffff00",
+"c c #ffffc6",
+".................",
+".................",
+"...#####.........",
+"..#ababa#........",
+".#abababa######..",
+".#cccccccccccc#d.",
+".#cbababababab#d.",
+".#cabababababa#d.",
+".#cbababababab#d.",
+".#cabababababa#d.",
+".#cbababababab#d.",
+".#cabababababa#d.",
+".#cbababababab#d.",
+".##############d.",
+"..dddddddddddddd.",
+"................."};
+

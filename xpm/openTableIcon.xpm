@@ -1,0 +1,26 @@
+/* XPM */
+static const char* const openTableIcon_data[] = { 
+"16 16 6 1",
+". c None",
+"# c #4a4a4a",
+"c c #4a4aa5",
+"d c #a5a54a",
+"a c #ffff4a",
+"b c #ffffff",
+"..........###...",
+".###.....#...#.#",
+"#aba#######...##",
+"#babababab#..###",
+"#ababababa#.....",
+"#baba###########",
+"#aba#ccccccccccc",
+"#ba#dccccccccccc",
+"#a#ddcbbbcbbbbbc",
+"##dddcb#bcb###bc",
+"#####cbbbcbbbbbc",
+".....cb#bcb###bc",
+".....cbbbcbbbbbc",
+".....cb#bcb###bc",
+".....cbbbcbbbbbc",
+".....ccccccccccc"};
+

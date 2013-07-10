@@ -1,0 +1,28 @@
+/* XPM */
+static const char* const databaseDisconnectIcon_data[] = { 
+"16 16 8 1",
+". c None",
+"c c #4a4a4a",
+"f c #840000",
+"d c #848400",
+"# c #949494",
+"e c #ff0000",
+"b c #ffff00",
+"a c #ffffc6",
+"..######........",
+".#ababab#.......",
+"#ababababc......",
+"#dabababac......",
+"#dbaadbddc......",
+"#ddadadbdc......",
+"#dbaadbddc......",
+"#ddadadbdc......",
+"#dbaadbddc......",
+"#ddadadbdc.eeeee",
+"#dbaadbddc.eeeef",
+"#ddadadbdc.eeeef",
+"#dbaadbddc.eeeef",
+"#ddadadbdc.effff",
+".ccaadbcc.......",
+"...cccc........."};
+

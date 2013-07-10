@@ -1,0 +1,5 @@
+LIBRARY   HELLO_PLUGIN
+DESCRIPTION "Hello World MySQLCC Plugin"
+EXPORTS
+   HelloWorldPlugin   @1
+

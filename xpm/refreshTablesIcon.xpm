@@ -1,0 +1,27 @@
+/* XPM */
+static const char* const refreshTablesIcon_data[] = { 
+"16 16 7 1",
+"a c #006363",
+"b c #009c63",
+". c None",
+"# c #319c00",
+"e c #4a4a4a",
+"c c #4a4aa5",
+"d c #ffffff",
+"...#............",
+"...##...........",
+".#####..........",
+"ab.##...........",
+"a..#............",
+"a.....a.........",
+"...#..accccccccc",
+"..##.baccccccccc",
+".#####ddddddddde",
+"..##edeedeedeede",
+"...#edddddddddde",
+"....edeedeedeede",
+"....edddddddddde",
+"....edeedeedeede",
+"....edddddddddde",
+"....eeeeeeeeeeee"};
+

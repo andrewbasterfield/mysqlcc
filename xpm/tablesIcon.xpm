@@ -1,0 +1,26 @@
+/* XPM */
+static const char* const tablesIcon_data[] = { 
+"16 16 6 1",
+". c None",
+"a c #4a4a4a",
+"# c #4a4aa5",
+"d c #848484",
+"c c #d6d6ce",
+"b c #ffffff",
+"..###########...",
+"..###########...",
+"..abbbbbbbbba...",
+"..abc###########",
+"..abb###########",
+"#####abbbbbbbbba",
+"#####abdddbdddba",
+"abbbbabbbbbbbbba",
+"abddcabdddbdddba",
+"abbbbabbbbbbbbba",
+"abddcabdddbdddba",
+"abbbbabbbbbbbbba",
+"abddcaaaaaaaaaaa",
+"abbbbbbbbba.....",
+"aaaaaaaaaaa.....",
+"................"};
+

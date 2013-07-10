@@ -1,0 +1,831 @@
+Changes for 0.9.8
+-----------------
+* Created a conditional for mysql_shutdown to check for the existance
+  of SHUTDOWN_DEFAULT in order to work with older mysql client libraries
+* Changed requirement for qpopmenu.h to qpopupmenu.h in include/CProperties.h
+  and src/CTableTools.cpp
+* Added /usr/share/qt3 to the list of places to look for qt3 (fixes Debian
+  problems)
+
+Notes for 0.9.7
+----------------
+This is a development release. Henceforth, version numbers will follow the Linux
+kernel standard wherein odd numbered releases (such as 0.9.7) refer to 
+development releases and even numbered releases (such as 0.9.8) refer to stable
+releases.
+
+Users connecting to or using MySQL 5 libraries should be using this release.
+Users still connecting only to MySQL 4 or lower servers should continue using
+version 0.9.4. This is an issue which will be addressed by version 0.9.8 and,
+if that version is available at the time you read this, that version should be 
+used instead.
+
+Changes for 0.9.7
+-----------------
+* Changed the call to mysql_shutdown to include SHUTDOWN_DEFAULT as required
+  by MySQL >= 5 client libraries in CMySQL.cpp
+* Repaired default_table assignment in CQueryWindow.cpp
+
+
+Important Notes for 0.9.4-beta
+------------------------------
+This is a major bug-fix and enhancement release of MySQL Control Center.  Most of
+the known bugs have been fixed in this version.  All users are encouraged to upgrade
+to this release.
+
+Changes for 0.9.4
+-----------------
+  Fixed some memory leaks in the inplace field editor
+
+  Fixed a bug that crashed MySQLCC when the connection to the MySQL Server failed.
+
+  Fixed a bug in the Query Window that didn't propperly handle the 'Delete' Key.
+
+  Fixed a bug in the Register Server dialog where the "Test" button didn't show
+  the test results for a connection.
+
+  Fixed a bug that ordered the Size and Records of Tables as strings instead of
+  numbers.
+
+  Fixed a couple of bugs regarding Unicode charsets.
+
+  Fixed a bug in Create/Alter Table Window that didn't recognize certain option-changes
+  thus in some cases it didn't ask to save table modifications.
+
+  Added MySQL 4.1 compatibility.
+
+  Fixed a bug that made MySQLCC crash under some Win98 systems.
+
+  Fixed a bug in CQueryWindow that didn't handle blocked tables correctly thus causing
+  an 'unresponsive application' effect.
+
+  Updated the Spanish translation files.
+
+  Fixed a bug in the default short-cut keys in the Query Window.
+
+  Fixed a couple of spelling mistakes
+
+  Fixed some bugs in the glibc 2.2 Linux version of MySQLCC.
+
+  Fixed a bug which didn't print Queries correctly.
+
+  Fixed a problem when executing multiple queries simultaneously.
+
+  MySQLCC 0.9.4 is now compiled with Qt 3.2.3
+
+  Several other bug-fixes and enhancements.
+  
+
+
+Important Notes for 0.9.3-beta
+-------------------------------
+This is a major bug-fix and enhancement release of MySQL Control Center.  Most of
+the known bugs have been fixed in this version.  All users are encouraged to upgrade
+to this release.
+
+Changes for 0.9.3
+-----------------
+  Updated the Chinese translations (thanks to Deng Jie)
+
+  Fixed a problem under RedHat 9
+
+  Added 'Unlimited' Max Join Size option (thanks to Adam Hooper)
+
+  The Query Window now has the option to automatically create a new Query Window
+  on by default.
+
+  The Query Window now has the option to automatically create a new tab on by
+  default.
+
+  In the "Register Server" Dialog, the "Databases" tab now displays the list of
+  databases if SHOW databases succeeds.
+
+  Fixed a critical bug with Key Bindings in the Query Editor
+
+  Fixed a bug which didn't start MySQLCC when certain settings where specified in
+  the my.ini or my.cnf file.
+
+  Added Italian translation (thanks to Andrea Decorte)
+
+  Fixed a bug where MySQLCC frequently crashed under RedHat 9
+
+  Fixed the ERROR 1104 when opening a table
+
+  Fixed a bug where Query results weren't being saved correctly
+
+  Fixed a bug which prevented the deletion of Field names when reserved words where
+  used.
+
+  Fixed a problem when executing queries
+
+  Added several internal enhancements and code-optimizations
+
+  Fixed a bug which crashed MySQLCC under Win2K when it was minimized and maximized
+  from the task bar.
+
+  Fixed a couple of spelling mistakes
+
+  Added MacOSX compatibility (thanks to Peter O'Gorman)
+
+  Added a "Never connect to this server on startup" option to the create/edit server
+  window.
+
+  Fixed a couple of memory leaks under Win98 which crashed the application under
+  certain circumstances.
+
+  Fixed a bug which didn't maintain sorted columns when the server admin was refreshed.
+
+  Fixed a bug which crashed MySQLCC when one attempted to execute a query to a server
+  where the connection had been previously lost.
+
+  Fixed a bug which displayed MySQLCC minimized under some circumstances in Linux
+  systems.
+
+  Updated Spanish translation file
+ 
+  Added Polish Translation (thanks to Radoslaw Zawartko)
+
+  Many other fixes and enhancements.
+
+
+Changes for 0.9.2
+-----------------
+  When no servers have been registered, automatically open the "Register Server"
+  dialog on startup.
+
+  Fixed a minor bug which didn't automatically set the correct default values for
+  some features introduced in the previous version when registering a new server.
+
+  Added an "Unlimited" option for the Automatic SELECT Limit option.
+
+  Enabled plugin support.
+
+  Fixed a bug compiling MySQLCC with Qt < 3.1.0.
+
+  Updated German Translation (Thanks to Mat Leinmueller)
+
+  Updated French Translation (Thanks to Philippe Boxho)
+
+  Fixed a bug which automatically used the default unix socket when "localhost" was
+  defined as the servers hostname.  It the unix socket is used if the hostname is
+  "localhost" and port no. 3306
+
+
+Important Notes for 0.9.1-beta
+-------------------------------
+This is a minor bug-fix release MySQL Control Center.
+
+
+Changes for 0.9.1
+-----------------
+  Fixed a bug which didn't allow fields to be edited (introduced in 0.9.0)
+
+  Fixed a bug which reset the password when editing users under certain
+  circumstances.
+
+
+Important Notes for 0.9.0-beta
+-------------------------------
+This is a major bug-fix and enhancement release of MySQL Control Center.  Most of
+the known bugs have been fixed in this version.  All users are encouraged to upgrade
+to this release.
+
+
+Changes for 0.9.0
+------------------
+  Fixed a bug that crashed mysqlcc when trying to connect to 2 or more servers that
+  had the "Prompt for Password" property checked.
+
+  The Console Window now displays tool-tips for all the buttons.f
+
+  Fixed the configure scripts to check for mysql 4.0.0+ for when compiling mysqlcc
+  from a source distribution.
+
+  Fixed a bug which crashed mysqlcc when one double-clicked on the results panel
+  when an empty query was executed.
+
+  An error message now appears when an empty query is executed.
+
+  Fixed a bug which used incorrect tables in certain circumstances.  If the table
+  MySQLCC tried to use didn't exist, it would crash the application.
+
+  Added support for Unicode (Thanks to Alexander M. Stetsenko)
+
+  Added support for command line parameters under Win32
+
+  MySQLCC now reads my.cnf (or my.ini) under the sections "client" and "mysqlcc"
+  so that default command line parameters can be automatically set.
+
+  Fixed a bug that didn't update records correctly when a precision field was used
+  as a primary key.
+
+  MySQLCC doesn't prompt for exit confirmation unless "confirm critical operations"
+  is checked and no "critical operation" is being conducted.
+
+  Command Line parameters now works more like the command client 'mysql'
+
+  A default server can now be defined.
+
+  Added an option to enable or disable LOAD [LOCAL] INFILE.
+
+  Fixed a bug in the create/alter table window.
+
+  MySQLCC can now be compiled with Borland C (Thanks to Adam Majer)
+
+  Fixed a bug when one executed "Show Create"
+
+  Updated French Translation (Thanks to Philippe Boxho)
+
+  Redesigned the main Query Screen to make handling of multiple results easier.
+
+  Added full multi-threaded support for the main Query Screen
+
+  All tables now copy data in mysql ascii grid format.
+
+  MySQLCC binaries are now compiled with Qt 3.1.2.
+
+  MySQL 4.0.12 or greater is now required to compile mysqlcc under windows.
+
+  Fixed several bugs.
+
+  Many other enhancements !  
+
+
+
+Important Notes for 0.8.10-beta
+-------------------------------
+This is a bug-fix release of MySQL Control Center.  Most of the known bugs have been
+fixed in this version and all users should upgrade to this release.
+
+Changes for 0.8.10
+------------------
+  Fixed a bug when using the configure script with a '--with-qt' argument.
+
+  Fixed a bug parsing queries.
+
+  Fixed a bug which crashed mysqlcc when restoring "Open Items" under certain systems.
+
+  Fixed a bug which crashed mysqlcc when viewing a table's properties under when
+  following a certain pattern.
+
+  Fixed a bug which didn't highlight the last selected cell in the Results Panel.
+
+  Added support for latin2 charsets (patch supplied by Rafal Kurczyna)
+
+  Updated French translation files (Thanks to Philippe Boxho)
+
+  Fixed a memory-leak in CSqlTable.cpp
+
+  Fixed a bug which didn't parse users correctly under certain circumstances.
+  
+
+
+Important Notes for 0.8.9-beta
+-------------------------------
+Fixed a Security Bug for Unix / Linux platforms.  All users using MySQL Control Center
+under Linux or Unix systems should upgrade to this version.  This security bug does not
+apply to Windows users.
+
+Changes for 0.8.9-beta
+----------------------
+
+  Fixed a Security Bug under Unix / Linux platforms;  Previously, all configuration and
+  connection files where world-readable.
+
+  Fixed a bug in Empty, Drop and Rename table where in certain circumstances they
+  wouldn't take the current database in to account.
+
+  Added an option to enter the databases mysqlcc will put in the database tree which is
+  useful for when MySQL was started with --skip-show-database or when the user doesn't
+  have privileges to execute "SHOW DATABASES".
+
+  Fixed a minor bug while saving/reading the Restore Workspace properties.
+
+  Added a patch by Buchan Milne so that Mandrake rpm's are easier to create.
+
+  Enhanced the build scripts so that its easier to create binary releases for different
+  versions of glibc.
+
+
+  
+Important Notes for 0.8.8-beta
+-------------------------------
+This is the first Beta release of MySQL Control Center.  Several users have been using
+MySQLCC since early alpha stages and overall MySQLCC has proven to be quite stable.
+All users are recommended to upgrade to this release.
+
+From 0.8.8 onwards, there will be two binary releases for Linux systems.  One for glibc
+2.3 and another one for 2.2;  Make sure you download the appropriate binary distribution
+for your system.
+
+MySQLCC now requires MySQL 4.0.3 or higher to compile form source under Linux
+distributions. Windows versions are not affected by this yet, but will also require a
+4.X branch to compile in the future.
+
+Changes for 0.8.8-beta
+----------------------
+
+  Fixed a couple of bugs in the Plugin engine.
+
+  Added support for command line parameters under Linux.
+
+  Added support for "Restore Workspace"
+
+  Trailing white-spaces from passwords are not stripped anymore.
+
+  Added a default username for connections.
+
+  Fixed a bug that didn't drop indexes correctly when editing a table.
+
+  Fixed a bug which didn't parse C-Style comments (/* comment */) correctly.
+
+  Fixed a bug that didn't set empty passwords correctly when editing users.
+
+  Fixed a bug which crashed MySQLCC when connecting to a MySQL server which was started
+  with the --skip-show-database option.
+
+  Fixed a bug which didn't parse correctly queries such as:
+  SELECT f1 FROM t1 WHERE f1 LIKE 'Foo\\\\''%';
+
+  Fixed a bug which didn't connect to servers where a password with a '=' character was
+  specified.
+
+  Organized the source code tree for easier plugin-handling.
+
+  Enhanced the way translations are displayed in the General Configuration.
+
+  Fixed a bug which changed MySQLCC's language before restarting mysqlcc when a language
+  was selected.
+
+  Fixed a bug which made MySQLCC unstable when inserting 65K or more in TEXT / BLOB
+  fields.
+
+  MySQLCC now requires MySQL >= 4.0 to compile under Linux (Windows will follow shortly)
+
+  MySQLCC binaries are now compiled with Qt 3.1.1
+
+  Fixed a bug which didn't refresh tables correctly after they where deleted.
+
+  Added Simplified and Traditional Chinese Translations (Thanks to Deng Jie)
+
+  Added German Translation (Thanks to Mat Leinmueller)
+
+  Added French Translation (Thanks to Philippe Boxho)
+
+
+Changes for 0.8.7-alpha
+-----------------------
+
+  Fixed a bug which didn't handle the "With Grant" option in the user admin window
+  correctly.
+
+  Added a plugin engine ... more info & detail regarding this as well as examples will be
+  made public in 0.8.8 or 0.8.9
+
+  Added support for command line parameters.  This feature will be deactivated until MySQL
+  4.0.6 is released.
+
+  Fixed a bug which didn't update "Global Privileges" correctly in the user admin window.
+
+  Fixed a bug which crashed mysqlcc when one right-clicked on the indexes tab in the CREATE
+  TABLE Window when no item (index) was selected.
+
+  Added mysqlcc.spec.in patch for Mandrake distros (Patch supplied by Buchan Milne)
+
+  Fixed a bug which crashed mysqlcc when one created a new user after changing the root-
+  password of a server without reconnecting.
+
+  Fixed a bug which crashed mysqlcc when clicking really fast in some Left-Tree items.
+
+  Numerical values aren't quoted anymore when Inserting / Updating records.  This means
+  mysql will produce an error when setting text in a numerical value.  Before, since
+  mysql treats a quoted numerical value that contained invalid data as 0, the field was
+  set to 0 which was misleading.
+
+  Fixed a bug in the Query Editor Window which didn't execute queries after the "Clear"
+  button was pressed.
+
+  Fixed a bug in inline editing which didn't update records correctly when the where-
+  clause contained a precision number field type (decimal, float, double).
+
+  Changed the main MySQL Control Center icon under Win32
+
+  Fixed a couple of bugs which didn't allow mysqlcc from being compiled under certain
+  Linux systems (thanks to Aleksander Adamowski).
+
+  Added a complete Russian translation (thanks to Alexander Ustimenko)
+
+
+Important Notes for 0.8.6-alpha
+-------------------------------
+MySQL Control Center will now be referred to as "MySQL Control Center", not "MyCC".
+The name of the executable file has changed from "mycc" to "mysqlcc" and so have all
+the config directories.
+
+In order to upgrade to the latest release, one should simply rename the directory
+located in [HOME_DIR]/.MyCC to [HOME_DIR]/.mysqlcc
+
+All of the reported bugs have been fixed for MySQL Control Center 0.8.6 and most of the
+features keeping it in alpha stage have been implemented.  If everything goes well,
+MySQL Control Center will be released as beta for version 0.8.7.
+
+All MySQL Control Center users are recommended to upgrade to this release.
+
+Changes for 0.8.6-alpha
+-----------------------
+  Added inline inserting capabilities to the Results Panel.
+
+  Added inline deleting capabilities to the Results Panel.
+
+  Inline-Editing now supports updating BLOB / TEXT & Binary fields when the table
+  doesn't have any keys or when the BLOB, TEXT or Binary field is defined as a key
+
+  One can now copy selections instead of cell-values in the Results Panel.
+
+  Enhanced the way copy works in the Query Window
+
+  Added several visual enhancements to the Query Window
+
+  When the "Silent" option is now selected in 'Query Window Options', no queries will
+  be appended to the Sql Debug Panel.
+
+  Alter / Create Table doesn't reset the field length when changing the field type
+  anymore unless the types are in different sets.
+
+  Double-Clicking in a read-Only-Column (Results Panel) now opens up the default editor
+  .. that is ImageViewer for BLOB fields and the Text Editor for TEXT fields.
+
+  Disabled HTML rendering in the text editor.
+
+  Added a Russian translation (thanks to Alexander Ustimenko)  The translation was based
+  in 0.8.4 and there where a lot of changes between that version and 0.8.6 so it might
+  be incomplete for MySQL Control Center 0.8.6 :(
+
+  Fixed a bug in the Create & Alter Table window which didn't support NULL defaults and
+  also didn't parse "DEFAULT NULL" correctly;  One can now specify a NULL default by
+  pressing CTRL + 0 (same as for inline editing).
+
+  The Image Viewer can now load and update fields.
+
+  Fixed a couple of bugs which prevented MySQL Control Center from being compiled
+  under certain Linux distributions (Patch supplied by Fritz Ganter)
+
+  Fixed a bug in the "configure" script (Patch supplied by Fritz Ganter)
+
+  Fixed a bug that didn't refresh the tables list widget after deleting a table from
+  the tree panel.
+
+  Fixed a bug that didn't display the status of certain queries
+
+  Fixed a bug in the Query Window which allowed queries other than "SELECT * FROM Tbl"
+  to be edited.
+
+  Fixed a bug in the Explain Panel that displayed a QDockWindow menu when the panel's
+  context-menu was closed.
+
+  Fixed a non critical bug in the function that generates the UPDATE queries for the
+  Results Panel.
+
+  Fixed a couple of non-critical bugs in the way the privileges where parsed in the
+  User Administration Window
+
+  Fixed a bug in the completion editor which reset the completion box when completing
+  entries that had a '.'  This happened frequently when using the [database].[table]
+  syntax.
+
+  Fixed a very strange bug under Win32 which caused MySQL Control Center to crash
+  unexpectedly after executing a query.  This bug was introduced in 0.8.5
+
+  Removed the dependency on the Qt file <private/qrichtext_p.h>
+
+  MySQL Control Center 0.8.6 binaries are now compiled with Qt 3.0.6
+
+
+Important Notes for 0.8.5-alpha
+-------------------------------
+MyCC 0.8.5 is major feature enhancement, optimization and bugfix release.  It should
+should now be stable enough for most users to give it a test-drive.  The main reason
+why it's still regarded as "alpha" is because there are a couple of features that still
+need implementing thus keeping the possibility of generating new bugs open.
+
+This release is a recommended upgrade for all current users.
+
+Changes for 0.8.5-alpha
+-----------------------
+  QT 3.0.5 is now required to compile MyCC from Source.
+
+  Fixed a bug which displayed a "Console" Menu and a "File" menu when MyCC was not
+  being run as MDI.
+
+  Fixed a bug which crashed MyCC when a right-click was done in the ProcessList
+  Window.
+
+  Fixed a bug that made the "Compress" option for Server Properties always checked.
+
+  Fixed a bug which crashed MyCC under Linux when [TAB] was pressed in the SQL Editor.
+
+  Added a Hot-Key configuration dialog for most windows
+
+  Added an "Explain Query" tab in the Query Window
+
+  Changed the default layout of the Query Window
+
+  Fixed a bug in the Create-User Dialog
+
+  Added Query Window Options Dialog for the Query Window
+
+  Enhanced the Sql Editor
+
+  Optimized MyCC for slow network connections.
+
+  Fixed several bugs in Edit Table
+
+  Added several new options.
+
+  Cleaned up the code.
+
+  Optimized several functions to use less memory.
+
+  Added a "SHOW INNODB STATUS" panel in the Server Admin Dialog.
+
+  Modified the "Syntax.txt" file layout.
+
+  Optimized all the display panels so that less time was required to display messages.
+
+  Fixed several bugs which crashed MyCC under Win98
+
+  Added full support for Short-Cut Keys
+
+  Added an "Action" menu item in the Main Console Window
+
+  Added support for setting NULL values in the Query Window (Use CTRL + 0 to set a field to Null)
+
+  Fixed up several classes so that the Plugin engine is easier to handle.
+
+  Modified CSqlTable so that INSERT & DELETE from table are much easier to implement.
+
+  Added support for index length in the CREATE / ALTER Table Window
+
+  Fixed a bug which was responsible for not being able to connect to certain MySQL servers.
+
+  Many other things not listed.
+  
+
+Important Notes for 0.8.4-alpha
+-------------------------------
+MyCC 0.8.4 is a bugfix release. MyCC 0.8.3 has a couple of critical bugs that
+affect users who will be using the newly added features: 'New Table' & 'Edit Table'.
+If you are currently using MyCC 0.8.3 and are planning to use the above 2 features,
+please upgrade to the latest MyCC release.
+
+Changes for 0.8.4-alpha
+-----------------------
+  Fixed a bug which required CHAR fields to have a length.
+
+  Fixed a bug in Linux which automatically searched and used mysql.sock even if it was
+  manually defined by the user.
+
+  Added some enhancements to CTableWindow.
+
+  Fixed several SHOW CREATE TABLE parsing bugs.
+
+  Fixed a bug that failed to parse correctly the DEFAULT value of a field.
+
+  Fixed a bug which didn't generate the correct DEFAULT value for fields.
+
+  Fixed a bug that failed to parse correctly ENUM & SET Values.
+
+  Fixed a bug which reset the "Table Type" to MyISAM when editing tables.
+
+  Fixed a bug generating the quote enclosed values for SET & ENUM fields.
+
+  Fixed a bug generating the quote enclosed values for the DEFAULT value of a Field.
+
+  Fixed a bug which didn't clear the Field Properties correctly when modifying the
+  Field Type.
+
+  Fixed a bug which displayed an erroneous Error message when a field was moved.
+
+  Fixed the Changelog.txt file to improve readability.
+
+
+Important Notes for 0.8.3-alpha
+-------------------------------
+Because of a bug found in all previous versions of MyCC regarding the way Query History
+was saved, its important that you delete your current 'history' file from the '.MyCC'
+directory.
+
+Under Linux, this file is found in '~/.MyCC/history'.
+Windows users will have to search for this file using the native 'Search' utility.
+
+Changes for 0.8.3-alpha
+-----------------------
+  Added CREATE Table.
+
+  Added ALTER Table.
+
+  Added Inline Editing for query results.
+
+  Added Load From File to BLOB/Text fields.
+
+  Added "Paste" to context menus in CSqlTable.
+
+  Added "Linux Copy / Paste Style" to the SQL Editor configuration.  This option
+  emulates the way Linux works with copy & paste.
+
+  Added "Copy" to context menus in CSqlTable & CListViewProperties.
+
+  Added a patch for Unicode characters.
+
+  Added a default LIMIT for select queries to avoid opening huge tables.  The default
+  limit is set to 1000 records.
+
+  Added Syntax-Highlighting to ' --' comments.
+
+  Added "BEFORE", "AFTER" & "FULL" to the syntax file.
+
+  Added a centralWidget() to CTableTools.  This fixes an unwanted debug message.
+
+  Added "Clear Query" menu option in CQueryWindow.
+
+  Added a CShowDatabaseProperties Widget to CDatabaseItem.  This is to avoid
+  confusion with the Toolbar buttons.
+
+  When there's selected text in the query window and one clicks on the ! button, only
+  the selected text is executed.
+
+  MyCC now has an option to NOT execute the initial SELECT query automatically when
+  double-clicking on table items.
+
+  MyCC now has a user-definable commenting style.
+
+  MyCC now automatically detects mysql.sock when "localhost" is used for connections
+  under Linux.
+
+  Renamed "Action" to "File" in CDatabaseTree and CAdministrationPanel.
+
+  Optimized CHistoryView.
+
+  The History Panel now appends executed queries only if the last executed query is
+  different than the current one.
+
+  The title for the Query Window now changes accordingly depending on the type of
+  query introduced.
+
+  Query Results are now aligned correctly: numbers to the left and text to the right.
+
+  The numbers header in query results doesn't truncate the number anymore.
+
+  Renamed the binary "MyCC" to "mycc" in the Linux binary distribution.
+
+  Multiple queries can now be executed in the Query Window.  They need to be
+  separated with ";".
+ 
+  Double-Clicking on the Database branch (Navigation Tree) now opens or collapses the
+  child items depending on the current status.
+
+  One can now define a "Connection Name" when registering a new server.  Before, it
+  was only possible if one was editing a server.
+
+  The Linux configuration scripts now check for mysql_real_connect & QT >= 3.0.2
+
+  MyCC binaries are now compiled with Qt 3.0.4
+
+  Fixed up CSqlTable's context menu's for when no results where returned by the query.
+
+  Fixed a design bug which didn't preserve line-feeds in the query history.
+
+  Fixed a bug which lost history indexes when the query history was reloaded.
+
+  Fixed a bug which crashed MyCC when sorting columns in CShowTableGroupProperties.
+
+  Fixed a bug which crashed MyCC when one clicked "Execute" many times in CTableTools.
+
+  Fixed a bug which deleted Registered Servers when one clicked the "Refresh" button.
+
+  Fixed a rare bug which crashed MyCC when a CQueryWindow was closed under Linux.
+
+  Fixed a bug which displayed "ERROR: 10061 Connection to mysql server failed" under
+  Linux.
+
+  Fixed a bug which crashed MyCC when one tried to disconnect from a server while
+  retrieving the Tables list.
+ 
+  Fixed a bug in Add/Edit User which occurred when a database item was placed before
+  the Global Privileges Item after sorting.
+
+  Fixed a bug in Edit User which prevented setting null passwords once they where set
+  to something different.
+
+  Fixed a bug with unmatched ' in CQueryWindow's title.
+
+  Fixed a bug which printed the contents of Text fields as rendered HTML instead of
+  text.
+
+  Fixed a bug which displayed the contents of Text fields as rendered HTML instead of
+  text.
+
+  Fixed a bug introduced in 0.8.2 that displayed "or a unix socket" when a connection
+  w/o hostname was created under Linux.
+
+
+Changes for 0.8.2-alpha
+-----------------------
+  Added "MODIFY" & "TRUNCATE" to the syntax file.
+
+  Added "SQL Debug" Panel
+
+  Added support for saving window position & sizes.
+
+  Added support for saving Dock-Windows.
+
+  Added "Printer Font" Option to "General Options".
+
+  All instances of "successfull" where replaced with "successful".
+
+  Fixed a Spanish translation typo .. "rengistros" was replaced by "registros".
+
+  Optimized the Syntax Highlighter Editor.
+
+  Optimized CSqlTable .. This means all grids will load up much faster and use less
+  memory.
+
+  Hostname is not required to create connections anymore.  When empty, localhost will
+  be used by default.
+
+  When one double-clicks on the "results pane", the default editor is now launched.
+
+  Fixed the "Results Pane" shortcut not to interfere with the "Run" shortcut in the
+  query window.
+
+  Fixed a parsing bug in the User-Admin module.
+
+  Fixed a bug in "Edit User" where Grant_Priv was not being removed for Global Level.
+
+  Fixed a bug that crashed MyCC when resizing grid columns while a query was being
+  executed.
+
+  Fixed a sorting bug in CSqlTable which sorted numbers as strings.
+
+  Fixed a bug introduced in 0.8.1 that prevented from selecting processes in
+  "Process List".
+
+  Fixed a bug that crashed MyCC when closing a window parenting an active
+  "Field Chooser" window.
+
+  Fixed a printing bug in the QueryWindow which didn't print carriage returns.
+
+  Fixed a minor bug in the ConsoleWindow Toolbars.
+
+  Clicking on the "Info" field in the ProcessList grid, now opens a query window
+  with the contents of the cell.
+
+  MyCC binaries are now compiled with QT 3.0.2 ..This means no more Flickering!.
+
+  Qt 3.0.2 is now *required* to compile MyCC.
+
+  Fixed a bug when using MyCC with dual monitors.
+
+  Fixed a bug when compiling MyCC in Solaris 8.
+
+
+Changes for 0.8.1-alpha
+-----------------------
+  MyCC now supports editing users.  NOTE: one must have full access to mysql.*
+
+  Changed versioning scheme  - The current version is 0.8.1
+
+  Updated the Spanish Translation File.
+
+  MyCC now has support for Adding / Removing users.
+
+  Enhanced the Win32 Setup Tool.
+
+  Several Minor bug fixes.
+
+  MyCC is now compatible with MySQL 3.22
+
+  Buttons for uncoded features are now disabled.
+
+  Better Memory Management.
+
+  Loading many tables now takes a lot less time.
+
+  A lot less memory is now used in CTableItem.
+
+  All icons are now cached to provide better performance.
+
+  Fixed an obscure bug in CDatabaseTreeItem (Tree view).
+
+  Optimized several parts of CSqlTable.
+
+  Added Table retrieval method option in the server registration dialog.
+
+  Added 'Test Connection' in the server registration dialog.
+
+  Added a Query Button for Server-Items.
+
+
+Changes for 0.0.8-alpha
+-----------------
+  Initial pre-alpha release.

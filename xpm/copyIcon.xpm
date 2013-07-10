@@ -1,0 +1,23 @@
+/* XPM */
+static const char* const copyIcon_data[] = { 
+"16 16 4 1",
+". c None",
+"# c #4a4a4a",
+"b c #4a4aa5",
+"a c #ffffff",
+"................",
+".######.........",
+".#aaaa##........",
+".#aaaa#a#.......",
+".#a##a#bbbbbb...",
+".#aaaaabaaaabb..",
+".#a####baaaabab.",
+".#aaaaaba##abbbb",
+".#a####baaaaaaab",
+".#aaaaaba#####ab",
+".######baaaaaaab",
+".......ba#####ab",
+".......baaaaaaab",
+".......bbbbbbbbb",
+"................",
+"................"};

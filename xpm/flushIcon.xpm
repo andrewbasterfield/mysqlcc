@@ -1,0 +1,27 @@
+/* XPM */
+static const char* const flushIcon_data[] = { 
+"16 16 7 1",
+"# c #000000",
+"c c #000084",
+"a c None",
+"d c #4aff7b",
+". c #636363",
+"e c #8484ff",
+"b c #ffff94",
+".##########aaaaa",
+".bbbbbbb#a#aacca",
+".bbbbbbb#a#aaaac",
+".bbbbbbb#a#aaaac",
+".##########aacac",
+"aaaaaaaaaaaaacca",
+"aaaaaaaaaaaaaccc",
+".##a#######aaaaa",
+".d#adddddddaacca",
+".##a#######aaaac",
+"aaaaaaaaaaaaaaac",
+"aaaaaaaaaaaaacac",
+".##########aacca",
+".eeeeeeeee#aaccc",
+".##########aaaaa",
+"aaaaaaaaaaaaaaaa"};
+

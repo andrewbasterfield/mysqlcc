@@ -1,0 +1,5 @@
+mysqlcc			usr/bin
+syntax.txt		usr/share/mysqlcc
+error.wav		usr/share/mysqlcc
+warning.wav		usr/share/mysqlcc
+debian/mysqlcc.xpm	usr/share/pixmaps

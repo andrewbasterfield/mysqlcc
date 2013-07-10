@@ -1,0 +1,41 @@
+AC_INIT(src/main.cpp)
+AC_CANONICAL_HOST
+AC_PROG_CC
+AC_PROG_CXX
+AC_LIB_Z
+AC_LIB_MYSQL
+AC_HEADER_MYSQL
+AC_CHECK_QT
+
+MYSQLCC_SOURCES=
+MYSQLCC_HEADERS=
+
+for f in include/*.h include/CSqlEditor/*.h shared/include/*.h ; do
+ MYSQLCC_HEADERS="$MYSQLCC_HEADERS $f"
+done
+
+for f in src/*.cpp src/CSqlEditor/*.cpp shared/src/*.cpp ; do
+ MYSQLCC_SOURCES="$MYSQLCC_SOURCES $f"
+done
+
+
+AC_SUBST(MYSQL_INCLUDE)
+AC_SUBST(MYSQL_LIB)
+AC_SUBST(MYSQLCC_HEADERS)
+AC_SUBST(MYSQLCC_SOURCES)
+AC_OUTPUT(mysqlcc.pro)
+if test -z "${QMAKESPEC}"; then
+  QMAKESPEC=$QTDIR/mkspecs/$host_os
+else
+  QMAKESPEC=${QMAKESPEC}
+fi
+echo "Creating Makefile with qmake"
+QMAKESPEC=$QMAKESPEC QTDIR=$QTDIR $QTDIR/bin/qmake mysqlcc.pro
+if test ! $? = 0 ; then
+ echo "qmake failed, aborting"
+ exit 1
+fi
+echo "QTDIR=$QTDIR" > Makefile.tmp
+cat Makefile >> Makefile.tmp
+mv Makefile.tmp Makefile
+echo "Makefile created, now run make"

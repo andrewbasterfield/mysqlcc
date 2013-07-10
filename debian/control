@@ -1,0 +1,32 @@
+Source: mysqlcc
+Section: misc
+Priority: optional
+Maintainer: Adam Majer <adamm@galacticasoftware.com>
+Build-Depends: debhelper (>> 4), libmysqlclient-dev (>> 4), libqt3-mt-dev, libqt3-compat-headers, txt2man, autotools-dev, qt3-dev-tools
+Standards-Version: 3.6.1
+
+Package: mysqlcc
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: The official GUI interface for MySQL
+ MySQL Control Center is a platform-independent GUI 
+ administration client for the MySQL database server.
+ .
+ Features include:
+   * Interactive queries with a syntax-highlighting SQL editor
+   * Database and table management
+   * Server administration
+   * Cross-platform capability
+ .
+ For more information see www.mysql.com/products/mysqlcc/
+
+Package: mysqlcc-i18n
+Architecture: all
+Depends: mysqlcc (= ${Source-Version}), libqt3-i18n
+Description: The official GUI interface for MySQL with non-English support
+ MySQL Control Center is a platform-independent GUI
+ administration client for the MySQL database server.
+ .
+ This package contains support for German, French, Spanish, Russian,
+ Polish, Italian, Simplified Chinese, and Traditional Chinese
+

@@ -1,0 +1,26 @@
+/* XPM */
+static const char* const showVariablesIcon_data[] = { 
+"16 16 6 1",
+"# c #000000",
+"b c #000084",
+". c None",
+"c c #848484",
+"d c #ffffce",
+"a c #ffffef",
+"..#########.....",
+"..#########.....",
+"..#aaaaaaa###...",
+"..#aabbbaa###...",
+"..#abcacba#d#...",
+"..#aaaaaba#d#...",
+"..#aaaabaa#d#...",
+"..#aaabaaa#d#...",
+"..#aaabaaa#d#...",
+"..#aaaaaaa#d#...",
+"..#aaabaaa#d#...",
+"..#aaaaaaa#d#...",
+"..#########d#...",
+"....#ddddddd#...",
+"....#########...",
+"................"};
+

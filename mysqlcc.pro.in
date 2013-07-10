@@ -1,0 +1,68 @@
+TEMPLATE     = app
+CONFIG       += qt thread
+DEFINES      += QT_DLL
+DEFINES      += HAVE_MYSQLCC_CONFIG
+TARGET       = mysqlcc
+LANGUAGE     = C++
+MOC_DIR      = moc
+
+INCLUDEPATH    += ./include \
+                  ./shared/include \
+                  ./include/CSqlEditor
+
+TRANSLATIONS    = translations/Deutsch.ts \
+                  translations/French.ts \
+                  translations/Italian.ts \
+                  translations/Polish.ts \
+                  translations/Russian.ts \
+                  translations/Simplified_Chinese.ts \
+                  translations/Spanish.ts \
+                  translations/Traditional_Chinese.ts
+
+win32 {
+      LIBS        += C:\mysql\lib\opt\libmysql.lib
+      INCLUDEPATH += C:\mysql\include
+      CONFIG      += windows
+      RC_FILE      = win32/mysqlcc.rc
+}
+
+unix {
+      LIBS        += @MYSQL_LIB@ 
+      INCLUDEPATH += @MYSQL_INCLUDE@
+      CONFIG      += x11 
+      OBJECTS_DIR  = tmp
+}
+
+macx {
+        LIBS        += @MYSQL_LIB@ -headerpad_max_install_names -lz -framework Carbon -framework CoreFoundation
+        DEFINES     += QT_OSX_BUILD
+        INCLUDEPATH += @MYSQL_INCLUDE@
+        OBJECTS_DIR  = tmp
+        macxrmfiles.commands = $(DEL_FILE) mysqlcc.app/Contents/Info.plist
+        macxcopyfiles.target = mysqlcc.app/Contents/Resources
+        macxcopyfiles.commands = \
+        $(MKDIR) mysqlcc.app/Contents/Resources && \
+        $(COPY_FILE) macx/mysqlcc.icns mysqlcc.app/Contents/Resources/mysqlcc.icns && \
+        $(COPY_FILE) macx/Info.plist mysqlcc.app/Contents/Info.plist && \
+        $(COPY_FILE) *.wav mysqlcc.app/Contents/Resources/ && \
+        $(MKDIR) mysqlcc.app/Contents/Resources/translations && \
+        $(COPY_FILE) translations/*.qm mysqlcc.app/Contents/Resources/translations/ && \
+        $(COPY_FILE) syntax.txt mysqlcc.app/Contents/Resources/syntax.txt
+        macxcopyfiles.depends = macxrmfiles
+        macxstandalone.depends = $(TARGET)
+        macxstandalone.commands = \
+        $(COPY_FILE) $(QTDIR)/lib/`otool -XD $(QTDIR)/lib/libqt-mt.dylib` mysqlcc.app/Contents/MacOS/Qt && \
+        install_name_tool -change `otool -XD $(QTDIR)/lib/libqt-mt.dylib` \
+        @executable_path/Qt mysqlcc.app/Contents/MacOS/mysqlcc
+        QMAKE_EXTRA_UNIX_TARGETS += macxcopyfiles macxrmfiles macxstandalone
+        POST_TARGETDEPS += mysqlcc.app/Contents/Resources
+}
+
+SOURCES     = @MYSQLCC_SOURCES@
+
+HEADERS     = @MYSQLCC_HEADERS@
+
+
+
+
+

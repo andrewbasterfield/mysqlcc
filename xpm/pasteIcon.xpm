@@ -1,0 +1,29 @@
+/* XPM */
+static const char* const pasteIcon_data[] = { 
+"16 16 8 1",
+". c None",
+"# c #4a4a4a",
+"e c #4a4aa5",
+"b c #848400",
+"c c #848484",
+"d c #d6d6ce",
+"a c #ffff00",
+"f c #ffffff",
+"................",
+".....####.......",
+".#####aa#####...",
+"#bcb#a##a#cbc#..",
+"#cc#dddddd#cb#..",
+"#bc########cc#..",
+"#cbcbcbcbcbcb#..",
+"#bcbcbeeeeeee#..",
+"#cbcbcefffffee..",
+"#bcbcbefffffefe.",
+"#cbcbcefeeefeeee",
+"#bcbcbeffffffffe",
+"#cbcbcefeeeeeefe",
+".#####effffffffe",
+"......eeeeeeeeee",
+"................"};
+
+

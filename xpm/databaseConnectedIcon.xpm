@@ -1,0 +1,27 @@
+/* XPM */
+static const char* const databaseConnectedIcon_data[] = { 
+"11 16 7 1",
+"e c #008400",
+"b c #00ff00",
+"d c #4a4a4a",
+"c c #848484",
+"# c #949494",
+"a c #c6ffc6",
+". c None",
+"..######...",
+".#abababc..",
+"#ababababd.",
+"#eabababad.",
+"#ebaaebeed.",
+"#eeaeaebed.",
+"#ebaaebeed.",
+"#eeaeaebed.",
+"#ebaaebeed.",
+"#eeaeaebed.",
+"#ebaaebeed.",
+"#eeaeaebed.",
+"#ebaaebeed.",
+"#eeaeaebed.",
+".ddaaebdd..",
+"...dddd...."};
+

@@ -1,0 +1,28 @@
+/* XPM */
+static const char* const serverShutdownIcon_data[] = { 
+"16 16 8 1",
+". c None",
+"b c #4a4a4a",
+"e c #840000",
+"# c #848484",
+"d c #949494",
+"a c #c6c6c6",
+"f c #ff0000",
+"c c #ffffff",
+".########.......",
+"#aaaaaaa#b......",
+"#cccccc##b......",
+"#aaaaaa#bb......",
+"#######b#b......",
+"#ccccccddddddee.",
+"#aaaaaddccc#ee##",
+"######eecc#ee##.",
+"#ccccd##eeee##cb",
+"#aaaadcc#eee#ccb",
+"#aaaadcceeeeeccb",
+"#aaaadc#ee##eecb",
+"#aaafdcee##cee#b",
+"#aaaaa#ee#ccc#e.",
+".bbbbbee##cccbe#",
+"......e##bbbb.##"};
+

@@ -1,0 +1,7 @@
+?package(mysqlcc):needs="x11" \
+	section="Apps/Databases" \
+	icon="/usr/share/pixmaps/mysqlcc.xpm" \
+	title="MySQL CC" \
+	longtitle="MySQL Control Center" \
+	command="/usr/bin/mysqlcc"
+

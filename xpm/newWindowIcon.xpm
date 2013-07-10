@@ -1,0 +1,24 @@
+/* XPM */
+static const char* const newWindowIcon_data[] = { 
+"16 16 4 1",
+"b c #0000c0",
+"# c #008080",
+". c None",
+"a c #ffffff",
+"...###########..",
+"...#a#########..",
+"...###########..",
+"...#aaaaaaaaa#..",
+"###########aa#..",
+"#a#########aa#..",
+"###########aa#..",
+"#aaaaaaaaa####..",
+"#aaaabbbbbbbbbbb",
+"#aaaababbbbbbbbb",
+"#aaaabbbbbbbbbbb",
+"#####baaaaaaaaab",
+".....baaaaaaaaab",
+".....baaaaaaaaab",
+".....baaaaaaaaab",
+".....bbbbbbbbbbb"};
+

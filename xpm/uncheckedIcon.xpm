@@ -1,0 +1,23 @@
+/* XPM */
+static const char* const uncheckedIcon_data[] = { 
+"16 16 4 1",
+"b c #000000",
+". c None",
+"# c #848484",
+"a c #ffffff",
+"................",
+"................",
+".############a..",
+".#bbbbbbbbbb.a..",
+".#baaaaaaaaa.a..",
+".#baaaaaaaaa.a..",
+".#baaaaaaaaa.a..",
+".#baaaaaaaaa.a..",
+".#baaaaaaaaa.a..",
+".#baaaaaaaaa.a..",
+".#baaaaaaaaa.a..",
+".#baaaaaaaaa.a..",
+".#baaaaaaaaa.a..",
+".#...........a..",
+".aaaaaaaaaaaaa..",
+"................"};

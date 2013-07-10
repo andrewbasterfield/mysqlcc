@@ -1,0 +1,28 @@
+/* XPM */
+static const char* const findIcon_data[] = { 
+"16 16 8 1",
+". c None",
+"b c #4a4a4a",
+"d c #4affff",
+"f c #a54a4a",
+"# c #a5a5a5",
+"c c #d6d6d6",
+"e c #ff4a4a",
+"a c #ffffff",
+"................",
+".#########......",
+".#aaaaaaa#b.....",
+".#aaaaaaa#ab....",
+".#aaaaaaabbbb...",
+".#aaaaaaaaacb...",
+".#aaaabbbbacb...",
+".#aaab#cc#bcb...",
+".#aab#aaad#bb...",
+".#aabcaadacbb...",
+".#aabcadadcbb...",
+".#aab#dada#bb...",
+".#aaab#cc#beb...",
+".#ccccbbbbfeeb..",
+".#bbbbbbbbbfee..",
+"...........bff.."};
+

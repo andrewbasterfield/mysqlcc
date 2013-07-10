@@ -1,0 +1,151 @@
+NAME
+
+  mysqlcc
+
+USAGE
+
+  mysqlcc [options] [database]
+ 
+DESCRIPTION
+
+  MySQL Control Center (also known as MySQLCC) is a 
+  platform-independent GUI administration client for 
+  the MySQL database server. 
+
+ Features:
+   * Interactive queries with a syntax-highlighting SQL editor
+
+      With MySQLCC, you can construct queries using 
+      a syntax-highlighting text editor, and then view 
+      the results in a configurable table display. 
+      The table view includes support for viewing 
+      images stored in BLOB fields.
+
+   * Database and table management
+
+      MySQLCC makes it easy to create and manage 
+      databases and tables, including views for all of 
+      the table and field attributes such as comments 
+      and key lengths. You can also check, repair, and 
+      optimize tables.
+
+   * Server administration
+
+      You can easily view and change server variables, 
+      as well as view server status information. MySQLCC 
+      also supports multiple servers.
+
+   * Cross-platform
+
+      MySQLCC uses Trolltech's Qt toolkit, which means it 
+      can run on Microsoft Windows and Unix environments, 
+      and we plan on support Mac OS X in future versions.
+
+OPTIONS
+  -C, --compress
+      Use compression in server/client protocol.
+
+  -b, --blocking-queries 
+      Use Blocking Queries.
+  
+  -y, --syntax
+      Enable Syntax Highlighting and Completion.
+
+  -d, --database=name 
+      Database to use.
+
+  -h, --host=name 
+      Connect to host
+
+  -u, --user=name 
+      User for login if not current user.
+
+  -p, --password[=name]
+      Password to use when connecting to server. If password is
+      not given MySQL Control Center will prompt for the
+      password.
+
+  -P, --port=#
+      Port number to use for connection.
+
+  -S, --socket=name 
+      Socket file to use for connection.
+
+  -c, --connection-name=name
+      This is an alias to --server.
+
+  -s, --server=name 
+      MySQL Control Center connection name.
+
+  -q, --query 
+      Open a Query Window on startup.
+
+  -r, --register 
+      Open the Register Server dialog on startup.
+
+  -?, --help 
+      Display this help and exit. (might be more
+      up to date than this man page though)
+
+  -Y, --syntax-file=name
+      Syntax file for completion.
+
+  -H, --history-size=#
+      History Size for the Query Window.
+
+  -T, --translations-path=name
+      Path to the directory where MySQL Control Center
+      translations are located.
+
+  -g, --plugins-path=name
+      Path to the directory where MySQL Control Center plugins
+      are located.
+
+  -V, --version 
+      Print version information and exit.
+
+  --connect_timeout=#
+
+  --select_limit=#
+
+  --net_buffer_length=#
+
+  --max_allowed_packet=#
+
+  --local-infile
+      Enable/disable LOAD DATA LOCAL INFILE.
+
+  --max_join_size=#
+
+
+  The following options may be given as the first argument:
+
+  --print-defaults 
+      Print the program argument list and exit
+
+  --no-defaults
+      Don't read default options from any options file
+
+  --defaults-file=# 
+      Only read default options from the given file #
+
+  --defaults-extra-file=# 
+      Read this file after the global files are read
+
+
+FILES
+
+  Default options are read from the following files in the given order:
+  /etc/mysql/my.cnf, /var/lib/mysql/my.cnf, ~/.my.cnf
+
+ 
+AUTHORS
+
+  Jorge del Conde
+  MySQL AB
+
+NOTES
+
+This manpage has been compiled by Adam Majer <adamm@galacticasoftware.com>
+to satisfy Debian's requirements. If you find any bugs or omissions,
+please send me a note.

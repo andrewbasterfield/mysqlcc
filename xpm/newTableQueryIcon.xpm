@@ -1,0 +1,27 @@
+/* XPM */
+static const char* const newTableQueryIcon_data[] = { 
+"16 16 7 1",
+"e c #000000",
+". c None",
+"b c #4a4a4a",
+"c c #4a4aa5",
+"# c #848484",
+"a c #ffff00",
+"d c #ffffff",
+"................",
+"................",
+".......#a.......",
+".....a.#a.#.....",
+".....#a#a#a..bbb",
+"ccc#aa.a.aa..bbb",
+"ccccc##...#..bbb",
+"bddddddd.#a..bbb",
+"bdeedeed#....bbb",
+"bdddddddb....bbb",
+"bdeedeedb.......",
+"bdddddddb....bbb",
+"bbbbbbbbb....bbb",
+"................",
+"................",
+"................"};
+

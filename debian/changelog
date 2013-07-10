@@ -1,0 +1,69 @@
+mysqlcc (0.9.4-4) unstable; urgency=high
+
+  * Fix a rather critical NULL deference when new table rows are inserted.
+    This should go into Sarge (closes: #266069)
+
+ -- Adam Majer <adamm@galacticasoftware.com>  Mon, 16 Aug 2004 15:19:21 -0500
+
+mysqlcc (0.9.4-3) unstable; urgency=low
+
+  * Needs a rebuild - libqt was not picked up (my Qt setup broke the package)
+    (closes: #264300)
+
+ -- Adam Majer <adamm@galacticasoftware.com>  Sun,  8 Aug 2004 14:42:47 -0500
+
+mysqlcc (0.9.4-2) unstable; urgency=low
+
+  * Added a debian/watch file
+  * Set the default number of rows to be returned to be Unlimited. This
+    addresses all of the problems that people have when SELECT only returns
+    1000 rows (default upstream limit)
+
+ -- Adam Majer <adamm@galacticasoftware.com>  Thu,  5 Aug 2004 01:24:56 -0500
+
+mysqlcc (0.9.4-1) unstable; urgency=low
+
+  * New upstream release
+
+ -- Adam Majer <adamm@galacticasoftware.com>  Tue,  8 Jun 2004 01:13:23 -0500
+
+mysqlcc (0.9.3-3) unstable; urgency=low
+
+  * Set View|Results Tabs now use Alt+ instread of Ctrl+ as in ver. 0.9.1
+    so that Ctrl+0 may be used to enter NULL values (closes: #215170)
+
+ -- Adam Majer <adamm@galacticasoftware.com>  Fri, 10 Oct 2003 20:37:44 -0500
+
+mysqlcc (0.9.3-2) unstable; urgency=low
+
+  * Fixed a segfault caused by uninitialized textcodec variable.
+    (closes: #211876)
+  * Updated description of mysqlcc-i18n to include Italian and Polish
+  * Updated Standards to 3.6.1
+
+ -- Adam Majer <adamm@galacticasoftware.com>  Sun, 21 Sep 2003 19:17:55 -0500
+
+mysqlcc (0.9.3-1) unstable; urgency=low
+
+  * New upstream release (closes: #197687)
+    - Apply a patch from Tom Achtenberg <TomA@fh.org> to allow unlimited joins.
+    - Default max join size is now unlimited
+    - option added to not connect to any servers at startup (closes: #197672)
+    - keyword entry doesn't cause a lose of focus anymore (closes: #197686)
+  * Rebuilt with Qt 3.2.1 due to some incompatability introduced somewhere
+    b/w libqt 3.1.1-9 and 3.2.1-4 (closes: #210340)
+
+ -- Adam Majer <adamm@galacticasoftware.com>  Sat, 13 Sep 2003 17:22:58 -0500
+
+mysqlcc (0.9.1-2) unstable; urgency=low
+
+  * [debian/rules] Set debian/my_mv +x so it does not fail on build
+
+ -- Adam Majer <adamm@galacticasoftware.com>  Wed, 21 May 2003 09:46:04 -0500
+
+mysqlcc (0.9.1-1) unstable; urgency=low
+
+  * Initial Release (closes: #166022).
+
+ -- Adam Majer <adamm@galacticasoftware.com>  Fri,  2 May 2003 01:06:25 -0500
+

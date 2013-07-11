@@ -18,6 +18,7 @@
 #ifndef CMYSQLCCPLUGIN_H
 #define CMYSQLCCPLUGIN_H
 
+#include <stddef.h>
 #include <qwidget.h>
 #include <qstring.h>
 #include <qpixmap.h>

@@ -24,6 +24,7 @@
 #include <stdlib.h>
 #endif
 
+#include <stddef.h>
 #include <qstring.h>
 #include <qsound.h>
 #include <qapplication.h>

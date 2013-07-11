@@ -18,6 +18,7 @@
 #ifndef CTYPETOOLBAR_H
 #define CTYPETOOLBAR_H
 
+#include <stddef.h>
 #include <qtoolbar.h>
 #include <qtoolbutton.h>
 #include <qintdict.h>

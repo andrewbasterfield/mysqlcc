@@ -26,6 +26,7 @@
 #include "CTableSpecific.h"
 #include "CTableWindow.h"
 #include "panels.h"
+#include <stddef.h>  
 #include <qdict.h>
 
 #ifdef DEBUG_LEVEL

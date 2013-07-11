@@ -18,6 +18,7 @@
 #ifndef CUSERADMINWINDOW_H
 #define CUSERADMINWINDOW_H
 
+#include <stddef.h>
 #include <qvariant.h>
 #include <qlistview.h>
 #include "CMyWindow.h"

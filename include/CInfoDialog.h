@@ -18,6 +18,7 @@
 #ifndef CINFODIALOG_H
 #define CINFODIALOG_H
 
+#include <stddef.h>
 #include <qvariant.h>
 #include <qdialog.h>
 

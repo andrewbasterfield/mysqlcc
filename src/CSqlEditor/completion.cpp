@@ -24,6 +24,7 @@
 #include "completion.h"
 #include "paragdata.h"
 #include "editor.h"
+#include <stddef.h>
 #include <qlistbox.h>
 #include <qvbox.h>
 #include <qmap.h>

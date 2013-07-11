@@ -22,6 +22,7 @@
 #include "config.h"
 #include "globals.h"
 #include "panels.h"
+#include <stddef.h>
 #include <qfile.h>
 #include <qdatetime.h>
 #include <qpopupmenu.h>

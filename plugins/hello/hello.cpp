@@ -9,6 +9,7 @@
 *****************************************************************************/
 
 #include "hello.h"
+#include <stddef.h>
 #include <qpushbutton.h>
 #include <qtimer.h>
 #include <qpainter.h>

@@ -19,6 +19,7 @@
 #define CPLUGIN_H
 
 #include "CMySQLCCPlugin.h"
+#include <stddef.h>
 #include <qmap.h>
 #include <qvaluelist.h>
 

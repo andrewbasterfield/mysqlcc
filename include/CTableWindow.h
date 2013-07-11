@@ -18,6 +18,7 @@
 #ifndef CTABLEWINDOW_H
 #define CTABLEWINDOW_H
 
+#include <stddef.h>
 #include <qvariant.h>
 #include "CMyWindow.h"
 #include <qtable.h>

@@ -38,6 +38,7 @@
 #ifndef COMPLETION_H
 #define COMPLETION_H
 
+#include <stddef.h>
 #include <qstring.h>
 #include <qstringlist.h>
 #include <qobject.h>

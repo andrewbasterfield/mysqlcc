@@ -16,6 +16,7 @@
   MA 02111-1307, USA 
 */
 #include "CNullLineEdit.h"
+#include <stddef.h>
 #include <qevent.h>
 
 CNullLineEdit::CNullLineEdit(QWidget * parent, const char * name)

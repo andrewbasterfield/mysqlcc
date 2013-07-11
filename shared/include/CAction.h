@@ -18,6 +18,7 @@
 #ifndef CACTION_H
 #define CACTION_H
 
+#include <stddef.h>
 #include <qaction.h>
 
 class QAction;

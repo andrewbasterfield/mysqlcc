@@ -23,6 +23,7 @@
 #include "CShowDatabaseGroupProperties.h"
 #include "CDatabaseItem.h"
 #include "panels.h"
+#include <stddef.h>  
 #include <qinputdialog.h>
 
 CDatabaseGroupItem::CDatabaseGroupItem(CDatabaseListViewItem * parent, CMySQLServer *m)

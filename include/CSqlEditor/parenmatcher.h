@@ -38,6 +38,7 @@
 #ifndef PARENMATCHER_H
 #define PARENMATCHER_H
 
+#include <stddef.h>
 #include <qstring.h>
 #include <qvaluelist.h>
 

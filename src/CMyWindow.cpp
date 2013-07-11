@@ -20,6 +20,7 @@
 #include "panels.h"
 #include "CConfig.h"
 #include "config.h"
+#include <stddef.h>
 #include <qapplication.h>
 #include <qregexp.h>
 #include <qobjectlist.h>

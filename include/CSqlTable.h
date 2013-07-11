@@ -19,6 +19,7 @@
 #define CSQLTABLE_H
 
 #include "CQueryTable.h"
+#include <stddef.h>
 #include <qmap.h>
 
 class CMySQLQuery;

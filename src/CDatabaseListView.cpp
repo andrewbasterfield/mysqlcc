@@ -29,6 +29,7 @@
 #include "globals.h"
 #include "config.h"
 #include "CMySQLServer.h"
+#include <stddef.h>  
 #include <qstatusbar.h>
 
 

@@ -33,6 +33,7 @@
 #include "CConsoleWindow.h"
 #include "CTableFieldChooser.h"
 
+#include <stddef.h>
 #include <qaccel.h>
 #include <qtimer.h>
 #include <qsplitter.h>

@@ -18,6 +18,7 @@
 #ifndef CMYSQLSERVER_H
 #define CMYSQLSERVER_H
 
+#include <stddef.h>
 #include <qvariant.h>
 #include <qobject.h>
 #include "CMySQL.h"

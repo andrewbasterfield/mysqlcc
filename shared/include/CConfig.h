@@ -20,6 +20,7 @@
 
 class QTextStream;
 
+#include <stddef.h>
 #include <qmap.h>
 #include <qstring.h>
 

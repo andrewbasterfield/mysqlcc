@@ -24,6 +24,7 @@
 #include "CAppConfigDialog.h"
 #include "CApplication.h"
 #include "CPluginWindow.h"
+#include <stddef.h>  
 #include <qfontdialog.h>
 
 /*

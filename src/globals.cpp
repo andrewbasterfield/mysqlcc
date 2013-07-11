@@ -18,6 +18,7 @@
 #include "globals.h"
 #include "config.h"
 #include "panels.h"
+#include <stddef.h>
 #include <qpixmap.h>
 #include <qregexp.h>
 #include <qstringlist.h>

@@ -18,6 +18,7 @@
 #ifndef CTABLESPECIFIC_H
 #define CTABLESPECIFIC_H
 
+#include <stddef.h>
 #include <qvariant.h>
 #include <qdialog.h>
 #include <qpopupmenu.h>

@@ -25,6 +25,7 @@
 #include "config.h"
 #include "globals.h"
 #include "panels.h"
+#include <stddef.h>  
 #include <qtextstream.h>
 #include <qapplication.h>
 #include <qfile.h>

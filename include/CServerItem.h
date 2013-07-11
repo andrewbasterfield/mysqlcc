@@ -19,6 +19,7 @@
 #define CSERVERITEM_H
 
 #include "CDatabaseListViewItem.h"
+#include <stddef.h>
 #include <qdict.h>
 #include <qtoolbutton.h>
 #include <qtoolbar.h>

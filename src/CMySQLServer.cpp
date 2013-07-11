@@ -23,6 +23,7 @@
 #include "CApplication.h"
 #include "CConsoleWindow.h"
 #include "panels.h"
+#include <stddef.h>
 #include <qmessagebox.h>
 #include <qregexp.h>
 #include <qmap.h>

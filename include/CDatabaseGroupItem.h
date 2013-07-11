@@ -19,6 +19,7 @@
 #define CDATABASEGROUPITEM_H
 
 #include "CDatabaseListViewItem.h"
+#include <stddef.h>
 #include <qdict.h>
 
 class CDatabaseGroupItem : public CDatabaseListViewItem

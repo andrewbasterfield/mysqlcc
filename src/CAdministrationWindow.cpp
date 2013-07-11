@@ -26,6 +26,7 @@
 #include "CTableFieldChooser.h"
 #include "CHotKeyEditorDialog.h"
 #include "CQueryWindow.h"
+#include <stddef.h>  
 #include <qtoolbutton.h>
 #include <qtabwidget.h>
 #include <qlayout.h>

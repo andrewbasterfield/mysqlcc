@@ -18,6 +18,7 @@
 #ifndef CCONFIGDIALOG_H
 #define CCONFIGDIALOG_H
 
+#include <stddef.h>
 #include <qvariant.h>
 #include <qwidget.h>
 #include "CMyWindow.h"

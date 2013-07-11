@@ -21,6 +21,7 @@
 #include "globals.h"
 #include "config.h"
 #include "panels.h"
+#include <stddef.h>
 #include <qvariant.h>
 #include <qbuttongroup.h>
 #include <qcheckbox.h>

@@ -20,6 +20,7 @@
 #include "CMySQLServer.h"
 #include "config.h"
 #include "CApplication.h"
+#include <stddef.h>  
 #include <qdatetime.h>
 #include <stdlib.h>
 #include <qaccel.h>

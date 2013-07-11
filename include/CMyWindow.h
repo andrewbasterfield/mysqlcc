@@ -18,6 +18,7 @@
 #ifndef CMYWINDOW_H
 #define CMYWINDOW_H
 
+#include <stddef.h>
 #include <qvariant.h>
 #include <qmainwindow.h>
 #include <qdockarea.h>

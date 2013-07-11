@@ -19,6 +19,7 @@
 #include "CMySQLServer.h"
 #include "CMySQLQuery.h"
 #include "globals.h"
+#include <stddef.h>  
 #include <qpushbutton.h>
 
 CTablePropertiesWidget::CTablePropertiesWidget(QWidget* parent,  CMySQLServer *m, const QString & t, const QString & d)

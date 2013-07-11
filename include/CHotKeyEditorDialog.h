@@ -18,6 +18,7 @@
 #ifndef CHOTKEYEDITORDIALOG_H
 #define CHOTKEYEDITORDIALOG_H
 
+#include <stddef.h>
 #include <qvariant.h>
 #include <qwidget.h>
 #include <qpopupmenu.h>

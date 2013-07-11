@@ -21,6 +21,7 @@
 #include "CHistoryView.h"
 #include "CDockWindow.h"
 #include "CMySQLQuery.h"
+#include <stddef.h>  
 #include <qlayout.h>
 #include <qpixmap.h>
 #include <qpopupmenu.h>

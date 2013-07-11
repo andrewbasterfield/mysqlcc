@@ -18,6 +18,7 @@
 #ifndef CFIELDEDITORWIDGET_H
 #define CFIELDEDITORWIDGET_H
 
+#include <stddef.h>
 #include <qwidget.h>
 
 class QMainWindow;

@@ -18,6 +18,7 @@
 #include "sqlcompletion.h"
 #include "editor.h"
 #include "config.h"
+#include <stddef.h>
 #include <qobject.h>
 #include <qmetaobject.h>
 #include <qobjectlist.h>

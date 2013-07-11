@@ -18,6 +18,7 @@
 #ifndef CAPPLICATION_H
 #define CAPPLICATION_H
 
+#include <stddef.h>
 #include <qapplication.h>
 #include <qmap.h>
 #include <qworkspace.h>

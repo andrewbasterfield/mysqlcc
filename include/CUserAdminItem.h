@@ -18,6 +18,7 @@
 #ifndef CUSERADMINITEM_H
 #define CUSERADMINITEM_H
 
+#include <stddef.h>
 #include <qvariant.h>
 #include "CDatabaseListViewItem.h"
 #include <qdict.h>

@@ -18,6 +18,7 @@
 #ifndef CSHOWDATABASEGROUPPROPERTIES_H
 #define CSHOWDATABASEGROUPPROPERTIES_H
 
+#include <stddef.h>
 #include <qregexp.h>
 #include <qstringlist.h>
 #include "CProperties.h"

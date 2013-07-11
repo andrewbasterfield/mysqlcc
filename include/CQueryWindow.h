@@ -22,6 +22,7 @@
 #include "config.h"
 #include "CQueryWindowOptionsDialog.h"
 #include "CTable.h"
+#include <stddef.h>
 #include <qmap.h>
 #include <qtabwidget.h>
 #include <qptrlist.h>

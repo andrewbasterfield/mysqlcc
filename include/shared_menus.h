@@ -18,6 +18,7 @@
 #ifndef SHARED_MENUS_H
 #define SHARED_MENUS_H
 
+#include <stddef.h>
 #include <qmenubar.h>
 #include <qfontdialog.h>
 #include <qstylefactory.h>

@@ -19,6 +19,7 @@
 #define CMYSQLQUERY_H
 
 #include <qthread.h>
+#include <stddef.h>
 #include <qvariant.h>
 #include "CMySQL.h"
 

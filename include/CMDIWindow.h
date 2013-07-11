@@ -18,6 +18,7 @@
 #ifndef CMDIWINDOW_H
 #define CMDIWINDOW_H
 
+#include <stddef.h>
 #include <qvariant.h>
 #include <qmainwindow.h>
 #include "CMyWindow.h"

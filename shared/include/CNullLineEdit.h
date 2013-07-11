@@ -18,6 +18,7 @@
 #ifndef CNULLLINEEDIT_H
 #define CNULLLINEEDIT_H
 
+#include <stddef.h>
 #include <qlineedit.h>
 #include <qvalidator.h>
 

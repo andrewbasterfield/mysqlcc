@@ -18,6 +18,7 @@
 #ifndef CQUERYTABLEITEM_H
 #define CQUERYTABLEITEM_H
 
+#include <stddef.h>
 #include <qtable.h>
 
 class CMySQLQuery;

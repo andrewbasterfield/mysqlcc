@@ -25,6 +25,7 @@
 #include "CMySQL.h"
 #include "CHotKeyEditorDialog.h"
 #include "CNullLineEdit.h"
+#include <stddef.h>
 #include <qregexp.h>
 #include <qvariant.h>
 #include <qtable.h>

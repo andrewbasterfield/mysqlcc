@@ -18,6 +18,7 @@
 #ifndef CGENERALCONFIG_H
 #define CGENERALCONFIG_H
 
+#include <stddef.h>
 #include <qvariant.h>
 #include "CConfigDialog.h"
 #include "CSqlEditorFont.h"

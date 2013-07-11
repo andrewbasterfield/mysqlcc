@@ -9,6 +9,7 @@
 
 #undef QT_NO_COMPAT
 #include "hello.h"
+#include <stddef.h>
 #include <qmetaobject.h>
 #include <qapplication.h>
 

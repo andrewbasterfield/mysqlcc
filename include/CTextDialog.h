@@ -18,6 +18,7 @@
 #ifndef CTEXTDIALOG_H
 #define CTEXTDIALOG_H
 
+#include <stddef.h>
 #include <qvariant.h>
 #include <qdialog.h>
 #include <qlabel.h>

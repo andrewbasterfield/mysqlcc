@@ -19,6 +19,7 @@
 #include "CSqlEditorFont.h"
 #include "sqlcompletion.h"
 #include "paragdata.h"
+#include <stddef.h>
 #include <qstring.h>
 #include <qdict.h>
 #include <qstringlist.h>

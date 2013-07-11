@@ -23,7 +23,7 @@ config.status: configure
 	ln -s /usr/share/misc/config.guess .
 
 	# Add here commands to configure the package.
-	./configure --host=$(DEB_HOST_GNU_TYPE) --build=$(DEB_BUILD_GNU_TYPE) --prefix=/usr --mandir=\$${prefix}/share/man --infodir=\$${prefix}/share/info --with-qt=/usr/share/qt3
+	./configure --host=$(DEB_HOST_GNU_TYPE) --build=$(DEB_BUILD_GNU_TYPE) --prefix=/usr --mandir=\$${prefix}/share/man --infodir=\$${prefix}/share/info --with-qt=/usr/share/qt3 --with-mysql-lib=`mysql_config --variable=pkglibdir` --with-mysql-include=`mysql_config --variable=pkgincludedir`
 
 build: build-stamp
 

@@ -21,6 +21,7 @@
 #include "config.h"
 #include "panels.h"
 #include "CHotKeyEditorDialog.h"
+#include <stddef.h>
 #include <qmessagebox.h>
 #include <qvariant.h>
 #include <qlayout.h>

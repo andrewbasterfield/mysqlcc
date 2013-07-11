@@ -18,6 +18,7 @@
 #ifndef GLOBALS_H
 #define GLOBALS_H
 
+#include <stddef.h>
 #include <qstring.h>
 #include <qmessagebox.h>
 #include <qpixmap.h>

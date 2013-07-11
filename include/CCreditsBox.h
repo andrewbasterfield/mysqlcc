@@ -18,6 +18,7 @@
 #ifndef CCREDITSBOX_H
 #define CCREDITSBOX_H
 
+#include <stddef.h>
 #include <qtextedit.h>
 #include "CInfoDialog.h"
 

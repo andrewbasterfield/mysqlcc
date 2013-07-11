@@ -24,6 +24,7 @@
 #include "parenmatcher.h"
 #include "globals.h"
 #include "CApplication.h"
+#include <stddef.h>  
 #include <qfile.h>
 #include <qpopupmenu.h>
 #include <qprinter.h>

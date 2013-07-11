@@ -28,6 +28,7 @@
 #include "globals.h"
 #include "panels.h"
 #include "CNullLineEdit.h"
+#include <stddef.h>
 #include <qfile.h>
 #include <qdatetime.h>
 #include <qlineedit.h>

@@ -18,6 +18,7 @@
 #include "CSqlEditorFont.h"
 #include "CConfig.h"
 #include "globals.h"
+#include <stddef.h>
 #include <qregexp.h>
 
 #ifdef DEBUG_LEVEL

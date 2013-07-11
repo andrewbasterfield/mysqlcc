@@ -16,6 +16,7 @@
   MA 02111-1307, USA 
 */
 #include "CCreditsBox.h"
+#include <stddef.h>  
 #include <qlayout.h>
 #include <qlabel.h>
 #include <qwhatsthis.h>

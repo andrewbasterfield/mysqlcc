@@ -26,6 +26,7 @@
 #include "globals.h"
 #include "CTableProperties.h"
 #include "CDatabaseListViewItem.h"
+#include <stddef.h>  
 #include <qmessagebox.h>
 
 

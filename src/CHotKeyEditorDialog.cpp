@@ -21,6 +21,7 @@
 #include "config.h"
 #include "CAction.h"
 
+#include <stddef.h>
 #include <qpushbutton.h>
 #include <qvariant.h>
 #include <qheader.h>

@@ -18,6 +18,7 @@
 #ifndef CDOCKWINDOW_H
 #define CDOCKWINDOW_H
 
+#include <stddef.h>
 #include <qdockwindow.h>
 
 class CDockWindow : public QDockWindow

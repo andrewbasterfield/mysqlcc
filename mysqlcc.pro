@@ -27,14 +27,14 @@ win32 {
 }
 
 unix {
-      LIBS        += /usr/lib/mysql/libmysqlclient.so  
+      LIBS        += /usr/lib/x86_64-linux-gnu/libmysqlclient.so  
       INCLUDEPATH += /usr/include/mysql
       CONFIG      += x11 
       OBJECTS_DIR  = tmp
 }
 
 macx {
-        LIBS        += /usr/lib/mysql/libmysqlclient.so  -headerpad_max_install_names -lz -framework Carbon -framework CoreFoundation
+        LIBS        += /usr/lib/x86_64-linux-gnu/libmysqlclient.so  -headerpad_max_install_names -lz -framework Carbon -framework CoreFoundation
         DEFINES     += QT_OSX_BUILD
         INCLUDEPATH += /usr/include/mysql
         OBJECTS_DIR  = tmp

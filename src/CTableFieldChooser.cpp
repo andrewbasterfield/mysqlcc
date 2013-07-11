@@ -18,6 +18,7 @@
 #include "CTableFieldChooser.h"
 #include "config.h"
 #include "globals.h"
+#include <stddef.h>  
 #include <qtable.h>
 #include <qpopupmenu.h>
 

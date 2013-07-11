@@ -18,6 +18,7 @@
 #ifndef CTABLEFIELDCHOOSER_H
 #define CTABLEFIELDCHOOSER_H
 
+#include <stddef.h>
 #include <qdockwindow.h>
 #include <qlistview.h>
 

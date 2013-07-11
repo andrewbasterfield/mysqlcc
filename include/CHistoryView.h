@@ -18,6 +18,7 @@
 #ifndef CHISTORYVIEW_H
 #define CHISTORYVIEW_H
 
+#include <stddef.h>
 #include <qvariant.h>
 #include <qintdict.h>
 

@@ -16,6 +16,7 @@
   MA 02111-1307, USA 
 */
 #include "mysqlcc_main.h"
+#include <mysql.h>
 #include <my_global.h>
 #include <my_sys.h>
 #ifdef VERSION
@@ -193,6 +194,7 @@ int main(int argc, char *argv[])
   int t = 0;  
   int ret = -1;
   char **save_argv;
+  mysql_library_init(0, NULL, NULL);
   load_defaults("my",load_default_groups,&argc,&argv);
   save_argv = argv;
   progname= argv[0];

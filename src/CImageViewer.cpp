@@ -21,6 +21,7 @@
 #include "CMySQLQuery.h"
 #include "globals.h"
 
+#include <stddef.h>
 #include <qlabel.h>
 #include <qclipboard.h>
 #include <qfiledialog.h>

@@ -18,6 +18,7 @@
 #ifndef CPROPERTIES_H
 #define CPROPERTIES_H
 
+#include <stddef.h>
 #include <qvariant.h>
 #include <qwidget.h>
 #include <qlabel.h>

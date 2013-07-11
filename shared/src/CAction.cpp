@@ -16,6 +16,7 @@
   MA 02111-1307, USA 
 */
 #include "CAction.h"
+#include <stddef.h>
 #include <qaction.h>
 
 #ifdef DEBUG_LEVEL

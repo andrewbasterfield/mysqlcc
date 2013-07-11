@@ -18,6 +18,7 @@
 #ifndef CSQLEDITORFONT_H
 #define CSQLEDITORFONT_H
 
+#include <stddef.h>
 #include <qfont.h>
 #include <qcolor.h>
 #include <qstring.h>

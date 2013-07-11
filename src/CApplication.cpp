@@ -21,6 +21,7 @@
 #include "CConfig.h"
 #include "CSqlEditorFont.h"
 #include "CHistoryView.h"
+#include <stddef.h>
 #include <qpixmap.h>
 #include <qptrlist.h>
 #include <qdir.h>

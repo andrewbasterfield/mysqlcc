@@ -18,6 +18,7 @@
 #ifndef CDATABASELISTVIEWITEM_H
 #define CDATABASELISTVIEWITEM_H
 
+#include <stddef.h>
 #include <qvariant.h>
 #include <qlistview.h>
 #include <qobject.h>

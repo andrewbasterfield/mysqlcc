@@ -22,6 +22,7 @@
 #include "CConsoleWindow.h"
 #include "CDatabaseListView.h"
 #include "CHotKeyEditorDialog.h"
+#include <stddef.h>  
 #include <qaction.h>
 
 /*

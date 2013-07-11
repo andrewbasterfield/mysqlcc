@@ -18,6 +18,7 @@
 #include "CPlugin.h"
 #include "globals.h"
 #include "CConfig.h"
+#include <stddef.h>  
 #include <qpixmap.h>
 #include <qlibrary.h>
 #include <qfile.h>

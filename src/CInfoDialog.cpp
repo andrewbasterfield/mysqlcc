@@ -20,6 +20,7 @@
 #endif
 
 #include "CInfoDialog.h"
+#include <stddef.h>  
 #include <qlabel.h>
 #include <qpushbutton.h>
 #include <qlayout.h>

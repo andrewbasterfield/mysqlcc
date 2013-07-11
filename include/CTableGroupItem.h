@@ -19,6 +19,7 @@
 #define CTABLEGROUPITEM_H
 
 #include "CDatabaseListViewItem.h"
+#include <stddef.h>
 #include <qmap.h>
 
 

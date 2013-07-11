@@ -19,6 +19,7 @@
 #include "CMySQLServer.h"
 #include "globals.h"
 #include "config.h"
+#include <stddef.h>  
 #include <qclipboard.h>
 #include <qdatetime.h>
 

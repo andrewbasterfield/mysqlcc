@@ -18,6 +18,7 @@
 #ifndef CABOUTBOX_H
 #define CABOUTBOX_H
 
+#include <stddef.h>
 #include <qtextedit.h>
 #include "CInfoDialog.h"
 

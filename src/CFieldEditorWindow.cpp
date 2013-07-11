@@ -15,6 +15,7 @@
   Software Foundation, Inc., 59 Temple Place - Suite 330, Boston,
   MA 02111-1307, USA 
 */
+#include <stddef.h>
 #include <qvariant.h>
 #include <qframe.h>
 #include <qpushbutton.h>

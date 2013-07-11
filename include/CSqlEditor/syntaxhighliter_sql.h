@@ -18,6 +18,7 @@
 #ifndef SQLSYNTAXHIGHLIGHTER_H
 #define SQLSYNTAXHIGHLIGHTER_H
 
+#include <stddef.h>
 #include <qintdict.h>
 #include <qmap.h>
 #include <private/qrichtext_p.h>

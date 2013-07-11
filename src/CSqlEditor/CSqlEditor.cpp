@@ -25,6 +25,7 @@
 #include "sqlcompletion.h"
 #include "parenmatcher.h"
 #include "panels.h"
+#include <stddef.h>
 #include <qfiledialog.h>
 #include <qsettings.h>
 #include <qpopupmenu.h>

@@ -1,6 +1,7 @@
 #include "hello_plugin.h"
 #include "hello.h"
 #include "CAction.h"
+#include <stddef.h>
 #include <qpopupmenu.h>
 #include <qmenubar.h>
 

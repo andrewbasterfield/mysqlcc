@@ -18,6 +18,7 @@
 #include "CConfig.h"
 #include "globals.h"
 #include "CConfigDialog.h"
+#include <stddef.h>
 #include <qpushbutton.h>
 #include <qtabwidget.h>
 #include <qlayout.h>

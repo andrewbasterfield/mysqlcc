@@ -16,6 +16,7 @@
   MA 02111-1307, USA 
 */
 #include "CConfig.h"
+#include <stddef.h>
 #include <qtextstream.h> 
 #include <qdir.h>
 #include <qstringlist.h>

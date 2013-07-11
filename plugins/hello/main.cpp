@@ -9,6 +9,7 @@
 *****************************************************************************/
 
 #include "hello.h"
+#include <stddef.h>
 #include <qapplication.h>
 
 

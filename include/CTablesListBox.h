@@ -18,6 +18,7 @@
 #ifndef CTABLESLISTBOX_H
 #define CTABLESLISTBOX_H
 
+#include <stddef.h>
 #include <qlistbox.h>
 
 class QListBoxItem;

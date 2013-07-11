@@ -16,6 +16,7 @@
   MA 02111-1307, USA 
 */
 #include "CTableTools.h"
+#include <stddef.h>  
 #include <qimage.h>
 #include <qlayout.h>
 #include <qptrlist.h> 

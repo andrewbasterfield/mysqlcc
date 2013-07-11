@@ -18,6 +18,7 @@
 #ifndef PANELS_H
 #define PANELS_H
 
+#include <stddef.h>
 #include <qvariant.h>
 #include <qlistview.h>
 #include <qtabwidget.h>

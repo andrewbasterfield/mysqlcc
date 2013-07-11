@@ -18,6 +18,7 @@
 #ifndef CTABLE_H
 #define CTABLE_H
 
+#include <stddef.h>
 #include <qvariant.h>
 #include <qtable.h>
 #include <qintdict.h>

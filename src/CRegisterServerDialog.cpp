@@ -24,6 +24,7 @@
 #include "CConfig.h"
 #include "config.h"
 #include "panels.h"
+#include <stddef.h>
 #include <qpixmap.h>
 #include <qfile.h>
 #include <qlistbox.h>

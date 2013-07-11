@@ -16,6 +16,7 @@
   MA 02111-1307, USA 
 */
 #include "CMySQLQuery.h"
+#include <stddef.h>  
 #include <qdatetime.h>
 #include <qapplication.h>
 

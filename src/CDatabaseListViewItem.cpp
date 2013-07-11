@@ -22,6 +22,7 @@
 #include "CAction.h"
 #include "panels.h"
 #include "globals.h"
+#include <stddef.h>  
 #include <qlistview.h>
 #include <qwidgetstack.h>
 

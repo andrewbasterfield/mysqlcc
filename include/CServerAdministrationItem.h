@@ -19,6 +19,7 @@
 #define CSERVERADMINISTRATIONITEM_H
 
 #include "CDatabaseListViewItem.h"
+#include <stddef.h>
 #include <qdict.h>
 
 class CServerAdministrationItem : public CDatabaseListViewItem

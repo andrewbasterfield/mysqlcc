@@ -27,6 +27,7 @@
 #include "shared_menus.h"
 #include "CRegisterServerDialog.h"
 #include "CHotKeyEditorDialog.h"
+#include <stddef.h>
 #include <qregexp.h>
 #include <qlayout.h>
 #include <qwidgetstack.h>

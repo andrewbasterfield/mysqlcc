@@ -18,6 +18,7 @@
 #ifndef CCONNECTIONDIALOG_H
 #define CCONNECTIONDIALOG_H
 
+#include <stddef.h>
 #include <qvariant.h>
 #include <qwidget.h>
 #include <qgroupbox.h>

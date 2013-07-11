@@ -18,6 +18,7 @@
 #ifndef CQUERYWINDOWOPTIONSDIALOGTAB_H
 #define CQUERYWINDOWOPTIONSDIALOGTAB_H
 
+#include <stddef.h>
 #include <qvariant.h>
 #include "CConfigDialog.h"
 

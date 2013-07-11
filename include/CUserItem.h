@@ -18,6 +18,7 @@
 #ifndef CUSERITEM_H
 #define CUSERITEM_H
 
+#include <stddef.h>
 #include <qvariant.h>
 #include "CDatabaseListViewItem.h"
 #include <qdict.h>

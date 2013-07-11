@@ -20,6 +20,7 @@
 
 #include "completion.h"
 #include "CSqlEditorFont.h"
+#include <stddef.h>
 #include <qguardedptr.h>
 
 class SqlCompletionEntry

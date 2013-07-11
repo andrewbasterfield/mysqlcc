@@ -20,6 +20,7 @@
 #include "CMySQLQuery.h"
 #include "globals.h"
 #include "config.h"
+#include <stddef.h>  
 #include <qpopupmenu.h>
 
 #ifdef DEBUG_LEVEL

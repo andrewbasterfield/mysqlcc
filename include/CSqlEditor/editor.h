@@ -24,6 +24,7 @@
 #ifndef EDITOR_H
 #define EDITOR_H
 
+#include <stddef.h>
 #include <qtextedit.h>
 
 struct Config;

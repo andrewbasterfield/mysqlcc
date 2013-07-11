@@ -24,6 +24,8 @@
 
 #include <mysql.h>
 #include <mysqld_error.h>
+#include <stddef.h>
+#include <stddef.h>
 #include <qvariant.h>
 #include <qobject.h>
 #include <qtextcodec.h>

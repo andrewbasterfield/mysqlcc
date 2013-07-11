@@ -24,6 +24,7 @@
 #include "CApplication.h"
 #include "CShowDatabaseGroupProperties.h"
 #include "CTableGroupItem.h"
+#include <stddef.h>  
 #include <qmessagebox.h>
 
 CDatabaseItem::CDatabaseItem(CDatabaseListViewItem * parent, const QString &dbname, CMySQLServer *m, const QPixmap &p1, const QPixmap &p2)

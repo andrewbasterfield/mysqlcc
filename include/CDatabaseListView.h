@@ -18,6 +18,7 @@
 #ifndef CDATABASELISTVIEW_H
 #define CDATABASELISTVIEW_H
 
+#include <stddef.h>
 #include <qlistview.h>
 
 class CConsoleWindow;

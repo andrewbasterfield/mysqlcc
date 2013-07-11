@@ -29,7 +29,7 @@
 #include <qheader.h>
 #include <qtooltip.h>
 
-#define MAX_MESSAGE_LENGTH 512
+#define MAX_MESSAGE_LENGTH CHistoryView::querySize()
 
 CPanelItem::CPanelItem(QListView * parent, const QString &t, const QPixmap &p)
 : QListViewItem(parent)

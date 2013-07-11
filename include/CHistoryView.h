@@ -37,12 +37,15 @@ public:
   static QString historyFile();
   static uint historySize();
   static void setHistorySize(uint size);  
+  static uint querySize();
+  static void setQuerySize(uint size);  
   static CHistoryView * historyView() { return &history_view; }
   
 private:
   QStringList historyList;
   static CHistoryView history_view;
   static uint history_size;
+  static uint query_size;
 };
 
 #endif

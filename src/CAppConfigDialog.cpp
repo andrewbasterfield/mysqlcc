@@ -920,7 +920,7 @@ CGeneralAppConfigTab::CGeneralAppConfigTab(QWidget* parent,  const char* name, W
   
   saveWorkspace = new QCheckBox(this, "saveWorkspace");
   
-  CGeneralAppConfigTabLayout->addMultiCellWidget(saveWorkspace, 6, 6, 0, 1);
+  CGeneralAppConfigTabLayout->addMultiCellWidget(saveWorkspace, 7, 7, 0, 1);
   
   language = new QComboBox(false, this, "language");
   language->setAutoCompletion(true);
@@ -945,12 +945,22 @@ CGeneralAppConfigTab::CGeneralAppConfigTab(QWidget* parent,  const char* name, W
   historySize->setValue(100);
   
   CGeneralAppConfigTabLayout->addWidget(historySize, 5, 1);
+  
+  querySizeLabel = new QLabel(this, "querySizeLabel");
+  
+  CGeneralAppConfigTabLayout->addWidget(querySizeLabel, 6, 0);
+  
+  querySize = new QSpinBox(this, "querySize");
+  querySize->setMaxValue(32768);
+  querySize->setValue(512);
+  
+  CGeneralAppConfigTabLayout->addWidget(querySize, 6, 1);
   QSpacerItem* spacer_3 = new QSpacerItem(20, 30, QSizePolicy::Minimum, QSizePolicy::Expanding);
-  CGeneralAppConfigTabLayout->addItem(spacer_3, 8, 1);
+  CGeneralAppConfigTabLayout->addItem(spacer_3, 9, 1);
   
   confirmCritical = new QCheckBox(this, "confirmCritical");
   
-  CGeneralAppConfigTabLayout->addMultiCellWidget(confirmCritical, 7, 7, 0, 1);
+  CGeneralAppConfigTabLayout->addMultiCellWidget(confirmCritical, 8, 8, 0, 1);
   languageChange();
   clearWState(WState_Polished);
   
@@ -964,8 +974,9 @@ CGeneralAppConfigTab::CGeneralAppConfigTab(QWidget* parent,  const char* name, W
   setTabOrder(informationSoundFile, informationSoundBrowse);
   setTabOrder(informationSoundBrowse, language);
   setTabOrder(language, historySize);
-  setTabOrder(historySize, confirmCritical);
-  setTabOrder(confirmCritical, saveWorkspace);
+  setTabOrder(historySize, querySize);
+  setTabOrder(querySize, saveWorkspace);
+  setTabOrder(saveWorkspace, confirmCritical);
   
   setDefaultValues();
   init();
@@ -997,6 +1008,8 @@ void CGeneralAppConfigTab::languageChange()
   languageLabel->setText(tr("Language"));
   historyNumberLabel->setText(tr("History size for Queries"));
   QWhatsThis::add(historySize, tr("This number specifies how many Queries will be saved by the History Panel in  the Query Windows."));
+  querySizeLabel->setText(tr("Max query size"));
+  QWhatsThis::add(querySize, tr("This number specifies the maximum size of a Query that will be saved by the History Panel in the Query Windows."));
   confirmCritical->setText(tr("Confirm critical operations"));
   QWhatsThis::add(confirmCritical, tr("This option will confirm critical operations done by the client.  Such critical operations include shutting down the application, shutting down the Server, truncate table, etc ..."));
 }
@@ -1024,6 +1037,7 @@ bool CGeneralAppConfigTab::save(CConfig *conn)
   
   ret &= conn->writeEntry("Language File", lang_tmp);
   ret &= conn->writeEntry("History Size", historySize->value());
+  ret &= conn->writeEntry("Query Size", querySize->value());
   ret &= conn->writeEntry("Save Workspace", booltostr(saveWorkspace->isChecked()));
   ret &= conn->writeEntry("Confirm Critical", booltostr(confirmCritical->isChecked()));
   ret &= conn->writeEntry("Error Sound", errorSoundFile->text().stripWhiteSpace());
@@ -1047,6 +1061,7 @@ void CGeneralAppConfigTab::setDefaultValues(CConfig *)
   
   translationsPath->setText(myApp()->translationsPath());
   historySize->setValue(CHistoryView::historySize());
+  querySize->setValue(CHistoryView::querySize());
   confirmCritical->setChecked(myApp()->confirmCritical());
   saveWorkspace->setChecked(myApp()->saveWorkspace());
   errorSoundFile->setText(myApp()->errorSoundFile());

@@ -84,6 +84,33 @@ uint CHistoryView::historySize()
 }
 
 /*
+setQuerySize() sets the MAX size of a query that should be stored in the history.
+*/
+void CHistoryView::setQuerySize(uint size)
+{
+#ifdef DEBUG
+  qDebug("static CHistoryView::setQuerySize(%d)", size);
+#endif
+  
+  query_size = size;
+}
+
+
+uint CHistoryView::query_size = 512;
+
+/*
+querySize() returns the MAX size of a query that should be stored in the history.
+*/
+uint CHistoryView::querySize()
+{
+#ifdef DEBUG
+  qDebug("static CHistoryView::querySize()");
+#endif
+  
+  return query_size;
+}
+
+/*
 historyFile() returns the complete path to the history file.
 */
 QString CHistoryView::historyFile()

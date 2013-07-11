@@ -201,6 +201,8 @@ private:
   QLabel* languageLabel;
   QLabel* historyNumberLabel;
   QSpinBox* historySize;
+  QLabel* querySizeLabel;
+  QSpinBox* querySize;
   QCheckBox* confirmCritical;
   QGridLayout* CGeneralAppConfigTabLayout;
 };

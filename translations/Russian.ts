@@ -778,8 +778,16 @@ And many others&lt;br&gt;</source>
         <translation>Это число определяет количество запросов которые будут сохранены в панели истории.</translation>
     </message>
     <message>
+        <source>This number specifies the maximum size of a Query that will be saved by the History Panel in the Query Windows.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>History size for Queries</source>
         <translation>Размер истории на запросы</translation>
+    </message>
+    <message>
+        <source>Max query size</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Language</source>

@@ -219,6 +219,13 @@ void CApplication::initGlobals(bool startup)
 
   CHistoryView::setHistorySize(history_size);
 
+  //Query Size
+  uint query_size = cfg->readNumberEntry("Query Size", 512);
+  if (query_size > 32768)
+    query_size = 32768;
+
+  CHistoryView::setQuerySize(query_size);
+
   //Syntax File
   syntax_file = cfg->readStringEntry("Syntax File", mydir + "syntax.txt");
 

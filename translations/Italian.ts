@@ -786,8 +786,16 @@ E molti altri&lt;br&gt;</translation>
         <translation>Questo numero specifica quante Query verranno salvate nella Cronologia delle Finestre delle Query.</translation>
     </message>
     <message>
+        <source>This number specifies the maximum size of a Query that will be saved by the History Panel in the Query Windows.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>History size for Queries</source>
         <translation>Dimensioni Cronologia delle Query</translation>
+    </message>
+    <message>
+        <source>Max query size</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Language</source>

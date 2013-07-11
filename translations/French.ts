@@ -779,8 +779,16 @@ seules les bases de données auxquelles vous avez accès seront affichées.\n\nN
         <translation>Ce nombre spécifie combien de requêtes seront sauvgardées dans le panneau d&apos;historique de la fenêtre des requêtes.</translation>
     </message>
     <message>
+        <source>This number specifies the maximum size of a Query that will be saved by the History Panel in the Query Windows.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>History size for Queries</source>
         <translation>Taille de l&apos;historique des requêtes</translation>
+    </message>
+    <message>
+        <source>Max query size</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Language</source>

@@ -779,8 +779,16 @@ And many others&lt;br&gt;</translation>
         <translation>This number specifies how many Queries will be saved by the History Panel in  the Query Windows.</translation>
     </message>
     <message>
+        <source>This number specifies the maximum size of a Query that will be saved by the History Panel in the Query Windows.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>History size for Queries</source>
         <translation>查询历史大小</translation>
+    </message>
+    <message>
+        <source>Max query size</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Language</source>

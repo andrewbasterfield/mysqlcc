@@ -776,8 +776,16 @@ NOTATKA: Ta opcja wywołuje mysql_select_db() dla każdej bazy aby sprawdzić do
         <translation>Ta liczba ustala jak wiele Zapytań będzie zapisywanych w Panelu Historii w Oknie Zapytania.</translation>
     </message>
     <message>
+        <source>This number specifies the maximum size of a Query that will be saved by the History Panel in the Query Windows.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>History size for Queries</source>
         <translation>Rozmiar Historii Zapytań</translation>
+    </message>
+    <message>
+        <source>Max query size</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Language</source>

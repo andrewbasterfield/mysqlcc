@@ -786,8 +786,16 @@ And many others&lt;br&gt;</translation>
         <translation>Este número especifica la cantidad de consultas máximas que seran almacenadas en el Historial de Consultas.</translation>
     </message>
     <message>
+        <source>This number specifies the maximum size of a Query that will be saved by the History Panel in the Query Windows.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>History size for Queries</source>
         <translation>Tamaño del Historial de Consultas</translation>
+    </message>
+    <message>
+        <source>Max query size</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Language</source>

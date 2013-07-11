@@ -749,6 +749,10 @@ wiederherstellen</translation>
         <translation>Größe der Historie für Abfragen</translation>
     </message>
     <message>
+        <source>Max query size</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Language</source>
         <translation>Sprache</translation>
     </message>
@@ -834,6 +838,10 @@ wiederherstellen</translation>
     </message>
     <message>
         <source>This number specifies how many Queries will be saved by the History Panel in  the Query Windows.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>This number specifies the maximum size of a Query that will be saved by the History Panel in the Query Windows.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

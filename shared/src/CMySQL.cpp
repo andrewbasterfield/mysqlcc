@@ -184,18 +184,10 @@ bool CMySQL::connect()
   if (mysql_opt_load_local_infile)
     mysql_options(mysql, MYSQL_OPT_LOCAL_INFILE, mysql_opt_load_local_infile ? 0 : (char*) &mysql_opt_load_local_infile);
 
-  if (mysql_opt_select_limit > 0)
-  {
-    if (mysql_opt_max_join_size > 0)
-      sprintf(init_command, "SET SQL_SELECT_LIMIT=%lu,SQL_MAX_JOIN_SIZE=%lu", mysql_opt_select_limit, mysql_opt_max_join_size);
-    else
-      sprintf(init_command, "SET SQL_SELECT_LIMIT=%lu", mysql_opt_select_limit);
-  }
-  else 
-    if (mysql_opt_max_join_size > 0)
-      sprintf(init_command, "SET SQL_MAX_JOIN_SIZE=%lu", mysql_opt_max_join_size);
-    else
-      sprintf(init_command, "SET SQL_BIG_SELECTS=1");
+  if (mysql_opt_max_join_size > 0)
+    sprintf(init_command, "SET SQL_MAX_JOIN_SIZE=%lu", mysql_opt_max_join_size);
+  else
+    sprintf(init_command, "SET SQL_BIG_SELECTS=1");
 
   mysql_options(mysql, MYSQL_INIT_COMMAND, init_command);
 

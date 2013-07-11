@@ -182,8 +182,22 @@ void CTableSpecific::QueryWindow(CMySQLServer *m, const QString &dbname, const Q
     {
       w->setTable(tableName);
       QString sql = "SELECT *\nFROM " + m->mysql()->quote(tableName);
-      if (query_type == SQL_LIMIT)
+
+      if (m->mysql()->selectLimit() > 0) {
+          query_type = SQL_LIMIT;
+
+          if (limit > 0 && m->mysql()->selectLimit() > limit) {
+              // limit is set and it is smaller than config limit
+              // leave it alone
+          } else {
+              limit = m->mysql()->selectLimit();
+          }
+      }
+
+      if (query_type == SQL_LIMIT) {
         sql += "\nLIMIT " + QString::number(limit);
+      }
+
       w->setQuery(sql);
     }
   }

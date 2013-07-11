@@ -96,6 +96,8 @@ public:
   void setMaxAllowedPacket(ulong i) { mysql_opt_max_allowed_packet = i; }
   void enableLoadLocalInfile(bool b) { mysql_opt_load_local_infile =  b; }
 
+  ulong selectLimit() { return mysql_opt_select_limit; }
+
   bool connect();
   void disconnect(bool e = true);
   QString escape(const QString &s) const;

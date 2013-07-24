@@ -20,31 +20,40 @@
 
 #include <stddef.h>
 #include <qvariant.h>
-#include <qlistview.h>
+#include <q3listview.h>
+//Added by qt3to4:
+#include <QPixmap>
+#include <Q3ActionGroup>
+#include <Q3GridLayout>
+#include <Q3HBoxLayout>
+#include <Q3VBoxLayout>
+#include <QLabel>
+#include <Q3PopupMenu>
+#include <QCloseEvent>
 #include "CMyWindow.h"
 
-class QVBoxLayout; 
-class QHBoxLayout; 
-class QGridLayout; 
+class Q3VBoxLayout; 
+class Q3HBoxLayout; 
+class Q3GridLayout; 
 class QAction;
-class QActionGroup;
-class QToolBar;
-class QPopupMenu;
-class QButtonGroup;
+class Q3ActionGroup;
+class Q3ToolBar;
+class Q3PopupMenu;
+class Q3ButtonGroup;
 class QCheckBox;
 class QLabel;
 class QLineEdit;
-class QListBox;
-class QListBoxItem;
+class Q3ListBox;
+class Q3ListBoxItem;
 class QPushButton;
 class CMySQLServer;
 
-class CGrantItem : public QCheckListItem
+class CGrantItem : public Q3CheckListItem
 {
 public:
   enum Type { GLOBAL, DATABASE, TABLE };
-  CGrantItem(QListView * parent, const QString &txt, const QPixmap &pix, Type t);
-  CGrantItem(QListViewItem * parent, const QString &txt, const QPixmap &pix, Type t);
+  CGrantItem(Q3ListView * parent, const QString &txt, const QPixmap &pix, Type t);
+  CGrantItem(Q3ListViewItem * parent, const QString &txt, const QPixmap &pix, Type t);
   
   Type type() { return m_type; }
   
@@ -60,7 +69,7 @@ public:
 private:
   void init(const QPixmap &pix, const Type &t);
   void stateChange(bool b);
-  int compare(QListViewItem * i, int col, bool ascending) const;
+  int compare(Q3ListViewItem * i, int col, bool ascending) const;
   Type m_type;
   QString dbname;
   QString tblname;
@@ -86,7 +95,7 @@ private slots:
   void applyClicked();
   void refreshItems();
   void refreshPrivilegesList();
-  void setCurrentItem(QListViewItem *i);
+  void setCurrentItem(Q3ListViewItem *i);
   void allPrivilegesToggled(bool);
   void withGrantToggled(bool);
   void privilegeListBoxChanged();
@@ -116,19 +125,19 @@ private:
   QLabel* hostLabel;
   QLabel* passwordLabel;
   QLineEdit* Host;
-  QButtonGroup* ButtonGroup1;
+  Q3ButtonGroup* ButtonGroup1;
   QCheckBox* allPrivileges;
   QCheckBox* withGrantOption;
-  QListBox* privilegeListBox;
+  Q3ListBox* privilegeListBox;
   QLineEdit* Username;
   QLabel* usernameLabel;
   QPushButton* deleteButton;
   QPushButton* applyButton;
   QPushButton* closeButton;
-  QListView* databaseListView;
-  QGridLayout* CUserAdminWindowLayout;
-  QGridLayout* ButtonGroup1Layout;
-  QHBoxLayout* Layout2;
+  Q3ListView* databaseListView;
+  Q3GridLayout* CUserAdminWindowLayout;
+  Q3GridLayout* ButtonGroup1Layout;
+  Q3HBoxLayout* Layout2;
 };
 
 #endif

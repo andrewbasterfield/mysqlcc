@@ -26,6 +26,9 @@
 #include "CTableTools.h"
 #include "CTableWindow.h"
 #include "CQueryWindow.h"
+//Added by qt3to4:
+#include <QPixmap>
+#include <QKeyEvent>
 
 #ifdef DEBUG_LEVEL
 #if DEBUG_LEVEL < 1
@@ -166,7 +169,7 @@ void CTableItem::keyPressed(QKeyEvent * e)
   if (isBlocked())
     return;
 
-  if (e->key() == QListViewItem::Key_Delete)
+  if (e->key() == Qt::Key_Delete)
     processMenu(MENU_DELETE);
   else
     CDatabaseListViewItem::keyPressed(e);

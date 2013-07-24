@@ -19,6 +19,8 @@
 #include "globals.h"
 #include "config.h"
 #include "CTableItem.h"
+//Added by qt3to4:
+#include <Q3PopupMenu>
 
 CShowTableProperties::CShowTableProperties(QWidget * parent, const char *name)
 : CTable(parent, name)
@@ -32,8 +34,8 @@ CShowTableProperties::CShowTableProperties(QWidget * parent, const char *name)
 
   verticalHeader()->hide();
   setReadOnly(true);
-  setFocusStyle(QTable::FollowStyle);
-  setSelectionMode(QTable::SingleRow);
+  setFocusStyle(Q3Table::FollowStyle);
+  setSelectionMode(Q3Table::SingleRow);
   setLeftMargin(0);
   current_item = 0;  
 }
@@ -57,7 +59,7 @@ void CShowTableProperties::ContextMenuRequested(int, int, const QPoint &pos)
 
   if (current_item != 0)
   {
-    QPopupMenu *m = new QPopupMenu();
+    Q3PopupMenu *m = new Q3PopupMenu();
     m->insertItem(getPixmapIcon("designIcon"), tr("&Edit Table"), MENU_EDIT);
     m->insertSeparator();
     m->insertItem(getPixmapIcon("refreshTablesIcon"), tr("&Refresh Fields"), MENU_REFRESH);

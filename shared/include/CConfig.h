@@ -1,3 +1,5 @@
+//Added by qt3to4:
+#include <Q3TextStream>
 /* Copyright (C) 2003 MySQL AB & Jorge del Conde
 
   This program is free software; you can redistribute it and/or
@@ -18,7 +20,7 @@
 #ifndef CCONFIG_H
 #define CCONFIG_H
 
-class QTextStream;
+class Q3TextStream;
 
 #include <stddef.h>
 #include <qmap.h>

@@ -19,6 +19,9 @@
 #define CTABLEITEM_H
 
 #include "CDatabaseListViewItem.h"
+//Added by qt3to4:
+#include <QKeyEvent>
+#include <QPixmap>
 
 class CTableGroupItem;
 
@@ -55,10 +58,10 @@ private:
     QString m_caption;
   };
 
-  QIntDict<header> headers;
-  QIntDict<QPixmap> pix;
+  Q3IntDict<header> headers;
+  Q3IntDict<QPixmap> pix;
   CTableGroupItem *my_parent;
-  QIntDict<QString> widgetData;
+  Q3IntDict<QString> widgetData;
   void refreshWidget(bool b);
   void initMenuItems();
   uint real_numRows;

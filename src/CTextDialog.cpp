@@ -17,13 +17,15 @@
 */
 #include "CTextDialog.h"
 #include "globals.h"
+//Added by qt3to4:
+#include <QLabel>
 
 /*
 This class is needed because QInputDialog::getText() forces the user to write
 text in the QLineEdit.  In other words, it doesn's support empty strings.
 */
 
-CTextDialog::CTextDialog( QWidget* parent,  const char* name, bool modal, WFlags fl )
+CTextDialog::CTextDialog( QWidget* parent,  const char* name, bool modal, Qt::WFlags fl )
 : QDialog( parent, name, modal, fl )
 {  
 #ifdef DEBUG
@@ -48,13 +50,13 @@ CTextDialog::CTextDialog( QWidget* parent,  const char* name, bool modal, WFlags
   CancelButton = new QPushButton( this, "CancelButton" );
   CancelButton->setGeometry( QRect( 315, 50, 80, 25 ) ); 
   CancelButton->setText(tr("&Cancel", "" ) );
-  QWhatsThis::add( CancelButton,tr("Close this dialog", "" ) );
+  Q3WhatsThis::add( CancelButton,tr("Close this dialog", "" ) );
   
   OkButton = new QPushButton( this, "OkButton" );
   OkButton->setGeometry( QRect( 230, 50, 80, 25 ) ); 
   OkButton->setText(tr("&OK", "" ) );
   OkButton->setDefault( TRUE );
-  QWhatsThis::add( OkButton,tr("Click to Accept changes", "" ) );
+  Q3WhatsThis::add( OkButton,tr("Click to Accept changes", "" ) );
   
   connect(Text, SIGNAL( returnPressed() ), this, SLOT( accept() ) );
   connect(OkButton, SIGNAL( clicked() ), this, SLOT( accept() ) );

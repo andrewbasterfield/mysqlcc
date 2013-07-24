@@ -129,7 +129,7 @@ getSaveFileName() pops up a file save dialog
 */
 QString getSaveFileName(const QString &fileName, const QString &default_ext, const QString &ext_desc)
 { 
-  QString fn = QFileDialog::getSaveFileName(fileName, ext_desc, 0);
+  QString fn = Q3FileDialog::getSaveFileName(fileName, ext_desc, 0);
   if (!fn.isEmpty())
   {
     if (!default_ext.isNull())

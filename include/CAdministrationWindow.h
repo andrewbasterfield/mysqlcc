@@ -22,9 +22,12 @@
 #include "CProperties.h"
 #include "editor.h"
 #include "CQueryTable.h"
+//Added by qt3to4:
+#include <Q3GridLayout>
+#include <Q3PopupMenu>
 
 class CMySQLServer;
-class QGridLayout; 
+class Q3GridLayout; 
 class QTabWidget;
 class CMySQL;
 class CAction;
@@ -48,14 +51,14 @@ private slots:
   void DoubleClicked(int row, int col, int button, const QPoint &);
 
 protected:
-  void copy_data_func(QString *cpy, CMySQLQuery *qry, QTableSelection *sel, QMap<uint, ulong> *max_length_map);
+  void copy_data_func(QString *cpy, CMySQLQuery *qry, Q3TableSelection *sel, QMap<uint, ulong> *max_length_map);
 
 private:
-  class CCheckTableItem : public QCheckTableItem
+  class CCheckTableItem : public Q3CheckTableItem
   {
   public:
-    CCheckTableItem(QTable * table, const QString & txt)
-      : QCheckTableItem(table, txt) {}
+    CCheckTableItem(Q3Table * table, const QString & txt)
+      : Q3CheckTableItem(table, txt) {}
     int alignment() const { return Qt::AlignLeft; }
   };
 
@@ -101,7 +104,7 @@ public slots:
 
 private:
   QString contents() const;
-  QPopupMenu * createPopupMenu(const QPoint &p);
+  Q3PopupMenu * createPopupMenu(const QPoint &p);
   CMySQLServer *mysql;
 };
 
@@ -115,7 +118,7 @@ public:
   ~CAdministrationWindow();
   CMySQLServer * mysql() const { return m_mysql; }
   void setCurrentTabPage(int);
-  static QPopupMenu * flushMenu(const CMySQL *mysql);
+  static Q3PopupMenu * flushMenu(const CMySQL *mysql);
   static void ping(CMySQLServer *m);
   static void shutdown(CMySQLServer *m);
   static void flush(CMySQLServer *m, int flush_type);
@@ -162,9 +165,9 @@ private:
   CInnoDBStatus *innoDBStatus;
   CProcessListTable *processList;
   CServerStatusTable *status;
-  QPopupMenu * flush_menu;
-  QPopupMenu * save_menu;
-  QGridLayout* CAdministrationWindowLayout;
+  Q3PopupMenu * flush_menu;
+  Q3PopupMenu * save_menu;
+  Q3GridLayout* CAdministrationWindowLayout;
   QTabWidget* tabWidget;
   CMySQLServer *m_mysql;
   bool has_innodb;

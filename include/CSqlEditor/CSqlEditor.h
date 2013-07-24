@@ -19,6 +19,8 @@
 #define CSQLEDITOR_H
 
 #include "editor.h"
+//Added by qt3to4:
+#include <QMouseEvent>
 
 class SyntaxHighlighter_SQL;
 class SqlEditorCompletion;

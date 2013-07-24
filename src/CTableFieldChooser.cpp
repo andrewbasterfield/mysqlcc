@@ -19,11 +19,13 @@
 #include "config.h"
 #include "globals.h"
 #include <stddef.h>  
-#include <qtable.h>
-#include <qpopupmenu.h>
+#include <q3table.h>
+#include <q3popupmenu.h>
+//Added by qt3to4:
+#include <QKeyEvent>
 
-CTableFieldChooserListItem::CTableFieldChooserListItem(QListView * parent, const QString & text, int columnid)
-: QCheckListItem(parent, text, CheckBox)
+CTableFieldChooserListItem::CTableFieldChooserListItem(Q3ListView * parent, const QString & text, int columnid)
+: Q3CheckListItem(parent, text, CheckBox)
 {
   c = columnid;
 }
@@ -39,7 +41,7 @@ void CTableFieldChooserListItem::keyPressed(QKeyEvent *e)
   qDebug("CTableFieldChooserListItem::keyPressed()");
 #endif
 
-  if (e->key() == QListViewItem::Key_Shift)
+  if (e->key() == Qt::Key_Shift)
   {
     QPoint p(listView()->itemRect(this).bottomLeft());
     p.setY(p.y() + listView()->itemRect(this).bottom() - listView()->itemRect(this).top() + 7);
@@ -48,15 +50,15 @@ void CTableFieldChooserListItem::keyPressed(QKeyEvent *e)
   }
 }
 
-CTableFieldChooserListView::CTableFieldChooserListView(CTableFieldChooser * parent, const char * name, WFlags f)
-:QListView(parent, name, f)
+CTableFieldChooserListView::CTableFieldChooserListView(CTableFieldChooser * parent, const char * name, Qt::WFlags f)
+:Q3ListView(parent, name, f)
 {
-  connect(this, SIGNAL(contextMenuRequested(QListViewItem *, const QPoint &, int)), this, SLOT(displayMenu(QListViewItem *, const QPoint &, int)));
+  connect(this, SIGNAL(contextMenuRequested(Q3ListViewItem *, const QPoint &, int)), this, SLOT(displayMenu(Q3ListViewItem *, const QPoint &, int)));
 }
 
-void CTableFieldChooserListView::displayMenu( QListViewItem *, const QPoint &pos, int )
+void CTableFieldChooserListView::displayMenu( Q3ListViewItem *, const QPoint &pos, int )
 {
-  QPopupMenu *menu = new QPopupMenu();
+  Q3PopupMenu *menu = new Q3PopupMenu();
   menu->insertItem(getPixmapIcon("checkedIcon"), tr("Check All"), 1);
   menu->insertItem(getPixmapIcon("uncheckedIcon"), tr("Clear All"), 2);
   menu->insertSeparator();
@@ -77,13 +79,13 @@ void CTableFieldChooserListView::displayMenu( QListViewItem *, const QPoint &pos
 
   if (res != MENU_REFRESH)
   {
-    QListViewItemIterator it(this);
+    Q3ListViewItemIterator it(this);
     for ( ; it.current(); ++it)
       ((CTableFieldChooserListItem *)it.current())->setOn(b);
   }  
 }
 
-QTable * CTableFieldChooserListView::table() const
+Q3Table * CTableFieldChooserListView::table() const
 { 
   return ((CTableFieldChooser *) parent())->table();
 }
@@ -97,7 +99,7 @@ void CTableFieldChooserListView::keyPressEvent(QKeyEvent * e)
   if (currentItem() != 0)
       ((CTableFieldChooserListItem *) currentItem())->keyPressed(e);
 
-  QListView::keyPressEvent(e);
+  Q3ListView::keyPressEvent(e);
 }
 
 void CTableFieldChooserListView::checkBoxClicked(int c, bool s)
@@ -126,14 +128,14 @@ void CTableFieldChooserListView::refresh()
 }
 
 
-CTableFieldChooser::CTableFieldChooser(QWidget *parent, QTable * t, const char * name, Place p, WFlags f)
-:QDockWindow(p, parent, name, f), tbl(t)
+CTableFieldChooser::CTableFieldChooser(QWidget *parent, Q3Table * t, const char * name, Place p, Qt::WFlags f)
+:Q3DockWindow(p, parent, name, f), tbl(t)
 {
   init();
 }
 
-CTableFieldChooser::CTableFieldChooser(QWidget *parent, const char * name, Place p, WFlags f)
-:QDockWindow(p, parent, name, f), tbl(0)
+CTableFieldChooser::CTableFieldChooser(QWidget *parent, const char * name, Place p, Qt::WFlags f)
+:Q3DockWindow(p, parent, name, f), tbl(0)
 {
   init();
 }
@@ -145,19 +147,19 @@ void CTableFieldChooser::init()
   setHorizontallyStretchable (true);
   setVerticallyStretchable (true);
   setOpaqueMoving (false);
-  setCloseMode(QDockWindow::Always);
+  setCloseMode(Q3DockWindow::Always);
 
   setCaption(tr("Table Columns" ));
 
   columnsListView = new CTableFieldChooserListView(this, "Columns");
   columnsListView->addColumn(tr("Columns"));
   columnsListView->header()->setResizeEnabled(false, columnsListView->header()->count() - 1);
-  columnsListView->setFrameShape(QListView::Box);
+  columnsListView->setFrameShape(Q3ListView::Box);
   columnsListView->setLineWidth(1);
   columnsListView->setShowSortIndicator(true);
-  columnsListView->setResizeMode(QListView::AllColumns);
+  columnsListView->setResizeMode(Q3ListView::AllColumns);
 
-  QWhatsThis::add(columnsListView, tr("Select the columns that you want visible in the grid."));
+  Q3WhatsThis::add(columnsListView, tr("Select the columns that you want visible in the grid."));
   setWidget(columnsListView);
   is_first = true;
 }
@@ -168,7 +170,7 @@ void CTableFieldChooser::show()
     move(QCursor::pos().x(), QCursor::pos().y());
   is_first = false;
   columnsListView->refresh();
-  QDockWindow::show();
+  Q3DockWindow::show();
 }
 
 void CTableFieldChooser::refresh()
@@ -178,18 +180,18 @@ void CTableFieldChooser::refresh()
 
 void CTableFieldChooser::setCaption(const QString &s)
 {
-  if (QDockWindow::caption() == s)
+  if (Q3DockWindow::caption() == s)
     return;
 
   if (myApp()->isMDI())
-    QDockWindow::setCaption(s);
+    Q3DockWindow::setCaption(s);
   else
   {
     QString app_name(SHORT_NAME);
     app_name += " - ";
     if (s.startsWith(app_name))
-      QDockWindow::setCaption(s);
+      Q3DockWindow::setCaption(s);
     else
-      QDockWindow::setCaption(app_name + s);
+      Q3DockWindow::setCaption(app_name + s);
   }
 }

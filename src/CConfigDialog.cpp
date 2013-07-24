@@ -23,7 +23,10 @@
 #include <qtabwidget.h>
 #include <qlayout.h>
 #include <qtooltip.h>
-#include <qwhatsthis.h>
+#include <q3whatsthis.h>
+//Added by qt3to4:
+#include <Q3HBoxLayout>
+#include <Q3VBoxLayout>
 
 CConfigDialog::CConfigDialog(QWidget* parent,  const char* name)
 :CMyWindow(parent, name)
@@ -38,14 +41,14 @@ CConfigDialog::CConfigDialog(QWidget* parent,  const char* name)
   setMaximumSize(QSize(32767, 32767));  
   setIcon(getPixmapIcon("applicationIcon"));
   setCentralWidget(new QWidget(this, "qt_central_widget"));  
-  CConfigDialogLayout = new QVBoxLayout(centralWidget(), 4, 2, "CConfigDialogLayout");   
+  CConfigDialogLayout = new Q3VBoxLayout(centralWidget(), 4, 2, "CConfigDialogLayout");   
   
   p_tab = new QTabWidget(centralWidget(), "p_tab");  
-  QWhatsThis::add(p_tab, tr("This is the Configuration Dialog."));
+  Q3WhatsThis::add(p_tab, tr("This is the Configuration Dialog."));
   
   CConfigDialogLayout->addWidget(p_tab);
   
-  Layout44 = new QHBoxLayout(0, 0, 6, "Layout44");
+  Layout44 = new Q3HBoxLayout(0, 0, 6, "Layout44");
 
   contextHelpButton = new QPushButton(centralWidget(), "contextHelpButton");  
   contextHelpButton->setPixmap(getPixmapIcon("contextHelpIcon"));
@@ -69,7 +72,7 @@ CConfigDialog::CConfigDialog(QWidget* parent,  const char* name)
   Q_CHECK_PTR(cancelPushButton);
   cancelPushButton->setMinimumSize(QSize(70, 0));
   cancelPushButton->setText(tr("&Cancel"));
-  QWhatsThis::add(cancelPushButton, tr("Close this Dialog without saving any changes you have made."));
+  Q3WhatsThis::add(cancelPushButton, tr("Close this Dialog without saving any changes you have made."));
   Layout44->addWidget(cancelPushButton);
   CConfigDialogLayout->addLayout(Layout44);
   
@@ -95,7 +98,7 @@ void CConfigDialog::insertTab (CConfigDialogTab * child, int index)
   p_tab->insertTab(child, child->caption(), index);
 }
 
-void CConfigDialog::insertTab (CConfigDialogTab * child, const QIconSet & iconset, int index)
+void CConfigDialog::insertTab (CConfigDialogTab * child, const QIcon & iconset, int index)
 {
 #ifdef DEBUG
   qDebug("CConfigDialog::insertTab(CConfigDialogTab *, const QIconSet &, %d)", index);

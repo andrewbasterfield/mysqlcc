@@ -23,8 +23,12 @@
 #include "panels.h"
 #include "globals.h"
 #include <stddef.h>  
-#include <qlistview.h>
-#include <qwidgetstack.h>
+#include <q3listview.h>
+#include <q3widgetstack.h>
+//Added by qt3to4:
+#include <QPixmap>
+#include <Q3PopupMenu>
+#include <QKeyEvent>
 
 #ifdef DEBUG_LEVEL
 #if DEBUG_LEVEL < 3
@@ -111,7 +115,7 @@ void CDatabaseListViewItemMenu::createToolBar(CToolBar *t, int type)
   }
 }
 
-void CDatabaseListViewItemMenu::createPopupMenu(QPopupMenu *p)
+void CDatabaseListViewItemMenu::createPopupMenu(Q3PopupMenu *p)
 {
 #ifdef DEBUG
   qDebug("CDatabaseListViewItemMenu::createPopupMenu()");
@@ -151,7 +155,7 @@ void CDatabaseListViewItemMenu::clear()
   item_list.clear();
 }
 
-void CDatabaseListViewItemMenu::insertItem(const QPixmap &pixmap, const QString &label, QPopupMenu * popup, int value)
+void CDatabaseListViewItemMenu::insertItem(const QPixmap &pixmap, const QString &label, Q3PopupMenu * popup, int value)
 {
 #ifdef DEBUG
   qDebug("CDatabaseListViewItemMenu::insertItem(const QPixmap &, '%s', QPopupMenu *, %d)", debug_string(label), value);
@@ -205,7 +209,7 @@ void CDatabaseListViewItemMenu::setItemEnabled(int idx, bool e)
 
 
 CDatabaseListViewItem::CDatabaseListViewItem(CDatabaseListView * parent, CMySQLServer *m, item_type t, const char *name)
-: QObject(parent, name), QListViewItem(parent), m_mysql(m), m_type(t)
+: QObject(parent, name), Q3ListViewItem(parent), m_mysql(m), m_type(t)
 {
 #ifdef DEBUG
   qDebug("CDatabaseListViewItem::CDatabaseListViewItem(CDatabaseListView *, CMySQLServer *, item_type, const char *)");
@@ -215,7 +219,7 @@ CDatabaseListViewItem::CDatabaseListViewItem(CDatabaseListView * parent, CMySQLS
 }
 
 CDatabaseListViewItem::CDatabaseListViewItem(CDatabaseListViewItem * parent, CMySQLServer *m, item_type t, const char *name)
-: QObject(parent, name), QListViewItem(parent), m_mysql(m), m_type(t)
+: QObject(parent, name), Q3ListViewItem(parent), m_mysql(m), m_type(t)
 {
 #ifdef DEBUG
   qDebug("CDatabaseListViewItem::CDatabaseListViewItem(CDatabaseListViewItem *, CMySQLServer *, item_type, const char *)");
@@ -237,8 +241,8 @@ CDatabaseListViewItem::~CDatabaseListViewItem()
 
 void CDatabaseListViewItem::refresh()
 {
-  listView()->setCurrentItem((QListViewItem *) this);
-  listView()->setSelected((QListViewItem *) this, true);
+  listView()->setCurrentItem((Q3ListViewItem *) this);
+  listView()->setSelected((Q3ListViewItem *) this, true);
   refreshWidget(true);
 }
 
@@ -263,7 +267,7 @@ void CDatabaseListViewItem::setBlocked(bool b)
   qDebug("CDatabaseListViewItem::setBlocked(%s)", debug_string(booltostr(b)));
 #endif
 
-  consoleWindow()->setCursor(b ? CDatabaseListView::WaitCursor : CDatabaseListView::ArrowCursor);
+  consoleWindow()->setCursor(b ? Qt::WaitCursor : Qt::ArrowCursor);
   blocked = b;
   qApp->processEvents();
 }
@@ -275,7 +279,7 @@ void CDatabaseListViewItem::okRename(int col)
 #endif
 
   old_text = text(0);
-  QListViewItem::okRename(col);
+  Q3ListViewItem::okRename(col);
 }
 
 CConsoleWindow * CDatabaseListViewItem::consoleWindow() const
@@ -296,7 +300,7 @@ CMessagePanel * CDatabaseListViewItem::messagePanel() const
   return databaseListView()->messagePanel();
 }
 
-QWidgetStack * CDatabaseListViewItem::widgetStack() const
+Q3WidgetStack * CDatabaseListViewItem::widgetStack() const
 {
 #ifdef DEBUG
   qDebug("CDatabaseListViewItem::widgetStack()");
@@ -329,7 +333,7 @@ void CDatabaseListViewItem::keyPressed(QKeyEvent *e)
   qDebug("CDatabaseListViewItem::keyPressed()");
 #endif
 
-  if (e->key() == QListViewItem::Key_Shift)
+  if (e->key() == Qt::Key_Shift)
   {
     QPoint p(listView()->itemRect(this).bottomLeft());
     p.setY(p.y() + listView()->itemRect(this).bottom() - listView()->itemRect(this).top() + 7);
@@ -349,7 +353,7 @@ void CDatabaseListViewItem::createWindowMenu(CToolBar *t)
   qApp->processEvents();
 }
 
-void CDatabaseListViewItem::createPopupMenu(QPopupMenu *m)
+void CDatabaseListViewItem::createPopupMenu(Q3PopupMenu *m)
 {
 #ifdef DEBUG
   qDebug("CDatabaseListViewItem::createPopupMenu()");
@@ -366,7 +370,7 @@ int CDatabaseListViewItem::displayMenu(const QPoint &pos)
   qDebug("CDatabaseListViewItem::displayMenu()");
 #endif
 
-  QPopupMenu *m = new QPopupMenu();
+  Q3PopupMenu *m = new Q3PopupMenu();
   connect(m, SIGNAL(activated(int)), this, SLOT(processMenu(int)));
   createPopupMenu(m);
   int res = m->exec(pos);
@@ -380,12 +384,12 @@ void CDatabaseListViewItem::deleteChilds()
   qDebug("CDatabaseListViewItem::deleteChilds()");
 #endif
 
-  QListViewItemIterator c( firstChild() );
+  Q3ListViewItemIterator c( firstChild() );
   for ( ; c.current(); ++c )
   {    
-    if (c.current()->parent() != QListViewItem::parent())
+    if (c.current()->parent() != Q3ListViewItem::parent())
     {   
-      QListViewItem *p = c.current();     
+      Q3ListViewItem *p = c.current();     
       takeItem(p);      
       delete(p);
       p = NULL;

@@ -19,6 +19,8 @@
 #define CQUERYTABLE_H
 
 #include "CTable.h"
+//Added by qt3to4:
+#include <QPixmap>
 
 class CMySQLQuery;
 
@@ -51,7 +53,7 @@ protected:
   QPixmap uniIcon;
   QPixmap nothingIcon;
   QString tmpFileName;
-  virtual void copy_data_func(QString *cpy, CMySQLQuery *qry, QTableSelection *sel, QMap<uint, ulong> *max_length_map);  
+  virtual void copy_data_func(QString *cpy, CMySQLQuery *qry, Q3TableSelection *sel, QMap<uint, ulong> *max_length_map);  
 
 private:
   CMySQLQuery *qry;

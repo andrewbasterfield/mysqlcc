@@ -19,14 +19,21 @@
 #define CTABLETOOLS_H
 
 #include "CMyWindow.h"
+//Added by qt3to4:
+#include <Q3PopupMenu>
+#include <Q3VBoxLayout>
+#include <Q3Frame>
+#include <Q3GridLayout>
+#include <Q3PtrList>
+#include <Q3HBoxLayout>
 
-class QVBoxLayout; 
-class QHBoxLayout; 
-class QGridLayout; 
-class QFrame;
+class Q3VBoxLayout; 
+class Q3HBoxLayout; 
+class Q3GridLayout; 
+class Q3Frame;
 class QPushButton;
 class QCheckBox;
-class QGroupBox;
+class Q3GroupBox;
 class CMySQLServer;
 class CTablesListBox;
 
@@ -42,10 +49,10 @@ public:
     QCheckBox *checkBox;
   };
 
-  CTableTools(QWidget* parent, CMySQLServer *m, const QString dbname, int type, QPtrList<ToolOptions> *options, const QString &tableName = QString::null, const char* name = 0);
+  CTableTools(QWidget* parent, CMySQLServer *m, const QString dbname, int type, Q3PtrList<ToolOptions> *options, const QString &tableName = QString::null, const char* name = 0);
   ~CTableTools();
 
-  static QPopupMenu *tableToolsMenu();
+  static Q3PopupMenu *tableToolsMenu();
   static void processMenu(CMySQLServer *m, int res, const QString dbname, const QString & tableName=QString::null);
   static bool inRange(int res);
 
@@ -59,19 +66,19 @@ private:
   CMySQLServer * mysql;  
   QString m_tableName;
   QString database_name;
-  QPtrList<ToolOptions> *Options;
+  Q3PtrList<ToolOptions> *Options;
   int Type;
-  QFrame* m_pTopFrame;
+  Q3Frame* m_pTopFrame;
   CTablesListBox* tablesListBox;
   QPushButton* m_pExecutePushButton;
   QPushButton* m_pCancelPushButton;	
   QPushButton* PushButton4;
-  QHBoxLayout* Layout14;
-  QVBoxLayout* CTableToolsLayout;
-  QVBoxLayout* m_pTopFrameLayout;
-  QGroupBox *pOptions;
-  QGridLayout *pOptionsLayout;
-  QGridLayout * Layout;
+  Q3HBoxLayout* Layout14;
+  Q3VBoxLayout* CTableToolsLayout;
+  Q3VBoxLayout* m_pTopFrameLayout;
+  Q3GroupBox *pOptions;
+  Q3GridLayout *pOptionsLayout;
+  Q3GridLayout * Layout;
 };
 
 #endif

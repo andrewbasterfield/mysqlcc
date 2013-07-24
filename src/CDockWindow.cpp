@@ -18,6 +18,8 @@
 #include "CDockWindow.h"
 #include "config.h"
 #include "globals.h"
+//Added by qt3to4:
+#include <QCloseEvent>
 
 #ifdef DEBUG_LEVEL
 #if DEBUG_LEVEL < 2
@@ -29,8 +31,8 @@
 #endif
 #endif
 
-CDockWindow::CDockWindow(Place p, QWidget * parent, const char * name, WFlags f)
-: QDockWindow(p, parent, name, f)
+CDockWindow::CDockWindow(Place p, QWidget * parent, const char * name, Qt::WFlags f)
+: Q3DockWindow(p, parent, name, f)
 {
 #ifdef DEBUG
   qDebug("CDockWindow::CDockWindow()");
@@ -59,19 +61,19 @@ void CDockWindow::closeEvent(QCloseEvent *e)
 
 void CDockWindow::setCaption(const QString &s)
 {
-  if (QDockWindow::caption() == s)
+  if (Q3DockWindow::caption() == s)
     return;
 
   if (myApp()->isMDI())
-    QDockWindow::setCaption(s);
+    Q3DockWindow::setCaption(s);
   else
   {
     QString app_name(SHORT_NAME);
     app_name += " - ";
     if (s.startsWith(app_name))
-      QDockWindow::setCaption(s);
+      Q3DockWindow::setCaption(s);
     else
-      QDockWindow::setCaption(app_name + s);
+      Q3DockWindow::setCaption(app_name + s);
   }
 }
 

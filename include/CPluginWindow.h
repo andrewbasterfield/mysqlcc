@@ -20,14 +20,22 @@
 
 #include "CMyWindow.h"
 #include "CPlugin.h"
+//Added by qt3to4:
+#include <QCustomEvent>
+#include <Q3PopupMenu>
+#include <Q3VBoxLayout>
+#include <Q3GridLayout>
+#include <QPixmap>
+#include <Q3HBoxLayout>
+#include <Q3ActionGroup>
 
-class QVBoxLayout;
-class QHBoxLayout;
-class QGridLayout;
+class Q3VBoxLayout;
+class Q3HBoxLayout;
+class Q3GridLayout;
 class QAction;
-class QActionGroup;
-class QToolBar;
-class QPopupMenu;
+class Q3ActionGroup;
+class Q3ToolBar;
+class Q3PopupMenu;
 
 class CPluginMessage
 {
@@ -62,7 +70,7 @@ protected:
 private:
   QWidget* pluginWidget;
   CMySQLCCWidgetPlugin *plugin;
-  QGridLayout* CPluginWindowLayout;
+  Q3GridLayout* CPluginWindowLayout;
 
   void display_message_panel(bool);
 };

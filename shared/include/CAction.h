@@ -29,7 +29,7 @@ class CAction : public QAction
 
 public:
   CAction(QObject * parent, const char * name = 0, bool toggle = false);
-  CAction(const QString & text, const QIconSet & icon, const QString & menuText, QKeySequence accel, QObject * parent, const char * name = 0, bool toggle = false);
+  CAction(const QString & text, const QIcon & icon, const QString & menuText, QKeySequence accel, QObject * parent, const char * name = 0, bool toggle = false);
   CAction(const QString & text, const QString & menuText, QKeySequence accel, QObject * parent, const char * name = 0, bool toggle = false);  
 
   QString parentMenuText() const { return parentmenutext; }

@@ -26,6 +26,8 @@
 #include "CPluginWindow.h"
 #include <stddef.h>  
 #include <qfontdialog.h>
+//Added by qt3to4:
+#include <Q3PopupMenu>
 
 /*
 This file contains shared Menus which are used by CConsoleWindow & CMDIWindow
@@ -35,7 +37,7 @@ This file contains shared Menus which are used by CConsoleWindow & CMDIWindow
 Created a "Plugins" menu item"
 */
 CPluginsMenu::CPluginsMenu(QWidget * parent, QMenuBar *menuBar, const char * name)
-:QPopupMenu(parent, name)
+:Q3PopupMenu(parent, name)
 {
 #ifdef DEBUG
   qDebug("CPluginsMenu::CPluginsMenu()");
@@ -85,7 +87,7 @@ void CPluginsMenu::Activated(const CPlugin &p)
 Creates a "Help" menu item
 */
 CHelpMenu::CHelpMenu(QWidget * parent, QMenuBar *menuBar, const char * name)
-:QPopupMenu(parent, name)
+:Q3PopupMenu(parent, name)
 {
 #ifdef DEBUG
   qDebug("CHelpMenu::CHelpMenu()");
@@ -176,7 +178,7 @@ void CHelpMenu::creditsAction()
 This class handles all the "Options" menu items
 */
 COptionsMenu::COptionsMenu(QWidget * parent, QMenuBar *menuBar, const char * name)
-:QPopupMenu(parent, name)
+:Q3PopupMenu(parent, name)
 {
 #ifdef DEBUG
   qDebug("COptionsMenu::COptionsMenu()");
@@ -198,13 +200,13 @@ COptionsMenu::COptionsMenu(QWidget * parent, QMenuBar *menuBar, const char * nam
   mdiAction->addTo(this);
   
 #ifndef QT_NO_STYLE  
-  themesMenu = new QPopupMenu(this);  
+  themesMenu = new Q3PopupMenu(this);  
   themesMenu->setCheckable(true);
   insertItem(getPixmapIcon("stylesIcon"), tr("&Themes"), themesMenu);
   connect(themesMenu, SIGNAL(aboutToShow()), this, SLOT(themesMenuAboutToShow()));
 #endif
   
-  fontsMenu = new QPopupMenu(this);
+  fontsMenu = new Q3PopupMenu(this);
   applicationFontAction = new CAction(parent, "applicationFontAction");
   applicationFontAction->setMenuText(tr("&Application Font"));
   applicationFontAction->setText(tr("Application Font"));

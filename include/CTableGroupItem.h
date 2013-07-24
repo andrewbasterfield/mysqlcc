@@ -21,6 +21,9 @@
 #include "CDatabaseListViewItem.h"
 #include <stddef.h>
 #include <qmap.h>
+//Added by qt3to4:
+#include <QPixmap>
+#include <Q3PopupMenu>
 
 
 class CTableGroupItem : public CDatabaseListViewItem
@@ -42,8 +45,8 @@ public:
 
   //The below declarations are used to save memory in CTableItem
 
-  QPopupMenu *toolsMenu() const { return tools_menu; }
-  QPopupMenu *openTableMenu() const { return open_table_menu; }
+  Q3PopupMenu *toolsMenu() const { return tools_menu; }
+  Q3PopupMenu *openTableMenu() const { return open_table_menu; }
   QPixmap toolsIcon() const { return tools_icon; }
   QPixmap tableIcon() const { return table_icon; }
   QPixmap refreshTablesIcon() const { return refresh_tables_icon; }
@@ -61,8 +64,8 @@ public slots:
 private:
   bool refresh_on_activate;
   void insertWidgetData(QWidget *w, int id, int row, int col, const QString &str);
-  QPopupMenu * tools_menu;
-  QPopupMenu * open_table_menu;
+  Q3PopupMenu * tools_menu;
+  Q3PopupMenu * open_table_menu;
   void initMenuItems();
   void init(const QString &dbname);
   QString database_name;

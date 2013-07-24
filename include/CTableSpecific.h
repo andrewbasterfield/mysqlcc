@@ -21,7 +21,7 @@
 #include <stddef.h>
 #include <qvariant.h>
 #include <qdialog.h>
-#include <qpopupmenu.h>
+#include <q3popupmenu.h>
 #include <qinputdialog.h>
 
 class CMySQLServer;

@@ -19,30 +19,33 @@
 #define CDATABASELISTVIEW_H
 
 #include <stddef.h>
-#include <qlistview.h>
+#include <q3listview.h>
+//Added by qt3to4:
+#include <Q3PopupMenu>
+#include <QKeyEvent>
 
 class CConsoleWindow;
 class CMessagePanel;
-class QWidgetStack;
-class QPopupMenu;
+class Q3WidgetStack;
+class Q3PopupMenu;
 class CMySQLServer;
 class CDatabaseListViewItem;
 
-class CDatabaseListView : public QListView
+class CDatabaseListView : public Q3ListView
 {
   Q_OBJECT
     
 public:
-  CDatabaseListView(CConsoleWindow * c, QWidget * parent, const char * name = 0, WFlags f = 0);
+  CDatabaseListView(CConsoleWindow * c, QWidget * parent, const char * name = 0, Qt::WFlags f = 0);
   CConsoleWindow * consoleWindow() const { return consolewindow; }
   CMessagePanel * messagePanel() const;
-  QWidgetStack * widgetStack() const;
+  Q3WidgetStack * widgetStack() const;
   void updateListView();
 
   bool isBusy() const { return isbusy; }
   void setBusy(bool b);
   void setItemRoot(CDatabaseListViewItem *item);
-  void getActionMenu(QPopupMenu *);
+  void getActionMenu(Q3PopupMenu *);
   void emitEnableQueryButton(CDatabaseListViewItem *);
 
 signals:
@@ -50,18 +53,18 @@ signals:
 
 public slots:
   void processCurrentItemMenu(int);
-  void ContextMenuRequested(QListViewItem *item, const QPoint & pos, int c);
-  void CurrentChanged(QListViewItem *item);
+  void ContextMenuRequested(Q3ListViewItem *item, const QPoint & pos, int c);
+  void CurrentChanged(Q3ListViewItem *item);
   void refreshServers();
   void openInNewWindow(CDatabaseListViewItem *item);
 
 private slots:
-  void DoubleClicked( QListViewItem *item);
-  void Expanded(QListViewItem *item);
-  void Collapsed(QListViewItem *item);
-  void ItemRenamed(QListViewItem * item, int col, const QString & text);
-  void ReturnPressed( QListViewItem *item);
-  void SpacePressed( QListViewItem *item);
+  void DoubleClicked( Q3ListViewItem *item);
+  void Expanded(Q3ListViewItem *item);
+  void Collapsed(Q3ListViewItem *item);
+  void ItemRenamed(Q3ListViewItem * item, int col, const QString & text);
+  void ReturnPressed( Q3ListViewItem *item);
+  void SpacePressed( Q3ListViewItem *item);
   
 private:
   void init();

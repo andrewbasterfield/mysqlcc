@@ -25,8 +25,11 @@
 #include <qpushbutton.h>
 #include <qlayout.h>
 #include <qtooltip.h>
-#include <qwhatsthis.h>
+#include <q3whatsthis.h>
 #include <qimage.h>
+//Added by qt3to4:
+#include <QPixmap>
+#include <Q3GridLayout>
 #include "globals.h"
 #include "config.h"
 #include "icons.h"
@@ -35,7 +38,7 @@
 This is the base class for dialogs such as CAboutBox & CCreditsBox.  This class takes care of
 showing the left-side pixmap & the close buttons.
 */
-CInfoDialog::CInfoDialog( QWidget* parent,  const char* name, bool modal, WFlags fl )
+CInfoDialog::CInfoDialog( QWidget* parent,  const char* name, bool modal, Qt::WFlags fl )
 : QDialog( parent, name, modal, fl )
 {
 #ifdef DEBUG
@@ -48,7 +51,7 @@ CInfoDialog::CInfoDialog( QWidget* parent,  const char* name, bool modal, WFlags
   resize( 472, 202 ); 
   setCaption(APPLICATION);
   setIcon(getPixmapIcon("applicationIcon"));
-  CInfoDialogLayout = new QGridLayout( this, 1, 1, 4, 2, "CInfoDialogLayout"); 
+  CInfoDialogLayout = new Q3GridLayout( this, 1, 1, 4, 2, "CInfoDialogLayout"); 
   
   Copyright = new QLabel( this, "Copyright" );
   Copyright->setText(tr(COPYRIGHT));
@@ -124,7 +127,7 @@ CInfoDialog::CInfoDialog( QWidget* parent,  const char* name, bool modal, WFlags
   PixmapLabel1->setFrameShadow( QLabel::Plain );
   PixmapLabel1->setPixmap( image1 );
   PixmapLabel1->setScaledContents( FALSE );
-  PixmapLabel1->setAlignment( int( QLabel::AlignBottom ) );
+  PixmapLabel1->setAlignment( int( Qt::AlignBottom ) );
   
   CInfoDialogLayout->addMultiCellWidget( PixmapLabel1, 0, 2, 0, 0 );
   
@@ -132,7 +135,7 @@ CInfoDialog::CInfoDialog( QWidget* parent,  const char* name, bool modal, WFlags
   m_pClosePushButton->setMinimumSize( QSize( 70, 0 ) );
   m_pClosePushButton->setMaximumSize( QSize( 70, 32767 ) );
   m_pClosePushButton->setText(tr("&Close" ) );
-  QWhatsThis::add( m_pClosePushButton,tr("Click to close this dialog." ) );
+  Q3WhatsThis::add( m_pClosePushButton,tr("Click to close this dialog." ) );
   
   CInfoDialogLayout->addWidget( m_pClosePushButton, 3, 2 );
   

@@ -26,7 +26,7 @@
 #include <qpushbutton.h>
 #include <qlayout.h>
 #include <qtooltip.h>
-#include <qwhatsthis.h>
+#include <q3whatsthis.h>
 
 class QLabel;
 class QLineEdit;
@@ -37,7 +37,7 @@ class CTextDialog : public QDialog
   Q_OBJECT
     
 public:
-  CTextDialog( QWidget* parent = 0, const char* name = 0, bool modal = false, WFlags fl = 0 );
+  CTextDialog( QWidget* parent = 0, const char* name = 0, bool modal = false, Qt::WFlags fl = 0 );
   ~CTextDialog();
   QLabel* textLabel;
   QLineEdit* Text;

@@ -26,18 +26,21 @@
 #include <qspinbox.h>
 #include <qlayout.h>
 #include <qtooltip.h>
-#include <qwhatsthis.h>
+#include <q3whatsthis.h>
 #include <qpixmap.h>
-#include <qfiledialog.h>
+#include <q3filedialog.h>
 #include <qcolordialog.h>
 #include <qfontdatabase.h>
-#include <qbuttongroup.h>
+#include <q3buttongroup.h>
 #include <qradiobutton.h>
 #include <qmessagebox.h>
-#include <qlistbox.h>
+#include <q3listbox.h>
 #include <qregexp.h>
-#include <qlistview.h>
-#include <qheader.h>
+#include <q3listview.h>
+#include <q3header.h>
+//Added by qt3to4:
+#include <Q3HBoxLayout>
+#include <Q3GridLayout>
 
 #include "CHistoryView.h"
 #include "CApplication.h"
@@ -47,7 +50,7 @@
 
 static QString setPath(QWidget *sender, const QString &title)
 {
-  QString tmp = QFileDialog::getExistingDirectory("", sender, "setPath", title);
+  QString tmp = Q3FileDialog::getExistingDirectory("", sender, "setPath", title);
   if (!tmp.isEmpty())
   {    
     tmp = charReplace(tmp.stripWhiteSpace(),'\\', "/");
@@ -59,7 +62,7 @@ static QString setPath(QWidget *sender, const QString &title)
 }
 
 
-CQueryConfigTab::CQueryConfigTab(QWidget* parent,  const char* name, WFlags fl)
+CQueryConfigTab::CQueryConfigTab(QWidget* parent,  const char* name, Qt::WFlags fl)
 : CConfigDialogTab(parent, name, fl)
 {
 #ifdef DEBUG
@@ -70,20 +73,20 @@ CQueryConfigTab::CQueryConfigTab(QWidget* parent,  const char* name, WFlags fl)
     setName("CQueryConfigTab");
   needrestart = false;
   setCaption(tr("Queries"));
-  CQueryConfigTabLayout = new QGridLayout(this, 1, 1, 4, 2, "CQueryConfigTabLayout"); 
+  CQueryConfigTabLayout = new Q3GridLayout(this, 1, 1, 4, 2, "CQueryConfigTabLayout"); 
   
-  CommentsBox = new QButtonGroup(this, "CommentsBox");
+  CommentsBox = new Q3ButtonGroup(this, "CommentsBox");
   CommentsBox->setTitle(tr("Default Comment Style"));
-  QWhatsThis::add(CommentsBox, tr("This is the commenting style which will be used by default."));
+  Q3WhatsThis::add(CommentsBox, tr("This is the commenting style which will be used by default."));
   CommentsBox->setColumnLayout(0, Qt::Vertical);
   CommentsBox->layout()->setSpacing(6);
   CommentsBox->layout()->setMargin(11);
-  CommentsBoxLayout = new QGridLayout(CommentsBox->layout());
+  CommentsBoxLayout = new Q3GridLayout(CommentsBox->layout());
   CommentsBoxLayout->setAlignment(Qt::AlignTop);
   
   hashComments = new QRadioButton(CommentsBox, "hashComments");
   hashComments->setText(tr("Hash [ # Comment ]"));
-  QWhatsThis::add(hashComments, tr("When selected, the Hash commenting style will be used.\n"
+  Q3WhatsThis::add(hashComments, tr("When selected, the Hash commenting style will be used.\n"
     "\n"
     "Hash comments look as follows:\n"
     "\n"
@@ -93,7 +96,7 @@ CQueryConfigTab::CQueryConfigTab(QWidget* parent,  const char* name, WFlags fl)
   
   dashComments = new QRadioButton(CommentsBox, "dashComments");
   dashComments->setText(tr("Dash [ -- Comment ]"));
-  QWhatsThis::add(dashComments, tr("When selected, the Dash commenting style will be used.\n"
+  Q3WhatsThis::add(dashComments, tr("When selected, the Dash commenting style will be used.\n"
     "\n"
     "Dash comments look as follows:\n"
     "\n"
@@ -103,7 +106,7 @@ CQueryConfigTab::CQueryConfigTab(QWidget* parent,  const char* name, WFlags fl)
   
   cComments = new QRadioButton(CommentsBox, "cComments");
   cComments->setText(tr("C-Style [ /* Comment */ ]"));
-  QWhatsThis::add(cComments, tr("When selected, the C-Style commenting style will be used.\n"
+  Q3WhatsThis::add(cComments, tr("When selected, the C-Style commenting style will be used.\n"
     "\n"
     "C-Style comments look as follows:\n"
     "\n"
@@ -117,24 +120,24 @@ CQueryConfigTab::CQueryConfigTab(QWidget* parent,  const char* name, WFlags fl)
   
   CQueryConfigTabLayout->addMultiCellWidget(CommentsBox, 2, 2, 0, 2);
   
-  OpenTablesBox = new QButtonGroup(this, "OpenTablesBox");
+  OpenTablesBox = new Q3ButtonGroup(this, "OpenTablesBox");
   OpenTablesBox->setTitle(tr("Open Table Options"));
-  QWhatsThis::add(OpenTablesBox, tr("This is the action that will be taken when one double-clicks on a Table in the database tree"));
+  Q3WhatsThis::add(OpenTablesBox, tr("This is the action that will be taken when one double-clicks on a Table in the database tree"));
   OpenTablesBox->setColumnLayout(0, Qt::Vertical);
   OpenTablesBox->layout()->setSpacing(6);
   OpenTablesBox->layout()->setMargin(11);
-  OpenTablesBoxLayout = new QGridLayout(OpenTablesBox->layout());
+  OpenTablesBoxLayout = new Q3GridLayout(OpenTablesBox->layout());
   OpenTablesBoxLayout->setAlignment(Qt::AlignTop);
   
   onlySqlStatement = new QRadioButton(OpenTablesBox, "onlySqlStatement");
   onlySqlStatement->setText(tr("Do not execute the query"));
-  QWhatsThis::add(onlySqlStatement, tr("This option will automatically issue a SELECT * FROM Table statement but will not execute the query."));
+  Q3WhatsThis::add(onlySqlStatement, tr("This option will automatically issue a SELECT * FROM Table statement but will not execute the query."));
   
   OpenTablesBoxLayout->addWidget(onlySqlStatement, 1, 0);
   
   allRecords = new QRadioButton(OpenTablesBox, "allRecords");
   allRecords->setText(tr("Retrieve all records"));
-  QWhatsThis::add(allRecords, tr("This option will automatically execute a SELECT * FROM Table statement to retreive all the records in a Table."));
+  Q3WhatsThis::add(allRecords, tr("This option will automatically execute a SELECT * FROM Table statement to retreive all the records in a Table."));
   
   OpenTablesBoxLayout->addWidget(allRecords, 0, 0);
   
@@ -142,7 +145,7 @@ CQueryConfigTab::CQueryConfigTab(QWidget* parent,  const char* name, WFlags fl)
   
   enableSqlDebug = new QCheckBox(this, "limitQueries");
   enableSqlDebug->setText(tr("Enable SQL Debug"));
-  QWhatsThis::add(enableSqlDebug, tr("This option will append each executed query to the SQL Debug Panel."));
+  Q3WhatsThis::add(enableSqlDebug, tr("This option will append each executed query to the SQL Debug Panel."));
   
   CQueryConfigTabLayout->addWidget(enableSqlDebug, 0, 0);
   QSpacerItem* spacer = new QSpacerItem(20, 20, QSizePolicy::Minimum, QSizePolicy::Expanding);
@@ -190,7 +193,7 @@ bool CQueryConfigTab::save(CConfig *conn)
 }
 
 
-CSyntaxHighlightConfigTab::CSyntaxHighlightConfigTab(QWidget* parent,  const char* name, WFlags fl)
+CSyntaxHighlightConfigTab::CSyntaxHighlightConfigTab(QWidget* parent,  const char* name, Qt::WFlags fl)
 : CConfigDialogTab(parent, name, fl)
 {
 #ifdef DEBUG
@@ -200,25 +203,25 @@ CSyntaxHighlightConfigTab::CSyntaxHighlightConfigTab(QWidget* parent,  const cha
   if (!name)
     setName("CSyntaxHighlightConfigTab");
   setCaption(tr("Syntax Highlighting"));
-  CSyntaxHighlightConfigTabLayout = new QHBoxLayout(this, 4, 2, "CSyntaxHighlightConfigTabLayout"); 
+  CSyntaxHighlightConfigTabLayout = new Q3HBoxLayout(this, 4, 2, "CSyntaxHighlightConfigTabLayout"); 
   
-  Sections = new QListBox(this, "Sections");
-  Sections->setSelectionMode(QListBox::Extended);
-  QWhatsThis::add(Sections, tr("Available Sections for the SQL Editor.\n  If you want to modify multiple entries at once, select all the sections you want to modify by using the CRTL key and either the mouse or the up, down and space-bar keys."));
+  Sections = new Q3ListBox(this, "Sections");
+  Sections->setSelectionMode(Q3ListBox::Extended);
+  Q3WhatsThis::add(Sections, tr("Available Sections for the SQL Editor.\n  If you want to modify multiple entries at once, select all the sections you want to modify by using the CRTL key and either the mouse or the up, down and space-bar keys."));
   CSyntaxHighlightConfigTabLayout->addWidget(Sections);
   
-  Layout12 = new QGridLayout(0, 1, 1, 0, 6, "Layout12"); 
+  Layout12 = new Q3GridLayout(0, 1, 1, 0, 6, "Layout12"); 
   
   Preview = new QLineEdit(this, "Preview");
   Preview->setMinimumSize(QSize(0, 50));
   Preview->setText("Jorge@mysql.com");
-  QWhatsThis::add(Preview, tr("Preview of this section."));
+  Q3WhatsThis::add(Preview, tr("Preview of this section."));
   
   Layout12->addMultiCellWidget(Preview, 3, 3, 1, 5);
   
   Underline = new QCheckBox(this, "Underline");
   Underline->setText(tr("Underline"));
-  QWhatsThis::add(Underline, tr("The font for this section will be Underlined."));
+  Q3WhatsThis::add(Underline, tr("The font for this section will be Underlined."));
   
   Layout12->addWidget(Underline, 2, 3);
   
@@ -233,13 +236,13 @@ CSyntaxHighlightConfigTab::CSyntaxHighlightConfigTab(QWidget* parent,  const cha
   Size->setMinValue(0);
   Size->setValue(8);
   Size->setSpecialValueText(" ");
-  QWhatsThis::add(Size, tr("This is the font Size that will be used for this particular section."));
+  Q3WhatsThis::add(Size, tr("This is the font Size that will be used for this particular section."));
   
   Layout12->addWidget(Size, 1, 1);
   
   Italic = new QCheckBox(this, "Italic");
   Italic->setText(tr("Italic"));
-  QWhatsThis::add(Italic, tr("The font for this section will be Italic."));
+  Q3WhatsThis::add(Italic, tr("The font for this section will be Italic."));
   
   Layout12->addMultiCellWidget(Italic, 2, 2, 4, 5);
   
@@ -250,12 +253,12 @@ CSyntaxHighlightConfigTab::CSyntaxHighlightConfigTab(QWidget* parent,  const cha
   
   Bold = new QCheckBox(this, "Bold");
   Bold->setText(tr("Bold"));
-  QWhatsThis::add(Bold, tr("The font for this section will be Bold."));
+  Q3WhatsThis::add(Bold, tr("The font for this section will be Bold."));
   
   Layout12->addMultiCellWidget(Bold, 2, 2, 1, 2);
   
   Font = new QComboBox(false, this, "Font");
-  QWhatsThis::add(Font, tr("This is the Font that will be used for this particular section."));
+  Q3WhatsThis::add(Font, tr("This is the Font that will be used for this particular section."));
   
   Layout12->addMultiCellWidget(Font, 0, 0, 1, 5);
   
@@ -263,7 +266,7 @@ CSyntaxHighlightConfigTab::CSyntaxHighlightConfigTab(QWidget* parent,  const cha
   Color->setMinimumSize(QSize(19, 19));
   Color->setMaximumSize(QSize(19, 19));  
   Color->setText(tr(""));
-  QWhatsThis::add(Color, tr("This is the font Color that will be used for this particular section."));
+  Q3WhatsThis::add(Color, tr("This is the font Color that will be used for this particular section."));
   
   Layout12->addWidget(Color, 1, 5);
   
@@ -276,7 +279,7 @@ CSyntaxHighlightConfigTab::CSyntaxHighlightConfigTab(QWidget* parent,  const cha
   
   colorLabel = new QLabel(this, "colorLabel");
   colorLabel->setText(tr("Color"));
-  colorLabel->setAlignment(int(QLabel::AlignVCenter));
+  colorLabel->setAlignment(int(Qt::AlignVCenter));
   
   Layout12->addWidget(colorLabel, 1, 4);
   
@@ -310,7 +313,7 @@ void CSyntaxHighlightConfigTab::setDefaultValues(CConfig *)
   QFontDatabase fdb;
   QStringList families = fdb.families();
   Font->insertStringList(families);  
-  QIntDictIterator<CSqlEditorFont> it(*CSqlEditorFont::sqlEditorStyles());
+  Q3IntDictIterator<CSqlEditorFont> it(*CSqlEditorFont::sqlEditorStyles());
   for (; it.current(); ++it)
   {
     Sections->insertItem(it.current()->displayName(), (int) it.current()->highlightType());    
@@ -327,7 +330,7 @@ bool CSyntaxHighlightConfigTab::save(CConfig *conn)
 #endif
   
   bool ret = true;
-  QIntDictIterator<CSqlEditorFont> it(*CSqlEditorFont::sqlEditorStyles());
+  Q3IntDictIterator<CSqlEditorFont> it(*CSqlEditorFont::sqlEditorStyles());
   for (; it.current(); ++it)
     ret &= it.current()->save(conn);
   return ret;
@@ -559,7 +562,7 @@ void CSyntaxHighlightConfigTab::init()
   
   connect(Sections, SIGNAL(selectionChanged()), this, SLOT(Refresh()));  
   connect(Bold, SIGNAL(toggled(bool)), this, SLOT(BoldToggled(bool)));  
-  connect(Underline, SIGNAL(toggled(bool)), this, SLOT(UnderlineToggled(bool)));
+  connect(Qt::TextUnderline, SIGNAL(toggled(bool)), this, SLOT(UnderlineToggled(bool)));
   connect(Italic, SIGNAL(toggled(bool)), this, SLOT(ItalicToggled(bool)));
   connect(Font, SIGNAL(activated(const QString &)), this, SLOT(FontChanged(const QString &)));
   connect(Size, SIGNAL(valueChanged(int)), this, SLOT(ValueChanged(int)));  
@@ -567,7 +570,7 @@ void CSyntaxHighlightConfigTab::init()
   connect(DefaultPushButton, SIGNAL(clicked()), this, SLOT(DefaultPushButtonClicked()));
 }
 
-CSqlEditorConfigTab::CSqlEditorConfigTab(QWidget* parent,  const char* name, WFlags fl)
+CSqlEditorConfigTab::CSqlEditorConfigTab(QWidget* parent,  const char* name, Qt::WFlags fl)
 : CConfigDialogTab(parent, name, fl)
 {
 #ifdef DEBUG
@@ -578,17 +581,17 @@ CSqlEditorConfigTab::CSqlEditorConfigTab(QWidget* parent,  const char* name, WFl
     setName("CSqlEditorConfigTab");
   
   setCaption(tr("Sql Editor"));  
-  CSqlEditorConfigTabLayout = new QGridLayout(this, 1, 1, 3, 2, "CSqlEditorConfigTabLayout");
+  CSqlEditorConfigTabLayout = new Q3GridLayout(this, 1, 1, 3, 2, "CSqlEditorConfigTabLayout");
   
   Parentheses = new QCheckBox(this, "Parentheses");
   Parentheses->setText(tr("Enable Parentheses Matching"));
-  QWhatsThis::add(Parentheses, tr("When enabled, the SQL Editor will use Parentheses Matching."));
+  Q3WhatsThis::add(Parentheses, tr("When enabled, the SQL Editor will use Parentheses Matching."));
   
   CSqlEditorConfigTabLayout->addMultiCellWidget(Parentheses, 2, 2, 0, 2);
   
   LinuxPaste = new QCheckBox(this, "LinuxPaste");
   LinuxPaste->setText(tr("Enable Linux Copy / Paste Style"));
-  QWhatsThis::add(LinuxPaste, tr("When enabled, the SQL Editor will emulate the way Linux works for Copy & Paste.  When text is selected, it will automatically be copied in to the buffer and when the mid-mouse button is clicked, it will be pasted at the current cursor position."));
+  Q3WhatsThis::add(LinuxPaste, tr("When enabled, the SQL Editor will emulate the way Linux works for Copy & Paste.  When text is selected, it will automatically be copied in to the buffer and when the mid-mouse button is clicked, it will be pasted at the current cursor position."));
   
   CSqlEditorConfigTabLayout->addMultiCellWidget(LinuxPaste, 3, 3, 0, 2);  
   
@@ -600,7 +603,7 @@ CSqlEditorConfigTab::CSqlEditorConfigTab(QWidget* parent,  const char* name, WFl
   SyntaxFile = new QLineEdit(this, "SyntaxFile");
   SyntaxFile->setFrameShape(QLineEdit::StyledPanel);
   SyntaxFile->setFrameShadow(QLineEdit::Sunken);
-  QWhatsThis::add(SyntaxFile, tr("This is the File that contains the list of keywords that will be highlighted and completed by the SQL Editor."));
+  Q3WhatsThis::add(SyntaxFile, tr("This is the File that contains the list of keywords that will be highlighted and completed by the SQL Editor."));
   
   CSqlEditorConfigTabLayout->addWidget(SyntaxFile, 0, 1);
   
@@ -609,13 +612,13 @@ CSqlEditorConfigTab::CSqlEditorConfigTab(QWidget* parent,  const char* name, WFl
   SyntaxFileBrowse->setMaximumSize(QSize(22, 22));
   SyntaxFileBrowse->setText(tr(""));
   SyntaxFileBrowse->setPixmap(getPixmapIcon("openIcon"));
-  QWhatsThis::add(SyntaxFileBrowse, tr("Select the Folder that contains the Translation Files."));
+  Q3WhatsThis::add(SyntaxFileBrowse, tr("Select the Folder that contains the Translation Files."));
   
   CSqlEditorConfigTabLayout->addWidget(SyntaxFileBrowse, 0, 2);
   
   SyntaxHighlight = new QCheckBox(this, "SyntaxHighlight");
   SyntaxHighlight->setText(tr("Enable SQL Syntax Highlighting && Completion"));
-  QWhatsThis::add(SyntaxHighlight, tr("When enabled, the SQL Editor will use Syntax Highlighting for SQL Keywords and will also have support for Keyword completion."));
+  Q3WhatsThis::add(SyntaxHighlight, tr("When enabled, the SQL Editor will use Syntax Highlighting for SQL Keywords and will also have support for Keyword completion."));
   
   CSqlEditorConfigTabLayout->addMultiCellWidget(SyntaxHighlight, 1, 1, 0, 2);
   QSpacerItem* spacer = new QSpacerItem(20, 20, QSizePolicy::Minimum, QSizePolicy::Expanding);  
@@ -662,7 +665,7 @@ void CSqlEditorConfigTab::setSyntaxFile()
   qDebug("CSqlEditorConfigTab::setSyntaxFile()");
 #endif
   
-  QString tmp = QFileDialog::getOpenFileName ("syntax.txt", tr("Text Files") + " (*.txt);;" + tr("All Files") + " (*.*)", this, "setSyntaxFile", tr("Select the Syntax File"));    
+  QString tmp = Q3FileDialog::getOpenFileName ("syntax.txt", tr("Text Files") + " (*.txt);;" + tr("All Files") + " (*.*)", this, "setSyntaxFile", tr("Select the Syntax File"));    
   if (!tmp.isEmpty())
   {
     tmp = charReplace(tmp.stripWhiteSpace(),'\\', "/");    
@@ -680,7 +683,7 @@ void CSqlEditorConfigTab::init()
   connect(SyntaxHighlight, SIGNAL(toggled(bool)), Parentheses, SLOT(setEnabled(bool)));
 }
 
-CPluginsConfigTab::CPluginsConfigTab(QWidget* parent,  const char* name, WFlags fl)
+CPluginsConfigTab::CPluginsConfigTab(QWidget* parent,  const char* name, Qt::WFlags fl)
 : CConfigDialogTab(parent, name, fl)
 {
 #ifdef DEBUG
@@ -688,7 +691,7 @@ CPluginsConfigTab::CPluginsConfigTab(QWidget* parent,  const char* name, WFlags 
 #endif
   if (!name)
     setName("CPluginsConfigTab");
-  CPluginsConfigTabLayout = new QGridLayout(this, 1, 1, 4, 2, "CPluginsConfigTabLayout"); 
+  CPluginsConfigTabLayout = new Q3GridLayout(this, 1, 1, 4, 2, "CPluginsConfigTabLayout"); 
   
   pluginsPathBrowse = new QPushButton(this, "pluginsPathBrowse");
   pluginsPathBrowse->setMinimumSize(QSize(22, 22));
@@ -714,10 +717,10 @@ CPluginsConfigTab::CPluginsConfigTab(QWidget* parent,  const char* name, WFlags 
   
   CPluginsConfigTabLayout->addMultiCellWidget(textLabel1, 1, 1, 0, 2);
   
-  pluginsList = new QListView(this, "pluginsList");
+  pluginsList = new Q3ListView(this, "pluginsList");
   pluginsList->addColumn(tr("Plugins"));
   pluginsList->setShowSortIndicator(true);
-  pluginsList->setResizeMode(QListView::AllColumns);
+  pluginsList->setResizeMode(Q3ListView::AllColumns);
   
   CPluginsConfigTabLayout->addMultiCellWidget(pluginsList, 2, 2, 0, 2);
   languageChange();
@@ -739,13 +742,13 @@ void CPluginsConfigTab::languageChange()
 {
   setCaption(tr("Plugins"));
   pluginsPathBrowse->setText(QString::null);
-  QWhatsThis::add(pluginsPathBrowse, tr("Click to browse for the Plugins Path."));
+  Q3WhatsThis::add(pluginsPathBrowse, tr("Click to browse for the Plugins Path."));
   pluginsPathLabel->setText(tr("Plugins Path"));
-  QWhatsThis::add(pluginsPath, tr("This is the path where MySQLCC will search for plugins."));
+  Q3WhatsThis::add(pluginsPath, tr("This is the path where MySQLCC will search for plugins."));
   textLabel1->setText(tr("The Checked plugins will be enabled to be used in MySQLCC"));
   pluginsList->header()->setLabel(0, tr("Plugins"));
   pluginsList->clear();
-  QWhatsThis::add(pluginsList, tr("Available Plugins"));
+  Q3WhatsThis::add(pluginsList, tr("Available Plugins"));
 }
 
 void CPluginsConfigTab::setPluginsPath()
@@ -772,11 +775,11 @@ bool CPluginsConfigTab::save(CConfig *conn)
   if (pluginsList->firstChild())
     pluginsList->setCurrentItem(pluginsList->firstChild());
 
-  QListViewItemIterator it(pluginsList);
+  Q3ListViewItemIterator it(pluginsList);
   QStringList lst = myApp()->enabledPluginsList();
   while (it.current())
   {
-    if (((QCheckListItem *)it.current())->isOn())
+    if (((Q3CheckListItem *)it.current())->isOn())
     {
       list.append(it.current()->text(0));
       if (!needrestart)
@@ -833,12 +836,12 @@ void CPluginsConfigTab::refreshPluginsList(const QString &path)
   QStringList plugin_list = dir.entryList();
   for (QStringList::Iterator it = plugin_list.begin(); it != plugin_list.end(); ++it)
   {
-    QCheckListItem *c = new QCheckListItem(pluginsList, *it, QCheckListItem::CheckBox);
+    Q3CheckListItem *c = new Q3CheckListItem(pluginsList, *it, Q3CheckListItem::CheckBox);
     c->setOn(lst.find(*it) != lst.end());
   }
 }
 
-CGeneralAppConfigTab::CGeneralAppConfigTab(QWidget* parent,  const char* name, WFlags fl)
+CGeneralAppConfigTab::CGeneralAppConfigTab(QWidget* parent,  const char* name, Qt::WFlags fl)
 : CConfigDialogTab(parent, name, fl),needrestart(false)
 {
 #ifdef DEBUG
@@ -848,7 +851,7 @@ CGeneralAppConfigTab::CGeneralAppConfigTab(QWidget* parent,  const char* name, W
   if (!name)
     setName("CGeneralAppConfigTab");
   
-  CGeneralAppConfigTabLayout = new QGridLayout(this, 1, 1, 4, 2, "CGeneralAppConfigTabLayout"); 
+  CGeneralAppConfigTabLayout = new Q3GridLayout(this, 1, 1, 4, 2, "CGeneralAppConfigTabLayout"); 
   
   errorSoundFile = new QLineEdit(this, "errorSoundFile");
   errorSoundFile->setFrameShape(QLineEdit::StyledPanel);
@@ -985,33 +988,33 @@ CGeneralAppConfigTab::CGeneralAppConfigTab(QWidget* parent,  const char* name, W
 void CGeneralAppConfigTab::languageChange()
 {
   setCaption(tr("General"));
-  QWhatsThis::add(errorSoundFile, tr("This is a WAV file that will be played each time an Error message occures.  If you don't want to play a sound, leave this field empty."));
-  QWhatsThis::add(translationsPath, tr("This is the Path which will be used by the application to find Language Files."));
+  Q3WhatsThis::add(errorSoundFile, tr("This is a WAV file that will be played each time an Error message occures.  If you don't want to play a sound, leave this field empty."));
+  Q3WhatsThis::add(translationsPath, tr("This is the Path which will be used by the application to find Language Files."));
   warningSoundLabel->setText(tr("Warning Sound File"));
   errorSoundLabel->setText(tr("Error Sound File"));
   translationsPathLabel->setText(tr("Translations Path"));
   warningSoundBrowse->setText(QString::null);
-  QWhatsThis::add(warningSoundBrowse, tr("Click to browse for the Warning WAV File."));
+  Q3WhatsThis::add(warningSoundBrowse, tr("Click to browse for the Warning WAV File."));
   informationSoundBrowse->setText(QString::null);
-  QWhatsThis::add(informationSoundBrowse, tr("Click to browse for the Information WAV File."));
+  Q3WhatsThis::add(informationSoundBrowse, tr("Click to browse for the Information WAV File."));
   errorSoundBrowse->setText(QString::null);
-  QWhatsThis::add(errorSoundBrowse, tr("Click to browse for the Error WAV File."));
+  Q3WhatsThis::add(errorSoundBrowse, tr("Click to browse for the Error WAV File."));
   translationsBrowse->setText(QString::null);
-  QWhatsThis::add(translationsBrowse, tr("Click to browse for a the Translations Path"));
+  Q3WhatsThis::add(translationsBrowse, tr("Click to browse for a the Translations Path"));
   informationSoundLabel->setText(tr("Information Sound File"));
-  QWhatsThis::add(informationSoundFile, tr("This is a WAV file that will be played each time a Information message occures.  If you don't want to play a sound, leave this field empty."));
-  QWhatsThis::add(warningSoundFile, tr("This is a WAV file that will be played each time a Warning message occures.  If you don't want to play a sound, leave this field empty."));
+  Q3WhatsThis::add(informationSoundFile, tr("This is a WAV file that will be played each time a Information message occures.  If you don't want to play a sound, leave this field empty."));
+  Q3WhatsThis::add(warningSoundFile, tr("This is a WAV file that will be played each time a Warning message occures.  If you don't want to play a sound, leave this field empty."));
   saveWorkspace->setText(tr("Restore last Workspace on startup"));
-  QWhatsThis::add(saveWorkspace, tr("When enabled, the application will restore the last Workspace of the previous execution by automatically opening all windows and connections which where open prior shutdown."));
+  Q3WhatsThis::add(saveWorkspace, tr("When enabled, the application will restore the last Workspace of the previous execution by automatically opening all windows and connections which where open prior shutdown."));
   language->clear();
-  QWhatsThis::add(language, tr("This will change the display Language of the Application.  If changed, one will have to restart the application for changes to take place."));
+  Q3WhatsThis::add(language, tr("This will change the display Language of the Application.  If changed, one will have to restart the application for changes to take place."));
   languageLabel->setText(tr("Language"));
   historyNumberLabel->setText(tr("History size for Queries"));
-  QWhatsThis::add(historySize, tr("This number specifies how many Queries will be saved by the History Panel in  the Query Windows."));
+  Q3WhatsThis::add(historySize, tr("This number specifies how many Queries will be saved by the History Panel in  the Query Windows."));
   querySizeLabel->setText(tr("Max query size"));
-  QWhatsThis::add(querySize, tr("This number specifies the maximum size of a Query that will be saved by the History Panel in the Query Windows."));
+  Q3WhatsThis::add(querySize, tr("This number specifies the maximum size of a Query that will be saved by the History Panel in the Query Windows."));
   confirmCritical->setText(tr("Confirm critical operations"));
-  QWhatsThis::add(confirmCritical, tr("This option will confirm critical operations done by the client.  Such critical operations include shutting down the application, shutting down the Server, truncate table, etc ..."));
+  Q3WhatsThis::add(confirmCritical, tr("This option will confirm critical operations done by the client.  Such critical operations include shutting down the application, shutting down the Server, truncate table, etc ..."));
 }
 
 
@@ -1119,7 +1122,7 @@ void CGeneralAppConfigTab::setErrorFile()
   qDebug("CGeneralAppConfigTab::setErrorFile()");
 #endif
   
-  QString tmp = QFileDialog::getOpenFileName(QString::null, tr("Wav Files(*.wav)"), this, "BrowseErrorFile", tr("Select Error Sound"));
+  QString tmp = Q3FileDialog::getOpenFileName(QString::null, tr("Wav Files(*.wav)"), this, "BrowseErrorFile", tr("Select Error Sound"));
   if (!tmp.isEmpty())
   {
     tmp = charReplace(tmp.stripWhiteSpace(),'\\', "/");
@@ -1133,7 +1136,7 @@ void CGeneralAppConfigTab::setWarningFile()
   qDebug("CGeneralAppConfigTab::setWarningFile()");
 #endif
   
-  QString tmp = QFileDialog::getOpenFileName(QString::null, tr("Wav Files(*.wav)"), this, "BrowseWarningFile", tr("Select Warning Sound"));
+  QString tmp = Q3FileDialog::getOpenFileName(QString::null, tr("Wav Files(*.wav)"), this, "BrowseWarningFile", tr("Select Warning Sound"));
   if (!tmp.isEmpty())
   {    
     tmp = charReplace(tmp.stripWhiteSpace(),'\\', "/");
@@ -1147,7 +1150,7 @@ void CGeneralAppConfigTab::setInformationFile()
   qDebug("CGeneralAppConfigTab::setInformationFile()");
 #endif
   
-  QString tmp = QFileDialog::getOpenFileName(QString::null, tr("Wav Files(*.wav)"), this, "BrowseInformationFile", tr("Select Information Sound"));
+  QString tmp = Q3FileDialog::getOpenFileName(QString::null, tr("Wav Files(*.wav)"), this, "BrowseInformationFile", tr("Select Information Sound"));
   if (!tmp.isEmpty())
   {    
     tmp = charReplace(tmp.stripWhiteSpace(),'\\', "/");
@@ -1189,7 +1192,7 @@ CAppConfigDialog::CAppConfigDialog(QWidget* parent,  const char* name)
   insertTab(new CSqlEditorConfigTab((QWidget *) tab()));
   insertTab(new CSyntaxHighlightConfigTab((QWidget *) tab()));
   okPushButton->setText(tr("&Apply"));
-  QWhatsThis::add(okPushButton, tr("Click to Apply changes."));
+  Q3WhatsThis::add(okPushButton, tr("Click to Apply changes."));
   myResize(421, 263);
 }
 

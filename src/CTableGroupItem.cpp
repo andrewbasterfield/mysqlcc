@@ -27,7 +27,9 @@
 #include "CTableWindow.h"
 #include "panels.h"
 #include <stddef.h>  
-#include <qdict.h>
+#include <q3dict.h>
+//Added by qt3to4:
+#include <Q3PopupMenu>
 
 #ifdef DEBUG_LEVEL
 #if DEBUG_LEVEL < 1
@@ -114,7 +116,7 @@ void CTableGroupItem::init(const QString &dbname)
   delete_icon = getPixmapIcon("deleteIcon");
   rename_table_icon = getPixmapIcon("renameTableIcon");
 
-  open_table_menu = new QPopupMenu();
+  open_table_menu = new Q3PopupMenu();
   open_table_menu->insertItem(tr("Return &all rows"), SQL_ALL_ROWS);
   open_table_menu->insertItem(tr("Return &Limit"), SQL_LIMIT);
   connect(open_table_menu, SIGNAL(activated(int)), this, SLOT(processMenu(int)));

@@ -21,6 +21,8 @@
 #include <stddef.h>
 #include <qlineedit.h>
 #include <qvalidator.h>
+//Added by qt3to4:
+#include <QKeyEvent>
 
 class QKeyEvent;
 class CNullLineEditValidator;

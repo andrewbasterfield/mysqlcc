@@ -19,12 +19,14 @@
 #include <stddef.h>  
 #include <qlayout.h>
 #include <qlabel.h>
-#include <qwhatsthis.h>
+#include <q3whatsthis.h>
+//Added by qt3to4:
+#include <Q3GridLayout>
 
 /*
 This class shows the Credits Window in the "Help" menu item.
 */
-CCreditsWidget::CCreditsWidget( QWidget* parent,  const char* name, WFlags fl )
+CCreditsWidget::CCreditsWidget( QWidget* parent,  const char* name, Qt::WFlags fl )
 : QWidget( parent, name, fl )
 {
 #ifdef DEBUG
@@ -33,7 +35,7 @@ CCreditsWidget::CCreditsWidget( QWidget* parent,  const char* name, WFlags fl )
   
   if (!name)
     setName("CCreditsWidget");
-  creditsWidgetLayout = new QGridLayout( this, 1, 1, 1, 1, "creditsWidgetLayout"); 
+  creditsWidgetLayout = new Q3GridLayout( this, 1, 1, 1, 1, "creditsWidgetLayout"); 
   
   TextLabel3_2 = new QLabel( this, "TextLabel3_2" );
   TextLabel3_2->setSizePolicy( QSizePolicy( (QSizePolicy::SizeType)7, (QSizePolicy::SizeType)2, 0, 0, TextLabel3_2->sizePolicy().hasHeightForWidth() ) );
@@ -48,8 +50,8 @@ CCreditsWidget::CCreditsWidget( QWidget* parent,  const char* name, WFlags fl )
 	  "Jeremy Cole<br>\n"
     "Tom Basil<br>\n"
     "And many others<br>") );
-  TextLabel3_2->setAlignment( int( QLabel::AlignTop ) );
-  QWhatsThis::add( TextLabel3_2,tr("People who contributed indirectly to this development." ) );
+  TextLabel3_2->setAlignment( int( Qt::AlignTop ) );
+  Q3WhatsThis::add( TextLabel3_2,tr("People who contributed indirectly to this development." ) );
   
   creditsWidgetLayout->addWidget( TextLabel3_2, 4, 0 );
   
@@ -92,8 +94,8 @@ CCreditsWidget::CCreditsWidget( QWidget* parent,  const char* name, WFlags fl )
     "<b>Adam Majer</b> [adamm@galacticasoftware.com]<br>\n"
     "<b>Kyung-uk Son</b> [hey_calm@yahoo.co.kr]"));
   
-  TextLabel3->setAlignment( int( QLabel::AlignTop ) );
-  QWhatsThis::add( TextLabel3,tr("People who contributed directly to this development." ) );
+  TextLabel3->setAlignment( int( Qt::AlignTop ) );
+  Q3WhatsThis::add( TextLabel3,tr("People who contributed directly to this development." ) );
   
   creditsWidgetLayout->addWidget( TextLabel3, 1, 0 );
   QSpacerItem* spacer = new QSpacerItem( 20, 20, QSizePolicy::Minimum, QSizePolicy::Fixed );
@@ -108,7 +110,7 @@ CCreditsWidget::~CCreditsWidget()
 
 }
 
-CCreditsBox::CCreditsBox( QWidget* parent,  const char* name, bool modal, WFlags fl )
+CCreditsBox::CCreditsBox( QWidget* parent,  const char* name, bool modal, Qt::WFlags fl )
 : CInfoDialog( parent, name, modal, fl )
 {
 #ifdef DEBUG

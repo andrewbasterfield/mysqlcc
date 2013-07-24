@@ -26,6 +26,9 @@
 #include "CTableGroupItem.h"
 #include <stddef.h>  
 #include <qmessagebox.h>
+//Added by qt3to4:
+#include <QPixmap>
+#include <QKeyEvent>
 
 CDatabaseItem::CDatabaseItem(CDatabaseListViewItem * parent, const QString &dbname, CMySQLServer *m, const QPixmap &p1, const QPixmap &p2)
 : CDatabaseListViewItem(parent, m, DATABASE, "CDatabaseItem")
@@ -109,7 +112,7 @@ void CDatabaseItem::refreshWidget(bool b)
       w->loadData(widgetData);
   }
   else
-    ((CDatabaseListViewItem *) QListViewItem::parent())->refreshWidget(b);
+    ((CDatabaseListViewItem *) Q3ListViewItem::parent())->refreshWidget(b);
   widgetStack()->raiseWidget(widget_id);
   setBlocked(false);
 }
@@ -219,7 +222,7 @@ void CDatabaseItem::keyPressed(QKeyEvent * e)
   if (isBlocked())
     return;
 
-  if (e->key() == QListViewItem::Key_Delete)
+  if (e->key() == Qt::Key_Delete)
     processMenu(MENU_DELETE);
   else
     CDatabaseListViewItem::keyPressed(e);

@@ -25,8 +25,11 @@
 #include <stddef.h>
 #include <qfile.h>
 #include <qdatetime.h>
-#include <qpopupmenu.h>
+#include <q3popupmenu.h>
 #include <qregexp.h>
+//Added by qt3to4:
+#include <Q3TextStream>
+#include <QPixmap>
 
 
 CQueryTable::CQueryTable(QWidget * parent, CMySQLQuery *q, CMySQLServer *m, const char * name)
@@ -44,7 +47,7 @@ CQueryTable::CQueryTable(QWidget * parent, CMySQLQuery *q, CMySQLServer *m, cons
   else
     qry = 0;
 
-  setSelectionMode(QTable::Single);
+  setSelectionMode(Q3Table::Single);
   setReadOnly(true);
   pkIcon = getPixmapIcon("pkIcon");
   mulIcon = getPixmapIcon("mulIcon");
@@ -139,7 +142,7 @@ void CQueryTable::save()
       QMessageBox::Yes, QMessageBox::No) != QMessageBox::Yes))
       return;
 
-  if ( !file.open( IO_WriteOnly ) )
+  if ( !file.open( QIODevice::WriteOnly ) )
   {
     if (mysql()->messagePanel())
       mysql()->messagePanel()->critical(tr("An error occurred while saving the file"));
@@ -156,7 +159,7 @@ void CQueryTable::save()
   title += tr("Saved") + ": " + QDateTime::currentDateTime().toString("yyyy-MM-dd hh:mm:ss") + line_terminator;  
   title = CApplication::commentText(title, line_terminator) + line_terminator;
 
-  QTextStream ts( &file );
+  Q3TextStream ts( &file );
   ts << title;
   
   QString tmp = tr("Query") + ":" + line_terminator;
@@ -233,7 +236,7 @@ QString CQueryTable::copy_data(int row, int col)
     return copy_current_selection_func(row, col);
   else
   {
-    QTableSelection sel;
+    Q3TableSelection sel;
     if (currentSelection() == -1 || forceCopyAll())
     {
       sel.init(0, 0);
@@ -286,7 +289,7 @@ QString CQueryTable::copy_data(int row, int col)
   }
 }
 
-void CQueryTable::copy_data_func(QString *cpy, CMySQLQuery *qry, QTableSelection *sel, QMap<uint, ulong> *max_length_map)
+void CQueryTable::copy_data_func(QString *cpy, CMySQLQuery *qry, Q3TableSelection *sel, QMap<uint, ulong> *max_length_map)
 {
   uint length;
   QString tmp;

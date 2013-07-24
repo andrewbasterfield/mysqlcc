@@ -28,7 +28,7 @@
 #include <qstring.h>
 #include <qsound.h>
 #include <qapplication.h>
-#include <qfiledialog.h>
+#include <q3filedialog.h>
 #include <qfile.h>
 
 #if !defined(max)

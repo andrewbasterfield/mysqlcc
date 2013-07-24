@@ -20,7 +20,10 @@
 
 #include "CDatabaseListViewItem.h"
 #include <stddef.h>
-#include <qdict.h>
+#include <q3dict.h>
+//Added by qt3to4:
+#include <QKeyEvent>
+#include <QPixmap>
 
 class CDatabaseItem : public CDatabaseListViewItem
 {
@@ -52,7 +55,7 @@ private:
   QPixmap sqlIcon;
   QPixmap deleteIcon;
   QPixmap newWindowIcon;
-  QDict<QString> widgetData;
+  Q3Dict<QString> widgetData;
 };
 
 #endif

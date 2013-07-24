@@ -26,12 +26,16 @@
 #include <qvariant.h>
 #include <qlayout.h>
 #include <qtooltip.h>
-#include <qwhatsthis.h>
+#include <q3whatsthis.h>
 #include <qaction.h>
 #include <qmenubar.h>
-#include <qpopupmenu.h>
-#include <qtoolbar.h>
+#include <q3popupmenu.h>
+#include <q3toolbar.h>
 #include <qlibrary.h>
+//Added by qt3to4:
+#include <QPixmap>
+#include <Q3GridLayout>
+#include <QCustomEvent>
 
 CPluginWindow::CPluginWindow(QWidget * parent, const CPlugin &p)
 : CMyWindow(parent), pluginWidget(0), plugin(0)
@@ -45,7 +49,7 @@ CPluginWindow::CPluginWindow(QWidget * parent, const CPlugin &p)
   setCaption(p.name());
   setIcon(p.icon().isNull() ? getPixmapIcon("applicationIcon") : p.icon());
   setCentralWidget(new QWidget(this, "qt_central_widget"));
-  CPluginWindowLayout = new QGridLayout(centralWidget(), 1, 1, 4, 2, "CPluginWindowLayout");
+  CPluginWindowLayout = new Q3GridLayout(centralWidget(), 1, 1, 4, 2, "CPluginWindowLayout");
 
   plugin = (CMySQLCCWidgetPlugin *) CPlugin::createPlugin(p);
   if (plugin)

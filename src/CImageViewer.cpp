@@ -24,12 +24,16 @@
 #include <stddef.h>
 #include <qlabel.h>
 #include <qclipboard.h>
-#include <qfiledialog.h>
+#include <q3filedialog.h>
 #include <qtoolbutton.h>
-#include <qpopupmenu.h>
+#include <q3popupmenu.h>
 #include <qimage.h>
 #include <qmessagebox.h>
 #include <qmenubar.h>
+//Added by qt3to4:
+#include <Q3GridLayout>
+#include <QPixmap>
+#include <Q3StrList>
 #include <ctype.h>
 
 QString g_img_fname_prompt;
@@ -51,7 +55,7 @@ void init_img_fname_prompt()
 {
   g_img_fname_prompt = QObject::tr("Image Files");
   g_img_fname_prompt += " (";
-  QStrList fmt = QImage::outputFormats();  
+  Q3StrList fmt = QImageWriter::supportedImageFormats();  
   for (const char* f = fmt.first(); f; f = fmt.next())
   {
     g_img_fname_prompt += '*';
@@ -81,10 +85,10 @@ void CImageViewer::initFieldEditorWidget()
   mainWindow()->setCaption(tr("Image Viewer") + " - " + tr("Column") + ": '" + tableItem->query()->fields(tableItem->index()).name +
     "' Row" + ": " + QString::number(tableItem->row()) );
   
-  widgetLayout = new QGridLayout( this, 1, 1, 0, 0, "widgetLayout"); 
+  widgetLayout = new Q3GridLayout( this, 1, 1, 0, 0, "widgetLayout"); 
 
   image = new QLabel(this, "image");
-  image->setAlignment(int( QLabel::AlignCenter));
+  image->setAlignment(int( Qt::AlignCenter));
   image->setFrameShape(QLabel::Panel);
   image->setFrameShadow(QLabel::Sunken);
   image->setScaledContents(false);
@@ -107,12 +111,12 @@ void CImageViewer::initFieldEditorWidget()
   fileCloseAction = new QAction (tr("Close"), getPixmapIcon("closeIcon"),
     tr("&Close"), 0, this, "fileCloseAction");
 
-  saveImageTypeMenu = new QPopupMenu(this);
-  QStrList fmt = QImage::outputFormats();  
+  saveImageTypeMenu = new Q3PopupMenu(this);
+  Q3StrList fmt = QImageWriter::supportedImageFormats();  
   for (const char* f = fmt.first(); f; f = fmt.next())
     saveImageTypeMenu->insertItem(f);
 
-  toolBar = new QToolBar(tr("Tools"), mainWindow());
+  toolBar = new Q3ToolBar(tr("Tools"), mainWindow());
   
   fileOpenAction->addTo(toolBar);
 
@@ -127,7 +131,7 @@ void CImageViewer::initFieldEditorWidget()
   toolBar->addSeparator();
   editScaleContentsAction->addTo(toolBar);
 
-  fileMenu = new QPopupMenu(this);
+  fileMenu = new Q3PopupMenu(this);
   
   fileOpenAction->addTo(fileMenu);
 
@@ -137,7 +141,7 @@ void CImageViewer::initFieldEditorWidget()
   fileCloseAction->addTo(fileMenu);
   mainWindow()->menuBar()->insertItem(tr("&File"), fileMenu);
   
-  editMenu = new QPopupMenu(this);
+  editMenu = new Q3PopupMenu(this);
   editScaleContentsAction->addTo(editMenu);
   editMenu->insertSeparator();
   editCopyAction->addTo(editMenu);
@@ -254,7 +258,7 @@ bool CImageViewer::loadFromData(const uchar *data, ulong len)
 
 void CImageViewer::openFile()
 { 
-  tmpFileName = QFileDialog::getOpenFileName(tmpFileName, g_img_fname_prompt);
+  tmpFileName = Q3FileDialog::getOpenFileName(tmpFileName, g_img_fname_prompt);
   bool ok = false;
   QPixmap p;
   if (!tmpFileName.isEmpty())
@@ -263,7 +267,7 @@ void CImageViewer::openFile()
     return;
 
   QFile file(tmpFileName);
-  if (!file.open(IO_ReadOnly))
+  if (!file.open(QIODevice::ReadOnly))
   {
     message(CRITICAL, tr("An error occured while trying to load") + " " + tmpFileName);
     return;

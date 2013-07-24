@@ -24,18 +24,23 @@
 #include <stddef.h>
 #include <qpushbutton.h>
 #include <qvariant.h>
-#include <qheader.h>
-#include <qlistview.h>
+#include <q3header.h>
+#include <q3listview.h>
 #include <qlayout.h>
 #include <qtooltip.h>
-#include <qwhatsthis.h>
+#include <q3whatsthis.h>
 #include <qimage.h>
 #include <qpixmap.h>
-#include <qobjectlist.h>
+#include <qobject.h>
+//Added by qt3to4:
+#include <Q3GridLayout>
+#include <Q3PtrList>
+#include <Q3PopupMenu>
+#include <QKeyEvent>
 
 
 CHotKeySetupBox::CHotKeySetupBox(QWidget *parent, QKeySequence *key, const QString &caption, const QString &text)
-: QMessageBox(caption, text , NoIcon, Ok, Cancel, 0, parent, "CHotKeySetupBox", true, WDestructiveClose)
+: QMessageBox(caption, text , NoIcon, Ok, Cancel, 0, parent, "CHotKeySetupBox", true, Qt::WDestructiveClose)
 {
 #ifdef DEBUG
   qDebug("CHotKeySetupBox::CHotKeySetupBox()");
@@ -90,7 +95,7 @@ void CHotKeySetupBox::keyReleaseEvent(QKeyEvent * e)
 This class takes care of displaying the hotkey menu and it also opens the hotkey editor dialog.
 */
 CHotKeyEditorMenu::CHotKeyEditorMenu(QWidget * parent, QMenuBar *menuBar, const char * name)
-:QPopupMenu(parent, name)
+:Q3PopupMenu(parent, name)
 {
 #ifdef DEBUG
   qDebug("CHotKeyEditorMenu::CHotKeyEditorMenu()");
@@ -118,7 +123,7 @@ void CHotKeyEditorMenu::openHotKeyEditor()
 }
 
 
-CHotKeyEditorTab::CHotKeyEditorTab( QWidget* parent, QWidget* wnd, const char* name, WFlags fl )
+CHotKeyEditorTab::CHotKeyEditorTab( QWidget* parent, QWidget* wnd, const char* name, Qt::WFlags fl )
 : CConfigDialogTab ( parent, name, fl )
 {
 #ifdef DEBUG
@@ -130,14 +135,14 @@ CHotKeyEditorTab::CHotKeyEditorTab( QWidget* parent, QWidget* wnd, const char* n
   window = wnd;
   warningIcon = getPixmapIcon("warningIcon");
   setCaption(trUtf8("HotKey Editor"));
-  CHotKeyEditorTabLayout = new QGridLayout( this, 1, 1, 4, 2, "CHotKeyEditorTabLayout"); 
+  CHotKeyEditorTabLayout = new Q3GridLayout( this, 1, 1, 4, 2, "CHotKeyEditorTabLayout"); 
   
-  ListView1 = new QListView( this, "ListView1" );
+  ListView1 = new Q3ListView( this, "ListView1" );
   ListView1->setShowSortIndicator(true);
   ListView1->addColumn(trUtf8( "Action" ) );
   ListView1->addColumn(trUtf8( "HotKey" ) );  
-  ListView1->setResizeMode(QListView::AllColumns );
-  QWhatsThis::add(ListView1, trUtf8( "Action is the column that contains items that can have a hot-key defined.\n"
+  ListView1->setResizeMode(Q3ListView::AllColumns );
+  Q3WhatsThis::add(ListView1, trUtf8( "Action is the column that contains items that can have a hot-key defined.\n"
     "\n"
     "HotKey is the column that displays the hot-key combination for the specified Action."));
   CHotKeyEditorTabLayout->addWidget( ListView1, 0, 0 );  
@@ -204,18 +209,18 @@ void CHotKeyEditorTab::checkDuplicates()
 #endif
 
   QPixmap pm;
-  QListViewItemIterator it3(ListView1);
+  Q3ListViewItemIterator it3(ListView1);
   while (it3.current() != 0)
   {
     it3.current()->setPixmap(0, pm);
     ++it3;
   }
-  QListViewItemIterator it(ListView1);    
+  Q3ListViewItemIterator it(ListView1);    
   while ( it.current() != 0 )
   {
     if (!it.current()->text(1).isEmpty())
     {
-      QListViewItemIterator it2(ListView1);
+      Q3ListViewItemIterator it2(ListView1);
       while (it2.current() != 0)
       {
         if (it2.current() != it.current() && it.current()->text(1) == it2.current()->text(1))
@@ -235,8 +240,8 @@ bool CHotKeyEditorTab::save(CConfig *cfg)
 #endif
   
   bool ret = true;
-  QPtrList<QListViewItem> lst;
-  QListViewItemIterator it(ListView1);
+  Q3PtrList<Q3ListViewItem> lst;
+  Q3ListViewItemIterator it(ListView1);
   while ( it.current() != 0 )
   {
     CHotKeyListViewItem *item = (CHotKeyListViewItem *)it.current();    
@@ -267,10 +272,10 @@ CHotKeyEditorDialog::CHotKeyEditorDialog(QWidget* parent,  QWidget *wnd)
   hotKeyTab->initHotKeys();
   insertTab(hotKeyTab);
   okPushButton->setText(tr("&Apply"));
-  QWhatsThis::add(okPushButton, tr("Click to Apply changes."));
+  Q3WhatsThis::add(okPushButton, tr("Click to Apply changes."));
   customButton->setText(tr( "&Map Keys"));
   customButton->setIconSet(getPixmapIcon("keyboardIcon"));
-  QWhatsThis::add(customButton, tr("Click here to map the keys for the selected Action.."));
+  Q3WhatsThis::add(customButton, tr("Click here to map the keys for the selected Action.."));
   connect(customButton, SIGNAL(clicked()), this, SLOT(customButtonClicked()));
   connect(this, SIGNAL(mapKeys()), hotKeyTab, SLOT(mapKeys()));
   customButton->show();

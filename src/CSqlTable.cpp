@@ -32,13 +32,16 @@
 #include <qfile.h>
 #include <qdatetime.h>
 #include <qlineedit.h>
-#include <qpopupmenu.h>
+#include <q3popupmenu.h>
 #include <qregexp.h>
-#include <qfiledialog.h>
+#include <q3filedialog.h>
+//Added by qt3to4:
+#include <QPixmap>
+#include <Q3MemArray>
 #include <stdlib.h>
 #include <math.h>
 #include <qtextcodec.h>
-#include <qcstring.h>
+#include <q3cstring.h>
 
 CSqlTable::CSqlTable(QWidget * parent, CMySQLQuery *q, CMySQLServer *m, const char * name)
 : CQueryTable(parent, q, m, name)
@@ -65,7 +68,7 @@ CSqlTable::CSqlTable(QWidget * parent, CMySQLQuery *q, CMySQLServer *m, const ch
   messagePanel = m->messagePanel();
   historyPanel = 0;
   connect(this, SIGNAL(currentChanged(int, int)), this, SLOT(currentChanged(int, int)));
-  setFocusStyle(QTable::FollowStyle);
+  setFocusStyle(Q3Table::FollowStyle);
   inserting_row = -1;
   force_insert = false;
 }
@@ -90,7 +93,7 @@ QWidget *CSqlTable::createEditor(int row, int col, bool initFromCell) const
       e->setMaxLength(maxColumnLength(col));
       if (i->isNull())
         e->setNull(true);
-	    if (!e || i->editType() == QTableItem::Never)
+	    if (!e || i->editType() == Q3TableItem::Never)
 		    return 0;
     }
   }
@@ -362,7 +365,7 @@ void CSqlTable::deleteRecord()
       return;
 
   setBlocked(true);
-  QMemArray<int> delete_rows(0);
+  Q3MemArray<int> delete_rows(0);
   CSqlTableItem *field;
   int cnt = 0;
   bool ok;
@@ -448,11 +451,11 @@ void CSqlTable::doLoadFromFile(CSqlTableItem *field)
 
   setBlocked(true);
   bool unblocked = false;
-  QString s = QFileDialog::getOpenFileName(QString::null, tr("All Files(*.*)"), 0, tr("Load from File"), tr("Choose a file"));
+  QString s = Q3FileDialog::getOpenFileName(QString::null, tr("All Files(*.*)"), 0, tr("Load from File"), tr("Choose a file"));
   if (!s.isNull())
   {
     QFile file(s);
-    if (!file.open(IO_ReadOnly))
+    if (!file.open(QIODevice::ReadOnly))
     {
       mysql()->showMessage(CRITICAL, tr("An error occurred while opening the file."));
       return;
@@ -927,7 +930,7 @@ void CSqlTable::ContextMenuRequested(int row, int col, const QPoint &pos)
   int num_cols = numCols();
   int num_rows = numRows();
 
-  QPopupMenu *menu = new QPopupMenu();
+  Q3PopupMenu *menu = new Q3PopupMenu();
 
   menu->insertItem(getPixmapIcon("insertRowIcon"), tr("&Insert Record"), MENU_INSERT);
   menu->setItemEnabled (MENU_INSERT, !isReadOnly());
@@ -937,7 +940,7 @@ void CSqlTable::ContextMenuRequested(int row, int col, const QPoint &pos)
 
   menu->insertSeparator();
   
-  QPopupMenu *open_menu = new QPopupMenu();
+  Q3PopupMenu *open_menu = new Q3PopupMenu();
 
   CSqlTableItem *table_item = (CSqlTableItem *) item(currentRow(), currentColumn());
 
@@ -1027,7 +1030,7 @@ QString CSqlTable::copy_current_selection_func(int row, int col)
     return QString::null;
 }
 
-void CSqlTable::copy_data_func(QString *cpy, CMySQLQuery *, QTableSelection *sel, QMap<uint, ulong> *max_length_map)
+void CSqlTable::copy_data_func(QString *cpy, CMySQLQuery *, Q3TableSelection *sel, QMap<uint, ulong> *max_length_map)
 {
   uint length;
   QString tmp;

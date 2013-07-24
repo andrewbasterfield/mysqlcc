@@ -20,13 +20,15 @@
 
 #include <stddef.h>
 #include <qvariant.h>
-#include <qlistview.h>
+#include <q3listview.h>
 #include <qobject.h>
 #include <qpixmap.h>
-#include <qpopupmenu.h>
-#include <qwidgetstack.h>
+#include <q3popupmenu.h>
+#include <q3widgetstack.h>
 #include <qevent.h>
-#include <qptrlist.h>
+#include <q3ptrlist.h>
+//Added by qt3to4:
+#include <QKeyEvent>
 #include "CDatabaseListView.h"
 #include "CToolBar.h"
 
@@ -44,11 +46,11 @@ public:
   ~CDatabaseListViewItemMenu();
 
   void createToolBar(CToolBar *t, int type);
-  void createPopupMenu(QPopupMenu *p);
+  void createPopupMenu(Q3PopupMenu *p);
   void clear();
   void setItemEnabled(int idx, bool e);
 
-  void insertItem(const QPixmap &pixmap, const QString &label, QPopupMenu * popup, int value);
+  void insertItem(const QPixmap &pixmap, const QString &label, Q3PopupMenu * popup, int value);
   void insertItem(const QPixmap &pixmap, const QString &label, int value);
   void insertItem(const QString &label, int value);
   void insertSeparator();
@@ -74,8 +76,8 @@ private:
       men = 0;
     }
 
-    void setPopupMenu(QPopupMenu *m) { men = m; }
-    QPopupMenu * popup() const { return men; }
+    void setPopupMenu(Q3PopupMenu *m) { men = m; }
+    Q3PopupMenu * popup() const { return men; }
     void setEnabled(bool b) { ena = b; }
     bool enabled() const { return ena; }
     QPixmap pixmap() const { return pix; }
@@ -84,7 +86,7 @@ private:
     bool isSeparator() { return separator; }
 
   private:
-    QPopupMenu *men;
+    Q3PopupMenu *men;
     QPixmap pix;
     QString lab;
     int val;
@@ -101,11 +103,11 @@ private:
         return i;
     return 0;
   }
-  QPtrList<my_item> item_list;
+  Q3PtrList<my_item> item_list;
 };
 
 
-class CDatabaseListViewItem : public QObject, public QListViewItem
+class CDatabaseListViewItem : public QObject, public Q3ListViewItem
 {
   Q_OBJECT
 
@@ -130,7 +132,7 @@ public:
   virtual int displayMenu(const QPoint &);
   virtual void okRename(int col);
   virtual void createWindowMenu(CToolBar *);
-  virtual void createPopupMenu(QPopupMenu *);
+  virtual void createPopupMenu(Q3PopupMenu *);
   virtual void initMenuItems() {};
   virtual void keyPressed(QKeyEvent *);
   virtual void refreshWidget(bool) {};
@@ -148,7 +150,7 @@ public:
 
   CConsoleWindow * consoleWindow() const;
   CMessagePanel * messagePanel() const;
-  QWidgetStack * widgetStack() const;
+  Q3WidgetStack * widgetStack() const;
   CMySQLServer * mysql() const { return m_mysql; }
   bool isBlocked() { return blocked; }
 

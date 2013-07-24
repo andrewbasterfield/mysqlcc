@@ -17,11 +17,15 @@
 */
 #include <stddef.h>
 #include <qvariant.h>
-#include <qframe.h>
+#include <q3frame.h>
 #include <qpushbutton.h>
 #include <qlayout.h>
 #include <qtooltip.h>
-#include <qwhatsthis.h>
+#include <q3whatsthis.h>
+//Added by qt3to4:
+#include <Q3GridLayout>
+#include <Q3HBoxLayout>
+#include <QCloseEvent>
 #include "CHotKeyEditorDialog.h"
 #include "CFieldEditorWindow.h"
 #include "CFieldEditorWidget.h"
@@ -41,7 +45,7 @@ CFieldEditorWindow::CFieldEditorWindow(CFieldEditorWidget *editor, const char* n
   setIcon(getPixmapIcon("applicationIcon"));
   setCaption(trUtf8("Field Editor"));
   setCentralWidget(new QWidget( this, "qt_central_widget"));
-  CFieldEditorWindowLayout = new QGridLayout(centralWidget(), 1, 1, 2, 2, "CFieldEditorWindowLayout");
+  CFieldEditorWindowLayout = new Q3GridLayout(centralWidget(), 1, 1, 2, 2, "CFieldEditorWindowLayout");
 
   editor->reparent(centralWidget(), 0, QPoint());
   editor->setMainWindow(this);
@@ -58,11 +62,11 @@ CFieldEditorWindow::CFieldEditorWindow(CFieldEditorWidget *editor, const char* n
   editor->setSizePolicy(QSizePolicy((QSizePolicy::SizeType)5, (QSizePolicy::SizeType)7, 0, 0, editor->sizePolicy().hasHeightForWidth()));
   CFieldEditorWindowLayout->addWidget(editor, 0, 0);
 
-  Frame5 = new QFrame(centralWidget(), "Frame5");
+  Frame5 = new Q3Frame(centralWidget(), "Frame5");
   Frame5->setSizePolicy(QSizePolicy((QSizePolicy::SizeType)5, (QSizePolicy::SizeType)0, 0, 0, Frame5->sizePolicy().hasHeightForWidth()));
-  Frame5->setFrameShape(QFrame::Box);
-  Frame5->setFrameShadow(QFrame::Sunken);
-  Frame5Layout = new QHBoxLayout(Frame5, 4, 6, "Frame5Layout");
+  Frame5->setFrameShape(Q3Frame::Box);
+  Frame5->setFrameShadow(Q3Frame::Sunken);
+  Frame5Layout = new Q3HBoxLayout(Frame5, 4, 6, "Frame5Layout");
   QSpacerItem* spacer = new QSpacerItem(20, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
   Frame5Layout->addItem(spacer);
  

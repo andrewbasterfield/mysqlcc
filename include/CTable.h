@@ -20,21 +20,23 @@
 
 #include <stddef.h>
 #include <qvariant.h>
-#include <qtable.h>
-#include <qintdict.h>
+#include <q3table.h>
+#include <q3intdict.h>
 #include <qclipboard.h>
 #include <qmap.h>
+//Added by qt3to4:
+#include <QPixmap>
 
 class QPixmap;
 class CMySQLServer;
 
-class CTable : public QTable
+class CTable : public Q3Table
 {
   Q_OBJECT
 public:
   CTable (QWidget * parent = 0, const char * name = 0);
   virtual bool isBlocked() { return blocked; }
-  static void saveTableContentsToFile(QTable *table, CMySQLServer *m, QString &fname, const QString &ext, const QString &txt, const QString &title);
+  static void saveTableContentsToFile(Q3Table *table, CMySQLServer *m, QString &fname, const QString &ext, const QString &txt, const QString &title);
   QWidget *realParent() const { return real_parent; }
   void setRealParent(QWidget *w) { real_parent = w; }
   bool hasProcessEvents() { return enable_process_events; }
@@ -67,7 +69,7 @@ protected slots:
 protected:
   struct SortableTableItem
   {
-    QTableItem *item;
+    Q3TableItem *item;
   };
 
   class OldColumn

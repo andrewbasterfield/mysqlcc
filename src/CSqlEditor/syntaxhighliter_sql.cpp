@@ -21,7 +21,7 @@
 #include "paragdata.h"
 #include <stddef.h>
 #include <qstring.h>
-#include <qdict.h>
+#include <q3dict.h>
 #include <qstringlist.h>
 #include <qmap.h>
 #include <qapplication.h>
@@ -67,7 +67,7 @@ void SyntaxHighlighter_SQL::refreshFormats()
   
   bool empty = formats.isEmpty();
   
-  QIntDictIterator<CSqlEditorFont> it(*CSqlEditorFont::sqlEditorStyles());
+  Q3IntDictIterator<CSqlEditorFont> it(*CSqlEditorFont::sqlEditorStyles());
   for(; it.current(); ++it)
     if(it.current()->highlightType() != CSqlEditorFont::PARENTHESES_MATCHING)
       if (empty)

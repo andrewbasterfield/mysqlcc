@@ -20,31 +20,41 @@
 
 #include <stddef.h>
 #include <qvariant.h>
+//Added by qt3to4:
+#include <Q3HBoxLayout>
+#include <Q3ValueList>
+#include <QLabel>
+#include <Q3GridLayout>
+#include <QPixmap>
+#include <Q3PopupMenu>
+#include <Q3VBoxLayout>
+#include <Q3ActionGroup>
+#include <QCloseEvent>
 #include "CMyWindow.h"
-#include <qtable.h>
+#include <q3table.h>
 #include <qwidget.h>
 #include <qvalidator.h>
-#include <qdict.h>
+#include <q3dict.h>
 
 class CMessagePanel;
-class QVBoxLayout; 
-class QHBoxLayout; 
-class QGridLayout; 
+class Q3VBoxLayout; 
+class Q3HBoxLayout; 
+class Q3GridLayout; 
 class QAction;
-class QActionGroup;
-class QToolBar;
-class QPopupMenu;
+class Q3ActionGroup;
+class Q3ToolBar;
+class Q3PopupMenu;
 class QTabWidget;
 class CMySQLServer;
-class QListView;
-class QListViewItem;
+class Q3ListView;
+class Q3ListViewItem;
 class QCheckBox;
 class QLabel;
 class QLineEdit;
 class CAction;
 class QPushButton;
 class QRadioButton;
-class QButtonGroup;
+class Q3ButtonGroup;
 class CMySQL;
 class CNullLineEdit;
 class CTableWindow;
@@ -117,16 +127,16 @@ public:
   }
 };
 
-class CTableWindowComboItem : public QComboTableItem
+class CTableWindowComboItem : public Q3ComboTableItem
 {
 public:
-  CTableWindowComboItem(QTable * table, const QStringList & list, bool editable = false)
-  : QComboTableItem(table, list, editable)
+  CTableWindowComboItem(Q3Table * table, const QStringList & list, bool editable = false)
+  : Q3ComboTableItem(table, list, editable)
   {
     Field = new CTableWindowField();
   }
-  CTableWindowComboItem(QTable * table, CTableWindowField *f, const QStringList & list, bool editable = false)
-  : QComboTableItem(table, list, editable)
+  CTableWindowComboItem(Q3Table * table, CTableWindowField *f, const QStringList & list, bool editable = false)
+  : Q3ComboTableItem(table, list, editable)
   {
     Field = new CTableWindowField(*f);
   }
@@ -144,7 +154,7 @@ class CAlterTableOptions : public QWidget
   Q_OBJECT
     
 public:
-  CAlterTableOptions(QWidget* parent, QTable *f, CMySQLServer *m, const char* name = 0, WFlags fl = 0);
+  CAlterTableOptions(QWidget* parent, Q3Table *f, CMySQLServer *m, const char* name = 0, Qt::WFlags fl = 0);
   QString getAlterTableOptions() const;
   QCheckBox* ignore;
   QComboBox* orderBy;
@@ -155,9 +165,9 @@ public slots:
   
 private:
   CMySQLServer *mysql;
-  QTable *table;
+  Q3Table *table;
   QLabel* TextLabel1;
-  QGridLayout* CAlterTableOptionsLayout;
+  Q3GridLayout* CAlterTableOptionsLayout;
 };
 
 class CTblProperties : public QWidget
@@ -165,7 +175,7 @@ class CTblProperties : public QWidget
   Q_OBJECT
     
 public:
-  CTblProperties(QWidget* parent, CMySQL *m, const char* name = 0, WFlags fl = 0);
+  CTblProperties(QWidget* parent, CMySQL *m, const char* name = 0, Qt::WFlags fl = 0);
   QString getTableProperties() const;
   QLineEdit* tableName;
   QLineEdit* comment;
@@ -193,7 +203,7 @@ private:
   QLabel* TextLabel4;
   QLabel* TextLabel6;
   QLabel* TextLabel7;
-  QGridLayout* CTblPropertiesLayout;
+  Q3GridLayout* CTblPropertiesLayout;
 };
 
 class CIndexField
@@ -223,7 +233,7 @@ private:
   int len;
 };
 
-typedef QValueList<CIndexField> IndexFieldList;
+typedef Q3ValueList<CIndexField> IndexFieldList;
 enum IndexType { PRIMARY, INDEX, UNIQUE, FULLTEXT }; 
 
 class CIndex
@@ -247,9 +257,9 @@ class CTableIndexes : public QWidget
   Q_OBJECT
     
 public: 
-  CTableIndexes(QWidget* parent, QTable *table, CMySQL *m, CMessagePanel *p, const char* name = 0, WFlags fl = 0);
+  CTableIndexes(QWidget* parent, Q3Table *table, CMySQL *m, CMessagePanel *p, const char* name = 0, Qt::WFlags fl = 0);
   void setIsAlterTable(bool b) { isAlterTable = b; }
-  QButtonGroup* indexTypes;
+  Q3ButtonGroup* indexTypes;
   QRadioButton* uniqueIndex;
   QRadioButton* indexIndex;
   QRadioButton* fullTextIndex;
@@ -274,20 +284,20 @@ private slots:
   void UniToggled(bool);
   void IdxToggled(bool);
   void FtToggled(bool);  
-  void setIdxLength(QListViewItem *);
-  void showFieldsUsedMenu(QListViewItem *, const QPoint &, int);  
+  void setIdxLength(Q3ListViewItem *);
+  void showFieldsUsedMenu(Q3ListViewItem *, const QPoint &, int);  
 
 signals:
   void primaryKey(int row, bool isPk);
   void do_click(int);
 
 private: 
-  void insertListViewItem(QListView *, const QString &);
-  bool canSetIndexLength(QListViewItem *, IndexFieldList::Iterator &);
-  void setIndexLength(QListViewItem *, IndexFieldList::Iterator &);
+  void insertListViewItem(Q3ListView *, const QString &);
+  bool canSetIndexLength(Q3ListViewItem *, IndexFieldList::Iterator &);
+  void setIndexLength(Q3ListViewItem *, IndexFieldList::Iterator &);
   QString getIndexFields(CIndex *index) const;
-  QDict<CIndex> indexDict;
-  QTable *fields;
+  Q3Dict<CIndex> indexDict;
+  Q3Table *fields;
   CMySQL *mysql;
   CMessagePanel *messagePanel;
   QLabel* TextLabel1;
@@ -298,10 +308,10 @@ private:
   QLabel* PixmapLabel2;
   QLabel* PixmapLabel3;
   QLabel* PixmapLabel4;
-  QListView* fieldsUsed;
-  QListView* availableFields;
-  QGridLayout* CTableIndexesLayout;
-  QGridLayout* indexTypesLayout;
+  Q3ListView* fieldsUsed;
+  Q3ListView* availableFields;
+  Q3GridLayout* CTableIndexesLayout;
+  Q3GridLayout* indexTypesLayout;
   QStringList deletedIndexes;
   bool isAlterTable;
 };
@@ -311,7 +321,7 @@ class CFieldProperties : public QWidget
   Q_OBJECT
     
 public:
-  CFieldProperties(QWidget* parent = 0, const char* name = 0, WFlags fl = 0);
+  CFieldProperties(QWidget* parent = 0, const char* name = 0, Qt::WFlags fl = 0);
   void resetLength(CTableWindowField *f, const QString &type);
   void setTableWindow(CTableWindow *w) { tableWindow = w; }
 
@@ -348,7 +358,7 @@ private:
   QCheckBox* Binary;
   QCheckBox* ZeroFill;
   QCheckBox* AutoIncrement;
-  QGridLayout* CFieldPropertiesLayout;
+  Q3GridLayout* CFieldPropertiesLayout;
   bool isNumberField(const QString &type);
   bool isCharField(const QString &type);
 };
@@ -391,10 +401,10 @@ private slots:
   void verticalHeaderReleased(int);
 
 private:
-  class MyTable : public QTable
+  class MyTable : public Q3Table
   {
   public:
-    MyTable(QWidget * parent = 0, const char * name = 0) : QTable(parent, name) {}
+    MyTable(QWidget * parent = 0, const char * name = 0) : Q3Table(parent, name) {}
     bool is_editing() { return isEditing(); }
     void finishEdit()
     {
@@ -420,7 +430,7 @@ private:
   CTableIndexes* indexesTab;
   CTblProperties* tablePropertiesTab;
   CAlterTableOptions * alterTableOptionsTab;
-  QGridLayout* CTableWindowLayout;
+  Q3GridLayout* CTableWindowLayout;
   CAction *tablePrimaryKeyAction;
   CAction *viewShowMessagesAction;
   CAction *fileReloadAction;

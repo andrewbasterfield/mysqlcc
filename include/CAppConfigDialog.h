@@ -20,24 +20,29 @@
 
 #include <stddef.h>
 #include <qvariant.h>
+//Added by qt3to4:
+#include <Q3HBoxLayout>
+#include <Q3GridLayout>
+#include <QLabel>
+#include <Q3VBoxLayout>
 #include "CConfigDialog.h"
 #include "CSqlEditorFont.h"
 
-class QVBoxLayout; 
-class QHBoxLayout; 
-class QGridLayout; 
+class Q3VBoxLayout; 
+class Q3HBoxLayout; 
+class Q3GridLayout; 
 class QCheckBox;
 class QComboBox;
 class QLabel;
 class QLineEdit;
 class QPushButton;
 class QSpinBox;
-class QListBox;
-class QListBoxItem;
+class Q3ListBox;
+class Q3ListBoxItem;
 class privateTabConfig;
-class QButtonGroup;
+class Q3ButtonGroup;
 class QRadioButton;
-class QListView;
+class Q3ListView;
 class CConfig;
 
 class CQueryConfigTab : public CConfigDialogTab
@@ -45,7 +50,7 @@ class CQueryConfigTab : public CConfigDialogTab
   Q_OBJECT
     
 public:
-  CQueryConfigTab (QWidget* parent = 0, const char* name = 0, WFlags fl = 0);
+  CQueryConfigTab (QWidget* parent = 0, const char* name = 0, Qt::WFlags fl = 0);
   void setDefaultValues(CConfig * conn = 0);
   bool save(CConfig *conn);
   bool needRestart() { return needrestart; }
@@ -53,17 +58,17 @@ public:
 private:  
   bool needrestart;
   bool tmp_sqldebug;
-  QButtonGroup* CommentsBox;
+  Q3ButtonGroup* CommentsBox;
   QRadioButton* hashComments;
   QRadioButton* dashComments;
   QRadioButton* cComments;
-  QButtonGroup* OpenTablesBox;
+  Q3ButtonGroup* OpenTablesBox;
   QRadioButton* onlySqlStatement;
   QRadioButton* allRecords;
   QCheckBox* enableSqlDebug;
-  QGridLayout* CQueryConfigTabLayout;
-  QGridLayout* CommentsBoxLayout;
-  QGridLayout* OpenTablesBoxLayout;
+  Q3GridLayout* CQueryConfigTabLayout;
+  Q3GridLayout* CommentsBoxLayout;
+  Q3GridLayout* OpenTablesBoxLayout;
 };
 
 class CSyntaxHighlightConfigTab : public CConfigDialogTab
@@ -71,7 +76,7 @@ class CSyntaxHighlightConfigTab : public CConfigDialogTab
   Q_OBJECT
     
 public:
-  CSyntaxHighlightConfigTab (QWidget* parent = 0, const char* name = 0, WFlags fl = 0);
+  CSyntaxHighlightConfigTab (QWidget* parent = 0, const char* name = 0, Qt::WFlags fl = 0);
   void setDefaultValues(CConfig * conn = 0);
   bool save(CConfig *conn);
 
@@ -90,9 +95,9 @@ private:
   void refreshPreview(const QFont & fnt, const QColor & clr);
   void setFontBoolValue(void (QFont::*member)(bool), bool value);  
   CSqlEditorFont *findItem(uint i);
-  QHBoxLayout* CSyntaxHighlightConfigTabLayout;
-  QGridLayout* Layout12;
-  QListBox* Sections;
+  Q3HBoxLayout* CSyntaxHighlightConfigTabLayout;
+  Q3GridLayout* Layout12;
+  Q3ListBox* Sections;
   QLineEdit* Preview;
   QCheckBox* Underline;
   QLabel* sizeLabel;
@@ -113,7 +118,7 @@ class CPluginsConfigTab : public CConfigDialogTab
   Q_OBJECT
     
 public:
-  CPluginsConfigTab (QWidget* parent = 0, const char* name = 0, WFlags fl = 0);
+  CPluginsConfigTab (QWidget* parent = 0, const char* name = 0, Qt::WFlags fl = 0);
   void setDefaultValues(CConfig * conn = 0);
   bool save(CConfig *conn);
   bool needRestart() { return needrestart; }
@@ -131,8 +136,8 @@ private:
   QLabel* pluginsPathLabel;
   QLineEdit* pluginsPath;
   QLabel* textLabel1;
-  QListView* pluginsList;
-  QGridLayout* CPluginsConfigTabLayout;
+  Q3ListView* pluginsList;
+  Q3GridLayout* CPluginsConfigTabLayout;
   bool needrestart;
 };
 
@@ -141,7 +146,7 @@ class CSqlEditorConfigTab : public CConfigDialogTab
   Q_OBJECT
     
 public:
-  CSqlEditorConfigTab (QWidget* parent = 0, const char* name = 0, WFlags fl = 0);
+  CSqlEditorConfigTab (QWidget* parent = 0, const char* name = 0, Qt::WFlags fl = 0);
   void setDefaultValues(CConfig * conn = 0);
   bool save(CConfig *conn);  
 
@@ -150,7 +155,7 @@ private slots:
   
 private:  
   void init();
-  QGridLayout* CSqlEditorConfigTabLayout;
+  Q3GridLayout* CSqlEditorConfigTabLayout;
   QCheckBox* Parentheses;
   QLabel* SyntaxFileLabel;
   QLineEdit* SyntaxFile;
@@ -164,7 +169,7 @@ class CGeneralAppConfigTab : public CConfigDialogTab
   Q_OBJECT
 
 public:
-  CGeneralAppConfigTab (QWidget* parent = 0, const char* name = 0, WFlags fl = 0); 
+  CGeneralAppConfigTab (QWidget* parent = 0, const char* name = 0, Qt::WFlags fl = 0); 
   void setDefaultValues(CConfig * conn = 0);
   bool save(CConfig *conn);
   bool needRestart() { return needrestart; }
@@ -204,7 +209,7 @@ private:
   QLabel* querySizeLabel;
   QSpinBox* querySize;
   QCheckBox* confirmCritical;
-  QGridLayout* CGeneralAppConfigTabLayout;
+  Q3GridLayout* CGeneralAppConfigTabLayout;
 };
 
 class CAppConfigDialog : public CConfigDialog

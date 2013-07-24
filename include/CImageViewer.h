@@ -19,17 +19,21 @@
 #define CIMAGEVIEWER_H
 
 #include "CFieldEditorWidget.h"
+//Added by qt3to4:
+#include <Q3PopupMenu>
+#include <Q3GridLayout>
+#include <QLabel>
 
 class CAction;
 class QAction;
-class QToolBar;
+class Q3ToolBar;
 class CSqlTableItem;
 class QLabel;
 class CMySQLServer;
 class QToolButton;
-class QPopupMenu;
+class Q3PopupMenu;
 class QMenuBar;
-class QGridLayout;
+class Q3GridLayout;
 
 class CImageViewer : public CFieldEditorWidget
 {
@@ -55,12 +59,12 @@ private:
   char *new_data;
   ulong new_data_len;
   bool has_modified;
-  QGridLayout* widgetLayout;
-  QPopupMenu *fileMenu;
-  QPopupMenu *editMenu;
+  Q3GridLayout* widgetLayout;
+  Q3PopupMenu *fileMenu;
+  Q3PopupMenu *editMenu;
   QMenuBar *menubar;
 
-  QToolBar *toolBar;
+  Q3ToolBar *toolBar;
 
   CAction* fileOpenAction;
   CAction* fileSaveAsAction;
@@ -68,7 +72,7 @@ private:
   CAction* editCopyAction;
   CAction* editScaleContentsAction;
   QToolButton *saveImageTypeButton;
-  QPopupMenu *saveImageTypeMenu;
+  Q3PopupMenu *saveImageTypeMenu;
 
   CSqlTableItem *tableItem;
   QString tmpFileName;

@@ -19,17 +19,17 @@
 #define CQUERYTABLEITEM_H
 
 #include <stddef.h>
-#include <qtable.h>
+#include <q3table.h>
 
 class CMySQLQuery;
 
 #define MAX_FIELD_DISPLAY 384
 
-class CSqlTableItem : public QTableItem
+class CSqlTableItem : public Q3TableItem
 {
 public:
-  CSqlTableItem (QTable * table, CMySQLQuery *q, ulong off_set, uint idx, EditType et=OnTyping);
-  CSqlTableItem (QTable * table, CMySQLQuery *q, uint idx, EditType et=OnTyping);
+  CSqlTableItem (Q3Table * table, CMySQLQuery *q, ulong off_set, uint idx, EditType et=OnTyping);
+  CSqlTableItem (Q3Table * table, CMySQLQuery *q, uint idx, EditType et=OnTyping);
 
   ~CSqlTableItem();
   bool isBinary() { return is_binary; }

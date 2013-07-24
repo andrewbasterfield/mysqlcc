@@ -30,7 +30,12 @@
 #include <stddef.h>
 #include <qregexp.h>
 #include <qlayout.h>
-#include <qwidgetstack.h>
+#include <q3widgetstack.h>
+//Added by qt3to4:
+#include <QCloseEvent>
+#include <Q3GridLayout>
+#include <Q3Frame>
+#include <Q3PopupMenu>
 #include "CMySQLServer.h"
 #include "CShowServerProperties.h"
 #include "CShowDatabaseGroupProperties.h"
@@ -41,7 +46,7 @@
 /*
 CConsoleWindow() is the main Console Window in mysqlcc.
 */
-CConsoleWindow::CConsoleWindow(QWidget * parent, bool appwindow, WFlags f)
+CConsoleWindow::CConsoleWindow(QWidget * parent, bool appwindow, Qt::WFlags f)
 : CMyWindow(parent, 0, appwindow, f)
 {
 #ifdef DEBUG
@@ -58,11 +63,11 @@ CConsoleWindow::CConsoleWindow(QWidget * parent, bool appwindow, WFlags f)
 
   messageWindow()->setCaption(tr("Message Panel"));
 
-  CConsoleWindowLayout = new QGridLayout( centralWidget(), 1, 1, 2, 2, "CConsoleWindowLayout"); 
+  CConsoleWindowLayout = new Q3GridLayout( centralWidget(), 1, 1, 2, 2, "CConsoleWindowLayout"); 
 
-  widgetstack = new QWidgetStack(centralWidget(), "widgetstack");
-  widgetstack->setFrameShape( QFrame::StyledPanel );
-  widgetstack->setFrameShadow( QFrame::Sunken );
+  widgetstack = new Q3WidgetStack(centralWidget(), "widgetstack");
+  widgetstack->setFrameShape( Q3Frame::StyledPanel );
+  widgetstack->setFrameShadow( Q3Frame::Sunken );
   CConsoleWindowLayout->addWidget(widgetstack, 0, 0);
 
   defaultwidget = new QWidget(widgetstack);
@@ -84,16 +89,16 @@ CConsoleWindow::CConsoleWindow(QWidget * parent, bool appwindow, WFlags f)
   dbListView = new CDatabaseListView(this, treepanelwindow, "DatabaseListView");
     
   treepanelwindow->setWidget(dbListView);
-  addDockWindow(treepanelwindow, DockLeft);
+  addDockWindow(treepanelwindow, Qt::DockLeft);
     
-  QPopupMenu *fileMenu = new QPopupMenu(this, "FileMenu");
+  Q3PopupMenu *fileMenu = new Q3PopupMenu(this, "FileMenu");
   menuBar()->insertItem(tr("&File"), fileMenu);
   sqldebugpanel = 0;
 
-  QPopupMenu *viewMenu = new QPopupMenu(this, "ViewMenu");
+  Q3PopupMenu *viewMenu = new Q3PopupMenu(this, "ViewMenu");
   connect(viewMenu, SIGNAL(aboutToShow()), this, SLOT(viewMenuAboutToShow()));
 
-  consoletoolbar = new QToolBar(this);
+  consoletoolbar = new Q3ToolBar(this);
   consoletoolbar->setLabel(tr("Console"));
 
   if (isApplicationWindow())
@@ -163,7 +168,7 @@ CConsoleWindow::CConsoleWindow(QWidget * parent, bool appwindow, WFlags f)
     
     new COptionsMenu(this, menuBar(), "OptionsMenu");
 
-    actionmenu = new QPopupMenu(this, "ActionMenu");
+    actionmenu = new Q3PopupMenu(this, "ActionMenu");
     action_menu_id = menuBar()->insertItem(tr("&Action"), actionmenu);
 #ifndef NO_MYSQLCC_PLUGINS
     new CPluginsMenu(this, menuBar(), "PluginsMenu");
@@ -179,7 +184,7 @@ CConsoleWindow::CConsoleWindow(QWidget * parent, bool appwindow, WFlags f)
     connect(fileCloseAction, SIGNAL(activated()), this, SLOT(close()));
     fileCloseAction->addTo(fileMenu);
     
-    actionmenu = new QPopupMenu(this, "ActionMenu");
+    actionmenu = new Q3PopupMenu(this, "ActionMenu");
     action_menu_id = menuBar()->insertItem(tr("&Action"), actionmenu);
     new CHotKeyEditorMenu(this, menuBar(), "HotKeyEditor");
     
@@ -397,18 +402,18 @@ void CConsoleWindow::closeEvent(QCloseEvent * e)
   }  
 }
 
-void CConsoleWindow::saveDockWindowSettings(QDockWindow *dw, const QString &c, CConfig *cfg)
+void CConsoleWindow::saveDockWindowSettings(Q3DockWindow *dw, const QString &c, CConfig *cfg)
 {
 #ifdef DEBUG
   qDebug("CConsoleWindow::saveDockWindowSettings()");
 #endif
   
-  Dock d = findDockWindow((CMyWindow *)qApp->mainWidget(), dw);
+  Qt::ToolBarDock d = findDockWindow((CMyWindow *)qApp->mainWidget(), dw);
   QString s;
   if ((int) d != 0)
   {
     int m = 0;
-    if ((d == DockTop) || (d == DockBottom))
+    if ((d == Qt::DockTop) || (d == Qt::DockBottom))
       m = dw->height();
     else
       m = dw->width();
@@ -432,7 +437,7 @@ void CConsoleWindow::saveSettings(CConfig *cfg)
   if (!isApplicationWindow() || !myApp()->saveWorkspace())
     return;
 
-  QListViewItemIterator it(databaseListView());
+  Q3ListViewItemIterator it(databaseListView());
   QString server;
   bool server_done = false;
   while (it.current() != 0)
@@ -484,7 +489,7 @@ void CConsoleWindow::saveWindowSettings()
   delete cfg;
 }
 
-bool CConsoleWindow::loadDockWindowSettings(bool r, QDockWindow *dw, const QString &c, CConfig *cfg)
+bool CConsoleWindow::loadDockWindowSettings(bool r, Q3DockWindow *dw, const QString &c, CConfig *cfg)
 {
 #ifdef DEBUG
   qDebug("CConsoleWindow::loadDockWindowSettings()");
@@ -499,12 +504,12 @@ bool CConsoleWindow::loadDockWindowSettings(bool r, QDockWindow *dw, const QStri
     {
       if (rx.cap(4) == "MainWindow")
       {
-        Dock d = (Dock) rx.cap(2).toInt();
+        Qt::ToolBarDock d = (Qt::ToolBarDock) rx.cap(2).toInt();
         if ((int) d == 0)
           d = Qt::DockLeft;
         ((CMyWindow *)qApp->mainWidget())->addDockWindow(dw, d);
         int m = rx.cap(3).toInt();
-        if (((d == DockTop) || (d == DockBottom)) && (m != 0))
+        if (((d == Qt::DockTop) || (d == Qt::DockBottom)) && (m != 0))
           dw->setFixedExtentHeight(m);
         else
           dw->setFixedExtentWidth(m);

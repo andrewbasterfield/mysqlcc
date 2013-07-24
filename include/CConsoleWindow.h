@@ -20,6 +20,10 @@
 
 #include "CMyWindow.h"
 #include "CToolBar.h"
+//Added by qt3to4:
+#include <Q3GridLayout>
+#include <Q3PopupMenu>
+#include <QCloseEvent>
 
 class CDockWindow;
 class CConfig;
@@ -27,16 +31,16 @@ class CDatabaseListView;
 class CDatabaseListViewItem;
 class CSqlDebugPanel;
 class CAction;
-class QGridLayout;
-class QWidgetStack;
-class QToolBar;
+class Q3GridLayout;
+class Q3WidgetStack;
+class Q3ToolBar;
 class CMySQLServer;
 
 class CConsoleWindow : public CMyWindow
 {
   Q_OBJECT
 public:
-  CConsoleWindow (QWidget * parent, bool appwindow = false, WFlags f = WDestructiveClose);
+  CConsoleWindow (QWidget * parent, bool appwindow = false, Qt::WFlags f = Qt::WDestructiveClose);
 
   void saveWindowSettings();
   bool loadWindowSettings();
@@ -46,11 +50,11 @@ public:
   CDockWindow * treePanelWindow() const { return treepanelwindow; }
 
   CSqlDebugPanel *sqlDebugPanel() const { return sqldebugpanel; }
-  QWidgetStack *widgetStack() const { return widgetstack; }
+  Q3WidgetStack *widgetStack() const { return widgetstack; }
   QWidget * defaultWidget() const { return defaultwidget; }
   void removeFromWidgetStack(int);
   CToolBar * itemToolBar() const { return itemtoolbar; }
-  QPopupMenu * actionMenu() { return actionmenu; }
+  Q3PopupMenu * actionMenu() { return actionmenu; }
   void setCursor ( const QCursor & );
 
 public slots:
@@ -71,14 +75,14 @@ protected:
 
 private:
   CToolBar * itemtoolbar;
-  QToolBar * consoletoolbar;
-  QGridLayout* CConsoleWindowLayout;
-  QWidgetStack * widgetstack;
+  Q3ToolBar * consoletoolbar;
+  Q3GridLayout* CConsoleWindowLayout;
+  Q3WidgetStack * widgetstack;
   QWidget * defaultwidget;
   CDockWindow *treepanelwindow;
   CDatabaseListView *dbListView;
   int action_menu_id;
-  QPopupMenu * actionmenu;
+  Q3PopupMenu * actionmenu;
   CDatabaseListViewItem *current_query_item;
   CSqlDebugPanel *sqldebugpanel;
   CAction *viewShowTreeAction;
@@ -86,8 +90,8 @@ private:
   CAction * fileQueryAction;
   void beforeClose();
   void closeEvent(QCloseEvent * e);
-  void saveDockWindowSettings(QDockWindow *dw, const QString &c, CConfig *cfg);
-  bool loadDockWindowSettings(bool r, QDockWindow *dw, const QString &c, CConfig *cfg);  
+  void saveDockWindowSettings(Q3DockWindow *dw, const QString &c, CConfig *cfg);
+  bool loadDockWindowSettings(bool r, Q3DockWindow *dw, const QString &c, CConfig *cfg);  
 };
 
 #endif

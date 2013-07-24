@@ -23,7 +23,10 @@
 #include <stddef.h>
 #include <qapplication.h>
 #include <qregexp.h>
-#include <qobjectlist.h>
+#include <qobject.h>
+//Added by qt3to4:
+#include <Q3TextStream>
+#include <QCloseEvent>
 
 #ifdef QT_OSX_BUILD
 #include <Carbon/Carbon.h>  
@@ -43,8 +46,8 @@
 CMyWindow is the base class for handling windows.  Basically, its main purpose is to provide functionality
 for loading & saving window sizes & coordenates.
 */
-CMyWindow::CMyWindow(QWidget * parent, const char * name, bool appwindow, WFlags f)
-: QMainWindow(parent, name, f), isapplicationwindow(appwindow) 
+CMyWindow::CMyWindow(QWidget * parent, const char * name, bool appwindow, Qt::WFlags f)
+: Q3MainWindow(parent, name, f), isapplicationwindow(appwindow) 
 {
 #ifdef DEBUG
   qDebug("CMyWindow::CMyWindow()");
@@ -72,11 +75,11 @@ void CMyWindow::enableMessageWindow(bool e)
   else
     if (e && messagewindow == 0)
     {
-      messagewindow = new CMessageWindow(QDockWindow::InDock, this, "MessagePanel");
+      messagewindow = new CMessageWindow(Q3DockWindow::InDock, this, "MessagePanel");
       messagepanel = new CMessagePanel(tr("Messages"));    
       messagewindow->addPanel(messagepanel);
       messagewindow->setFixedExtentHeight(90);
-      moveDockWindow(messagewindow, DockBottom);
+      moveDockWindow(messagewindow, Qt::DockBottom);
     }
 }
 
@@ -163,7 +166,7 @@ bool CMyWindow::loadWindowSettings()
   if (!s.isNull())  
   {
     s = charReplace(s, '|', "\n");
-    QTextStream ts( &s, IO_ReadOnly);
+    Q3TextStream ts( &s, QIODevice::ReadOnly);
     ts >> *this;    
   }
 
@@ -234,7 +237,7 @@ void CMyWindow::saveWindowSettings()
   saveSettings(cfg);
   cfg->writeEntry(name(), s);
   s = QString::null;
-  QTextStream ts( &s, IO_WriteOnly );
+  Q3TextStream ts( &s, QIODevice::WriteOnly );
   ts << *this;
   s = charReplace(s, '\n', "|");
   cfg->writeEntry("Window " + QString(name()), s);  
@@ -242,7 +245,7 @@ void CMyWindow::saveWindowSettings()
   delete cfg;  
 }
 
-Qt::Dock CMyWindow::findDockWindow(CMyWindow *wnd, QDockWindow *dockWnd)
+Qt::ToolBarDock CMyWindow::findDockWindow(CMyWindow *wnd, Q3DockWindow *dockWnd)
 {
 #ifdef DEBUG
   qDebug("static CMyWindow::findDockWindow()");
@@ -260,7 +263,7 @@ Qt::Dock CMyWindow::findDockWindow(CMyWindow *wnd, QDockWindow *dockWnd)
         if (wnd->bottomDock()->hasDockWindow(dockWnd))
           return Qt::DockBottom;
        else
-          return (Qt::Dock)0;
+          return (Qt::ToolBarDock)0;
 }
 
 CMyWindow::~CMyWindow()
@@ -409,18 +412,18 @@ void CMyWindow::autoPlace()
 
 void CMyWindow::setCaption(const QString &s)
 {
-  if (QMainWindow::caption() == s)
+  if (Q3MainWindow::caption() == s)
     return;
 
   if (myApp()->isMDI())
-    QMainWindow::setCaption(s);
+    Q3MainWindow::setCaption(s);
   else
   {
     QString app_name(SHORT_NAME);
     app_name += " - ";
     if (s.startsWith(app_name))
-      QMainWindow::setCaption(s);
+      Q3MainWindow::setCaption(s);
     else
-      QMainWindow::setCaption(app_name + s);
+      Q3MainWindow::setCaption(app_name + s);
   }
 }

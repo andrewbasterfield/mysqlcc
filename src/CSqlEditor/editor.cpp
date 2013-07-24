@@ -26,10 +26,12 @@
 #include "CApplication.h"
 #include <stddef.h>  
 #include <qfile.h>
-#include <qpopupmenu.h>
+#include <q3popupmenu.h>
 #include <qprinter.h>
-#include <qsimplerichtext.h>
-#include <qpaintdevicemetrics.h>
+#include <q3simplerichtext.h>
+#include <q3paintdevicemetrics.h>
+//Added by qt3to4:
+#include <Q3CString>
 #include <private/qrichtext_p.h>
 
 
@@ -44,23 +46,23 @@
 #endif
 
 Editor::Editor(QWidget *parent, const char *name)
-: QTextEdit(parent, name), hasError(false)
+: Q3TextEdit(parent, name), hasError(false)
 {
 #ifdef DEBUG
   qDebug("Editor::Editor()");
 #endif
 
   document()->setFormatter(new QTextFormatterBreakInWords);    
-  setHScrollBarMode(QScrollView::AlwaysOff);
-  setVScrollBarMode(QScrollView::AlwaysOn);
+  setHScrollBarMode(Q3ScrollView::AlwaysOff);
+  setVScrollBarMode(Q3ScrollView::AlwaysOn);
   document()->setUseFormatCollection(false);
   parenMatcher = new ParenMatcher;
   connect(this, SIGNAL(cursorPositionChanged(QTextCursor *)),
     this, SLOT(cursorPosChanged(QTextCursor *)));
   document()->addSelection(Error);
   document()->addSelection(Step);
-  document()->setSelectionColor(Error, red);
-  document()->setSelectionColor(Step, yellow);
+  document()->setSelectionColor(Error, Qt::red);
+  document()->setSelectionColor(Step, Qt::yellow);
   document()->setInvertSelectionText(Error, false);
   document()->setInvertSelectionText(Step, false);
   document()->addSelection(ParenMatcher::Match);
@@ -103,9 +105,9 @@ void Editor::load(const QString &fn)
 
   filename = fn;
   QFile f(filename);
-  if (!f.open(IO_ReadOnly))
+  if (!f.open(QIODevice::ReadOnly))
     return;
-  QCString txt;
+  Q3CString txt;
   txt.resize(f.size());
   f.readBlock(txt.data(), f.size());
   setText(txt);
@@ -193,7 +195,7 @@ void Editor::doChangeInterval()
 #endif
 
   emit intervalChanged();
-  QTextEdit::doChangeInterval();
+  Q3TextEdit::doChangeInterval();
 }
 
 void Editor::commentSelection()
@@ -259,18 +261,18 @@ void Editor::print()
     QPainter p(&printer);
     if(!p.isActive())
       return;
-    QPaintDeviceMetrics metrics(p.device());
+    Q3PaintDeviceMetrics metrics(p.device());
     int dpiy = metrics.logicalDpiY();
     int margin = (int) ((2/2.54)*dpiy);
     QRect body(margin, margin, metrics.width() - 2 * margin, metrics.height() - 2 * margin);
     QString t = text();
-    if (textFormat()== PlainText)
+    if (textFormat()== Qt::PlainText)
     {
       t = charReplace(t, '<', "&lt;");
       t = charReplace(t, '>', "&gt;");
     }
     t = charReplace(t, '\n', "<br>");
-    QSimpleRichText richText(t, myApp()->printerFont(), context(), styleSheet(), mimeSourceFactory(), body.height());
+    Q3SimpleRichText richText(t, myApp()->printerFont(), context(), styleSheet(), mimeSourceFactory(), body.height());
     richText.setWidth(&p, body.width());
 
     QRect view( body );

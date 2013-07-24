@@ -21,7 +21,7 @@
 /*
 This class shows the About Box in the "Help" menu item
 */
-CAboutBox::CAboutBox( QWidget* parent,  const char* name, bool modal, WFlags fl )
+CAboutBox::CAboutBox( QWidget* parent,  const char* name, bool modal, Qt::WFlags fl )
 : CInfoDialog( parent, name, modal, fl )
 {
 #ifdef DEBUG
@@ -31,7 +31,7 @@ CAboutBox::CAboutBox( QWidget* parent,  const char* name, bool modal, WFlags fl 
   if ( !name )
     setName( "CAboutBox" );
   setCaption(tr("About") + " " + APPLICATION);
-  aboutWidget = new QTextEdit( this, "infoWidget" );
+  aboutWidget = new Q3TextEdit( this, "infoWidget" );
   aboutWidget->setText(tr( "This program is free software; you can redistribute it and/or modify "
     "it under the terms of the GNU General Public License as published by "
     "the Free Software Foundation; either version 2 of the License, or "

@@ -23,6 +23,9 @@
 #include "panels.h"
 #include "CUserAdminItem.h"
 #include "CUserAdminWindow.h"
+//Added by qt3to4:
+#include <QPixmap>
+#include <QKeyEvent>
 
 #ifdef DEBUG_LEVEL
 #if DEBUG_LEVEL < 1
@@ -54,7 +57,7 @@ void CUserItem::activated()
   if (isBlocked())
     return;
 
-  ((CUserAdminItem *) QListViewItem::parent())->refreshWidget(false);
+  ((CUserAdminItem *) Q3ListViewItem::parent())->refreshWidget(false);
 }
 
 void CUserItem::processMenu(int res)
@@ -78,7 +81,7 @@ void CUserItem::processMenu(int res)
     case MENU_NEW:
     {
       CUserAdminWindow *p = new CUserAdminWindow(myApp()->workSpace(), mysql(), QString::null, QString::null, false);
-      connect(p, SIGNAL(do_refresh()), (CUserAdminItem *) QListViewItem::parent(), SLOT(refresh()));
+      connect(p, SIGNAL(do_refresh()), (CUserAdminItem *) Q3ListViewItem::parent(), SLOT(refresh()));
       myShowWindow(p);
     }
     break;
@@ -91,7 +94,7 @@ void CUserItem::processMenu(int res)
       else
       {
         CUserAdminWindow *p = new CUserAdminWindow(myApp()->workSpace(), mysql(), user_name, host_name, true);
-        connect(p, SIGNAL(do_refresh()), (CUserAdminItem *) QListViewItem::parent(), SLOT(refresh()));
+        connect(p, SIGNAL(do_refresh()), (CUserAdminItem *) Q3ListViewItem::parent(), SLOT(refresh()));
         myShowWindow(p);
       }
     }
@@ -117,7 +120,7 @@ void CUserItem::keyPressed(QKeyEvent * e)
   if (isBlocked())
     return;
 
-  if (e->key() == QListViewItem::Key_Delete)
+  if (e->key() == Qt::Key_Delete)
     processMenu(MENU_DELETE);
   else
     CDatabaseListViewItem::keyPressed(e);

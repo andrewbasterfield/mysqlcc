@@ -34,7 +34,7 @@
 #include "CTableFieldChooser.h"
 
 #include <stddef.h>
-#include <qaccel.h>
+#include <q3accel.h>
 #include <qtimer.h>
 #include <qsplitter.h>
 #include <qvariant.h>
@@ -44,14 +44,19 @@
 #include <qlabel.h>
 #include <qlayout.h>
 #include <qtooltip.h>
-#include <qwhatsthis.h>
+#include <q3whatsthis.h>
 #include <qcursor.h>
 #include <qtoolbutton.h>
 #include <qmenubar.h>
-#include <qpopupmenu.h>
-#include <qtoolbar.h>
+#include <q3popupmenu.h>
+#include <q3toolbar.h>
 #include <qstatusbar.h>
 #include <qmessagebox.h>
+//Added by qt3to4:
+#include <QContextMenuEvent>
+#include <QCloseEvent>
+#include <Q3GridLayout>
+#include <QCustomEvent>
 
 #define PROCESS_EVENT 35
 
@@ -64,8 +69,8 @@ CExplainQueryPanel::CExplainQueryPanel(QWidget * parent)
   enableProcessEvents(false);
 #endif
   verticalHeader()->hide();
-  setFocusStyle(QTable::FollowStyle);
-  setSelectionMode(QTable::Single);
+  setFocusStyle(Q3Table::FollowStyle);
+  setSelectionMode(Q3Table::Single);
   setLeftMargin(0);
   setCaption(tr("Explain Panel"));
   disconnect(SIGNAL(contextMenuRequested(int, int, const QPoint &)));
@@ -95,7 +100,7 @@ void CExplainQueryPanel::contextMenuEvent (QContextMenuEvent * e)
 {
   if (isBlocked())
     return;
-  QPopupMenu *menu = new QPopupMenu();
+  Q3PopupMenu *menu = new Q3PopupMenu();
   menu->insertItem(getPixmapIcon("copyIcon"), tr("&Copy"), MENU_COPY);
   int res = menu->exec(e->globalPos());
   delete menu;
@@ -146,8 +151,8 @@ CQuerySet::CQuerySet(CQueryWindow *p, uint id, int querytype, const QString &db,
   explain_query->setEmitMessages(false);
 
   query_editor = new CSqlEditor(my_parent->queryTab(), mysql_server, "query_editor");
-  query_editor->setWordWrap(QTextEdit::WidgetWidth);
-  query_editor->setWrapPolicy(QTextEdit::AtWhiteSpace);
+  query_editor->setWordWrap(Q3TextEdit::WidgetWidth);
+  query_editor->setWrapPolicy(Q3TextEdit::AtWhiteSpace);
 
   if (!db.isEmpty())
     setDefaultDatabase(db);
@@ -804,13 +809,13 @@ void CQuerySet::setBusy(bool b)
   QApplication::postEvent(this, event);
 }
 
-CQueryWindow::CQueryWindow(QWidget * parent, const QString &connection_name, int querytype, ushort display, const char *name, WFlags f)
+CQueryWindow::CQueryWindow(QWidget * parent, const QString &connection_name, int querytype, ushort display, const char *name, Qt::WFlags f)
 : CMyWindow(parent, name, false, f), tab_number(0)
 {  
   init(connection_name, querytype, display, name);
 }
 
-CQueryWindow::CQueryWindow(QWidget * parent, CMySQLServer *m, int querytype, ushort display, const char *name, WFlags f)
+CQueryWindow::CQueryWindow(QWidget * parent, CMySQLServer *m, int querytype, ushort display, const char *name, Qt::WFlags f)
 : CMyWindow(parent, name, false, f), tab_number(0)
 {
   init (m->connectionName(), querytype, display, name);
@@ -861,9 +866,9 @@ void CQueryWindow::init(const QString &connection_name, int querytype, ushort di
   statusBar()->addWidget(read_only_label, 0, true);
   
   setCentralWidget( new QWidget( this, "qt_central_widget" ) );
-  CQueryWindowLayout = new QGridLayout( centralWidget(), 1, 1, 4, 0, "CQueryWindowLayout"); 
+  CQueryWindowLayout = new Q3GridLayout( centralWidget(), 1, 1, 4, 0, "CQueryWindowLayout"); 
   
-  QSplitter* splitter = new QSplitter(QSplitter::Vertical, centralWidget());
+  QSplitter* splitter = new QSplitter(Qt::Vertical, centralWidget());
   
   query_tab = new CQueryWindowTab( splitter, "query_tab" );
   query_tab->setTabPosition( QTabWidget::Bottom );
@@ -882,11 +887,11 @@ void CQueryWindow::init(const QString &connection_name, int querytype, ushort di
   query_tab->setMinimumSize(10, 50);  
   results_tab->setMinimumSize(10, 50);
   
-  columns_window = new CTableFieldChooser(0, "CQueryTableColumnsWindow", QDockWindow::InDock);
+  columns_window = new CTableFieldChooser(0, "CQueryTableColumnsWindow", Q3DockWindow::InDock);
   columns_window->setCaption("[" + mysql()->connectionName() + "] " + tr("Query Columns"));
   
-  setDockEnabled(columns_window, DockRight, true);
-  moveDockWindow(columns_window, DockRight);
+  setDockEnabled(columns_window, Qt::DockRight, true);
+  moveDockWindow(columns_window, Qt::DockRight);
   
   sqldebugpanel = 0;
   
@@ -895,7 +900,7 @@ void CQueryWindow::init(const QString &connection_name, int querytype, ushort di
   fileOpenAction->setParentMenuText(tr("File"));
   connect(fileOpenAction, SIGNAL(activated()), this, SLOT(openFile()));  
 
-  saveTypesMenu = new QPopupMenu(this);
+  saveTypesMenu = new Q3PopupMenu(this);
 
   CAction *fileSaveToClipboardAction = new CAction(tr("Save to Clipboard"), getPixmapIcon("saveToClipboardIcon"),
     tr("Save to &Clipboard"), Qt::ALT + Qt::Key_S, this, "fileSaveToClipboardAction");
@@ -975,7 +980,7 @@ void CQueryWindow::init(const QString &connection_name, int querytype, ushort di
   editPasteAction->setParentMenuText(tr("Edit"));
   connect(editPasteAction, SIGNAL(activated()), this, SLOT(pasteQuery()));
 
-  viewQueryTabsMenu = new QPopupMenu(this);
+  viewQueryTabsMenu = new Q3PopupMenu(this);
 
   CAction *viewQueryTabFirstAction = new CAction(tr("First"), getPixmapIcon("firstIcon"), tr("&First"),
     Qt::CTRL + Qt::Key_1, this, "viewQueryTabFirstAction");
@@ -994,7 +999,7 @@ void CQueryWindow::init(const QString &connection_name, int querytype, ushort di
   viewQueryTabPreviousAction->setParentMenuText(tr("View | Query Tabs"));
   connect(viewQueryTabPreviousAction, SIGNAL(activated()), query_tab, SLOT(toggle()));
   viewQueryTabPreviousAction->addTo(viewQueryTabsMenu);
-  QAccel *queryTabPreviousAccel = new QAccel(this);
+  Q3Accel *queryTabPreviousAccel = new Q3Accel(this);
   queryTabPreviousAccel->connectItem(queryTabPreviousAccel->insertItem(Qt::CTRL + Qt::Key_Space), query_tab, SLOT(toggle()));
 
   CAction *viewQueryTabNextAction = new CAction(tr("Next"), getPixmapIcon("nextIcon"), tr("&Next"),
@@ -1009,7 +1014,7 @@ void CQueryWindow::init(const QString &connection_name, int querytype, ushort di
   connect(viewQueryTabLastAction, SIGNAL(activated()), query_tab, SLOT(last()));
   viewQueryTabLastAction->addTo(viewQueryTabsMenu);
 
-  viewResultTabsMenu = new QPopupMenu(this);
+  viewResultTabsMenu = new Q3PopupMenu(this);
 
   CAction *viewResultTabFirstAction = new CAction(tr("First"), getPixmapIcon("firstIcon"), tr("&First"),
     Qt::CTRL + Qt::Key_F7, this, "viewResultTabFirstAction");
@@ -1070,8 +1075,8 @@ void CQueryWindow::init(const QString &connection_name, int querytype, ushort di
     tr("&Execute"), Qt::CTRL + Qt::Key_E, this, "queryExecuteAction");
   queryExecuteAction->setParentMenuText(tr("Query"));
   connect(queryExecuteAction, SIGNAL(activated()), this, SLOT(executeQuery()));
-  QAccel *a = new QAccel(this);
-  a->connectItem(a->insertItem(Qt::CTRL + Key_Return), this, SLOT(executeQuery()));
+  Q3Accel *a = new Q3Accel(this);
+  a->connectItem(a->insertItem(Qt::CTRL + Qt::Key_Return), this, SLOT(executeQuery()));
   
   queryCancelAction = new CAction(tr("Cancel Execution and Clear Results"), getPixmapIcon("cancelQueryIcon"),
     tr("&Cancel"), Qt::CTRL + Qt::Key_Escape, this, "queryCancelAction");
@@ -1082,14 +1087,14 @@ void CQueryWindow::init(const QString &connection_name, int querytype, ushort di
     tr("&Insert Record"), Qt::CTRL + Qt::Key_I, this, "queryInsertRecordAction");
   queryInsertRecordAction->setParentMenuText(tr("Query"));
   connect(queryInsertRecordAction, SIGNAL(activated()), this, SLOT(insertRecord()));
-  QAccel *insertRecordAccel = new QAccel(this);
-  insertRecordAccel->connectItem(insertRecordAccel->insertItem(Key_Insert), this, SLOT(insertRecord()));
+  Q3Accel *insertRecordAccel = new Q3Accel(this);
+  insertRecordAccel->connectItem(insertRecordAccel->insertItem(Qt::Key_Insert), this, SLOT(insertRecord()));
   
   queryDeleteRecordAction = new CAction(tr("Delete Record"), getPixmapIcon("deleteRowIcon"),
     tr("&Delete Record"), Qt::CTRL + Qt::Key_D, this, "queryDeleteRowAction");
   queryDeleteRecordAction->setParentMenuText(tr("Query"));
   connect(queryDeleteRecordAction, SIGNAL(activated()), this, SLOT(deleteRecord()));
-  QAccel *deleteRecordAccel = new QAccel(this);
+  Q3Accel *deleteRecordAccel = new Q3Accel(this);
   deleteRecordAccel->connectItem(deleteRecordAccel->insertItem(Qt::Key_Delete), this, SLOT(deleteRecord()));
   
   optionsQueryWindowAction = new CAction(tr("General options for the Query Window"),
@@ -1103,25 +1108,25 @@ void CQueryWindow::init(const QString &connection_name, int querytype, ushort di
   connect(optionsGeneralAction, SIGNAL(activated()), this, SLOT(generalOptions()));
   
   
-  QPopupMenu * fileMenu = new QPopupMenu(this, "fileMenu");
+  Q3PopupMenu * fileMenu = new Q3PopupMenu(this, "fileMenu");
   menuBar()->insertItem(tr("&File"), fileMenu);
   
-  QPopupMenu * editMenu = new QPopupMenu(this, "editMenu");
+  Q3PopupMenu * editMenu = new Q3PopupMenu(this, "editMenu");
   menuBar()->insertItem(tr("&Edit"), editMenu);
   
-  QPopupMenu * viewMenu = new QPopupMenu(this, "viewMenu");
+  Q3PopupMenu * viewMenu = new Q3PopupMenu(this, "viewMenu");
   connect(viewMenu, SIGNAL(aboutToShow()), this, SLOT(viewMenuAboutToShow()));
   menuBar()->insertItem(tr("&View"), viewMenu);
   
-  queryMenu = new QPopupMenu(this, "queryMenu");
+  queryMenu = new Q3PopupMenu(this, "queryMenu");
   menuBar()->insertItem(tr("&Query"), queryMenu);
   
-  QPopupMenu * optionsMenu = new QPopupMenu(this, "optionsMenu");
+  Q3PopupMenu * optionsMenu = new Q3PopupMenu(this, "optionsMenu");
   menuBar()->insertItem(tr("&Options"), optionsMenu);
   
-  QToolBar * fileToolBar = new QToolBar(tr("File Bar"), this);
+  Q3ToolBar * fileToolBar = new Q3ToolBar(tr("File Bar"), this);
   
-  queryTypesMenu = new QPopupMenu(this, "queryTypesMenu");
+  queryTypesMenu = new Q3PopupMenu(this, "queryTypesMenu");
   
   queryTypesMenu->insertItem(getPixmapIcon("selectQueryIcon"), tr("Select Query"), 1);
   queryTypesMenu->insertItem(getPixmapIcon("updateQueryIcon"), tr("Update Query"), 2);
@@ -1163,7 +1168,7 @@ void CQueryWindow::init(const QString &connection_name, int querytype, ushort di
   fileMenu->insertSeparator();
   fileCloseAction->addTo(fileMenu);
   
-  QToolBar * editToolBar = new QToolBar(tr("Edit Bar"), this);
+  Q3ToolBar * editToolBar = new Q3ToolBar(tr("Edit Bar"), this);
 
   editEraseAction->addTo(editMenu);
   editEraseAction->addTo(editToolBar);
@@ -1182,7 +1187,7 @@ void CQueryWindow::init(const QString &connection_name, int querytype, ushort di
   editPasteAction->addTo(editMenu);
   editPasteAction->addTo(editToolBar);
   
-  QToolBar * viewToolBar = new QToolBar(tr("View Bar"), this);
+  Q3ToolBar * viewToolBar = new Q3ToolBar(tr("View Bar"), this);
 
   viewMenu->insertItem(tr("Query Tabs"), viewQueryTabsMenu);
   viewMenu->insertItem(tr("Result Tabs"), viewResultTabsMenu);
@@ -1199,7 +1204,7 @@ void CQueryWindow::init(const QString &connection_name, int querytype, ushort di
   viewMenu->insertSeparator();
   viewShowMessagesAction->addTo(viewMenu);
   
-  QToolBar * queryToolBar = new QToolBar(tr("Query Bar"), this);
+  Q3ToolBar * queryToolBar = new Q3ToolBar(tr("Query Bar"), this);
   queryExecuteAction->addTo(queryMenu);
   queryExecuteAction->addTo(queryToolBar);
   queryCancelAction->addTo(queryMenu);
@@ -1590,7 +1595,7 @@ void CQueryWindow::deleteRecord()
     CQuerySet *q = currentQuerySet();
     if (q)
       if (q->queryEditor()->hasFocus())
-        q->queryEditor()->doKeyboardAction(QTextEdit::ActionDelete);
+        q->queryEditor()->doKeyboardAction(Q3TextEdit::ActionDelete);
   }
 }
 
@@ -1748,7 +1753,7 @@ void CQueryWindow::resultsTabChanged(QWidget *w)
   if (q->resultsTable() == w)
   {
     read_only_label->setEnabled(q->resultsTable()->isReadOnly());
-    columnsWindow()->setTable((QTable *) q->resultsTable());
+    columnsWindow()->setTable((Q3Table *) q->resultsTable());
     explain_panel->setData(q->explainRows(), q->explainCols(), q->explainData());
     messageWindow()->setTabEnabled(explain_panel, q->explainCols() > 0 && !q->explainData().isEmpty());
   }
@@ -1991,7 +1996,7 @@ void CQueryWindow::deleteQuery()
   }
 }
 
-CQueryWindowTab::CQueryWindowTab(QWidget * parent, const char * name, WFlags f)
+CQueryWindowTab::CQueryWindowTab(QWidget * parent, const char * name, Qt::WFlags f)
 : QTabWidget(parent, name, f), tab_toggle(false)
 {
   last_tab_idx = 0;

@@ -22,21 +22,25 @@
 #include <qvariant.h>
 #include <qwidget.h>
 #include <qlabel.h>
-#include <qlistview.h>
+#include <q3listview.h>
 #include <qlayout.h>
 #include <qtooltip.h>
-#include <qwhatsthis.h>
-#include <qheader.h>
-#include <qpopupmenu.h>
+#include <q3whatsthis.h>
+#include <q3header.h>
+#include <q3popupmenu.h>
 #include <qpixmap.h>
 #include <qaction.h>
-#include <qdict.h>
+#include <q3dict.h>
+//Added by qt3to4:
+#include <Q3VBoxLayout>
+#include <Q3GridLayout>
+#include <Q3HBoxLayout>
 
-class QVBoxLayout; 
-class QHBoxLayout; 
-class QGridLayout; 
+class Q3VBoxLayout; 
+class Q3HBoxLayout; 
+class Q3GridLayout; 
 class QLabel;
-class QListView;
+class Q3ListView;
 class CMySQLServer;
 
 class CProperties : public QWidget
@@ -49,13 +53,13 @@ public:
   virtual QString getSaveTitle();
   void setSaveTitle(const QString &title);
   void setMySQL(CMySQLServer *m) { p_mysql = m; }
-  void saveData(QDict<QString> *data);
-  void loadData(const QDict<QString> &data);
+  void saveData(Q3Dict<QString> *data);
+  void loadData(const Q3Dict<QString> &data);
   void setTitle(const QString &s);
   CMySQLServer *mysql() const { return p_mysql; }
 
 public slots:
-  void RightButtonClicked( QListViewItem *, const QPoint & pos, int);
+  void RightButtonClicked( Q3ListViewItem *, const QPoint & pos, int);
   void refresh();
   void save();
   
@@ -64,11 +68,11 @@ protected slots:
 
 protected:  
   void insertItem(const QString & property, const QString & value);  
-  QListView * details;  
+  Q3ListView * details;  
 
 private:
   QLabel* title;
-  QVBoxLayout* CPropertiesLayout;
+  Q3VBoxLayout* CPropertiesLayout;
   QAction* refreshAction;
   QString tmpFileName;
   bool hasSaveTitle;

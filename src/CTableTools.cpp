@@ -19,11 +19,16 @@
 #include <stddef.h>  
 #include <qimage.h>
 #include <qlayout.h>
-#include <qptrlist.h> 
-#include <qgroupbox.h>
+#include <q3ptrlist.h> 
+#include <q3groupbox.h>
 #include <qcheckbox.h>
-#include <qpopupmenu.h>
+#include <q3popupmenu.h>
 #include <qpushbutton.h>
+//Added by qt3to4:
+#include <Q3HBoxLayout>
+#include <Q3GridLayout>
+#include <Q3Frame>
+#include <Q3VBoxLayout>
 #include "CMySQLServer.h"
 #include "CMySQLQuery.h"
 #include "CTablesListBox.h"
@@ -31,7 +36,7 @@
 #include "globals.h"
 #include "config.h"
 
-CTableTools::CTableTools(QWidget* parent, CMySQLServer *m, const QString dbname, int type, QPtrList<ToolOptions> *options, const QString &tableName, const char* name)
+CTableTools::CTableTools(QWidget* parent, CMySQLServer *m, const QString dbname, int type, Q3PtrList<ToolOptions> *options, const QString &tableName, const char* name)
 :CMyWindow(parent, name)
 {
 #ifdef DEBUG
@@ -45,13 +50,13 @@ CTableTools::CTableTools(QWidget* parent, CMySQLServer *m, const QString dbname,
   setIcon(getPixmapIcon("applicationIcon"));
   
   setCentralWidget(new QWidget(this, "qt_central_widget"));
-  CTableToolsLayout = new QVBoxLayout(centralWidget()); 
+  CTableToolsLayout = new Q3VBoxLayout(centralWidget()); 
   CTableToolsLayout->setSpacing(2);
   CTableToolsLayout->setMargin(2);
   
-  m_pTopFrame = new QFrame(centralWidget(), "m_pTopFrame");
-  m_pTopFrame->setFrameShape(QFrame::Box);
-  m_pTopFrame->setFrameShadow(QFrame::Sunken);
+  m_pTopFrame = new Q3Frame(centralWidget(), "m_pTopFrame");
+  m_pTopFrame->setFrameShape(Q3Frame::Box);
+  m_pTopFrame->setFrameShadow(Q3Frame::Sunken);
   mysql = m;
   database_name = dbname;
   m_tableName = tableName;
@@ -61,7 +66,7 @@ CTableTools::CTableTools(QWidget* parent, CMySQLServer *m, const QString dbname,
   create();  
   CTableToolsLayout->addWidget(m_pTopFrame);
     
-  Layout14 = new QHBoxLayout();
+  Layout14 = new Q3HBoxLayout();
   
   Layout14->setSpacing(6);
   Layout14->setMargin(0);  
@@ -134,7 +139,7 @@ void CTableTools::create()
   qDebug("CTableTools::create()");
 #endif
   
-  m_pTopFrameLayout = new QVBoxLayout(m_pTopFrame);
+  m_pTopFrameLayout = new Q3VBoxLayout(m_pTopFrame);
   m_pTopFrameLayout->setSpacing(4);
   m_pTopFrameLayout->setMargin(8);  
   tablesListBox = new CTablesListBox(m_pTopFrame, mysql, database_name, m_tableName);
@@ -142,17 +147,17 @@ void CTableTools::create()
   
   if (!Options->isEmpty())
   {
-    pOptions = new QGroupBox(m_pTopFrame, "pOptions");
+    pOptions = new Q3GroupBox(m_pTopFrame, "pOptions");
     pOptions->setTitle(tr("Options"));
     pOptions->setColumnLayout(0, Qt::Vertical);
     pOptions->layout()->setSpacing(0);
     pOptions->layout()->setMargin(4);
     
-    pOptionsLayout = new QGridLayout(pOptions->layout());
+    pOptionsLayout = new Q3GridLayout(pOptions->layout());
     pOptionsLayout->setAlignment(Qt::AlignTop);
     pOptionsLayout->setSpacing(2);
     pOptionsLayout->setMargin(2);    
-    Layout = new QGridLayout;    
+    Layout = new Q3GridLayout;    
     Layout->setSpacing(6);
     Layout->setMargin(0);
     
@@ -180,7 +185,7 @@ void CTableTools::processMenu(CMySQLServer *m, int res, const QString dbname, co
   qDebug("static CTableTools::processMenu(CMySQLServer *, %d, '%s', '%s')", res, debug_string(dbname), debug_string(tableName));
 #endif
 
-  QPtrList<ToolOptions> *options = new QPtrList<ToolOptions>;
+  Q3PtrList<ToolOptions> *options = new Q3PtrList<ToolOptions>;
   Q_CHECK_PTR(options);
   switch (res)  //SETS OPTIONS.  Currently, only CHECK and REPAIR have options.
   {
@@ -318,13 +323,13 @@ void CTableTools::execute()
   }
 }
 
-QPopupMenu * CTableTools::tableToolsMenu()
+Q3PopupMenu * CTableTools::tableToolsMenu()
 {
 #ifdef DEBUG
   qDebug("static CTableTools::tableToolsMenu()");
 #endif
 
-  QPopupMenu *p_toolsMenu = new QPopupMenu();
+  Q3PopupMenu *p_toolsMenu = new Q3PopupMenu();
   p_toolsMenu->insertItem(tr("Analyze Table"), ANALYZE_TABLE);
   p_toolsMenu->insertItem(tr("Check Table"), CHECK_TABLE);
   p_toolsMenu->insertItem(tr("Optimize Table"), OPTIMIZE_TABLE);
@@ -349,9 +354,9 @@ void CTableTools::init()
   qDebug("CTableTools::init()");
 #endif
 
-  QWhatsThis::add(this, tr("Select one or more Tables."));
-  QWhatsThis::add(m_pExecutePushButton,tr("Click to execute."));
-  QWhatsThis::add(m_pCancelPushButton, tr("Close this Dialog without executing.")); 
+  Q3WhatsThis::add(this, tr("Select one or more Tables."));
+  Q3WhatsThis::add(m_pExecutePushButton,tr("Click to execute."));
+  Q3WhatsThis::add(m_pCancelPushButton, tr("Close this Dialog without executing.")); 
   connect(m_pCancelPushButton, SIGNAL(clicked()), this, SLOT(close()));
   connect(m_pExecutePushButton, SIGNAL(clicked()), this, SLOT(execute()));
   connect(PushButton4, SIGNAL(clicked()), this, SLOT(whatsThis()));

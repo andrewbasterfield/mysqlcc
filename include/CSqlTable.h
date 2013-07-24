@@ -60,7 +60,7 @@ protected:
   void endEdit(int row, int col, bool accept, bool replace);
   QWidget * beginEdit(int row, int col, bool replace);
   QWidget * createEditor(int row, int col, bool initFromCell) const;
-  void copy_data_func(QString *cpy, CMySQLQuery *qry, QTableSelection *sel, QMap<uint, ulong> *max_length_map);
+  void copy_data_func(QString *cpy, CMySQLQuery *qry, Q3TableSelection *sel, QMap<uint, ulong> *max_length_map);
   QString copy_current_selection_func(int row, int col);
 
 protected slots:

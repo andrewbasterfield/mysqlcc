@@ -22,7 +22,7 @@
 #include <qfont.h>
 #include <qcolor.h>
 #include <qstring.h>
-#include <qintdict.h>
+#include <q3intdict.h>
 
 class CConfig;
 
@@ -64,13 +64,13 @@ public:
   QFont dFont;  //default fonts
   QColor dColor;
   
-  static QIntDict<CSqlEditorFont> * sqlEditorStyles() { return &sqleditorstyles; }  
+  static Q3IntDict<CSqlEditorFont> * sqlEditorStyles() { return &sqleditorstyles; }  
 
 private:
   QString realname;
   QString displayname;
   highlight_type highlighttype;
-  static QIntDict<CSqlEditorFont> sqleditorstyles;
+  static Q3IntDict<CSqlEditorFont> sqleditorstyles;
 
 };
 

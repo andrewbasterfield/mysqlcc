@@ -20,7 +20,9 @@
 
 #include "CDatabaseListViewItem.h"
 #include <stddef.h>
-#include <qdict.h>
+#include <q3dict.h>
+//Added by qt3to4:
+#include <Q3PopupMenu>
 
 class CServerAdministrationItem : public CDatabaseListViewItem
 {
@@ -40,8 +42,8 @@ private:
   void init();
   void initMenuItems();
   void refreshWidget(bool b);
-  QPopupMenu * flush_menu;
-  QDict<QString> widgetData;
+  Q3PopupMenu * flush_menu;
+  Q3Dict<QString> widgetData;
 };
 
 #endif

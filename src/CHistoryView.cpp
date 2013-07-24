@@ -16,7 +16,7 @@
   MA 02111-1307, USA 
 */
 #include <stddef.h>
-#include <qtextstream.h>
+#include <q3textstream.h>
 #include <qfile.h>
 #include <qdir.h>
 #include <qmessagebox.h>
@@ -136,7 +136,7 @@ void CHistoryView::load()
   if (size > 0)
   {    
     QFile f_strm(historyFile());
-    if (f_strm.open(IO_ReadOnly) && size > 0)
+    if (f_strm.open(QIODevice::ReadOnly) && size > 0)
     {
       if (!historyList.empty())
         historyList.clear();
@@ -230,12 +230,12 @@ void CHistoryView::write()
   if (historyList.empty())
     return;
   QFile file(historyFile());
-  if (!file.open( IO_WriteOnly ))
+  if (!file.open( QIODevice::WriteOnly ))
   {    
     QMessageBox::critical(0, qApp->translate("CHistoryView", "Error"), qApp->translate("CHistoryView", "An error occurred while saving the history list."));
     return;
   }    
-  QTextStream ts( &file );
+  Q3TextStream ts( &file );
   QString line;
   for ( QStringList::Iterator it = historyList.begin(); it != historyList.end(); ++it )
   {

@@ -20,9 +20,12 @@
 
 #include "CDatabaseListViewItem.h"
 #include <stddef.h>
-#include <qdict.h>
+#include <q3dict.h>
 #include <qtoolbutton.h>
-#include <qtoolbar.h>
+#include <q3toolbar.h>
+//Added by qt3to4:
+#include <QKeyEvent>
+#include <QPixmap>
 
 class CServerItem : public CDatabaseListViewItem
 {
@@ -51,7 +54,7 @@ private:
   QPixmap deleteIcon;
   QPixmap newWindowIcon;
   void refreshWidget(bool b);
-  QDict<QString> widgetData;
+  Q3Dict<QString> widgetData;
 };
 
 #endif

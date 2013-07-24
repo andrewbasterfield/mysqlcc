@@ -17,7 +17,7 @@
 */
 #include "CConfig.h"
 #include <stddef.h>
-#include <qtextstream.h> 
+#include <q3textstream.h> 
 #include <qdir.h>
 #include <qstringlist.h>
 #include <qfile.h>
@@ -153,9 +153,9 @@ bool CConfig::reset()
 #endif
   
   QFile f_strm(absoluteConfigFileName);
-  if (f_strm.open(IO_ReadOnly))
+  if (f_strm.open(QIODevice::ReadOnly))
   {
-    QTextStream t_strm(&f_strm);
+    Q3TextStream t_strm(&f_strm);
     entries.clear();
     QString str;
     QString key;
@@ -191,9 +191,9 @@ bool CConfig::save()
 #endif
 
   QFile f_strm(absoluteConfigFileName);
-  if (f_strm.open(IO_WriteOnly))
+  if (f_strm.open(QIODevice::WriteOnly))
   {
-    QTextStream t_strm(&f_strm);
+    Q3TextStream t_strm(&f_strm);
     for (QMap<QString, QString>::Iterator it = entries.begin(); it != entries.end(); ++it)
       t_strm << it.key() << "\t=\t" << it.data() << "\r\n";
     f_strm.close();

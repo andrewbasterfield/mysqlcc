@@ -24,10 +24,10 @@
 #include <qpixmap.h>
 #include <qapplication.h>
 #include <qworkspace.h>
-#include <qvaluelist.h>
+#include <q3valuelist.h>
 #include <qtabwidget.h>
 #include <qtabwidget.h>
-#include <qmainwindow.h>
+#include <q3mainwindow.h>
 #include "CMySQL.h"
 
 namespace Plugin
@@ -38,7 +38,7 @@ namespace Plugin
 
   enum mysqlcc_plugin_type { NO_TYPE, WIDGET, NO_WIDGET, QUERY_PARSER };
 
-typedef QValueList<mysqlcc_plugin_place> CPluginPlaceList;
+typedef Q3ValueList<mysqlcc_plugin_place> CPluginPlaceList;
 }
 
 
@@ -175,7 +175,7 @@ public:
 
   virtual QWidget * createWidgetPlugin(QWidget *, const char *) { return 0; }  //Used in WIDGET Plugins
 
-  void setPluginWindow(QMainWindow *w) { plugin_window = w; }
+  void setPluginWindow(Q3MainWindow *w) { plugin_window = w; }
   void setHasMessagePanel(bool b) { has_message_panel = b; }
   void setMessagePanelVisible(bool b) { message_panel_visible = b; }
   void setMessageTabWidget(QTabWidget *w) { messages_tab_widget = w; }
@@ -187,7 +187,7 @@ signals:
   void enable_hotkey_editor();
 
 protected:
-  QMainWindow *pluginWindow() const { return plugin_window; }
+  Q3MainWindow *pluginWindow() const { return plugin_window; }
   bool hasMessagePanel() const { return has_message_panel; }  
   void messagePanel() { emit message_panel(); }
   void showMessagePanel() { emit show_message_panel(); }
@@ -197,7 +197,7 @@ protected:
   QTabWidget * messagesTabWidget() const { return messages_tab_widget; }
   
 private:
-  QMainWindow *plugin_window;
+  Q3MainWindow *plugin_window;
   bool has_message_panel;
   bool message_panel_visible;
   QTabWidget *messages_tab_widget;

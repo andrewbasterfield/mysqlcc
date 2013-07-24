@@ -19,12 +19,18 @@
 #define CFIELDEDITOR_H
 
 #include "CMyWindow.h"
+//Added by qt3to4:
+#include <Q3VBoxLayout>
+#include <Q3Frame>
+#include <Q3GridLayout>
+#include <QCloseEvent>
+#include <Q3HBoxLayout>
 
 class CDefaultTableItem;
-class QVBoxLayout; 
-class QHBoxLayout; 
-class QGridLayout; 
-class QFrame;
+class Q3VBoxLayout; 
+class Q3HBoxLayout; 
+class Q3GridLayout; 
+class Q3Frame;
 class QPushButton;
 class CFieldEditorWidget;
 
@@ -52,9 +58,9 @@ private slots:
 
 private:
   void closeEvent(QCloseEvent * e);
-  QGridLayout* CFieldEditorWindowLayout;
-  QHBoxLayout* Frame5Layout;
-  QFrame* Frame5;
+  Q3GridLayout* CFieldEditorWindowLayout;
+  Q3HBoxLayout* Frame5Layout;
+  Q3Frame* Frame5;
   QPushButton* applyPushButton;
   QPushButton* cancelPushButton;
   bool close_on_apply;

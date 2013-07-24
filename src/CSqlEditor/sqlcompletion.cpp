@@ -21,8 +21,10 @@
 #include <stddef.h>
 #include <qobject.h>
 #include <qmetaobject.h>
-#include <qobjectlist.h>
+#include <qobject.h>
 #include <qregexp.h>
+//Added by qt3to4:
+#include <Q3ValueList>
 
 #include <private/qrichtext_p.h>
 
@@ -114,7 +116,7 @@ void SqlEditorCompletion::clear()
     sqlCompletionMap.clear();
 }
 
-QValueList<CompletionEntry> SqlEditorCompletion::completionList( const QString &s, QTextDocument *) const
+Q3ValueList<CompletionEntry> SqlEditorCompletion::completionList( const QString &s, QTextDocument *) const
 {
 #ifdef DEBUG
   qDebug("SqlEditorCompletion::completionList()");
@@ -124,9 +126,9 @@ QValueList<CompletionEntry> SqlEditorCompletion::completionList( const QString &
 
   QMap<QChar, SqlCompletionEntryList>::ConstIterator it = sqlCompletionMap.find( key );
   if ( it == sqlCompletionMap.end() )
-    return QValueList<CompletionEntry>();
+    return Q3ValueList<CompletionEntry>();
   SqlCompletionEntryList::ConstIterator it2 = (*it).begin();
-  QValueList<CompletionEntry> lst;
+  Q3ValueList<CompletionEntry> lst;
   int len = s.length();
   for ( ; it2 != (*it).end(); ++it2 )
   {

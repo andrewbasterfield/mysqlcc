@@ -22,6 +22,10 @@
 #include <stddef.h>  
 #include <qclipboard.h>
 #include <qdatetime.h>
+//Added by qt3to4:
+#include <Q3VBoxLayout>
+#include <QLabel>
+#include <Q3PopupMenu>
 
 #ifdef DEBUG_LEVEL
 #if DEBUG_LEVEL < 2
@@ -43,18 +47,18 @@ CProperties::CProperties(QWidget* parent,  CMySQLServer *m, const char *name)
   if (!name)
     setName("CProperties");
   tmpFileName = QString::null;
-  CPropertiesLayout = new QVBoxLayout( this, 0, 1, "CPropertiesLayout"); 
+  CPropertiesLayout = new Q3VBoxLayout( this, 0, 1, "CPropertiesLayout"); 
   title = new QLabel( this, "connectionName" );
   QFont title_font(title->font());
   title_font.setPointSize(9);  
   title->setFont(title_font);
   title->setMinimumSize(0, 20);
   CPropertiesLayout->addWidget(title);
-  details = new QListView(this, "details");
+  details = new Q3ListView(this, "details");
 
-  details->setFrameShape(QListView::Box);
+  details->setFrameShape(Q3ListView::Box);
   details->setLineWidth(1);
-  details->setSelectionMode(QListView::NoSelection);
+  details->setSelectionMode(Q3ListView::NoSelection);
   details->setShowSortIndicator(true);
   details->setShowToolTips(false);
   details->header()->setClickEnabled(true, 0);
@@ -64,11 +68,11 @@ CProperties::CProperties(QWidget* parent,  CMySQLServer *m, const char *name)
   
   refreshAction = new QAction(this, "refreshAction" );
   refreshAction->setText(tr("Refresh"));
-  refreshAction->setIconSet( QIconSet(getPixmapIcon("refreshIcon")) );
+  refreshAction->setIconSet( QIcon(getPixmapIcon("refreshIcon")) );
   refreshAction->setMenuText(tr("&Refresh"));
   refreshAction->setAccel( 0 );
   
-  connect(details, SIGNAL(contextMenuRequested(QListViewItem *, const QPoint &, int)), this, SLOT(RightButtonClicked( QListViewItem *, const QPoint &, int )));
+  connect(details, SIGNAL(contextMenuRequested(Q3ListViewItem *, const QPoint &, int)), this, SLOT(RightButtonClicked( Q3ListViewItem *, const QPoint &, int )));
   
   CPropertiesLayout->addWidget(details);
   p_mysql = m;
@@ -120,7 +124,7 @@ QString CProperties::getSaveContents()
   qDebug("CProperties::getSaveContents()");
 #endif
 
-  QListViewItemIterator it(details);
+  Q3ListViewItemIterator it(details);
   QString contents = getSaveTitle();
   for (int i = 0; i < details->columns(); i++)
     contents += mysql()->fieldEncloser(true) + details->columnText(i) + mysql()->fieldEncloser(true) 
@@ -150,13 +154,13 @@ void CProperties::save()
   saveToFile(tmpFileName, "txt", tr("Text Files (*.txt);;All Files(*.*)" ), getSaveContents(), mysql()->messagePanel());
 }
 
-void CProperties::RightButtonClicked( QListViewItem *, const QPoint & pos, int c)
+void CProperties::RightButtonClicked( Q3ListViewItem *, const QPoint & pos, int c)
 {
 #ifdef DEBUG
   qDebug("CProperties::RightButtonClicked()");
 #endif
 
-  QPopupMenu p_itemMenu;
+  Q3PopupMenu p_itemMenu;
   p_itemMenu.insertItem(getPixmapIcon("copyIcon"), tr("Copy"), MENU_COPY);
   p_itemMenu.setItemEnabled(MENU_COPY, (details->childCount() > 0));
   p_itemMenu.insertSeparator();
@@ -168,7 +172,7 @@ void CProperties::RightButtonClicked( QListViewItem *, const QPoint & pos, int c
   case MENU_COPY:
     {
 #ifndef QT_NO_CLIPBOARD      
-      QListViewItem * item = details->currentItem();
+      Q3ListViewItem * item = details->currentItem();
       if (item != 0)
         QApplication::clipboard()->setText(item->text(c));
 #endif      
@@ -192,14 +196,14 @@ void CProperties::setTitle(const QString &s)
   title->setText(" " + s);
 }
 
-void CProperties::saveData(QDict<QString> *data)
+void CProperties::saveData(Q3Dict<QString> *data)
 {
 #ifdef DEBUG
   qDebug("CProperties::saveData()");
 #endif
 
   data->clear();
-  QListViewItemIterator it(details);
+  Q3ListViewItemIterator it(details);
   while ( it.current() != 0 )
   {
     data->insert(it.current()->text(0), new QString(it.current()->text(1)));
@@ -207,7 +211,7 @@ void CProperties::saveData(QDict<QString> *data)
   }
 }
 
-void CProperties::loadData(const QDict<QString> &data)
+void CProperties::loadData(const Q3Dict<QString> &data)
 {
 #ifdef DEBUG
   qDebug("CProperties::loadData()");
@@ -216,7 +220,7 @@ void CProperties::loadData(const QDict<QString> &data)
   details->clear();
   if (data.count() > 0)
   {
-    QDictIterator<QString> it(data);
+    Q3DictIterator<QString> it(data);
     for( ; it.current(); ++it )
       insertItem(it.currentKey(), *it.current());
   }
@@ -230,7 +234,7 @@ void CProperties::insertItem(const QString & property, const QString & value)
 
   if (property.isEmpty() || value.isEmpty())
     return;
-  QListViewItem * item = new QListViewItem(details);
+  Q3ListViewItem * item = new Q3ListViewItem(details);
   item->setText( 0, property);
   item->setText( 1, value);
   details->insertItem(item);

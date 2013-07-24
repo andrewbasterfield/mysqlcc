@@ -21,13 +21,15 @@
 #include "CMySQLCCPlugin.h"
 #include <stddef.h>
 #include <qmap.h>
-#include <qvaluelist.h>
+#include <q3valuelist.h>
+//Added by qt3to4:
+#include <QPixmap>
 
 class QPixmap;
 class QString;
 class CPlugin;
 
-typedef QValueList<CPlugin> PluginList;
+typedef Q3ValueList<CPlugin> PluginList;
 typedef QMap<Plugin::mysqlcc_plugin_place, PluginList> PluginMap;
 
 class CPlugin

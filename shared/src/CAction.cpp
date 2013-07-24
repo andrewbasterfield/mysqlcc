@@ -39,7 +39,7 @@ CAction::CAction(QObject * parent, const char * name, bool toggle)
   init();
 }
 
-CAction::CAction(const QString & text, const QIconSet & icon, const QString & menuText, QKeySequence accel, QObject * parent, const char * name, bool toggle)
+CAction::CAction(const QString & text, const QIcon & icon, const QString & menuText, QKeySequence accel, QObject * parent, const char * name, bool toggle)
 :QAction(text, icon, menuText, accel, parent, name, toggle)
 {
 #ifdef DEBUG

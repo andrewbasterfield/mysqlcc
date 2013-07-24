@@ -20,15 +20,17 @@
 
 #include <stddef.h>
 #include <qvariant.h>
-#include <qmainwindow.h>
-#include <qdockarea.h>
+#include <q3mainwindow.h>
+#include <q3dockarea.h>
 #include <qmenubar.h>
 #include <qlayout.h>
 #include <qtooltip.h>
-#include <qwhatsthis.h>
-#include <qpopupmenu.h>
-#include <qtoolbar.h>
+#include <q3whatsthis.h>
+#include <q3popupmenu.h>
+#include <q3toolbar.h>
 #include <qpixmap.h>
+//Added by qt3to4:
+#include <QCloseEvent>
 
 #include "CAction.h"
 
@@ -36,12 +38,12 @@ class CMessageWindow;
 class CMessagePanel;
 class CConfig;
 
-class CMyWindow : public QMainWindow
+class CMyWindow : public Q3MainWindow
 { 
   Q_OBJECT
     
 public:
-  CMyWindow (QWidget * parent, const char * name=0, bool appwindow = false, WFlags f = WDestructiveClose);
+  CMyWindow (QWidget * parent, const char * name=0, bool appwindow = false, Qt::WFlags f = Qt::WDestructiveClose);
   ~CMyWindow();  
   void autoPlace();
 
@@ -58,7 +60,7 @@ public:
   virtual bool loadWindowSettings();
   virtual void setCaption(const QString &s);
   
-  static Qt::Dock findDockWindow(CMyWindow *wnd, QDockWindow *dockWnd);
+  static Qt::ToolBarDock findDockWindow(CMyWindow *wnd, Q3DockWindow *dockWnd);
 
 signals:
   void about_to_close();

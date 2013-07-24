@@ -19,16 +19,18 @@
 #define CTABLEFIELDCHOOSER_H
 
 #include <stddef.h>
-#include <qdockwindow.h>
-#include <qlistview.h>
+#include <q3dockwindow.h>
+#include <q3listview.h>
+//Added by qt3to4:
+#include <QKeyEvent>
 
-class QTable;
+class Q3Table;
 class CTableFieldChooser;
 
-class CTableFieldChooserListItem : public QCheckListItem
+class CTableFieldChooserListItem : public Q3CheckListItem
 {
 public:
-  CTableFieldChooserListItem(QListView * parent, const QString & text, int columnid);
+  CTableFieldChooserListItem(Q3ListView * parent, const QString & text, int columnid);
   int col() { return c; }
   void keyPressed(QKeyEvent *e);
 
@@ -37,18 +39,18 @@ private:
   void stateChange (bool s);  
 };
 
-class CTableFieldChooserListView : public QListView
+class CTableFieldChooserListView : public Q3ListView
 {
   Q_OBJECT
 
 public:
-  CTableFieldChooserListView(CTableFieldChooser * parent, const char * name = 0, WFlags f = 0 );
+  CTableFieldChooserListView(CTableFieldChooser * parent, const char * name = 0, Qt::WFlags f = 0 );
   void checkBoxClicked(int c, bool s);
-  QTable * table() const;
+  Q3Table * table() const;
   void refresh();
 
 public slots:
-  void displayMenu(QListViewItem *, const QPoint &, int);
+  void displayMenu(Q3ListViewItem *, const QPoint &, int);
 
 signals:
   void showColumn(int c, bool s);
@@ -57,20 +59,20 @@ private:
   void keyPressEvent(QKeyEvent * e);
 };
 
-class CTableFieldChooser : public QDockWindow
+class CTableFieldChooser : public Q3DockWindow
 {
   Q_OBJECT
 
 public:
-  CTableFieldChooser(QWidget *parent, QTable * t, const char * name = 0, Place p = OutsideDock, WFlags f = WStyle_StaysOnTop);
-  CTableFieldChooser(QWidget *parent, const char * name = 0, Place p = OutsideDock, WFlags f = WStyle_StaysOnTop);
-  QTable * table() { return tbl; }
+  CTableFieldChooser(QWidget *parent, Q3Table * t, const char * name = 0, Place p = OutsideDock, Qt::WFlags f = Qt::WStyle_StaysOnTop);
+  CTableFieldChooser(QWidget *parent, const char * name = 0, Place p = OutsideDock, Qt::WFlags f = Qt::WStyle_StaysOnTop);
+  Q3Table * table() { return tbl; }
   virtual void setCaption(const QString &s);
 
 public slots:
   void refresh();
   void show();
-  void setTable(QTable *t)
+  void setTable(Q3Table *t)
   {
     tbl = t;
     refresh();
@@ -78,7 +80,7 @@ public slots:
 
 private:
   void init();
-  QTable *tbl;
+  Q3Table *tbl;
   bool is_first;
   CTableFieldChooserListView * columnsListView;
 

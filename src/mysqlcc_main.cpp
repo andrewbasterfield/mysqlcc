@@ -26,11 +26,13 @@
 #include "globals.h"
 #include "panels.h"
 #include <stddef.h>  
-#include <qtextstream.h>
+#include <q3textstream.h>
 #include <qapplication.h>
 #include <qfile.h>
 #include <qstringlist.h>
 #include <qmap.h>
+//Added by qt3to4:
+#include <QPixmap>
 #ifndef WIN32
 #include <unistd.h>
 #endif
@@ -101,12 +103,12 @@ static QString unquote(const QString &str)
     return str;
 }
 
-static QListViewItem * connect_to_server(const QString &arg)
+static Q3ListViewItem * connect_to_server(const QString &arg)
 {
   QStringList databases;
   QString server;
   int p;
-  QListViewItem *ret = 0;
+  Q3ListViewItem *ret = 0;
   bool db_ok = false;
   bool server_ok = false;
   bool done = false;
@@ -126,7 +128,7 @@ static QListViewItem * connect_to_server(const QString &arg)
  
   if (!server.isEmpty())
   {
-    QListViewItemIterator it(myApp()->consoleWindow()->databaseListView());
+    Q3ListViewItemIterator it(myApp()->consoleWindow()->databaseListView());
     while (it.current() != 0)
     {
       switch (((CDatabaseListViewItem *) it.current())->type())
@@ -193,7 +195,7 @@ static void handle_connect_to_servers(const QString &connection, CConfig *cfg)
 
   if (conn)
   {
-    QListViewItem *item = connect_to_server(connection);
+    Q3ListViewItem *item = connect_to_server(connection);
     if (item && !argumentMap['q'].isNull())
     {
       myApp()->consoleWindow()->prepareQueryWindow((CDatabaseListViewItem *) item);
@@ -215,7 +217,7 @@ static void handle_connect_to_servers(const QString &connection, CConfig *cfg)
 
   if (conn)
   {
-    QListViewItem *item = myApp()->consoleWindow()->databaseListView()->firstChild();
+    Q3ListViewItem *item = myApp()->consoleWindow()->databaseListView()->firstChild();
     if (item)
     {
       myApp()->consoleWindow()->databaseListView()->setSelected(item, true);
@@ -351,7 +353,7 @@ int mysqlcc_main(int argc, char** argv)
     if (!s.isNull())
     {
       s = charReplace(s, '|', "\n");
-      QTextStream ts( &s, IO_ReadOnly);
+      Q3TextStream ts( &s, QIODevice::ReadOnly);
       ts >> mainwindow;
     }
     if (!err.isEmpty())
@@ -368,7 +370,7 @@ int mysqlcc_main(int argc, char** argv)
   }
   else
   {
-    CConsoleWindow mainwindow(0, true, CMyWindow::WType_TopLevel);
+    CConsoleWindow mainwindow(0, true, Qt::WType_TopLevel);
     app.setMainWidget(&mainwindow);
     app.setMainConsoleWindow(&mainwindow);
     if (!mainwindow.loadWindowSettings())

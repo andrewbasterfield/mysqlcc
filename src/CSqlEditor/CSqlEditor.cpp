@@ -26,12 +26,15 @@
 #include "parenmatcher.h"
 #include "panels.h"
 #include <stddef.h>
-#include <qfiledialog.h>
+#include <q3filedialog.h>
 #include <qsettings.h>
-#include <qpopupmenu.h>
+#include <q3popupmenu.h>
 #include <qinputdialog.h>
 #include <qclipboard.h>
 #include <qregexp.h>
+//Added by qt3to4:
+#include <Q3TextStream>
+#include <QMouseEvent>
 
 CSqlEditor::CSqlEditor(QWidget *parent, CMySQLServer *m, const char *name)
 : Editor(parent, name)
@@ -119,9 +122,9 @@ void CSqlEditor::loadSyntaxFile()
     return;
 
   QFile f_strm(myApp()->syntaxFile());
-  if (f_strm.open(IO_ReadOnly))
+  if (f_strm.open(QIODevice::ReadOnly))
   {
-    QTextStream t_strm(&f_strm);
+    Q3TextStream t_strm(&f_strm);
     SqlCompletionEntry::keyword_type keyword_type = (SqlCompletionEntry::keyword_type) 0;
     CSqlEditorFont::highlight_type highlight_type = (CSqlEditorFont::highlight_type) 0;
     bool hasSection = false;
@@ -214,7 +217,7 @@ void CSqlEditor::openFile()
   qDebug("CSqlEditor::openFile()");
 #endif
 
-  QString fn = QFileDialog::getOpenFileName( QString::null, tr("SQL Files") + " (*.sql);;" + tr("Text Files") + " (*.txt);;" + tr("All Files") + " (*.*)", this);
+  QString fn = Q3FileDialog::getOpenFileName( QString::null, tr("SQL Files") + " (*.sql);;" + tr("Text Files") + " (*.txt);;" + tr("All Files") + " (*.*)", this);
   if ( !fn.isEmpty() )  
     load(fn);  
 }

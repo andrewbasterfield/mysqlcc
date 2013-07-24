@@ -20,6 +20,8 @@
 
 #include "CMyWindow.h"
 #include "CProperties.h"
+//Added by qt3to4:
+#include <Q3GridLayout>
 
 class CMySQLServer;
 class QPushButton;
@@ -52,7 +54,7 @@ public:
   
 private:
   QPushButton* closeButton;
-  QGridLayout* Form1Layout;
+  Q3GridLayout* Form1Layout;
 };
 
 #endif // CTABLEPROPERTIES_H

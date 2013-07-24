@@ -27,8 +27,8 @@
 
 #endif //HAVE_MYSQLCC_CONFIG
 
-CSqlTableItem::CSqlTableItem(QTable * table, CMySQLQuery *q, ulong off_set, uint idx, EditType et)
-: QTableItem(table, et, QString::null), qry(q), m_offset(off_set), m_index(idx)
+CSqlTableItem::CSqlTableItem(Q3Table * table, CMySQLQuery *q, ulong off_set, uint idx, EditType et)
+: Q3TableItem(table, et, QString::null), qry(q), m_offset(off_set), m_index(idx)
 {  
   init();
   is_item_inserted = true;
@@ -49,8 +49,8 @@ CSqlTableItem::CSqlTableItem(QTable * table, CMySQLQuery *q, ulong off_set, uint
   }
 }
 
-CSqlTableItem::CSqlTableItem(QTable * table, CMySQLQuery *q, uint idx, EditType et)
-: QTableItem(table, et, QString::null), qry(q), m_index(idx)
+CSqlTableItem::CSqlTableItem(Q3Table * table, CMySQLQuery *q, uint idx, EditType et)
+: Q3TableItem(table, et, QString::null), qry(q), m_index(idx)
 {
   init();
   m_value = 0;
@@ -126,20 +126,20 @@ void CSqlTableItem::setTextFromValue()
     if (length() <= MAX_FIELD_DISPLAY && !is_blob)
     {
       //if (length() != 0)
-      QTableItem::setText(query()->mysql()->codec()->toUnicode(value()));
+      Q3TableItem::setText(query()->mysql()->codec()->toUnicode(value()));
       is_big_value = false;
     }
     else
     {
       is_big_value = true;
       if (length() == 0)  //BLOB length is either too big, or a query such as SELECT REPEAT("str", 100000000) was executed.
-        QTableItem::setText("");
+        Q3TableItem::setText("");
       else
       {
         QString tmp(query()->mysql()->codec()->toUnicode(value()));
         if (tmp.length() > MAX_FIELD_DISPLAY)
           tmp = tmp.left(MAX_FIELD_DISPLAY-3) + "...";
-        QTableItem::setText(tmp);
+        Q3TableItem::setText(tmp);
       }
     }
   table()->updateCell(row(), col());
@@ -161,7 +161,7 @@ QString CSqlTableItem::checkValue(const QString &str)
 
 void CSqlTableItem::setText(const QString &str)
 {
-  QTableItem::setText(checkValue(str));
+  Q3TableItem::setText(checkValue(str));
 }
 
 char * CSqlTableItem::value() const

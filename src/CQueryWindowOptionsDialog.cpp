@@ -25,23 +25,26 @@
 #include <qvariant.h>
 #include <qcheckbox.h>
 #include <qcombobox.h>
-#include <qframe.h>
+#include <q3frame.h>
 #include <qlabel.h>
 #include <qpushbutton.h>
 #include <qspinbox.h>
 #include <qlayout.h>
 #include <qtooltip.h>
-#include <qwhatsthis.h>
+#include <q3whatsthis.h>
 #include <qmessagebox.h>
-#include <qbuttongroup.h>
+#include <q3buttongroup.h>
 #include <qradiobutton.h>
+//Added by qt3to4:
+#include <Q3HBoxLayout>
+#include <Q3GridLayout>
 
-CQueryWindowOptionsTab::CQueryWindowOptionsTab(QWidget* parent, const char* name, WFlags fl)
+CQueryWindowOptionsTab::CQueryWindowOptionsTab(QWidget* parent, const char* name, Qt::WFlags fl)
 : CConfigDialogTab(parent, name, fl)
 {
   if (!name)
     setName("CQueryWindowOptionsTab");
-  CQueryWindowOptionsTabLayout = new QGridLayout(this, 1, 1, 4, 6, "CQueryWindowOptionsTabLayout"); 
+  CQueryWindowOptionsTabLayout = new Q3GridLayout(this, 1, 1, 4, 6, "CQueryWindowOptionsTabLayout"); 
   
   followQueryTab = new QCheckBox(this, "followQueryTab");
   
@@ -51,12 +54,12 @@ CQueryWindowOptionsTab::CQueryWindowOptionsTab(QWidget* parent, const char* name
   
   CQueryWindowOptionsTabLayout->addMultiCellWidget(queryNewTab, 3, 3, 0, 2);
   
-  multipleQueries = new QButtonGroup(this, "multipleQueries");
+  multipleQueries = new Q3ButtonGroup(this, "multipleQueries");
   multipleQueries->setColumnLayout(0, Qt::Vertical);
   multipleQueries->layout()->setSpacing(4);
   multipleQueries->layout()->setMargin(6);
   multipleQueries->setExclusive(true);
-  multipleQueriesLayout = new QGridLayout(multipleQueries->layout());
+  multipleQueriesLayout = new Q3GridLayout(multipleQueries->layout());
   multipleQueriesLayout->setAlignment(Qt::AlignTop);
   
   radioButton1 = new QRadioButton(multipleQueries, "radioButton1");
@@ -132,7 +135,7 @@ bool CQueryWindowOptionsTab::save(CConfig *cfg)
   return ret;
 }
 
-CQueryOptionsTab::CQueryOptionsTab(QWidget* parent, const char* name, WFlags fl)
+CQueryOptionsTab::CQueryOptionsTab(QWidget* parent, const char* name, Qt::WFlags fl)
 : CConfigDialogTab(parent, name, fl)
 {
   if (!name)
@@ -140,12 +143,12 @@ CQueryOptionsTab::CQueryOptionsTab(QWidget* parent, const char* name, WFlags fl)
   
   setCaption(tr("Query Configuration Dialog"));
   
-  CQueryOptionsTabLayout = new QGridLayout(this, 1, 1, 4, 6, "CQueryOptionsTabLayout"); 
+  CQueryOptionsTabLayout = new Q3GridLayout(this, 1, 1, 4, 6, "CQueryOptionsTabLayout"); 
   
-  Frame5 = new QFrame(this, "Frame5");
-  Frame5->setFrameShape(QFrame::Box);
-  Frame5->setFrameShadow(QFrame::Sunken);
-  Frame5Layout = new QGridLayout(Frame5, 1, 1, 6, 4, "Frame5Layout"); 
+  Frame5 = new Q3Frame(this, "Frame5");
+  Frame5->setFrameShape(Q3Frame::Box);
+  Frame5->setFrameShadow(Q3Frame::Sunken);
+  Frame5Layout = new Q3GridLayout(Frame5, 1, 1, 6, 4, "Frame5Layout"); 
   
   TextLabel5 = new QLabel(Frame5, "TextLabel5");
   
@@ -238,13 +241,13 @@ CQueryOptionsTab::CQueryOptionsTab(QWidget* parent, const char* name, WFlags fl)
   Frame5Layout->addWidget(TextLabel7, 4, 0);
   
   TextLabel12 = new QLabel(Frame5, "TextLabel12");
-  TextLabel12->setAlignment(int(QLabel::WordBreak | QLabel::AlignVCenter | QLabel::AlignLeft));
+  TextLabel12->setAlignment(int(Qt::TextWordWrap | Qt::AlignVCenter | Qt::AlignLeft));
   
   Frame5Layout->addMultiCellWidget(TextLabel12, 0, 0, 0, 4);
   
   CQueryOptionsTabLayout->addWidget(Frame5, 1, 0);
   
-  Layout2 = new QHBoxLayout(0, 0, 25, "Layout2"); 
+  Layout2 = new Q3HBoxLayout(0, 0, 25, "Layout2"); 
   
   force = new QCheckBox(this, "force");
   force->setChecked(true);
@@ -290,7 +293,7 @@ void CQueryOptionsTab::languageChange()
   autocommit->insertItem(tr("[DEFAULT]"));
   autocommit->insertItem(tr("0"));
   autocommit->insertItem(tr("1"));
-  QWhatsThis::add(autocommit, tr("If set to 1 all changes to a table will be done at once. To start a multi-command transaction, you have to use the BEGIN statement."));
+  Q3WhatsThis::add(autocommit, tr("If set to 1 all changes to a table will be done at once. To start a multi-command transaction, you have to use the BEGIN statement."));
   TextLabel4->setText(tr("SQL_BIG_SELECTS"));
   TextLabel9->setText(tr("SQL_LOG_OFF"));
   TextLabel11->setText(tr("SQL_QUOTE_SHOW_CREATE"));
@@ -298,23 +301,23 @@ void CQueryOptionsTab::languageChange()
   sql_big_selects->insertItem(tr("[DEFAULT]"));
   sql_big_selects->insertItem(tr("0"));
   sql_big_selects->insertItem(tr("1"));
-  QWhatsThis::add(sql_big_selects, tr("If set to 0, MySQL will abort if a SELECT is attempted that probably will take a very long time. This is useful when an inadvisable WHERE statement has been issued."));
+  Q3WhatsThis::add(sql_big_selects, tr("If set to 0, MySQL will abort if a SELECT is attempted that probably will take a very long time. This is useful when an inadvisable WHERE statement has been issued."));
   low_priority_updates->clear();
   low_priority_updates->insertItem(tr("[DEFAULT]"));
   low_priority_updates->insertItem(tr("0"));
   low_priority_updates->insertItem(tr("1"));
-  QWhatsThis::add(low_priority_updates, tr("If set to 1, all INSERT, UPDATE, DELETE, and and LOCK TABLE WRITE statements wait until there is no pending SELECT or LOCK TABLE READ on the affected table."));
+  Q3WhatsThis::add(low_priority_updates, tr("If set to 1, all INSERT, UPDATE, DELETE, and and LOCK TABLE WRITE statements wait until there is no pending SELECT or LOCK TABLE READ on the affected table."));
   big_tables->clear();
   big_tables->insertItem(tr("[DEFAULT]"));
   big_tables->insertItem(tr("0"));
   big_tables->insertItem(tr("1"));
-  QWhatsThis::add(big_tables, tr("If set to 1, all temporary tables are stored on disk rather than in memory."));
+  Q3WhatsThis::add(big_tables, tr("If set to 1, all temporary tables are stored on disk rather than in memory."));
   TextLabel6->setText(tr("LOW_PRIORITY_UPDATES"));
   sql_log_update->clear();
   sql_log_update->insertItem(tr("[DEFAULT]"));
   sql_log_update->insertItem(tr("0"));
   sql_log_update->insertItem(tr("1"));
-  QWhatsThis::add(sql_log_update, tr("If set to 0, no logging will be done to the update log for the client, if the client has the SUPER privilege. This does not affect the standard log!"));
+  Q3WhatsThis::add(sql_log_update, tr("If set to 0, no logging will be done to the update log for the client, if the client has the SUPER privilege. This does not affect the standard log!"));
   TextLabel10->setText(tr("SQL_LOG_UPDATE"));
   TextLabel8->setText(tr("SQL_SAFE_UPDATES"));
   query_cache_type->clear();
@@ -322,43 +325,43 @@ void CQueryOptionsTab::languageChange()
   query_cache_type->insertItem(tr("0"));
   query_cache_type->insertItem(tr("1"));
   query_cache_type->insertItem(tr("2"));
-  QWhatsThis::add(query_cache_type, tr("Set query cache setting for this thread."));
+  Q3WhatsThis::add(query_cache_type, tr("Set query cache setting for this thread."));
   TextLabel2->setText(tr("AUTOCOMMIT"));
   sql_log_off->clear();
   sql_log_off->insertItem(tr("[DEFAULT]"));
   sql_log_off->insertItem(tr("0"));
   sql_log_off->insertItem(tr("1"));
-  QWhatsThis::add(sql_log_off, tr("If set to 1, no logging will be done to the standard log for this client, if the client has the SUPER privilege. This does not affect the update log!"));
+  Q3WhatsThis::add(sql_log_off, tr("If set to 1, no logging will be done to the standard log for this client, if the client has the SUPER privilege. This does not affect the update log!"));
   sql_buffer_result->clear();
   sql_buffer_result->insertItem(tr("[DEFAULT]"));
   sql_buffer_result->insertItem(tr("0"));
   sql_buffer_result->insertItem(tr("1"));
-  QWhatsThis::add(sql_buffer_result, tr("SQL_BUFFER_RESULT will force the result from SELECTs to be put into a temporary table. This will help MySQL free the table locks early and will help in cases where it takes a long time to send the result set to the client."));
+  Q3WhatsThis::add(sql_buffer_result, tr("SQL_BUFFER_RESULT will force the result from SELECTs to be put into a temporary table. This will help MySQL free the table locks early and will help in cases where it takes a long time to send the result set to the client."));
   TextLabel3->setText(tr("BIG_TABLES"));
   TextLabel1->setText(tr("SQL_AUTO_IS_NULL"));
   sql_safe_updates->clear();
   sql_safe_updates->insertItem(tr("[DEFAULT]"));
   sql_safe_updates->insertItem(tr("0"));
   sql_safe_updates->insertItem(tr("1"));
-  QWhatsThis::add(sql_safe_updates, tr("If set to 1, MySQL will abort if an UPDATE or DELETE is attempted that doesn't use a key or LIMIT in the WHERE clause. This makes it possible to catch wrong updates when creating SQL commands by hand."));
+  Q3WhatsThis::add(sql_safe_updates, tr("If set to 1, MySQL will abort if an UPDATE or DELETE is attempted that doesn't use a key or LIMIT in the WHERE clause. This makes it possible to catch wrong updates when creating SQL commands by hand."));
   sql_quote_show_create->clear();
   sql_quote_show_create->insertItem(tr("[DEFAULT]"));
   sql_quote_show_create->insertItem(tr("0"));
   sql_quote_show_create->insertItem(tr("1"));
-  QWhatsThis::add(sql_quote_show_create, tr("If set to 1, SHOW CREATE TABLE will quote table and column names."));
+  Q3WhatsThis::add(sql_quote_show_create, tr("If set to 1, SHOW CREATE TABLE will quote table and column names."));
   sql_auto_is_null->clear();
   sql_auto_is_null->insertItem(tr("[DEFAULT]"));
   sql_auto_is_null->insertItem(tr("0"));
   sql_auto_is_null->insertItem(tr("1"));
-  QWhatsThis::add(sql_auto_is_null, tr("If set to 1 then one can find the last inserted row for a table with an AUTO_INCREMENT column with the following construct: WHERE auto_increment_column IS NULL."));
+  Q3WhatsThis::add(sql_auto_is_null, tr("If set to 1 then one can find the last inserted row for a table with an AUTO_INCREMENT column with the following construct: WHERE auto_increment_column IS NULL."));
   TextLabel7->setText(tr("QUERY_CACHE_TYPE"));
   TextLabel12->setText(tr("<B>NOTE:</B> The below options apply to <b>this</b> session only;  the server's configuration will not be affected by these settings.  All options set to '[DEFAULT]' will remain untouched."));
   force->setText(tr("Force"));
-  QWhatsThis::add(force, tr("Continue even if we get an sql error"));
+  Q3WhatsThis::add(force, tr("Continue even if we get an sql error"));
   use_history_file->setText(tr("Append to History View"));
-  QWhatsThis::add(use_history_file, tr("When checked, each executed query will be appended to the History Panel."));
+  Q3WhatsThis::add(use_history_file, tr("When checked, each executed query will be appended to the History Panel."));
   silent->setText(tr("Silent"));
-  QWhatsThis::add(silent, tr("When checked, no messages will be printed in the Messages Panel with the exception of errors."));
+  Q3WhatsThis::add(silent, tr("When checked, no messages will be printed in the Messages Panel with the exception of errors."));
 }
 
 
@@ -422,7 +425,7 @@ CQueryWindowOptionsDialog::CQueryWindowOptionsDialog(QWidget* parent, CMySQLServ
   insertTab(new CQueryWindowOptionsTab((QWidget *) tab()));
   insertTab(new CQueryOptionsTab((QWidget *) tab()));
   okPushButton->setText(tr("&Apply"));
-  QWhatsThis::add(okPushButton, tr("Click to Apply changes."));
+  Q3WhatsThis::add(okPushButton, tr("Click to Apply changes."));
   myResize(460, 308);
   config = new CConfig(m->connectionName(), m->connectionsPath());
   setDefaultValues(config);

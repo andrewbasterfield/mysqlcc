@@ -24,21 +24,23 @@
 #include <stddef.h>  
 #include <qlayout.h>
 #include <qpixmap.h>
-#include <qpopupmenu.h>
+#include <q3popupmenu.h>
 #include <qclipboard.h>
-#include <qheader.h>
+#include <q3header.h>
 #include <qtooltip.h>
+//Added by qt3to4:
+#include <QKeyEvent>
 
 #define MAX_MESSAGE_LENGTH CHistoryView::querySize()
 
-CPanelItem::CPanelItem(QListView * parent, const QString &t, const QPixmap &p)
-: QListViewItem(parent)
+CPanelItem::CPanelItem(Q3ListView * parent, const QString &t, const QPixmap &p)
+: Q3ListViewItem(parent)
 {
   init(t, p);  
 }
 
-CPanelItem::CPanelItem(QListView * parent, QListViewItem * after, const QString &t, const QPixmap &p)
-: QListViewItem(parent, after)
+CPanelItem::CPanelItem(Q3ListView * parent, Q3ListViewItem * after, const QString &t, const QPixmap &p)
+: Q3ListViewItem(parent, after)
 {
   init(t, p);  
 }
@@ -64,24 +66,24 @@ void CPanelItem::setText(int col, const QString &s)
   if (maxDisplay() > -1 && s.length() >= (uint) maxDisplay())
   {
      if (s.length() > MAX_MESSAGE_LENGTH)
-       QListViewItem::setText(col, QObject::tr("[BIG QUERY] - Query not stored completely in memory."));
+       Q3ListViewItem::setText(col, QObject::tr("[BIG QUERY] - Query not stored completely in memory."));
      else
-       QListViewItem::setText(col, s.simplifyWhiteSpace().left(maxDisplay() - 3) + "...");
+       Q3ListViewItem::setText(col, s.simplifyWhiteSpace().left(maxDisplay() - 3) + "...");
   }
   else
-    QListViewItem::setText(col, s.simplifyWhiteSpace());
+    Q3ListViewItem::setText(col, s.simplifyWhiteSpace());
 }
 
 
-CPanel::CPanel(QWidget * parent, const char * name, WFlags f)
-: QListView(parent, name, f), maxdisplay(-1), enter("\r\n")
+CPanel::CPanel(QWidget * parent, const char * name, Qt::WFlags f)
+: Q3ListView(parent, name, f), maxdisplay(-1), enter("\r\n")
 {
 #ifdef DEBUG
   qDebug("CPanel::CPanel()");
 #endif
   
   setLineWidth(1);
-  setSelectionMode(QListView::Single);
+  setSelectionMode(Q3ListView::Single);
   setSorting(-1);
   addColumn("");
   setMaxDisplaySize(150);
@@ -91,7 +93,7 @@ CPanel::CPanel(QWidget * parent, const char * name, WFlags f)
   realtext.setAutoDelete(true);
   enable_bottom_item = true;
   ctrl = false;
-  connect(this, SIGNAL(contextMenuRequested(QListViewItem *, const QPoint &, int)), this, SLOT(displayMenu(QListViewItem *, const QPoint &, int)));
+  connect(this, SIGNAL(contextMenuRequested(Q3ListViewItem *, const QPoint &, int)), this, SLOT(displayMenu(Q3ListViewItem *, const QPoint &, int)));
 }
 
 void CPanel::setCarriageReturn(const QString &s)
@@ -103,13 +105,13 @@ void CPanel::setCarriageReturn(const QString &s)
   enter = s;
 }
 
-void CPanel::setBottomItem(QListViewItem *i)
+void CPanel::setBottomItem(Q3ListViewItem *i)
 {
 #ifdef DEBUG
   qDebug("CPanel::setBottomItem()");
 #endif
   
-  QListViewItem *x = i != 0 ? i : lastItem();
+  Q3ListViewItem *x = i != 0 ? i : lastItem();
   if (x != 0)
     ensureItemVisible(x);
 }
@@ -132,7 +134,7 @@ void CPanel::showMessage(const QString & m)
   if (m.isEmpty())
     return;  
     
-  QListViewItem *p = lastItem();
+  Q3ListViewItem *p = lastItem();
 
   if (p != 0)
   {
@@ -160,7 +162,7 @@ void CPanel::showMessage(const QPixmap & w, const QString & m)
   if (m.isEmpty())
     return;
 
-  QListViewItem *p = lastItem();
+  Q3ListViewItem *p = lastItem();
   if (p != 0)
   {
     if (enable_bottom_item)
@@ -184,7 +186,7 @@ void CPanel::save()
 #endif
   
   QString txt = QString::null;   
-  QListViewItemIterator it(this);
+  Q3ListViewItemIterator it(this);
   while ( it.current() != 0 )
   {
     txt += ((CPanelItem *) it.current())->realText() + enter;
@@ -194,7 +196,7 @@ void CPanel::save()
   saveToFile(tmpFile, "txt", tr("Text Files (*.txt);;All Files(*.*)" ), txt, msgPanel);
 }
 
-void CPanel::copy(QListViewItem *item)
+void CPanel::copy(Q3ListViewItem *item)
 {
 #ifdef DEBUG
   qDebug("CPanel::copy()");
@@ -221,10 +223,10 @@ void CPanel::keyPressEvent(QKeyEvent * e)
     ctrl = false;
   }
 
-  QListView::keyPressEvent(e);
+  Q3ListView::keyPressEvent(e);
 }
 
-CMessagePanel::CMessagePanel(const QString &caption, QWidget * parent, const char * name, WFlags f)
+CMessagePanel::CMessagePanel(const QString &caption, QWidget * parent, const char * name, Qt::WFlags f)
 : CPanel(parent, name, f)
 {
 #ifdef DEBUG
@@ -242,13 +244,13 @@ CMessagePanel::CMessagePanel(const QString &caption, QWidget * parent, const cha
   informationIcon = getPixmapIcon("informationIcon");
 }
 
-void CMessagePanel::displayMenu(QListViewItem *item, const QPoint &pos, int)
+void CMessagePanel::displayMenu(Q3ListViewItem *item, const QPoint &pos, int)
 {
 #ifdef DEBUG
   qDebug("CMessagePanel::displayMenu()");
 #endif
   
-  QPopupMenu *p_itemMenu = new QPopupMenu();
+  Q3PopupMenu *p_itemMenu = new Q3PopupMenu();
   Q_CHECK_PTR(p_itemMenu);  
   p_itemMenu->insertItem(getPixmapIcon("copyIcon"), tr("Copy"), 1);
 #ifdef QT_NO_CLIPBOARD
@@ -328,7 +330,7 @@ void CMessagePanel::message(ushort type, const QString & m)
 }
 
 
-CHistoryPanel::CHistoryPanel(const QString &caption, QWidget * parent, const char * name, WFlags f)
+CHistoryPanel::CHistoryPanel(const QString &caption, QWidget * parent, const char * name, Qt::WFlags f)
 : CPanel(parent, name, f)
 {
 #ifdef DEBUG
@@ -344,18 +346,18 @@ CHistoryPanel::CHistoryPanel(const QString &caption, QWidget * parent, const cha
   historyScriptIcon = getPixmapIcon("historyScriptIcon");
   
   itemsEnabled = true;
-  connect(this, SIGNAL(doubleClicked(QListViewItem *)), this, SLOT(DoubleClicked(QListViewItem *)));
-  connect(this, SIGNAL(onItem(QListViewItem *)), this, SLOT(setCurrentHint(QListViewItem * )));  
-  connect(this, SIGNAL(mouseButtonClicked(int, QListViewItem *, const QPoint &, int)), this, SLOT(mouseClicked(int, QListViewItem *, const QPoint &, int)));
+  connect(this, SIGNAL(doubleClicked(Q3ListViewItem *)), this, SLOT(DoubleClicked(Q3ListViewItem *)));
+  connect(this, SIGNAL(onItem(Q3ListViewItem *)), this, SLOT(setCurrentHint(Q3ListViewItem * )));  
+  connect(this, SIGNAL(mouseButtonClicked(int, Q3ListViewItem *, const QPoint &, int)), this, SLOT(mouseClicked(int, Q3ListViewItem *, const QPoint &, int)));
 }
 
-void CHistoryPanel::displayMenu(QListViewItem *item, const QPoint &pos, int)
+void CHistoryPanel::displayMenu(Q3ListViewItem *item, const QPoint &pos, int)
 {
 #ifdef DEBUG
   qDebug("CHistoryPanel::displayMenu()");
 #endif
   
-  QPopupMenu *p_itemMenu = new QPopupMenu();
+  Q3PopupMenu *p_itemMenu = new Q3PopupMenu();
 
   QString qry = ((CPanelItem *)item)->realText();
 
@@ -400,7 +402,7 @@ void CHistoryPanel::displayMenu(QListViewItem *item, const QPoint &pos, int)
   }    
 }
 
-void CHistoryPanel::DoubleClicked(QListViewItem * i)
+void CHistoryPanel::DoubleClicked(Q3ListViewItem * i)
 {
 #ifdef DEBUG
   qDebug("CHistoryPanel::DoubleClicked()");
@@ -433,7 +435,7 @@ void CHistoryPanel::History(const QString & m, bool append)
 
 }
 
-void CHistoryPanel::mouseClicked(int, QListViewItem * i, const QPoint &, int)
+void CHistoryPanel::mouseClicked(int, Q3ListViewItem * i, const QPoint &, int)
 {
 #ifdef DEBUG
   qDebug("CHistoryPanel::mouseClicked()");
@@ -451,7 +453,7 @@ QString CHistoryPanel::getSelectedHintText()
   return currentItem() != 0 ? ((CPanelItem *)currentItem())->realText() : QString::null;
 }
 
-void CHistoryPanel::setCurrentHint(QListViewItem * i)
+void CHistoryPanel::setCurrentHint(Q3ListViewItem * i)
 {
 #ifdef DEBUG
   qDebug("CHistoryPanel::setCurrentHint()");
@@ -466,7 +468,7 @@ void CHistoryPanel::setCurrentHint(QListViewItem * i)
 }
 
 
-CSqlDebugPanel::CSqlDebugPanel(const QString &caption, QWidget * parent, const char * name, WFlags f)
+CSqlDebugPanel::CSqlDebugPanel(const QString &caption, QWidget * parent, const char * name, Qt::WFlags f)
 : CPanel(parent, name, f)
 {
 #ifdef DEBUG
@@ -482,11 +484,11 @@ CSqlDebugPanel::CSqlDebugPanel(const QString &caption, QWidget * parent, const c
     setCaption(caption);
   historyScriptIcon = getPixmapIcon("historyScriptIcon");
   
-  connect (this, SIGNAL(onItem(QListViewItem *)), this, SLOT(setCurrentHint(QListViewItem * )));
-  connect (this, SIGNAL(mouseButtonClicked(int, QListViewItem *, const QPoint &, int)), this, SLOT(mouseClicked(int, QListViewItem *, const QPoint &, int)));
+  connect (this, SIGNAL(onItem(Q3ListViewItem *)), this, SLOT(setCurrentHint(Q3ListViewItem * )));
+  connect (this, SIGNAL(mouseButtonClicked(int, Q3ListViewItem *, const QPoint &, int)), this, SLOT(mouseClicked(int, Q3ListViewItem *, const QPoint &, int)));
 }
 
-void CSqlDebugPanel::copy(QListViewItem *item)
+void CSqlDebugPanel::copy(Q3ListViewItem *item)
 {
 #ifdef DEBUG
   qDebug("CSqlDebugPanel::copy()");
@@ -509,13 +511,13 @@ void CSqlDebugPanel::copy(QListViewItem *item)
 #endif  
 }
 
-void CSqlDebugPanel::displayMenu(QListViewItem *item, const QPoint &pos, int)
+void CSqlDebugPanel::displayMenu(Q3ListViewItem *item, const QPoint &pos, int)
 {
 #ifdef DEBUG
   qDebug("CSqlDebugPanel::displayMenu()");
 #endif
   
-  QPopupMenu *p_itemMenu = new QPopupMenu();
+  Q3PopupMenu *p_itemMenu = new Q3PopupMenu();
   Q_CHECK_PTR(p_itemMenu);
   p_itemMenu->insertItem(getPixmapIcon("copyIcon"), tr("Copy"), 1);
   
@@ -556,7 +558,7 @@ void CSqlDebugPanel::SqlDebug(const QString & m)
   showMessage(historyScriptIcon, m);  
 }
 
-void CSqlDebugPanel::mouseClicked(int, QListViewItem * i, const QPoint &, int)
+void CSqlDebugPanel::mouseClicked(int, Q3ListViewItem * i, const QPoint &, int)
 {
 #ifdef DEBUG
   qDebug("CSqlDebugPanel::mouseClicked()");
@@ -574,7 +576,7 @@ QString CSqlDebugPanel::selectedHintText()
   return currentItem() != 0 ? ((CPanelItem *)currentItem())->realText() : QString::null;  
 }
 
-void CSqlDebugPanel::setCurrentHint(QListViewItem * i)
+void CSqlDebugPanel::setCurrentHint(Q3ListViewItem * i)
 {
 #ifdef DEBUG
   qDebug("CSqlDebugPanel::setCurrentHint()");
@@ -589,7 +591,7 @@ void CSqlDebugPanel::setCurrentHint(QListViewItem * i)
 }
 
 
-CMessageWindow::CMessageWindow(Place p, QWidget * parent, const char * name, WFlags f)
+CMessageWindow::CMessageWindow(Place p, QWidget * parent, const char * name, Qt::WFlags f)
 :CDockWindow (p, parent, name, f)
 {
 #ifdef DEBUG

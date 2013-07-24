@@ -31,12 +31,16 @@
 #include "CMySQLServer.h"
 #include <stddef.h>  
 #include <qstatusbar.h>
+//Added by qt3to4:
+#include <QPixmap>
+#include <Q3PopupMenu>
+#include <QKeyEvent>
 
 
 static const QString connections_path = QString(CONNECTIONS_PATH);
 
-CDatabaseListView::CDatabaseListView(CConsoleWindow * c, QWidget * parent, const char * name, WFlags f)
-: QListView(parent, name, f)
+CDatabaseListView::CDatabaseListView(CConsoleWindow * c, QWidget * parent, const char * name, Qt::WFlags f)
+: Q3ListView(parent, name, f)
 {
 #ifdef DEBUG
   qDebug("CDatabaseListView::CDatabaseListView()");
@@ -45,7 +49,7 @@ CDatabaseListView::CDatabaseListView(CConsoleWindow * c, QWidget * parent, const
   consolewindow = c;
   addColumn(trUtf8("MySQL Servers"));  
   setRootIsDecorated(false);
-  setResizeMode(QListView::AllColumns);
+  setResizeMode(Q3ListView::AllColumns);
   setColumnWidth(0, 150);
   setMargin(0);
   setShowSortIndicator(true);
@@ -80,7 +84,7 @@ void CDatabaseListView::refreshServers()
   CConfig::list(dbServerList, connections_path);
   if (childCount() > 0)
   {
-    QListViewItemIterator it(this);
+    Q3ListViewItemIterator it(this);
     while (it.current() != 0)
     {
       if (((CDatabaseListViewItem *) it.current())->type() == CDatabaseListViewItem::SERVER)
@@ -105,7 +109,7 @@ void CDatabaseListView::refreshServers()
     for (QStringList::Iterator j = dbServerList.begin(); j != dbServerList.end(); j++)
     {
       found = false;     
-      QListViewItemIterator it(this);
+      Q3ListViewItemIterator it(this);
       while (it.current() != 0)
       {
         if (((CDatabaseListViewItem *) it.current())->type() == CDatabaseListViewItem::SERVER)
@@ -147,7 +151,7 @@ void CDatabaseListView::updateListView()
   setBusy(true);
   if (childCount() > 0)
   {
-    QListViewItem *i = currentItem();
+    Q3ListViewItem *i = currentItem();
     if (i == 0)
       i = firstChild();
     if (i != 0)
@@ -177,7 +181,7 @@ void CDatabaseListView::updateListView()
   setBusy(false);
 }
 
-void CDatabaseListView::getActionMenu(QPopupMenu *m)
+void CDatabaseListView::getActionMenu(Q3PopupMenu *m)
 {
 #ifdef DEBUG
   qDebug("CDatabaseListView::getActionMenu()");
@@ -203,7 +207,7 @@ CMessagePanel * CDatabaseListView::messagePanel() const
   return consoleWindow()->messagePanel();  
 }
 
-QWidgetStack * CDatabaseListView::widgetStack() const
+Q3WidgetStack * CDatabaseListView::widgetStack() const
 {
 #ifdef DEBUG
   qDebug("CDatabaseListView::widgetStack()");
@@ -213,7 +217,7 @@ QWidgetStack * CDatabaseListView::widgetStack() const
 }
 
 
-void CDatabaseListView::ContextMenuRequested(QListViewItem *item, const QPoint & pos, int)
+void CDatabaseListView::ContextMenuRequested(Q3ListViewItem *item, const QPoint & pos, int)
 {
 #ifdef DEBUG
   qDebug("CDatabaseListView::ContextMenuRequested()");
@@ -224,7 +228,7 @@ void CDatabaseListView::ContextMenuRequested(QListViewItem *item, const QPoint &
   else
     if (item == 0)  //No item was clicked
     {
-      QPopupMenu *menu = new QPopupMenu();
+      Q3PopupMenu *menu = new Q3PopupMenu();
       if (consoleWindow()->isApplicationWindow())
       {
         menu->insertItem(getPixmapIcon("registerServerIcon"), tr("New"), MENU_NEW);
@@ -249,7 +253,7 @@ void CDatabaseListView::ContextMenuRequested(QListViewItem *item, const QPoint &
       ((CDatabaseListViewItem *) item)->displayMenu(pos);
 }
 
-void CDatabaseListView::DoubleClicked(QListViewItem *item)
+void CDatabaseListView::DoubleClicked(Q3ListViewItem *item)
 {
 #ifdef DEBUG
   qDebug("CDatabaseListView::DoubleClicked()");
@@ -263,7 +267,7 @@ void CDatabaseListView::DoubleClicked(QListViewItem *item)
   setBusy(false);
 }
 
-void CDatabaseListView::Expanded(QListViewItem *item)
+void CDatabaseListView::Expanded(Q3ListViewItem *item)
 {  
 #ifdef DEBUG
   qDebug("CDatabaseListView::Expanded()");
@@ -275,7 +279,7 @@ void CDatabaseListView::Expanded(QListViewItem *item)
   ((CDatabaseListViewItem *) item)->expanded();
 }
 
-void CDatabaseListView::Collapsed(QListViewItem *item)
+void CDatabaseListView::Collapsed(Q3ListViewItem *item)
 {  
 #ifdef DEBUG
   qDebug("CDatabaseListView::Collapsed()");
@@ -286,7 +290,7 @@ void CDatabaseListView::Collapsed(QListViewItem *item)
   ((CDatabaseListViewItem *) item)->collapsed();
 }
 
-void CDatabaseListView::ItemRenamed(QListViewItem * item, int, const QString & text)
+void CDatabaseListView::ItemRenamed(Q3ListViewItem * item, int, const QString & text)
 {
 #ifdef DEBUG
   qDebug("CDatabaseListView::ItemRenamed(QListViewItem *, int, '%s')", debug_string(text));
@@ -304,7 +308,7 @@ void CDatabaseListView::setItemRoot(CDatabaseListViewItem *item)
 #endif
 
   setBusy(true);
-  QListViewItem * new_item = 0;
+  Q3ListViewItem * new_item = 0;
   CMySQLServer *m = item->mysql()->oneConnection() ? item->mysql() : 0;
   switch(item->type())
   {  
@@ -384,7 +388,7 @@ void CDatabaseListView::openInNewWindow(CDatabaseListViewItem *item)
   item->setBlocked(false);
 }
 
-void CDatabaseListView::ReturnPressed(QListViewItem *item)
+void CDatabaseListView::ReturnPressed(Q3ListViewItem *item)
 {
 #ifdef DEBUG
   qDebug("CDatabaseListView::ReturnPressed()");
@@ -393,7 +397,7 @@ void CDatabaseListView::ReturnPressed(QListViewItem *item)
   DoubleClicked(item);
 }
 
-void CDatabaseListView::SpacePressed(QListViewItem *item)
+void CDatabaseListView::SpacePressed(Q3ListViewItem *item)
 {
 #ifdef DEBUG
   qDebug("CDatabaseListView::SpacePressed()");
@@ -413,7 +417,7 @@ void CDatabaseListView::keyPressEvent(QKeyEvent * e)
   if (!isBusy() && currentItem() != 0)
       ((CDatabaseListViewItem *) currentItem())->keyPressed(e);
 
-  QListView::keyPressEvent(e);
+  Q3ListView::keyPressEvent(e);
 }
 
 void CDatabaseListView::emitEnableQueryButton(CDatabaseListViewItem *i)
@@ -425,7 +429,7 @@ void CDatabaseListView::emitEnableQueryButton(CDatabaseListViewItem *i)
   emit itemSelected(i);
 }
 
-void CDatabaseListView::CurrentChanged(QListViewItem *item)
+void CDatabaseListView::CurrentChanged(Q3ListViewItem *item)
 {
 #ifdef QDEBUG
   qDebug("CDatabaseListView::CurrentChanged()");
@@ -451,12 +455,12 @@ void CDatabaseListView::init()
   qDebug("CDatabaseListView::init()");
 #endif
 
-  connect(this, SIGNAL(contextMenuRequested(QListViewItem *, const QPoint &, int)), this, SLOT(ContextMenuRequested(QListViewItem *, const QPoint &, int)));
-  connect(this, SIGNAL(doubleClicked(QListViewItem *)), this, SLOT(DoubleClicked(QListViewItem *)));
-  connect(this, SIGNAL(expanded(QListViewItem *)), this, SLOT(Expanded(QListViewItem *)));
-  connect(this, SIGNAL(collapsed(QListViewItem *)), this, SLOT(Collapsed(QListViewItem *)));
-  connect(this, SIGNAL(itemRenamed(QListViewItem *, int, const QString &)), this, SLOT(ItemRenamed(QListViewItem *, int, const QString &)));
-  connect(this, SIGNAL(returnPressed(QListViewItem *)), this, SLOT(ReturnPressed(QListViewItem *)));
-  connect(this, SIGNAL(spacePressed(QListViewItem *)), this, SLOT(SpacePressed(QListViewItem *)));
-  connect(this, SIGNAL(currentChanged(QListViewItem *)), this, SLOT(CurrentChanged(QListViewItem *)));
+  connect(this, SIGNAL(contextMenuRequested(Q3ListViewItem *, const QPoint &, int)), this, SLOT(ContextMenuRequested(Q3ListViewItem *, const QPoint &, int)));
+  connect(this, SIGNAL(doubleClicked(Q3ListViewItem *)), this, SLOT(DoubleClicked(Q3ListViewItem *)));
+  connect(this, SIGNAL(expanded(Q3ListViewItem *)), this, SLOT(Expanded(Q3ListViewItem *)));
+  connect(this, SIGNAL(collapsed(Q3ListViewItem *)), this, SLOT(Collapsed(Q3ListViewItem *)));
+  connect(this, SIGNAL(itemRenamed(Q3ListViewItem *, int, const QString &)), this, SLOT(ItemRenamed(Q3ListViewItem *, int, const QString &)));
+  connect(this, SIGNAL(returnPressed(Q3ListViewItem *)), this, SLOT(ReturnPressed(Q3ListViewItem *)));
+  connect(this, SIGNAL(spacePressed(Q3ListViewItem *)), this, SLOT(SpacePressed(Q3ListViewItem *)));
+  connect(this, SIGNAL(currentChanged(Q3ListViewItem *)), this, SLOT(CurrentChanged(Q3ListViewItem *)));
 }

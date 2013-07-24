@@ -22,7 +22,10 @@
 #include <qapplication.h>
 #include <qmap.h>
 #include <qworkspace.h>
-#include <qptrlist.h>
+#include <q3ptrlist.h>
+//Added by qt3to4:
+#include <QPixmap>
+#include <QTranslator>
 #include "CMyWindow.h"
 #include "CPlugin.h"
 #include "config.h"
@@ -112,7 +115,7 @@ public:
   bool linuxPaste() const { return linux_paste; }
   void setLinuxPaste(bool b) { linux_paste = b; }
 
-  QPtrList<CMyWindow> *childWindows() { return &child_windows; }
+  Q3PtrList<CMyWindow> *childWindows() { return &child_windows; }
 
   QMap<QString, QPixmap> * loadedPlugins() { return &loaded_plugins; }
   
@@ -135,7 +138,7 @@ private:
   QMap<QString, QPixmap> icons_map;
   
   CConsoleWindow *console_window;
-  QPtrList<CMyWindow> child_windows;
+  Q3PtrList<CMyWindow> child_windows;
   QFont printer_font;
   QWorkspace *workspace;
 

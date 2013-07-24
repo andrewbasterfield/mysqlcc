@@ -22,6 +22,8 @@
 #include <qpixmap.h>
 #include <qregexp.h>
 #include <qstringlist.h>
+//Added by qt3to4:
+#include <Q3TextStream>
 
 /*
 Wrapper for CApplication::Application() (see CApplication)
@@ -48,9 +50,9 @@ bool loadSyntaxSection(QStringList *list, int section, bool lower_case, QString 
 {
   list->clear();  
   QFile f_strm(syntaxFile.isNull() ? myApp()->syntaxFile() : syntaxFile);
-  if (f_strm.open(IO_ReadOnly))
+  if (f_strm.open(QIODevice::ReadOnly))
   {
-    QTextStream t_strm(&f_strm);
+    Q3TextStream t_strm(&f_strm);
     bool sectionFound = false;
     QString str;
     QRegExp rx;
@@ -114,7 +116,7 @@ void saveToFile(QString &fileName, const QString &default_ext, const QString &ex
       if ((QMessageBox::warning(0, qApp->translate("SaveToFile", "Replace File"), qApp->translate("SaveToFile", "The specified file name already exists.\nDo you want to replace it ?"),
         QMessageBox::Yes, QMessageBox::No) != QMessageBox::Yes))
         return;
-    if (!file.open(IO_WriteOnly))
+    if (!file.open(QIODevice::WriteOnly))
     {
       if (m != 0)
         m->critical(qApp->translate("saveToFile", "An error occurred while saving the file"));
@@ -125,7 +127,7 @@ void saveToFile(QString &fileName, const QString &default_ext, const QString &ex
     fileName = fn;
     if (!writeBinary)
     {
-      QTextStream ts(&file);
+      Q3TextStream ts(&file);
       ts << contents;
     }
     else

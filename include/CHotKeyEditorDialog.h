@@ -21,15 +21,21 @@
 #include <stddef.h>
 #include <qvariant.h>
 #include <qwidget.h>
-#include <qpopupmenu.h>
-#include <qlistview.h>
+#include <q3popupmenu.h>
+#include <q3listview.h>
 #include <qmessagebox.h>
 #include <qkeysequence.h>
+//Added by qt3to4:
+#include <QPixmap>
+#include <Q3GridLayout>
+#include <Q3HBoxLayout>
+#include <Q3VBoxLayout>
+#include <QKeyEvent>
 #include "CConfigDialog.h"
 
-class QVBoxLayout; 
-class QHBoxLayout; 
-class QGridLayout; 
+class Q3VBoxLayout; 
+class Q3HBoxLayout; 
+class Q3GridLayout; 
 class CConfig;
 
 class CHotKeySetupBox : public QMessageBox
@@ -48,11 +54,11 @@ private:
   bool done;  
 };
 
-class CHotKeyListViewItem : public QListViewItem
+class CHotKeyListViewItem : public Q3ListViewItem
 {
 public:
-  CHotKeyListViewItem ( QListView * parent, CAction * a = 0 )
-    : QListViewItem(parent), m_action(a)
+  CHotKeyListViewItem ( Q3ListView * parent, CAction * a = 0 )
+    : Q3ListViewItem(parent), m_action(a)
   {
     mod = false;
   }
@@ -67,7 +73,7 @@ private:
   bool mod;
 };
 
-class CHotKeyEditorMenu : public QPopupMenu
+class CHotKeyEditorMenu : public Q3PopupMenu
 {
   Q_OBJECT
 
@@ -84,7 +90,7 @@ class CHotKeyEditorTab : public CConfigDialogTab
   Q_OBJECT
     
 public:  
-  CHotKeyEditorTab(QWidget* parent, QWidget * wnd, const char* name = 0, WFlags fl = 0);
+  CHotKeyEditorTab(QWidget* parent, QWidget * wnd, const char* name = 0, Qt::WFlags fl = 0);
   bool save(CConfig *cfg);
   void initHotKeys();
 
@@ -97,8 +103,8 @@ signals:
 private:
   void checkDuplicates();
   QPixmap warningIcon;
-  QGridLayout *CHotKeyEditorTabLayout;
-  QListView *ListView1;
+  Q3GridLayout *CHotKeyEditorTabLayout;
+  Q3ListView *ListView1;
   QWidget *window;
 };
 

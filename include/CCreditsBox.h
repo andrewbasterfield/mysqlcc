@@ -19,12 +19,17 @@
 #define CCREDITSBOX_H
 
 #include <stddef.h>
-#include <qtextedit.h>
+#include <q3textedit.h>
+//Added by qt3to4:
+#include <Q3GridLayout>
+#include <QLabel>
+#include <Q3HBoxLayout>
+#include <Q3VBoxLayout>
 #include "CInfoDialog.h"
 
-class QVBoxLayout; 
-class QHBoxLayout; 
-class QGridLayout; 
+class Q3VBoxLayout; 
+class Q3HBoxLayout; 
+class Q3GridLayout; 
 class QLabel;
 
 class CCreditsWidget : public QWidget
@@ -32,7 +37,7 @@ class CCreditsWidget : public QWidget
   Q_OBJECT
     
 public:
-  CCreditsWidget( QWidget* parent = 0, const char* name = 0, WFlags fl = 0 );
+  CCreditsWidget( QWidget* parent = 0, const char* name = 0, Qt::WFlags fl = 0 );
   ~CCreditsWidget();
   
 private:
@@ -40,7 +45,7 @@ private:
   QLabel* TextLabel2_2;
   QLabel* TextLabel2;
   QLabel* TextLabel3;
-  QGridLayout* creditsWidgetLayout;
+  Q3GridLayout* creditsWidgetLayout;
 };
 
 class CCreditsBox : public CInfoDialog
@@ -48,7 +53,7 @@ class CCreditsBox : public CInfoDialog
   Q_OBJECT
     
 public:
-  CCreditsBox( QWidget* parent = 0, const char* name = 0, bool modal = FALSE, WFlags fl = 0 );
+  CCreditsBox( QWidget* parent = 0, const char* name = 0, bool modal = FALSE, Qt::WFlags fl = 0 );
   ~CCreditsBox();
   
 private:

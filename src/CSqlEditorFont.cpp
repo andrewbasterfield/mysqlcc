@@ -31,7 +31,7 @@
 #endif
 #endif
 
-QIntDict<CSqlEditorFont> CSqlEditorFont::sqleditorstyles;
+Q3IntDict<CSqlEditorFont> CSqlEditorFont::sqleditorstyles;
 
 CSqlEditorFont::CSqlEditorFont(CConfig *cfg, const QString & name, highlight_type highlight, const QString & defaultfont, const QString & defaultcolor)
 {

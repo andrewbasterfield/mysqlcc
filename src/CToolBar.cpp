@@ -17,6 +17,9 @@
 */
 #include "CToolBar.h"
 #include "config.h"
+//Added by qt3to4:
+#include <Q3PopupMenu>
+#include <QPixmap>
 
 #ifdef DEBUG_LEVEL
 #if DEBUG_LEVEL < 4
@@ -28,7 +31,7 @@
 #endif
 #endif
 
-CToolBarButton::CToolBarButton(QWidget * parent, int v, QPopupMenu *p)
+CToolBarButton::CToolBarButton(QWidget * parent, int v, Q3PopupMenu *p)
 : QToolButton(parent, "my_ToolButton")
 {
 #ifdef DEBUG
@@ -54,8 +57,8 @@ void CToolBarButton::Clicked()
   emit button_clicked(value());
 }
 
-CToolBar::CToolBar(QMainWindow * parent, const char * name)
-: QToolBar(parent, name)
+CToolBar::CToolBar(Q3MainWindow * parent, const char * name)
+: Q3ToolBar(parent, name)
 {
 #ifdef DEBUG
   qDebug("CToolBar::CToolBar(QMainWindow *, const char *)");
@@ -72,11 +75,11 @@ void CToolBar::clear()
 #endif
 
   cnt = 0;
-  QToolBar::clear();
+  Q3ToolBar::clear();
   buttons_dict.clear();
 }
 
-void CToolBar::addButton(const QPixmap &pix, int val, QPopupMenu *p, bool ena, const QString &label)
+void CToolBar::addButton(const QPixmap &pix, int val, Q3PopupMenu *p, bool ena, const QString &label)
 {
 #ifdef DEBUG
   qDebug("CToolBar::addButton(const QPixmap &, %d, QPopupMenu *, %s)", val, debug_string(booltostr(ena)));

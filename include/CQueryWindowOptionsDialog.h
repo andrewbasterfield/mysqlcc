@@ -20,18 +20,24 @@
 
 #include <stddef.h>
 #include <qvariant.h>
+//Added by qt3to4:
+#include <Q3GridLayout>
+#include <Q3HBoxLayout>
+#include <Q3VBoxLayout>
+#include <QLabel>
+#include <Q3Frame>
 #include "CConfigDialog.h"
 
 class CMySQLServer;
-class QVBoxLayout; 
-class QHBoxLayout; 
-class QGridLayout; 
+class Q3VBoxLayout; 
+class Q3HBoxLayout; 
+class Q3GridLayout; 
 class QCheckBox;
 class QComboBox;
-class QFrame;
+class Q3Frame;
 class QLabel;
 class QSpinBox;
-class QButtonGroup;
+class Q3ButtonGroup;
 class QRadioButton;
 
 
@@ -40,7 +46,7 @@ class CQueryWindowOptionsTab : public CConfigDialogTab
   Q_OBJECT
     
 public:
-  CQueryWindowOptionsTab(QWidget* parent = 0, const char* name = 0, WFlags fl = 0);
+  CQueryWindowOptionsTab(QWidget* parent = 0, const char* name = 0, Qt::WFlags fl = 0);
   
 protected:
   void setDefaultValues(CConfig *cfg);
@@ -50,11 +56,11 @@ protected slots:
   virtual void languageChange();
   
 private:
-  QGridLayout* CQueryWindowOptionsTabLayout;
-  QGridLayout* multipleQueriesLayout;
+  Q3GridLayout* CQueryWindowOptionsTabLayout;
+  Q3GridLayout* multipleQueriesLayout;
   QCheckBox* followQueryTab;
   QCheckBox* queryNewTab;
-  QButtonGroup* multipleQueries;
+  Q3ButtonGroup* multipleQueries;
   QRadioButton* radioButton1;
   QRadioButton* radioButton3;
   QSpinBox* maxResults;
@@ -67,7 +73,7 @@ class CQueryOptionsTab : public CConfigDialogTab
   Q_OBJECT
     
 public:
-  CQueryOptionsTab(QWidget* parent, const char* name = 0, WFlags fl = 0);  
+  CQueryOptionsTab(QWidget* parent, const char* name = 0, Qt::WFlags fl = 0);  
   
 protected slots:
   virtual void languageChange();
@@ -77,7 +83,7 @@ protected:
   bool save(CConfig *cfg);
   
 private:
-  QFrame* Frame5;
+  Q3Frame* Frame5;
   QLabel* TextLabel5;
   QComboBox* autocommit;
   QLabel* TextLabel4;
@@ -104,9 +110,9 @@ private:
   QCheckBox* force;
   QCheckBox* use_history_file;
   QCheckBox* silent;
-  QGridLayout* CQueryOptionsTabLayout;
-  QGridLayout* Frame5Layout;
-  QHBoxLayout* Layout2;
+  Q3GridLayout* CQueryOptionsTabLayout;
+  Q3GridLayout* Frame5Layout;
+  Q3HBoxLayout* Layout2;
 };
 
 class CQueryWindowOptionsDialog : public CConfigDialog

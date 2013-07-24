@@ -17,7 +17,7 @@
 */
 #include "CFieldEditorWidget.h"
 #include <stddef.h>  
-#include <qmainwindow.h>
+#include <q3mainwindow.h>
 
 CFieldEditorWidget::CFieldEditorWidget(QWidget *parent, bool readonly, const char* name)
 :QWidget(parent, name, 0)

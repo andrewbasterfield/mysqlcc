@@ -25,6 +25,9 @@
 #include "panels.h"
 #include <stddef.h>  
 #include <qinputdialog.h>
+//Added by qt3to4:
+#include <QPixmap>
+#include <Q3PtrList>
 
 CDatabaseGroupItem::CDatabaseGroupItem(CDatabaseListViewItem * parent, CMySQLServer *m)
 : CDatabaseListViewItem(parent, m, DATABASE_GROUP, "CDatabaseGroupItem")
@@ -92,7 +95,7 @@ void CDatabaseGroupItem::setOpen(bool b)
     return;
 
   setPixmap(0, b ? openFolderIcon : closedFolderIcon);
-  QListViewItem::setOpen(b);
+  Q3ListViewItem::setOpen(b);
 }
 
 void CDatabaseGroupItem::activated()
@@ -181,8 +184,8 @@ void CDatabaseGroupItem::addDatabases(bool is_refresh)
 
   if (is_refresh)
   {
-    QPtrList<CDatabaseListViewItem> removed_databases_list; 
-    QListViewItemIterator c( firstChild() );
+    Q3PtrList<CDatabaseListViewItem> removed_databases_list; 
+    Q3ListViewItemIterator c( firstChild() );
     for ( ; c.current(); ++c )
     {
       if (c.current()->parent() == this)

@@ -20,26 +20,33 @@
 
 #include <stddef.h>
 #include <qvariant.h>
-#include <qlistview.h>
+#include <q3listview.h>
 #include <qtabwidget.h>
 #include <qsize.h>
-#include <qintdict.h>
+#include <q3intdict.h>
+//Added by qt3to4:
+#include <QPixmap>
+#include <Q3GridLayout>
+#include <Q3HBoxLayout>
+#include <Q3VBoxLayout>
+#include <QLabel>
+#include <QKeyEvent>
 #include "CDockWindow.h"
 
-class QVBoxLayout; 
-class QHBoxLayout; 
-class QGridLayout; 
+class Q3VBoxLayout; 
+class Q3HBoxLayout; 
+class Q3GridLayout; 
 class QLabel;
 
 class CMessagePanel;
 class CPanel;
 
-class CPanel : public QListView
+class CPanel : public Q3ListView
 {
   Q_OBJECT
     
 public:
-  CPanel(QWidget * parent = 0, const char * name = 0, WFlags f = 0);
+  CPanel(QWidget * parent = 0, const char * name = 0, Qt::WFlags f = 0);
   void setCarriageReturn(const QString &s);
   QString realText(int idx);
   void setMaxDisplaySize(int len) { maxdisplay = len; };
@@ -52,14 +59,14 @@ public:
   void showMessage(const QPixmap & w, const QString & m);  
  
 public slots:
-  void setBottomItem(QListViewItem *i=0);
+  void setBottomItem(Q3ListViewItem *i=0);
 
 protected slots:
-  virtual void displayMenu(QListViewItem *, const QPoint &, int) {} ;
+  virtual void displayMenu(Q3ListViewItem *, const QPoint &, int) {} ;
   
 protected:
   virtual void save();
-  virtual void copy(QListViewItem *);
+  virtual void copy(Q3ListViewItem *);
   virtual QSize minimumSizeHint() const { return QSize(1, 1); }
   virtual QSize sizeHint() const { return QSize(1, 1); }
   QString tmpFile;
@@ -72,14 +79,14 @@ private:
   CMessagePanel *msgPanel;
   QString enter;
   QString insertRealText(const QString &s);
-  QIntDict<QString> realtext;
+  Q3IntDict<QString> realtext;
 };
 
-class CPanelItem : public QListViewItem
+class CPanelItem : public Q3ListViewItem
 {
 public:
-  CPanelItem(QListView * parent, const QString &t=QString::null, const QPixmap &p=0);
-  CPanelItem(QListView * parent, QListViewItem * after, const QString &t=QString::null, const QPixmap &p=0);
+  CPanelItem(Q3ListView * parent, const QString &t=QString::null, const QPixmap &p=0);
+  CPanelItem(Q3ListView * parent, Q3ListViewItem * after, const QString &t=QString::null, const QPixmap &p=0);
   QString realText() const { return real_text; }
   void setText(int, const QString &s);
   int maxDisplay() { return ((CPanel *)listView())->maxDisplay(); }
@@ -94,7 +101,7 @@ class CMessagePanel : public CPanel
   Q_OBJECT
     
 public:
-  CMessagePanel(const QString &caption=QString::null, QWidget * parent = 0, const char * name = 0, WFlags f = 0);
+  CMessagePanel(const QString &caption=QString::null, QWidget * parent = 0, const char * name = 0, Qt::WFlags f = 0);
   
 public slots:
   void warning(const QString & m);
@@ -103,7 +110,7 @@ public slots:
   void message(ushort type, const QString & m);
   
 private slots:  
-  void displayMenu(QListViewItem *, const QPoint &, int);
+  void displayMenu(Q3ListViewItem *, const QPoint &, int);
 
 private:
   QPixmap warningIcon;
@@ -117,7 +124,7 @@ class CHistoryPanel : public CPanel
   Q_OBJECT
     
 public:
-  CHistoryPanel(const QString &caption=QString::null, QWidget * parent = 0, const char * name = 0, WFlags f = 0);  
+  CHistoryPanel(const QString &caption=QString::null, QWidget * parent = 0, const char * name = 0, Qt::WFlags f = 0);  
   QString getSelectedHintText();
   
 public slots:  
@@ -131,10 +138,10 @@ signals:
   void doubleClicked(const QString &);
   
 private slots:
-  void setCurrentHint(QListViewItem * i);
-  void DoubleClicked(QListViewItem * i);
-  void displayMenu(QListViewItem *, const QPoint &, int);
-  void mouseClicked(int, QListViewItem * i, const QPoint &, int);
+  void setCurrentHint(Q3ListViewItem * i);
+  void DoubleClicked(Q3ListViewItem * i);
+  void displayMenu(Q3ListViewItem *, const QPoint &, int);
+  void mouseClicked(int, Q3ListViewItem * i, const QPoint &, int);
   
 private:
   QPixmap historyScriptIcon;
@@ -147,19 +154,19 @@ class CSqlDebugPanel : public CPanel
   Q_OBJECT
     
 public:
-  CSqlDebugPanel(const QString &caption=QString::null, QWidget * parent = 0, const char * name = 0, WFlags f = 0);
+  CSqlDebugPanel(const QString &caption=QString::null, QWidget * parent = 0, const char * name = 0, Qt::WFlags f = 0);
   QString selectedHintText();
   
 public slots:
   void SqlDebug(const QString & m);
   
 private slots:
-  void displayMenu(QListViewItem *, const QPoint &, int);
-  void setCurrentHint(QListViewItem * i);
-  void mouseClicked(int, QListViewItem * i, const QPoint &, int);
+  void displayMenu(Q3ListViewItem *, const QPoint &, int);
+  void setCurrentHint(Q3ListViewItem * i);
+  void mouseClicked(int, Q3ListViewItem * i, const QPoint &, int);
   
 private:
-  void copy(QListViewItem *);
+  void copy(Q3ListViewItem *);
   QPixmap historyScriptIcon;
 };
 
@@ -169,7 +176,7 @@ class CMessageWindow : public CDockWindow
   Q_OBJECT
     
 public:
-  CMessageWindow (Place p = InDock, QWidget * parent = 0, const char * name = 0, WFlags f = 0) ;
+  CMessageWindow (Place p = InDock, QWidget * parent = 0, const char * name = 0, Qt::WFlags f = 0) ;
   void setCarriageReturn(const QString &s);
   void addPanel(QWidget *panel);
   void setTabEnabled(QWidget * w, bool enable);

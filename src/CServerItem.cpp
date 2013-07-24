@@ -27,6 +27,9 @@
 #include "CDatabaseGroupItem.h"
 #include "CServerAdministrationItem.h"
 #include "CUserAdminItem.h"
+//Added by qt3to4:
+#include <QPixmap>
+#include <QKeyEvent>
 
 #ifdef DEBUG_LEVEL
 #if DEBUG_LEVEL < 1
@@ -88,7 +91,7 @@ void CServerItem::keyPressed(QKeyEvent * e)
   if (isBlocked())
     return;
 
-  if (e->key() == QListViewItem::Key_Delete && !isBlocked())
+  if (e->key() == Qt::Key_Delete && !isBlocked())
     processMenu(MENU_DELETE);
   else
     CDatabaseListViewItem::keyPressed(e);

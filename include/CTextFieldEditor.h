@@ -19,14 +19,17 @@
 #define CTEXTFIELDEDITOR_H
 
 #include "CFieldEditorWidget.h"
+//Added by qt3to4:
+#include <Q3PopupMenu>
+#include <Q3GridLayout>
 
 class CAction;
 class Editor;
-class QToolBar;
+class Q3ToolBar;
 class CSqlTableItem;
 class CMySQLServer;
-class QPopupMenu;
-class QGridLayout;
+class Q3PopupMenu;
+class Q3GridLayout;
 class QAction;
 
 class CTextFieldEditor : public CFieldEditorWidget
@@ -49,10 +52,10 @@ private slots:
 
 private:
   void init();
-  QGridLayout* widgetLayout;
-  QPopupMenu *fileMenu;
-  QPopupMenu *editMenu;
-  QToolBar *toolBar;
+  Q3GridLayout* widgetLayout;
+  Q3PopupMenu *fileMenu;
+  Q3PopupMenu *editMenu;
+  Q3ToolBar *toolBar;
   CAction* fileOpenAction;
   CAction* fileSaveAsAction;
   CAction* filePrintAction;

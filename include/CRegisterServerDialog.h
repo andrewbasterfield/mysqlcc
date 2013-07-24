@@ -21,28 +21,33 @@
 #include <stddef.h>
 #include <qvariant.h>
 #include <qwidget.h>
-#include <qgroupbox.h>
+#include <q3groupbox.h>
 #include <qcheckbox.h>
 #include <qlabel.h>
 #include <qspinbox.h>
 #include <qradiobutton.h>
-#include <qbuttongroup.h>
+#include <q3buttongroup.h>
 #include <qfile.h>
+//Added by qt3to4:
+#include <QPixmap>
+#include <Q3GridLayout>
+#include <Q3HBoxLayout>
+#include <Q3VBoxLayout>
 #include "CConfigDialog.h"
 
-class QVBoxLayout; 
-class QHBoxLayout; 
-class QGridLayout; 
+class Q3VBoxLayout; 
+class Q3HBoxLayout; 
+class Q3GridLayout; 
 class QCheckBox;
-class QGroupBox;
+class Q3GroupBox;
 class QLabel;
 class QLineEdit;
 class QPushButton;
 class QSpinBox;
 class CConfig;
 class CMessagePanel;
-class QListBox;
-class QListBoxItem;
+class Q3ListBox;
+class Q3ListBoxItem;
 class QPixmap;
 
 
@@ -51,7 +56,7 @@ class CMySQLOptionsTab : public CConfigDialogTab
   Q_OBJECT
 
 public:
-  CMySQLOptionsTab(QWidget* parent = 0, const char* name = 0, WFlags fl = 0);
+  CMySQLOptionsTab(QWidget* parent = 0, const char* name = 0, Qt::WFlags fl = 0);
   void setDefaultValues(CConfig *conn=0);
   bool save(CConfig *conn);
   
@@ -70,7 +75,7 @@ private:
   QSpinBox* maxJoinSize;
   QSpinBox* maxAllowedPacket;
   QCheckBox* localInFile;
-  QGridLayout* CMySQLOptionsTabLayout;
+  Q3GridLayout* CMySQLOptionsTabLayout;
 };
 
 class CSaveServerOptionsTab : public CConfigDialogTab
@@ -78,7 +83,7 @@ class CSaveServerOptionsTab : public CConfigDialogTab
   Q_OBJECT
       
 public:
-  CSaveServerOptionsTab (QWidget* parent = 0, const char* name = 0, WFlags fl = 0);
+  CSaveServerOptionsTab (QWidget* parent = 0, const char* name = 0, Qt::WFlags fl = 0);
   void setDefaultValues(CConfig *conn=0);
   bool save(CConfig *conn);  
   
@@ -92,8 +97,8 @@ private:
   QLineEdit* ReplaceEmpty;
   QLineEdit* Enclosed;
   QLabel* TextLabel4;
-  QVBoxLayout* CSaveServerOptionsTabLayout;
-  QGridLayout* Layout20;  
+  Q3VBoxLayout* CSaveServerOptionsTabLayout;
+  Q3GridLayout* Layout20;  
 };
 
 class CDatabaseServerOptionsTab : public CConfigDialogTab
@@ -101,10 +106,10 @@ class CDatabaseServerOptionsTab : public CConfigDialogTab
   Q_OBJECT
 
 public:
-  CDatabaseServerOptionsTab (QWidget* parent = 0, const char* name = 0, WFlags fl = 0);
+  CDatabaseServerOptionsTab (QWidget* parent = 0, const char* name = 0, Qt::WFlags fl = 0);
   void setDefaultValues(CConfig *conn=0);
   bool save(CConfig *conn);
-  QListBox* databases;
+  Q3ListBox* databases;
 
 private slots:
   void radioButton2Toggled(bool);
@@ -113,13 +118,13 @@ private slots:
 
 private:
   QCheckBox* showAllDatabasesCheckBox;
-  QButtonGroup* databaseRetrievalGroup;
+  Q3ButtonGroup* databaseRetrievalGroup;
   QPushButton* addDatabase;
   QPushButton* deleteDatabase;
   QRadioButton* radioButton2;
   QRadioButton* radioButton1;  
-  QGridLayout* CDatabaseServerOptionsTabLayout;
-  QGridLayout* databaseRetrievalGroupLayout;
+  Q3GridLayout* CDatabaseServerOptionsTabLayout;
+  Q3GridLayout* databaseRetrievalGroupLayout;
   QPixmap databaseIcon;
 };
 
@@ -128,20 +133,20 @@ class CGeneralServerOptionsTab : public CConfigDialogTab
   Q_OBJECT
     
 public:
-  CGeneralServerOptionsTab (bool isediting, QWidget* parent = 0, const char* name = 0, WFlags fl = 0);
+  CGeneralServerOptionsTab (bool isediting, QWidget* parent = 0, const char* name = 0, Qt::WFlags fl = 0);
   void setDefaultValues(CConfig *Settings);
   bool save(CConfig *conn);  
   QString validate() const;
   
   QLineEdit* HostNameBox;
-  QButtonGroup* tableRetrievalGroup;
+  Q3ButtonGroup* tableRetrievalGroup;
   QRadioButton* retrieveShowTableStatus;
   QRadioButton* retrieveShowTables;
   QLineEdit* PasswordBox;
   QLineEdit* UserNameBox;
   QSpinBox* PortBox;
   QLineEdit* ConnectionNameBox;
-  QGroupBox* Options;
+  Q3GroupBox* Options;
   QLineEdit* socketFile;
   QPushButton* socketBrowse;
   QCheckBox* oneConnectionCheckBox;
@@ -165,9 +170,9 @@ private:
   bool isEditing;
   QLabel* socketLabel;
   QLabel* userNameLabel;
-  QGridLayout* CGeneralServerOptionsTabLayout;
-  QGridLayout* tableRetrievalGroupLayout;
-  QGridLayout* OptionsLayout;
+  Q3GridLayout* CGeneralServerOptionsTabLayout;
+  Q3GridLayout* tableRetrievalGroupLayout;
+  Q3GridLayout* OptionsLayout;
   QLabel* portLabel;
   QLabel* connectionLabel;
   QLabel* hostLabel;

@@ -28,31 +28,34 @@
 #include <stddef.h>
 #include <qregexp.h>
 #include <qvariant.h>
-#include <qtable.h>
+#include <q3table.h>
 #include <qtabwidget.h>
 #include <qcheckbox.h>
 #include <qlabel.h>
 #include <qlineedit.h>
 #include <qlayout.h>
-#include <qlistview.h>
+#include <q3listview.h>
 #include <qtooltip.h>
-#include <qwhatsthis.h>
+#include <q3whatsthis.h>
 #include <qaction.h>
 #include <qmenubar.h>
-#include <qpopupmenu.h>
-#include <qtoolbar.h>
+#include <q3popupmenu.h>
+#include <q3toolbar.h>
 #include <qimage.h>
 #include <qpixmap.h>
 #include <qpushbutton.h>
 #include <qradiobutton.h>
 #include <qcombobox.h>
-#include <qbuttongroup.h>
+#include <q3buttongroup.h>
 #include <qinputdialog.h>
-#include <qaccel.h>
+#include <q3accel.h>
+//Added by qt3to4:
+#include <QCloseEvent>
+#include <Q3GridLayout>
 
 static bool has_primary_index = false;
 
-CAlterTableOptions::CAlterTableOptions(QWidget* parent, QTable *f, CMySQLServer *m, const char* name, WFlags fl)
+CAlterTableOptions::CAlterTableOptions(QWidget* parent, Q3Table *f, CMySQLServer *m, const char* name, Qt::WFlags fl)
 : QWidget(parent, name, fl)
 {
   if (!name)
@@ -60,7 +63,7 @@ CAlterTableOptions::CAlterTableOptions(QWidget* parent, QTable *f, CMySQLServer 
   setCaption(trUtf8("Alter Table Options"));
   mysql = m;
   table = f;
-  CAlterTableOptionsLayout = new QGridLayout(this, 1, 1, 4, 2, "CAlterTableOptionsLayout"); 
+  CAlterTableOptionsLayout = new Q3GridLayout(this, 1, 1, 4, 2, "CAlterTableOptionsLayout"); 
   QSpacerItem* spacer = new QSpacerItem(0, 0, QSizePolicy::Minimum, QSizePolicy::Expanding);
   CAlterTableOptionsLayout->addItem(spacer, 2, 2);
   
@@ -113,13 +116,13 @@ void CAlterTableOptions::refresh()
   orderBy->setCurrentText(current);
 }
 
-CTblProperties::CTblProperties(QWidget* parent, CMySQL *m, const char* name, WFlags fl)
+CTblProperties::CTblProperties(QWidget* parent, CMySQL *m, const char* name, Qt::WFlags fl)
 : QWidget(parent, name, fl), mysql(m)
 {
   if (!name)
     setName("CTblProperties");
   setCaption(trUtf8("Table Properties"));
-  CTblPropertiesLayout = new QGridLayout(this, 1, 1, 4, 2, "CTblPropertiesLayout"); 
+  CTblPropertiesLayout = new Q3GridLayout(this, 1, 1, 4, 2, "CTblPropertiesLayout"); 
   
   TextLabel1 = new QLabel(this, "TextLabel1");
   TextLabel1->setText(trUtf8("Table Name"));
@@ -147,19 +150,19 @@ CTblProperties::CTblProperties(QWidget* parent, CMySQL *m, const char* name, WFl
   
   TextLabel8 = new QLabel(this, "TextLabel8");
   TextLabel8->setText(trUtf8("Delay Key Write"));
-  TextLabel8->setAlignment(int(QLabel::AlignVCenter | QLabel::AlignRight));
+  TextLabel8->setAlignment(int(Qt::AlignVCenter | Qt::AlignRight));
   
   CTblPropertiesLayout->addMultiCellWidget(TextLabel8, 3, 3, 4, 5);
   
   TextLabel9 = new QLabel(this, "TextLabel9");
   TextLabel9->setText(trUtf8("Row Format"));
-  TextLabel9->setAlignment(int(QLabel::AlignVCenter | QLabel::AlignRight));
+  TextLabel9->setAlignment(int(Qt::AlignVCenter | Qt::AlignRight));
   
   CTblPropertiesLayout->addWidget(TextLabel9, 1, 5);
   
   TextLabel2 = new QLabel(this, "TextLabel2");
   TextLabel2->setText(trUtf8("Table Type"));
-  TextLabel2->setAlignment(int(QLabel::AlignVCenter | QLabel::AlignRight));
+  TextLabel2->setAlignment(int(Qt::AlignVCenter | Qt::AlignRight));
   
   CTblPropertiesLayout->addWidget(TextLabel2, 0, 5);
   
@@ -175,13 +178,13 @@ CTblProperties::CTblProperties(QWidget* parent, CMySQL *m, const char* name, WFl
   
   TextLabel6 = new QLabel(this, "TextLabel6");
   TextLabel6->setText(trUtf8("Pack Keys"));
-  TextLabel6->setAlignment(int(QLabel::AlignVCenter | QLabel::AlignRight));
+  TextLabel6->setAlignment(int(Qt::AlignVCenter | Qt::AlignRight));
   
   CTblPropertiesLayout->addMultiCellWidget(TextLabel6, 2, 2, 4, 5);
   
   TextLabel7 = new QLabel(this, "TextLabel7");
   TextLabel7->setText(trUtf8("Checksum"));
-  TextLabel7->setAlignment(int(QLabel::AlignVCenter | QLabel::AlignRight));
+  TextLabel7->setAlignment(int(Qt::AlignVCenter | Qt::AlignRight));
   
   CTblPropertiesLayout->addMultiCellWidget(TextLabel7, 4, 4, 3, 5);
   
@@ -297,7 +300,7 @@ QString CTblProperties::getTableProperties() const
   return ret.left(ret.length() - 1);
 }
 
-CTableIndexes::CTableIndexes(QWidget* parent, QTable *table, CMySQL *m, CMessagePanel *p, const char* name, WFlags fl)
+CTableIndexes::CTableIndexes(QWidget* parent, Q3Table *table, CMySQL *m, CMessagePanel *p, const char* name, Qt::WFlags fl)
 : QWidget(parent, name, fl), fields(table), mysql(m), messagePanel(p)
 {
   if (!name)
@@ -306,7 +309,7 @@ CTableIndexes::CTableIndexes(QWidget* parent, QTable *table, CMySQL *m, CMessage
   setCaption(trUtf8("Indexes"));
   isAlterTable = false;
   indexDict.setAutoDelete(true);
-  CTableIndexesLayout = new QGridLayout(this, 1, 1, 4, 2, "CTableIndexesLayout"); 
+  CTableIndexesLayout = new Q3GridLayout(this, 1, 1, 4, 2, "CTableIndexesLayout"); 
   QSpacerItem* spacer = new QSpacerItem(20, 20, QSizePolicy::Minimum, QSizePolicy::Fixed);
   CTableIndexesLayout->addItem(spacer, 3, 1);
   
@@ -320,14 +323,14 @@ CTableIndexes::CTableIndexes(QWidget* parent, QTable *table, CMySQL *m, CMessage
   deleteIndex->setMaximumSize(QSize(20, 20));
   deleteIndex->setText(trUtf8(""));
   deleteIndex->setPixmap(getPixmapIcon("minusIcon"));
-  QWhatsThis::add(deleteIndex, trUtf8("Delete selected Index"));
+  Q3WhatsThis::add(deleteIndex, trUtf8("Delete selected Index"));
   
   CTableIndexesLayout->addWidget(deleteIndex, 1, 7);
   
   indexName = new QComboBox(false, this, "indexName");
   indexName->insertItem(getPixmapIcon("pkIcon"), "PRIMARY");
   indexName->setSizePolicy(QSizePolicy((QSizePolicy::SizeType)3, (QSizePolicy::SizeType)0, 0, 0, indexName->sizePolicy().hasHeightForWidth()));
-  QWhatsThis::add(indexName, trUtf8("Available Index Names"));
+  Q3WhatsThis::add(indexName, trUtf8("Available Index Names"));
   
   CTableIndexesLayout->addMultiCellWidget(indexName, 0, 0, 4, 7);
   
@@ -356,17 +359,17 @@ CTableIndexes::CTableIndexes(QWidget* parent, QTable *table, CMySQL *m, CMessage
   addIndex->setMaximumSize(QSize(20, 20));
   addIndex->setText(trUtf8(""));
   addIndex->setPixmap(getPixmapIcon("plusIcon"));
-  QWhatsThis::add(addIndex, trUtf8("Add new Index"));
+  Q3WhatsThis::add(addIndex, trUtf8("Add new Index"));
   
   CTableIndexesLayout->addWidget(addIndex, 1, 5);
   
-  indexTypes = new QButtonGroup(this, "indexTypes");
+  indexTypes = new Q3ButtonGroup(this, "indexTypes");
   indexTypes->setTitle(trUtf8("Index Type"));
-  QWhatsThis::add(indexTypes, trUtf8("Type of Index for 'Index Name'"));
+  Q3WhatsThis::add(indexTypes, trUtf8("Type of Index for 'Index Name'"));
   indexTypes->setColumnLayout(0, Qt::Vertical);
   indexTypes->layout()->setSpacing(2);
   indexTypes->layout()->setMargin(4);
-  indexTypesLayout = new QGridLayout(indexTypes->layout());
+  indexTypesLayout = new Q3GridLayout(indexTypes->layout());
   indexTypesLayout->setAlignment(Qt::AlignTop);
   QSpacerItem* spacer_4 = new QSpacerItem(0, 53, QSizePolicy::Minimum, QSizePolicy::Expanding);
   indexTypesLayout->addItem(spacer_4, 3, 1);
@@ -405,27 +408,27 @@ CTableIndexes::CTableIndexes(QWidget* parent, QTable *table, CMySQL *m, CMessage
   
   CTableIndexesLayout->addMultiCellWidget(indexTypes, 2, 4, 3, 7);
   
-  fieldsUsed = new QListView(this, "fieldsUsed");
+  fieldsUsed = new Q3ListView(this, "fieldsUsed");
   fieldsUsed->addColumn(trUtf8("Fields Used"));
   fieldsUsed->header()->setClickEnabled(false, 0);
   fieldsUsed->header()->setResizeEnabled(false, 0);
-  fieldsUsed->setSelectionMode(QListView::Extended);
+  fieldsUsed->setSelectionMode(Q3ListView::Extended);
   fieldsUsed->setSorting(-1);
-  fieldsUsed->setResizeMode(QListView::AllColumns);
+  fieldsUsed->setResizeMode(Q3ListView::AllColumns);
 
-  QWhatsThis::add(fieldsUsed, trUtf8("Fields used in this Index"));
+  Q3WhatsThis::add(fieldsUsed, trUtf8("Fields used in this Index"));
   
   CTableIndexesLayout->addMultiCellWidget(fieldsUsed, 0, 4, 2, 2);
   
-  availableFields = new QListView(this, "availableFields");
+  availableFields = new Q3ListView(this, "availableFields");
   availableFields->addColumn(trUtf8("Available Fields"));
   availableFields->header()->setClickEnabled(false, 0);
   availableFields->header()->setResizeEnabled(false, 0);
-  availableFields->setSelectionMode(QListView::Extended);  
+  availableFields->setSelectionMode(Q3ListView::Extended);  
   availableFields->setSorting(-1);
   
-  availableFields->setResizeMode(QListView::AllColumns);
-  QWhatsThis::add(availableFields, trUtf8("Available Fields that can be used as an Index"));
+  availableFields->setResizeMode(Q3ListView::AllColumns);
+  Q3WhatsThis::add(availableFields, trUtf8("Available Fields that can be used as an Index"));
   
   CTableIndexesLayout->addMultiCellWidget(availableFields, 0, 4, 0, 0);
   
@@ -437,8 +440,8 @@ CTableIndexes::CTableIndexes(QWidget* parent, QTable *table, CMySQL *m, CMessage
   connect(uniqueIndex, SIGNAL(toggled(bool)), this, SLOT(UniToggled(bool)));
   connect(indexIndex, SIGNAL(toggled(bool)), this, SLOT(IdxToggled(bool)));
   connect(fullTextIndex, SIGNAL(toggled(bool)), this, SLOT(FtToggled(bool)));
-  connect(fieldsUsed, SIGNAL(contextMenuRequested(QListViewItem *, const QPoint &, int)), this, SLOT(showFieldsUsedMenu(QListViewItem *, const QPoint &, int)));
-  connect(fieldsUsed, SIGNAL(doubleClicked(QListViewItem *)), this, SLOT(setIdxLength(QListViewItem *)));
+  connect(fieldsUsed, SIGNAL(contextMenuRequested(Q3ListViewItem *, const QPoint &, int)), this, SLOT(showFieldsUsedMenu(Q3ListViewItem *, const QPoint &, int)));
+  connect(fieldsUsed, SIGNAL(doubleClicked(Q3ListViewItem *)), this, SLOT(setIdxLength(Q3ListViewItem *)));
   
   // tab order
   setTabOrder(indexName, availableFields);
@@ -467,17 +470,17 @@ void CTableIndexes::clear()
   indexName->setCurrentItem(0);
 }
 
-void CTableIndexes::insertListViewItem(QListView *lv, const QString &txt)
+void CTableIndexes::insertListViewItem(Q3ListView *lv, const QString &txt)
 {
-  QListViewItem *item;
+  Q3ListViewItem *item;
   if (lv->lastItem() != 0)
-    item = new QListViewItem(lv, lv->lastItem());
+    item = new Q3ListViewItem(lv, lv->lastItem());
   else
-    item = new QListViewItem(lv);
+    item = new Q3ListViewItem(lv);
   item->setText(0, txt);
 }
 
-bool CTableIndexes::canSetIndexLength(QListViewItem *item, IndexFieldList::Iterator &iterator)
+bool CTableIndexes::canSetIndexLength(Q3ListViewItem *item, IndexFieldList::Iterator &iterator)
 {
   if (!item)
     return false;
@@ -518,7 +521,7 @@ bool CTableIndexes::canSetIndexLength(QListViewItem *item, IndexFieldList::Itera
     return false;
 }
 
-void CTableIndexes::setIndexLength(QListViewItem *item, IndexFieldList::Iterator &iterator)
+void CTableIndexes::setIndexLength(Q3ListViewItem *item, IndexFieldList::Iterator &iterator)
 {
   bool ok = false;
   int res = QInputDialog::getInteger(item->text(0), tr("Enter the Index Length"), 
@@ -530,21 +533,21 @@ void CTableIndexes::setIndexLength(QListViewItem *item, IndexFieldList::Iterator
   }
 }
 
-void CTableIndexes::setIdxLength(QListViewItem *item)
+void CTableIndexes::setIdxLength(Q3ListViewItem *item)
 {
   IndexFieldList::Iterator iterator;
   if (canSetIndexLength(item, iterator))
     setIndexLength(item, iterator);
 }
 
-void CTableIndexes::showFieldsUsedMenu(QListViewItem *item, const QPoint &pos, int)
+void CTableIndexes::showFieldsUsedMenu(Q3ListViewItem *item, const QPoint &pos, int)
 {
   if (!item)
     return;
   IndexFieldList::Iterator iterator;
   if (canSetIndexLength(item, iterator))
   {
-    QPopupMenu *menu = new QPopupMenu();
+    Q3PopupMenu *menu = new Q3PopupMenu();
     menu->insertItem(tr("Index Length"), 1);
     if (menu->exec(pos) == 1)
       setIndexLength(item, iterator);
@@ -601,7 +604,7 @@ void CTableIndexes::refresh()
     }
   }
  
-  QDictIterator<CIndex> it(indexDict);
+  Q3DictIterator<CIndex> it(indexDict);
   IndexFieldList del;
   IndexFieldList::Iterator del_it;
   IndexFieldList::iterator it2;
@@ -715,7 +718,7 @@ void CTableIndexes::RemoveField()
     return;
   CIndex *index = indexDict.find(indexName->currentText());
 
-  QListViewItemIterator it(fieldsUsed);
+  Q3ListViewItemIterator it(fieldsUsed);
   IndexFieldList::iterator f;
   QString idx_name;
   while (it.current() != 0)
@@ -739,7 +742,7 @@ void CTableIndexes::AddField()
     return;
   CIndex *index = indexDict.find(indexName->currentText());
 
-  QListViewItemIterator it(availableFields);
+  Q3ListViewItemIterator it(availableFields);
   while (it.current() != 0)
   {
     if (it.current()->isSelected())
@@ -839,7 +842,7 @@ QString CTableIndexes::getIndexFields(CIndex *index) const
 QString CTableIndexes::getIndexes(bool alter) const
 {
   QString ret = QString::null;
-  QDictIterator<CIndex> it(indexDict);
+  Q3DictIterator<CIndex> it(indexDict);
   QString txt;
   QString p;
   for(; it.current(); ++it)
@@ -871,7 +874,7 @@ QString CTableIndexes::getIndexes(bool alter) const
 QString CTableIndexes::getDropIndexes()
 {
   QString ret = QString::null;
-  QDictIterator<CIndex> it(indexDict);
+  Q3DictIterator<CIndex> it(indexDict);
   for(; it.current(); ++it)
   {
     if (!it.current()->isNewIndex)
@@ -897,7 +900,7 @@ QString CTableIndexes::getDropIndexes()
 }
 
 
-CFieldProperties::CFieldProperties(QWidget* parent,  const char* name, WFlags fl)
+CFieldProperties::CFieldProperties(QWidget* parent,  const char* name, Qt::WFlags fl)
 : QWidget(parent, name, fl)
 {
   if (!name)
@@ -910,7 +913,7 @@ CFieldProperties::CFieldProperties(QWidget* parent,  const char* name, WFlags fl
   floatValidator = new QRegExpValidator(QRegExp("\\d+\\s*,\\s*\\d+"), this);
 
   setCaption(trUtf8("Field Properties"));
-  CFieldPropertiesLayout = new QGridLayout(this, 1, 1, 4, 2, "CFieldPropertiesLayout"); 
+  CFieldPropertiesLayout = new Q3GridLayout(this, 1, 1, 4, 2, "CFieldPropertiesLayout"); 
   
   TextLabel1 = new QLabel(this, "TextLabel1");
   TextLabel1->setText(trUtf8("Default"));
@@ -928,41 +931,41 @@ CFieldProperties::CFieldProperties(QWidget* parent,  const char* name, WFlags fl
   CFieldPropertiesLayout->addWidget(TextLabel3, 2, 0);
   
   Default = new CNullLineEdit(this, "Default");
-  QWhatsThis::add(Default, trUtf8("Default value for the Field."));
+  Q3WhatsThis::add(Default, trUtf8("Default value for the Field."));
   
   CFieldPropertiesLayout->addMultiCellWidget(Default, 1, 1, 1, 4);
   
   Value = new QLineEdit(this, "Value");
-  QWhatsThis::add(Value, trUtf8("This stores the values for SET & ENUM Fields.  Separate each field with commas and when using text values, enclose them with single-quotes."));
+  Q3WhatsThis::add(Value, trUtf8("This stores the values for SET & ENUM Fields.  Separate each field with commas and when using text values, enclose them with single-quotes."));
   
   CFieldPropertiesLayout->addMultiCellWidget(Value, 2, 2, 1, 4);
   
   Length = new QLineEdit(this, "Length");
-  QWhatsThis::add(Length, trUtf8("Maximum Length of the Field.  When empty, the Default Length will be used."));
+  Q3WhatsThis::add(Length, trUtf8("Maximum Length of the Field.  When empty, the Default Length will be used."));
   
   CFieldPropertiesLayout->addMultiCellWidget(Length, 0, 0, 1, 4);
   
   Unsigned = new QCheckBox(this, "Unsigned");
   Unsigned->setText(trUtf8("UNSIGNED"));
-  QWhatsThis::add(Unsigned, trUtf8("Set the UNSIGNED property for this field.  For more information refere to the MySQL manual."));
+  Q3WhatsThis::add(Unsigned, trUtf8("Set the UNSIGNED property for this field.  For more information refere to the MySQL manual."));
   
   CFieldPropertiesLayout->addMultiCellWidget(Unsigned, 3, 3, 0, 1);
   
   Binary = new QCheckBox(this, "Binary");
   Binary->setText(trUtf8("BINARY"));
-  QWhatsThis::add(Binary, trUtf8("Set the BINARY property for this field.  For more information refere to the MySQL manual."));
+  Q3WhatsThis::add(Binary, trUtf8("Set the BINARY property for this field.  For more information refere to the MySQL manual."));
   
   CFieldPropertiesLayout->addMultiCellWidget(Binary, 4, 4, 0, 1);
   
   ZeroFill = new QCheckBox(this, "ZeroFill");
   ZeroFill->setText(trUtf8("ZEROFILL"));
-  QWhatsThis::add(ZeroFill, trUtf8("Set the ZEROFILL property for this field.  For more information refere to the MySQL manual."));
+  Q3WhatsThis::add(ZeroFill, trUtf8("Set the ZEROFILL property for this field.  For more information refere to the MySQL manual."));
   
   CFieldPropertiesLayout->addWidget(ZeroFill, 4, 3);
   
   AutoIncrement = new QCheckBox(this, "AutoIncrement");
   AutoIncrement->setText(trUtf8("AUTO_INCREMENT"));
-  QWhatsThis::add(AutoIncrement, trUtf8("Set the AUTO_INCREMENT property for this field.  For more information refere to the MySQL manual."));
+  Q3WhatsThis::add(AutoIncrement, trUtf8("Set the AUTO_INCREMENT property for this field.  For more information refere to the MySQL manual."));
   
   CFieldPropertiesLayout->addWidget(AutoIncrement, 3, 3);
   QSpacerItem* spacer = new QSpacerItem(0, 0, QSizePolicy::Expanding, QSizePolicy::Minimum);
@@ -1240,7 +1243,7 @@ CTableWindow::CTableWindow(QWidget* parent, CMySQLServer *m, const QString &dbna
     tableName = table_name;
 
   setCentralWidget(new QWidget(this, "qt_central_widget"));
-  CTableWindowLayout = new QGridLayout(centralWidget(), 1, 1, 4, 2, "CTableWindowLayout"); 
+  CTableWindowLayout = new Q3GridLayout(centralWidget(), 1, 1, 4, 2, "CTableWindowLayout"); 
   
   fields = new MyTable(centralWidget(), "fields");  
   fields->setNumCols(3);
@@ -1294,12 +1297,12 @@ CTableWindow::CTableWindow(QWidget* parent, CMySQLServer *m, const QString &dbna
   CAction *tableInsertAction = new CAction (tr("Insert Row"), getPixmapIcon("insertRowIcon"),
     tr("&Insert Row"), Qt::CTRL + Qt::Key_I, this, "tableInsertAction");
   tableInsertAction->setParentMenuText(tr("Table"));
-  QAccel *tableInsertAccel = new QAccel(this);  
+  Q3Accel *tableInsertAccel = new Q3Accel(this);  
   
   CAction *tableDeleteAction = new CAction (tr("Delete Row"), getPixmapIcon("deleteRowIcon"),
     tr("&Delete Row"), Qt::CTRL + Qt::Key_D, this, "tableDeleteAction");
   tableDeleteAction->setParentMenuText(tr("Table"));
-  QAccel *tableDeleteAccel = new QAccel(this);    
+  Q3Accel *tableDeleteAccel = new Q3Accel(this);    
   
   tablePrimaryKeyAction = new CAction (tr("Add Primary Key"), pkIcon,
     tr("Add Primary &Key"), Qt::CTRL + Qt::Key_K, this, "tablePrimaryKeyAction");
@@ -1314,20 +1317,20 @@ CTableWindow::CTableWindow(QWidget* parent, CMySQLServer *m, const QString &dbna
   editPasteAction->setEnabled(false);
   editPasteAction->setParentMenuText(tr("Edit"));
   
-  QToolBar * fileBar = new QToolBar(tr("File"), this, DockTop);  
+  Q3ToolBar * fileBar = new Q3ToolBar(tr("File"), this, Qt::DockTop);  
   fileSaveAction->addTo(fileBar);  
   fileReloadAction->addTo(fileBar);
   fileBar->addSeparator();
   editCopyAction->addTo(fileBar);
   editPasteAction->addTo(fileBar);
   
-  QToolBar * tableBar = new QToolBar(tr("Table"), this, DockTop);
+  Q3ToolBar * tableBar = new Q3ToolBar(tr("Table"), this, Qt::DockTop);
   tablePrimaryKeyAction->addTo(tableBar);
   tableBar->addSeparator();
   tableInsertAction->addTo(tableBar);
   tableDeleteAction->addTo(tableBar);
   
-  QPopupMenu *fileMenu = new QPopupMenu(this);
+  Q3PopupMenu *fileMenu = new Q3PopupMenu(this);
   fileSaveAction->addTo(fileMenu);
   fileSaveAsAction->addTo(fileMenu);
   fileMenu->insertSeparator();
@@ -1336,19 +1339,19 @@ CTableWindow::CTableWindow(QWidget* parent, CMySQLServer *m, const QString &dbna
   fileCloseAction->addTo(fileMenu);
   menuBar()->insertItem(trUtf8("&File"), fileMenu);
   
-  QPopupMenu *editMenu = new QPopupMenu(this);  
+  Q3PopupMenu *editMenu = new Q3PopupMenu(this);  
   
   editCopyAction->addTo(editMenu);
   editPasteAction->addTo(editMenu);
   menuBar()->insertItem(trUtf8("&Edit"), editMenu);
   
-  QPopupMenu *viewMenu = new QPopupMenu(this, "ViewMenu");
+  Q3PopupMenu *viewMenu = new Q3PopupMenu(this, "ViewMenu");
   connect(viewMenu, SIGNAL(aboutToShow()), this, SLOT(viewMenuAboutToShow()));
   
   viewShowMessagesAction->addTo(viewMenu);
   menuBar()->insertItem(tr("&View"), viewMenu);
   
-  QPopupMenu * tableMenu = new QPopupMenu(this);
+  Q3PopupMenu * tableMenu = new Q3PopupMenu(this);
   tablePrimaryKeyAction->addTo(tableMenu);
   tableMenu->insertSeparator();
   tableInsertAction->addTo(tableMenu);
@@ -1368,7 +1371,7 @@ CTableWindow::CTableWindow(QWidget* parent, CMySQLServer *m, const QString &dbna
 
     connect(tableInsertAction, SIGNAL(activated()), this, SLOT(insertRow()));
     connect(tableDeleteAction, SIGNAL(activated()), this, SLOT(deleteRow()));
-    tableInsertAccel->connectItem(tableInsertAccel->insertItem(Key_Insert), this, SLOT(insertRow()));
+    tableInsertAccel->connectItem(tableInsertAccel->insertItem(Qt::Key_Insert), this, SLOT(insertRow()));
     tableDeleteAccel->connectItem(tableDeleteAccel->insertItem(Qt::Key_Delete), this, SLOT(deleteRow()));
 
     connect(tablePrimaryKeyAction, SIGNAL(activated()), this, SLOT(setPk()));
@@ -1469,7 +1472,7 @@ void CTableWindow::fieldsValueChanged(int row, int col)
   case 0: f->FieldName = fields->text(row,col);
           checkDuplicateNames(f->FieldName, row, col);
     break;
-  case 1: f->Null = ((QCheckTableItem *) fields->item(row, col))->isChecked();
+  case 1: f->Null = ((Q3CheckTableItem *) fields->item(row, col))->isChecked();
     break;
   case 2: 
     {
@@ -1500,7 +1503,7 @@ void CTableWindow::insert(CTableWindowField *f)
   fields->verticalHeader()->setLabel(currentRow, " ");
 
   CTableWindowComboItem *combo;  
-  QCheckTableItem *check = new QCheckTableItem(fields, QString::null);
+  Q3CheckTableItem *check = new Q3CheckTableItem(fields, QString::null);
   if (f != 0)  //paste insert
   {
     hasModified = true;
@@ -1941,7 +1944,7 @@ void CTableWindow::reset()
     hasPaste = false;
   }
   QStringList keys;
-  QIntDict<CTableWindowField> *fieldsDict = 0;
+  Q3IntDict<CTableWindowField> *fieldsDict = 0;
   deletedFields.clear();
   indexesTab->clear();
   if (isAlterTable)
@@ -1968,7 +1971,7 @@ void CTableWindow::reset()
     int p;
     QChar c;
     QString line;
-    fieldsDict = new QIntDict<CTableWindowField>(lines.count());
+    fieldsDict = new Q3IntDict<CTableWindowField>(lines.count());
     fieldsDict->setAutoDelete(true);
     for (QStringList::Iterator it = lines.begin(); it != lines.end(); ++it)  //parse the query
     {
@@ -2123,7 +2126,7 @@ void CTableWindow::reset()
   {
     fields->verticalHeader()->setLabel(i, " ");
     CTableWindowComboItem * combo = 0;    
-    QCheckTableItem *check = new QCheckTableItem(fields, QString::null);
+    Q3CheckTableItem *check = new Q3CheckTableItem(fields, QString::null);
     if (isAlterTable)
     {
       combo = new CTableWindowComboItem(fields, fieldsDict->find(i), field_types);
@@ -2296,7 +2299,7 @@ void CTableWindow::showMessages(bool b)
 
 void CTableWindow::showContextMenu(int row, int, const QPoint &pos)
 {
-  QPopupMenu *menu = new QPopupMenu();
+  Q3PopupMenu *menu = new Q3PopupMenu();
   bool isPrimaryKey = fields->verticalHeader()->label(row).isNull();
   if (isPrimaryKey)
     menu->insertItem(emptyPkIcon, tr("Dr&op Primary Key"), 0);

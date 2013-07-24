@@ -19,19 +19,21 @@
 #define CTYPETOOLBAR_H
 
 #include <stddef.h>
-#include <qtoolbar.h>
+#include <q3toolbar.h>
 #include <qtoolbutton.h>
-#include <qintdict.h>
-#include <qpopupmenu.h>
+#include <q3intdict.h>
+#include <q3popupmenu.h>
+//Added by qt3to4:
+#include <QPixmap>
 
-class QMainWindow;
+class Q3MainWindow;
 
 class CToolBarButton : public QToolButton
 {
   Q_OBJECT
 
 public:
-  CToolBarButton(QWidget * parent, int v, QPopupMenu *p=0);
+  CToolBarButton(QWidget * parent, int v, Q3PopupMenu *p=0);
   int value() const { return val; }
   void setValue(int v) { val = v;}
   
@@ -46,13 +48,13 @@ private:
 };
 
 
-class CToolBar : public QToolBar
+class CToolBar : public Q3ToolBar
 {
   Q_OBJECT
 
 public:
-  CToolBar (QMainWindow * parent = 0, const char * name = 0);
-  void addButton(const QPixmap &pix, int val, QPopupMenu *p, bool ena, const QString &label = QString::null);
+  CToolBar (Q3MainWindow * parent = 0, const char * name = 0);
+  void addButton(const QPixmap &pix, int val, Q3PopupMenu *p, bool ena, const QString &label = QString::null);
   void clear();
 
   void setType(int t) { m_type = t; }
@@ -68,7 +70,7 @@ private slots:
 private:
   int cnt;
   int m_type;
-  QIntDict<CToolBarButton> buttons_dict;
+  Q3IntDict<CToolBarButton> buttons_dict;
 };
 
 #endif

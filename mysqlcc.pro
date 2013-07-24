@@ -66,3 +66,5 @@ HEADERS     =  include/CAboutBox.h include/CAdministrationWindow.h include/CAppC
 
 
 
+#The following line was inserted by qt3to4
+QT +=  qt3support 

@@ -33,6 +33,10 @@
 #include <qspinbox.h>
 #include <qtimer.h>
 #include <qdatetime.h>
+//Added by qt3to4:
+#include <QLabel>
+#include <Q3GridLayout>
+#include <Q3PopupMenu>
 
 CProcessListTable::CProcessListTable (QWidget * parent, CMySQLServer *m)
 : CQueryTable(parent, 0, m, "CProcessListTable")
@@ -53,8 +57,8 @@ CProcessListTable::CProcessListTable (QWidget * parent, CMySQLServer *m)
   setCaption(tr("Process List"));
   columnsWindow->setCaption("[" + m->connectionName() + "] " + tr("Process List Columns"));
   verticalHeader()->hide();
-  setFocusStyle(QTable::FollowStyle);
-  setSelectionMode(QTable::MultiRow);
+  setFocusStyle(Q3Table::FollowStyle);
+  setSelectionMode(Q3Table::MultiRow);
   setLeftMargin(0);
   is_first = true;
   setReadOnly(false);
@@ -72,7 +76,7 @@ void CProcessListTable::ContextMenuRequested(int row, int col, const QPoint &pos
   if (isBlocked())
     return;
 
-  QPopupMenu *menu = new QPopupMenu();
+  Q3PopupMenu *menu = new Q3PopupMenu();
   
     
   menu->insertItem(getPixmapIcon("chooseFieldsIcon"), tr("Choose Fields"), MENU_COLUMNS_WINDOW);  
@@ -133,7 +137,7 @@ void CProcessListTable::ContextMenuRequested(int row, int col, const QPoint &pos
 }
 
 
-void CProcessListTable::copy_data_func(QString *cpy, CMySQLQuery *qry, QTableSelection *sel, QMap<uint, ulong> *max_length_map)
+void CProcessListTable::copy_data_func(QString *cpy, CMySQLQuery *qry, Q3TableSelection *sel, QMap<uint, ulong> *max_length_map)
 {
   uint length;
   QString tmp;
@@ -267,8 +271,8 @@ CServerStatusTable::CServerStatusTable(QWidget * parent, CMySQLServer *m)
 : CQueryTable(parent, 0, m, "CServerStatusTable")
 {
   verticalHeader()->hide();
-  setFocusStyle(QTable::FollowStyle);
-  setSelectionMode(QTable::Single);
+  setFocusStyle(Q3Table::FollowStyle);
+  setSelectionMode(Q3Table::Single);
   setLeftMargin(0);
   setKeepColumnWidth(true);
   qry = new CMySQLQuery(m->mysql());
@@ -293,7 +297,7 @@ void CServerStatusTable::ContextMenuRequested(int row, int col, const QPoint &po
   if (isBlocked())
     return;
 
-  QPopupMenu *menu = new QPopupMenu();
+  Q3PopupMenu *menu = new Q3PopupMenu();
   
   menu->insertItem(getPixmapIcon("chooseFieldsIcon"), tr("Choose Fields"), MENU_COLUMNS_WINDOW);  
   menu->insertSeparator();
@@ -553,9 +557,9 @@ void CInnoDBStatus::save()
 }
 
 
-QPopupMenu *CInnoDBStatus::createPopupMenu(const QPoint &)
+Q3PopupMenu *CInnoDBStatus::createPopupMenu(const QPoint &)
 {
-  QPopupMenu *menu = new QPopupMenu(this);
+  Q3PopupMenu *menu = new Q3PopupMenu(this);
   int copy_id = menu->insertItem(getPixmapIcon("copyIcon"), tr("&Copy"), this, SLOT(copy()));
   menu->setItemEnabled(copy_id, hasSelectedText());
   menu->insertSeparator();
@@ -625,7 +629,7 @@ CAdministrationWindow::CAdministrationWindow(QWidget* parent,  CMySQLServer *m)
   }
 
   setCentralWidget( new QWidget( this, "qt_central_widget"));
-  CAdministrationWindowLayout = new QGridLayout( centralWidget(), 1, 1, 4, 2, "CAdministrationWindowLayout"); 
+  CAdministrationWindowLayout = new Q3GridLayout( centralWidget(), 1, 1, 4, 2, "CAdministrationWindowLayout"); 
   
   tabWidget = new QTabWidget( centralWidget(), "tabWidget");  
   
@@ -638,7 +642,7 @@ CAdministrationWindow::CAdministrationWindow(QWidget* parent,  CMySQLServer *m)
   variables = new CShowServerVariables(tabWidget, m_mysql);
   tabWidget->insertTab(variables, getPixmapIcon("showVariablesIcon"), tr("Variables"), SHOW_VARIABLES);
 
-  save_menu = new QPopupMenu(this);
+  save_menu = new Q3PopupMenu(this);
   connect(save_menu, SIGNAL(activated(int)), this, SLOT(save(int)));
   save_menu->insertItem(getPixmapIcon("showProcessListIcon"), tr("&Process List"), MENU_SAVE_PROCESSLIST);
   save_menu->insertItem(getPixmapIcon("showStatusIcon"), tr("&Status"), MENU_SAVE_STATUS);
@@ -693,9 +697,9 @@ CAdministrationWindow::CAdministrationWindow(QWidget* parent,  CMySQLServer *m)
   fileTimerAction->setParentMenuText(tr("File"));
   connect(fileTimerAction, SIGNAL(toggled(bool)), this, SLOT(fileTimerActionToggled(bool)));
 
-  QPopupMenu *fileMenu = new QPopupMenu(this);
-  QPopupMenu *actionMenu = new QPopupMenu(this);
-  QPopupMenu *viewMenu = new QPopupMenu(this);
+  Q3PopupMenu *fileMenu = new Q3PopupMenu(this);
+  Q3PopupMenu *actionMenu = new Q3PopupMenu(this);
+  Q3PopupMenu *viewMenu = new Q3PopupMenu(this);
   connect(viewMenu, SIGNAL(aboutToShow()), this, SLOT(viewMenuAboutToShow()));
 
   fileMenu->insertItem(getPixmapIcon("saveIcon"), tr("Save"), save_menu);
@@ -724,7 +728,7 @@ CAdministrationWindow::CAdministrationWindow(QWidget* parent,  CMySQLServer *m)
 
   new CHotKeyEditorMenu(this, menuBar(), "HotKeyEditor");
 
-  QToolBar * actionToolBar = new QToolBar(tr("Action Bar"), this, Top);
+  Q3ToolBar * actionToolBar = new Q3ToolBar(tr("Action Bar"), this, Qt::DockTop);
 
   QToolButton * saveTypeButton = new QToolButton(actionToolBar);
   saveTypeButton->setPopup(save_menu);
@@ -745,7 +749,7 @@ CAdministrationWindow::CAdministrationWindow(QWidget* parent,  CMySQLServer *m)
   actionToolBar->addSeparator();
   actionShutdownAction->addTo(actionToolBar);
 
-  QToolBar * refreshToolBar = new QToolBar(tr("Refresh Bar"), this, Top );  
+  Q3ToolBar * refreshToolBar = new Q3ToolBar(tr("Refresh Bar"), this, Qt::DockTop );  
   fileRefreshAction->addTo(refreshToolBar);  
   refreshToolBar->addSeparator();
  
@@ -798,7 +802,7 @@ void CAdministrationWindow::killProcesses()
   bool found = false;
   for (int i = 0; i < processList->numRows(); i++)
   {     
-    if (processList->item(i,0) != 0 && ((QCheckTableItem *) processList->item(i,0))->isChecked())
+    if (processList->item(i,0) != 0 && ((Q3CheckTableItem *) processList->item(i,0))->isChecked())
       if (mysql()->mysql()->mysqlKill(processList->text(i,0).toLong()))
       {
         messagePanel()->information(tr("Process killed successfully") + " :" +  processList->text(i,0));
@@ -859,13 +863,13 @@ CAdministrationWindow::~CAdministrationWindow()
   delete flush_menu;
 }
 
-QPopupMenu * CAdministrationWindow::flushMenu(const CMySQL *mysql)
+Q3PopupMenu * CAdministrationWindow::flushMenu(const CMySQL *mysql)
 {
 #ifdef DEBUG
   qDebug("static CTableTools::tableToolsMenu()");
 #endif
     
-  QPopupMenu *m = new QPopupMenu();
+  Q3PopupMenu *m = new Q3PopupMenu();
   m->insertItem(tr("&Hosts"), FLUSH_HOSTS);
   m->insertItem(tr("&Logs"), FLUSH_LOGS);
   m->insertItem(tr("&Privileges"), FLUSH_PRIVILEGES);

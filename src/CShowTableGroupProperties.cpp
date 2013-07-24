@@ -17,6 +17,8 @@
 */
 #include "CShowTableGroupProperties.h"
 #include "config.h"
+//Added by qt3to4:
+#include <Q3PopupMenu>
 
 CShowTableGroupProperties::CShowTableGroupProperties(QWidget * parent, const char *name)
 : CTable(parent, name), current_item(0)
@@ -29,8 +31,8 @@ CShowTableGroupProperties::CShowTableGroupProperties(QWidget * parent, const cha
     setName("CShowTableGroupProperties");  
   verticalHeader()->hide();
   setReadOnly(true);
-  setFocusStyle(QTable::FollowStyle);
-  setSelectionMode(QTable::SingleRow);
+  setFocusStyle(Q3Table::FollowStyle);
+  setSelectionMode(Q3Table::SingleRow);
   setLeftMargin(0);
 }
 
@@ -43,7 +45,7 @@ CTableItem * CShowTableGroupProperties::findItem(const QString &str)
   if (current_item == 0)
     return 0;
 
-  QListViewItemIterator c(current_item->firstChild());
+  Q3ListViewItemIterator c(current_item->firstChild());
   for ( ; c.current(); ++c )
   {    
     if ((CTableGroupItem *)c.current()->parent() == current_item)
@@ -98,7 +100,7 @@ void CShowTableGroupProperties::ContextMenuRequested(int row, int, const QPoint 
     CTableItem * item = findItem(text(row, 0));
     if (item == 0)
       return;
-    QPopupMenu *m = new QPopupMenu();
+    Q3PopupMenu *m = new Q3PopupMenu();
     connect(m, SIGNAL(activated(int)), item, SLOT(processMenu(int)));
     item->createPopupMenu(m);
     m->removeItem(MENU_RENAME);

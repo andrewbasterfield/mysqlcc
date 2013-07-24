@@ -23,23 +23,27 @@
 #include "panels.h"
 #include <stddef.h>
 #include <qvariant.h>
-#include <qbuttongroup.h>
+#include <q3buttongroup.h>
 #include <qcheckbox.h>
-#include <qheader.h>
+#include <q3header.h>
 #include <qlabel.h>
 #include <qlineedit.h>
-#include <qlistbox.h>
+#include <q3listbox.h>
 #include <qpushbutton.h>
 #include <qlayout.h>
 #include <qtooltip.h>
-#include <qwhatsthis.h>
+#include <q3whatsthis.h>
 #include <qaction.h>
 #include <qmenubar.h>
-#include <qpopupmenu.h>
-#include <qtoolbar.h>
+#include <q3popupmenu.h>
+#include <q3toolbar.h>
 #include <qimage.h>
 #include <qpixmap.h>
 #include <qmessagebox.h>
+//Added by qt3to4:
+#include <Q3HBoxLayout>
+#include <Q3GridLayout>
+#include <QCloseEvent>
 
 #ifdef DEBUG_LEVEL
 #if DEBUG_LEVEL < 2
@@ -51,8 +55,8 @@
 #endif
 #endif
 
-CGrantItem::CGrantItem(QListView * parent, const QString &txt, const QPixmap &pix, Type t)
-: QCheckListItem(parent, txt, QCheckListItem::CheckBox)
+CGrantItem::CGrantItem(Q3ListView * parent, const QString &txt, const QPixmap &pix, Type t)
+: Q3CheckListItem(parent, txt, Q3CheckListItem::CheckBox)
 {
 #ifdef DEBUG
   qDebug("CGrantItem::CGrantItem(QListView *, const QString &, const QPixmap &, Type)");
@@ -61,8 +65,8 @@ CGrantItem::CGrantItem(QListView * parent, const QString &txt, const QPixmap &pi
   init(pix, t);
 }
 
-CGrantItem::CGrantItem(QListViewItem * parent, const QString &txt, const QPixmap &pix, Type t)
-: QCheckListItem(parent, txt, QCheckListItem::CheckBox)
+CGrantItem::CGrantItem(Q3ListViewItem * parent, const QString &txt, const QPixmap &pix, Type t)
+: Q3CheckListItem(parent, txt, Q3CheckListItem::CheckBox)
 {
 #ifdef DEBUG
   qDebug("CGrantItem::CGrantItem(QListViewItem *, const QString &, const QPixmap &, Type)");
@@ -86,7 +90,7 @@ void CGrantItem::init(const QPixmap &pix, const Type &t)
   privileges.clear();
 }
 
-int CGrantItem::compare(QListViewItem * i, int col, bool ascending) const
+int CGrantItem::compare(Q3ListViewItem * i, int col, bool ascending) const
 {
 #ifdef DEBUG
   qDebug("CGrantItem::compare(QListViewItem *, int, bool)");
@@ -105,14 +109,14 @@ void CGrantItem::stateChange(bool b)
 
   if (type() == DATABASE)
   {
-    QCheckListItem *d = (QCheckListItem *)firstChild();
+    Q3CheckListItem *d = (Q3CheckListItem *)firstChild();
     listView()->setCursor(Qt::WaitCursor);
     while (d != NULL)
     {    
       d->setEnabled(!b);
       if (d->isOn() && b)
         d->setOn(false);
-      d = (QCheckListItem *)d->nextSibling();
+      d = (Q3CheckListItem *)d->nextSibling();
     }
     listView()->setCursor(Qt::ArrowCursor);
   }
@@ -137,13 +141,13 @@ CUserAdminWindow::CUserAdminWindow(QWidget *parent, CMySQLServer *m, const QStri
   mysql->connect();
   
   setCentralWidget(new QWidget(this, "qt_central_widget"));
-  CUserAdminWindowLayout = new QGridLayout(centralWidget(), 1, 1, 4, 2, "CUserAdminWindowLayout"); 
+  CUserAdminWindowLayout = new Q3GridLayout(centralWidget(), 1, 1, 4, 2, "CUserAdminWindowLayout"); 
   
   Password = new QLineEdit(centralWidget(), "Password");
-  Password->setFrameShape(QLineEdit::LineEditPanel);
+  Password->setFrameShape(QFrame::StyledPanel);
   Password->setFrameShadow(QLineEdit::Sunken);
   Password->setEchoMode(QLineEdit::Password);
-  QWhatsThis::add(Password, trUtf8("This is the Password for Username."));
+  Q3WhatsThis::add(Password, trUtf8("This is the Password for Username."));
   
   CUserAdminWindowLayout->addWidget(Password, 2, 1);
   
@@ -158,36 +162,36 @@ CUserAdminWindow::CUserAdminWindow(QWidget *parent, CMySQLServer *m, const QStri
   CUserAdminWindowLayout->addWidget(passwordLabel, 2, 0);
   
   Host = new QLineEdit(centralWidget(), "Host");
-  Host->setFrameShape(QLineEdit::LineEditPanel);
+  Host->setFrameShape(QFrame::StyledPanel);
   Host->setFrameShadow(QLineEdit::Sunken);
   Host->setText(hostname);
-  QWhatsThis::add(Host, trUtf8("This is the Hostname the Username will be connecting from.  Use '%' for referring to Any."));
+  Q3WhatsThis::add(Host, trUtf8("This is the Hostname the Username will be connecting from.  Use '%' for referring to Any."));
   
   CUserAdminWindowLayout->addWidget(Host, 1, 1);
   
-  ButtonGroup1 = new QButtonGroup(centralWidget(), "ButtonGroup1");
+  ButtonGroup1 = new Q3ButtonGroup(centralWidget(), "ButtonGroup1");
   ButtonGroup1->setTitle(trUtf8("Privileges"));
   ButtonGroup1->setColumnLayout(0, Qt::Vertical);
   ButtonGroup1->layout()->setSpacing(6);
   ButtonGroup1->layout()->setMargin(6);
-  ButtonGroup1Layout = new QGridLayout(ButtonGroup1->layout());
+  ButtonGroup1Layout = new Q3GridLayout(ButtonGroup1->layout());
   ButtonGroup1Layout->setAlignment(Qt::AlignTop);
   
   allPrivileges = new QCheckBox(ButtonGroup1, "allPrivileges");
   allPrivileges->setText(trUtf8("All Privileges"));
-  QWhatsThis::add(allPrivileges, trUtf8("This option will GRANT ALL PRIVILEGES to Username"));
+  Q3WhatsThis::add(allPrivileges, trUtf8("This option will GRANT ALL PRIVILEGES to Username"));
   
   ButtonGroup1Layout->addWidget(allPrivileges, 0, 0);
   
   withGrantOption = new QCheckBox(ButtonGroup1, "withGrantOption");
   withGrantOption->setText(trUtf8("With GRANT option"));
-  QWhatsThis::add(withGrantOption, trUtf8("This option will grant Username privileges for GRANT."));
+  Q3WhatsThis::add(withGrantOption, trUtf8("This option will grant Username privileges for GRANT."));
   
   ButtonGroup1Layout->addWidget(withGrantOption, 2, 0);
   
-  privilegeListBox = new QListBox(ButtonGroup1, "privilegeListBox");
-  privilegeListBox->setSelectionMode(QListBox::Multi);
-  QWhatsThis::add(privilegeListBox, trUtf8("Select the desired Privileges for Username"));
+  privilegeListBox = new Q3ListBox(ButtonGroup1, "privilegeListBox");
+  privilegeListBox->setSelectionMode(Q3ListBox::Multi);
+  Q3WhatsThis::add(privilegeListBox, trUtf8("Select the desired Privileges for Username"));
   
   ButtonGroup1Layout->addWidget(privilegeListBox, 1, 0);
   
@@ -195,7 +199,7 @@ CUserAdminWindow::CUserAdminWindow(QWidget *parent, CMySQLServer *m, const QStri
   
   Username = new QLineEdit(centralWidget(), "Username");
   Username->setText(username);
-  QWhatsThis::add(Username, trUtf8("This is the Username you will be Granting / Editing privileges to."));
+  Q3WhatsThis::add(Username, trUtf8("This is the Username you will be Granting / Editing privileges to."));
   
   CUserAdminWindowLayout->addWidget(Username, 0, 1);
   
@@ -204,7 +208,7 @@ CUserAdminWindow::CUserAdminWindow(QWidget *parent, CMySQLServer *m, const QStri
   
   CUserAdminWindowLayout->addWidget(usernameLabel, 0, 0);
   
-  Layout2 = new QHBoxLayout(0, 0, 6, "Layout2"); 
+  Layout2 = new Q3HBoxLayout(0, 0, 6, "Layout2"); 
   
   deleteButton = new QPushButton(centralWidget(), "deleteButton");
   deleteButton->setText(trUtf8("&Delete User"));
@@ -218,24 +222,24 @@ CUserAdminWindow::CUserAdminWindow(QWidget *parent, CMySQLServer *m, const QStri
   applyButton->setMinimumSize(QSize(60, 0));
   applyButton->setText((const QString&)(is_editing ? trUtf8("&Apply") : trUtf8("&Add")));
   applyButton->setDefault(true);
-  QWhatsThis::add(applyButton, trUtf8("Click here to apply changes any you have made."));
+  Q3WhatsThis::add(applyButton, trUtf8("Click here to apply changes any you have made."));
   Layout2->addWidget(applyButton);
   
   closeButton = new QPushButton(centralWidget(), "closeButton");
   closeButton->setMinimumSize(QSize(60, 0));
   closeButton->setText(trUtf8("&Close"));
-  QWhatsThis::add(closeButton, trUtf8("Close this Dialog without saving any changes you have made."));
+  Q3WhatsThis::add(closeButton, trUtf8("Close this Dialog without saving any changes you have made."));
   Layout2->addWidget(closeButton);
   
   CUserAdminWindowLayout->addMultiCellLayout(Layout2, 4, 4, 0, 2);
   
-  databaseListView = new QListView(centralWidget(), "databaseListView");
+  databaseListView = new Q3ListView(centralWidget(), "databaseListView");
   databaseListView->addColumn(tr("Allow access to"));
   databaseListView->header()->setResizeEnabled(false, databaseListView->header()->count() - 1);  
   databaseListView->setShowSortIndicator(true);
-  databaseListView->setResizeMode(QListView::AllColumns);
+  databaseListView->setResizeMode(Q3ListView::AllColumns);
   databaseListView->setRootIsDecorated (true);    
-  QWhatsThis::add(databaseListView, trUtf8("These are the Databases/Tables username will have access to."));
+  Q3WhatsThis::add(databaseListView, trUtf8("These are the Databases/Tables username will have access to."));
   
   CUserAdminWindowLayout->addMultiCellWidget(databaseListView, 0, 3, 2, 2);  
   
@@ -253,7 +257,7 @@ CUserAdminWindow::CUserAdminWindow(QWidget *parent, CMySQLServer *m, const QStri
   connect(deleteButton, SIGNAL(clicked()), this, SLOT(deleteClicked()));
   connect(closeButton, SIGNAL(clicked()), this, SLOT(close()));
   connect(applyButton, SIGNAL(clicked()), this, SLOT(applyClicked()));
-  connect(databaseListView, SIGNAL(currentChanged(QListViewItem *)), this, SLOT(setCurrentItem(QListViewItem *)));
+  connect(databaseListView, SIGNAL(currentChanged(Q3ListViewItem *)), this, SLOT(setCurrentItem(Q3ListViewItem *)));
   connect(privilegeListBox, SIGNAL(selectionChanged()), this, SLOT(privilegeListBoxChanged()));
   connect(allPrivileges, SIGNAL(toggled(bool)), this, SLOT(allPrivilegesToggled(bool)));
   connect(withGrantOption, SIGNAL(toggled(bool)), this, SLOT(withGrantToggled(bool)));
@@ -322,7 +326,7 @@ void CUserAdminWindow::refresh()
   setWindowCaption(); 
   refreshPrivilegesList();
 
-  QListViewItemIterator it(databaseListView);
+  Q3ListViewItemIterator it(databaseListView);
   for (; it.current(); ++it)
   {
     CGrantItem *i = (CGrantItem *) it.current();
@@ -467,7 +471,7 @@ void CUserAdminWindow::getDefaultItemPrivileges(QStringList &lst, CGrantItem::Ty
   }
 }
 
-void CUserAdminWindow::setCurrentItem(QListViewItem *i)
+void CUserAdminWindow::setCurrentItem(Q3ListViewItem *i)
 {
 #ifdef DEBUG
   qDebug("CUserAdminWindow::setCurrentItem(QListViewItem *)");
@@ -594,7 +598,7 @@ CGrantItem *CUserAdminWindow::findItem(const QString &db, const QString &tbl)
   else
     tmp_tbl = tbl;
 
-  QListViewItemIterator it(databaseListView);
+  Q3ListViewItemIterator it(databaseListView);
   bool ok = false;
   for (; it.current(); ++it)
   {
@@ -718,7 +722,7 @@ bool CUserAdminWindow::grantPrivileges()
   if (is_editing)
     ret &= removeUser(mysql, username, hostname, true);
 
-  QListViewItemIterator it(databaseListView);
+  Q3ListViewItemIterator it(databaseListView);
   QString sql;
   CMySQLQuery *query = new CMySQLQuery(mysql->mysql());
   query->setEmitMessages(false);

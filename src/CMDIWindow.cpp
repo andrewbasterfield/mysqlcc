@@ -24,6 +24,10 @@
 #include "CHotKeyEditorDialog.h"
 #include <stddef.h>  
 #include <qaction.h>
+//Added by qt3to4:
+#include <Q3GridLayout>
+#include <Q3PopupMenu>
+#include <QCloseEvent>
 
 /*
 CMDIWindow is the class used as the Main Application Widget when mysqlcc is
@@ -33,7 +37,7 @@ It is used by main.cpp
 */
 
 CMDIWindow::CMDIWindow(QWidget* parent)
-: CMyWindow(parent, 0, true, WType_TopLevel)
+: CMyWindow(parent, 0, true, Qt::WType_TopLevel)
 {
 #ifdef DEBUG
   qDebug("CMDIWindow::CMDIWindow()");
@@ -46,14 +50,14 @@ CMDIWindow::CMDIWindow(QWidget* parent)
   setIcon(getPixmapIcon("applicationIcon"));
   
   setCentralWidget( new QWidget( this, "qt_central_widget" ) );
-  CMDIWindowLayout = new QGridLayout( centralWidget(), 1, 1, 2, 2, "CMDIWindowLayout"); 
+  CMDIWindowLayout = new Q3GridLayout( centralWidget(), 1, 1, 2, 2, "CMDIWindowLayout"); 
    
   myApp()->createWorkspace(centralWidget());
   myApp()->workSpace()->setScrollBarsEnabled(true);
   
   CMDIWindowLayout->addWidget(myApp()->workSpace(), 0, 0);
   
-  consoleMenu = new QPopupMenu(this, "ConsoleMenu");
+  consoleMenu = new Q3PopupMenu(this, "ConsoleMenu");
   
   QAction * consoleExitAction = new QAction (tr("Exit"), getPixmapIcon("exitIcon"),
     tr("E&xit"), 0, this, "consoleExitAction");  //Exit should not be CAction 
@@ -68,7 +72,7 @@ CMDIWindow::CMDIWindow(QWidget* parent)
 #endif
   new CHotKeyEditorMenu(this, menuBar(), "HotKeyEditor");
 
-  windowMenu = new QPopupMenu(this, "WindowMenu");
+  windowMenu = new Q3PopupMenu(this, "WindowMenu");
   windowMenu->setCheckable(true);
   menuBar()->insertItem(tr("&Window"), windowMenu);
   new CHelpMenu(this, menuBar(), "HelpMenu");
@@ -195,7 +199,7 @@ void CMDIWindow::closeAllWindows()
 #endif
   
   QWidgetList lst = myApp()->workSpace()->windowList();
-  QPtrListIterator<QWidget> it(lst);
+  Q3PtrListIterator<QWidget> it(lst);
   while (it.current())
   {
 	  QWidget *w = it.current();

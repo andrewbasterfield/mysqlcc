@@ -122,6 +122,22 @@ void CMySQL::setCompress(bool b)
 
 
 /*
+setReconnect() handles auto-reconnect.
+*/
+void CMySQL::setReconnect(bool b)
+{
+#ifdef DEBUG
+  qDebug("CMySQL::setReconnect()");
+#endif
+  
+  if (isConnected())
+    return;
+  
+  mysql_opt_reconnect = b;
+}
+
+
+/*
 setSSL() handles the use of SSL (encrypted) protocol.
 */
 void CMySQL::setSSL(bool b)

@@ -47,6 +47,7 @@ public:
   void setFieldEncloser(const QString &s) { p_field_encloser = s; }
   void setReplaceEmpty(const QString &s) { p_replace_empty = s; }
   void setCompress(bool b) { p_compress = b; }
+  void setReconnect(bool b) { p_reconnect = b; }
   void setPromptPassword(bool b) { p_prompt_password = b; }
   void setBlockingQueries(bool b) { p_blocking_queries = b; }
   void setOneConnection(bool b) { p_one_connection = b; }
@@ -84,6 +85,7 @@ public:
   
   bool isConnected() const { return mysql()->isConnected(); }
   bool compress() const { return p_compress; }
+  bool reconnect() const { return p_reconnect; }
   bool promptPassword() const { return p_prompt_password; }
   bool blockingQueries() const { return p_blocking_queries; }
   bool oneConnection() const { return p_one_connection; }
@@ -143,6 +145,7 @@ private:
   QStringList p_databases;
   bool p_use_specific_databases;
   bool p_compress;
+  bool p_reconnect;
   bool p_show_all_databases;
   bool p_prompt_password;
   bool p_blocking_queries;

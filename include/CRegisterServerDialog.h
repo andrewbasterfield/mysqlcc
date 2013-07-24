@@ -146,6 +146,7 @@ public:
   QPushButton* socketBrowse;
   QCheckBox* oneConnectionCheckBox;
   QCheckBox* compressCheckBox;
+  QCheckBox* reconnectCheckBox;
   QCheckBox* blockingCheckBox;
   QCheckBox* enableCompletionCheckBox;
   QCheckBox* SSLCheckBox;

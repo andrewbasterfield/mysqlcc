@@ -250,6 +250,7 @@ void CMySQLServer::refresh()
   p_user_name = cfg->readStringEntry("User");
   p_password = cfg->readStringEntry("Password");
   p_compress = strtobool(cfg->readStringEntry("Compress", "false"));
+  p_reconnect = strtobool(cfg->readStringEntry("Reconnect", "true"));
   p_prompt_password = strtobool(cfg->readStringEntry("Prompt Password", "false"));
   p_blocking_queries = strtobool(cfg->readStringEntry("Blocking Queries", "false"));
   p_one_connection = strtobool(cfg->readStringEntry("One Connection"));
@@ -373,6 +374,7 @@ bool CMySQLServer::connect()
   p_mysql->setPort(port());
   p_mysql->setUnixSocket(socketFile());
   p_mysql->setCompress(compress());
+  p_mysql->setReconnect(reconnect());
   p_mysql->setSSL(ssl());
   p_mysql->setConnectTimeout(timeout());
   p_mysql->setSelectLimit(selectLimit());

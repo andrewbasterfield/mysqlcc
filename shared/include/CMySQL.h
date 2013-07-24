@@ -88,6 +88,7 @@ public:
   void setPort(const uint &p) { mysql_port = p; }
   void setUnixSocket(const QString &s) { mysql_unix_socket = s; }
   void setCompress(bool b);
+  void setReconnect(bool b);
   void setSSL(bool b);
   void setConnectTimeout(ulong t) { mysql_opt_timeout = t; }
   void setSelectLimit(ulong i) { mysql_opt_select_limit = i; }
@@ -151,6 +152,7 @@ private:
   ulong mysql_opt_max_allowed_packet;
   bool mysql_opt_load_local_infile;
   bool mysql_opt_compress;
+  bool mysql_opt_reconnect;
   bool emiterror;
   bool emitmessages;
   bool blocking_queries;    

@@ -553,12 +553,12 @@ CGeneralServerOptionsTab::CGeneralServerOptionsTab(bool isediting, QWidget * par
   socketLabel = new QLabel(Options, "socketLabel");
   socketLabel->setSizePolicy(QSizePolicy((QSizePolicy::SizeType)0, (QSizePolicy::SizeType)5, 0, 0, socketLabel->sizePolicy().hasHeightForWidth()));
   
-  OptionsLayout->addWidget(socketLabel, 3, 0);
+  OptionsLayout->addWidget(socketLabel, 4, 0);
   
   socketFile = new QLineEdit(Options, "socketFile");
   socketFile->setSizePolicy(QSizePolicy((QSizePolicy::SizeType)7, (QSizePolicy::SizeType)0, 0, 0, socketFile->sizePolicy().hasHeightForWidth()));
   
-  OptionsLayout->addMultiCellWidget(socketFile, 3, 3, 1, 2);
+  OptionsLayout->addMultiCellWidget(socketFile, 4, 4, 1, 2);
   
   socketBrowse = new QPushButton(Options, "socketBrowse");
   socketBrowse->setMinimumSize(QSize(22, 22));
@@ -571,7 +571,7 @@ CGeneralServerOptionsTab::CGeneralServerOptionsTab(bool isediting, QWidget * par
   socketFile->setEnabled(false);
 #endif    
   
-  OptionsLayout->addWidget(socketBrowse, 3, 3);
+  OptionsLayout->addWidget(socketBrowse, 4, 4);
   
   oneConnectionCheckBox = new QCheckBox(Options, "oneConnectionCheckBox");
   oneConnectionCheckBox->setEnabled(false);  //TODO ... REMOVE WHEN FULLY SUPPORTED
@@ -583,14 +583,19 @@ CGeneralServerOptionsTab::CGeneralServerOptionsTab(bool isediting, QWidget * par
   
   OptionsLayout->addMultiCellWidget(compressCheckBox, 0, 0, 0, 1);
   
+  reconnectCheckBox = new QCheckBox(Options, "reconnectCheckBox");
+  reconnectCheckBox->setChecked(true);
+  
+  OptionsLayout->addMultiCellWidget(reconnectCheckBox, 1, 1, 0, 1);
+  
   blockingCheckBox = new QCheckBox(Options, "blockingCheckBox");
   
-  OptionsLayout->addMultiCellWidget(blockingCheckBox, 1, 1, 0, 1);
+  OptionsLayout->addMultiCellWidget(blockingCheckBox, 2, 2, 0, 1);
   
   enableCompletionCheckBox = new QCheckBox(Options, "enableCompletionCheckBox");
   enableCompletionCheckBox->setChecked(true);
   
-  OptionsLayout->addMultiCellWidget(enableCompletionCheckBox, 2, 2, 0, 1);
+  OptionsLayout->addMultiCellWidget(enableCompletionCheckBox, 3, 3, 0, 1);
   
   SSLCheckBox = new QCheckBox(Options, "SSLCheckBox");
   SSLCheckBox->setEnabled(false);  //TODO ... REMOVE WHEN FULLY SUPPORTED
@@ -624,7 +629,8 @@ CGeneralServerOptionsTab::CGeneralServerOptionsTab(bool isediting, QWidget * par
   setTabOrder(PortBox, retrieveShowTableStatus);
   setTabOrder(retrieveShowTableStatus, retrieveShowTables);
   setTabOrder(retrieveShowTables, compressCheckBox);
-  setTabOrder(compressCheckBox, blockingCheckBox);
+  setTabOrder(compressCheckBox, reconnectCheckBox);
+  setTabOrder(reconnectCheckBox, blockingCheckBox);
   setTabOrder(blockingCheckBox, enableCompletionCheckBox);
   setTabOrder(enableCompletionCheckBox, promptPasswordCheckBox);
   setTabOrder(promptPasswordCheckBox, oneConnectionCheckBox);
@@ -663,6 +669,8 @@ void CGeneralServerOptionsTab::languageChange()
   QWhatsThis::add(oneConnectionCheckBox, tr("Enable this option if you only want to use One connection rather than having MySQL Control Center use as many as required.  This option is recommended for when connecting to a high-load server."));
   compressCheckBox->setText(tr("Use Compression"));
   QWhatsThis::add(compressCheckBox, tr("Use the compressed client/server protocol."));
+  reconnectCheckBox->setText(tr("Automatically Reconnect"));
+  QWhatsThis::add(reconnectCheckBox, tr("Automatically connect when database connection is disconnected."));
   blockingCheckBox->setText(tr("Blocking Queries"));
   QWhatsThis::add(blockingCheckBox, tr("Use Blocking Queries when enabled.  This option will allow the user to keep doing things while processing a query.  If disabled, the application will block until the query is concluded. If you're unsure about this option, leave it disabled."));
   enableCompletionCheckBox->setText(tr("Completion and Syntax Highlighting"));
@@ -690,6 +698,7 @@ void CGeneralServerOptionsTab::setDefaultValues(CConfig *Settings)
   UserNameBox->setText(Settings->readStringEntry("User"));  
   PortBox->setValue(Settings->readNumberEntry("Port"));  
   compressCheckBox->setChecked(strtobool(Settings->readStringEntry("Compress", "false")));
+  reconnectCheckBox->setChecked(strtobool(Settings->readStringEntry("Reconnect", "true")));
   promptPasswordCheckBox->setChecked(strtobool(Settings->readStringEntry("Prompt Password", "false")));
   if (!promptPasswordCheckBox->isChecked())
     PasswordBox->setText(Settings->readStringEntry("Password"));
@@ -758,6 +767,7 @@ bool CGeneralServerOptionsTab::save(CConfig *conn)
   if (!promptPasswordCheckBox->isChecked())
     ret &= conn->writeEntry("Password", PasswordBox->text());
   ret &= conn->writeEntry("Compress", booltostr(compressCheckBox->isChecked()));
+  ret &= conn->writeEntry("Reconnect", booltostr(reconnectCheckBox->isChecked()));
   ret &= conn->writeEntry("Prompt Password", booltostr(promptPasswordCheckBox->isChecked()));
   ret &= conn->writeEntry("Blocking Queries", booltostr(blockingCheckBox->isChecked()));
   ret &= conn->writeEntry("One Connection", booltostr(oneConnectionCheckBox->isChecked()));
@@ -819,7 +829,7 @@ void CRegisterServerDialog::initConnectionDialog(CMessagePanel *messagepanel)
 #ifdef DEBUG
   qDebug("CRegisterServerDialog::initConnectionDialog()");
 #endif
-    
+
   myApp()->incCritical();
   messagePanel = messagepanel;
   GeneralServerOptionsTab = new CGeneralServerOptionsTab(isEditing, tab(), "General");

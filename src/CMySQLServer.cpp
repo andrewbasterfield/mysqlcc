@@ -309,7 +309,7 @@ QString CMySQLServer::fieldSeparator(bool escape) const
 QString CMySQLServer::replaceEmpty(bool escape) const
 {
 #ifdef DEBUG
-  qDebug("CMySQLServer::replaceEmtpy()");
+  qDebug("CMySQLServer::replaceEmpty()");
 #endif
   
   return (!escape ? p_replace_empty : doEscape(p_replace_empty));                    

@@ -278,7 +278,7 @@ void CSaveServerOptionsTab::setDefaultValues(CConfig *conn)
   Separated->setText(conn->readStringEntry("Field Separate", ","));
   Terminated->setText(conn->readStringEntry("Line Terminate", "\\r\\n"));
   Enclosed->setText(conn->readStringEntry("Field Enclosed", "'"));
-  ReplaceEmpty->setText(conn->readStringEntry("Replace Emtpy", QString::null));
+  ReplaceEmpty->setText(conn->readStringEntry("Replace Empty", QString::null));
 }
 
 

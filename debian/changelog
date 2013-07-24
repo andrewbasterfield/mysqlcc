@@ -1,3 +1,9 @@
+mysqlcc (1.0.1-1) UNRELEASED; urgency=low
+
+  * Source now from https://github.com/andrewbasterfield/mysqlcc/
+
+ -- Andrew Basterfield <abasterfield@gmail.com>  Wed, 24 Jul 2013 12:59:20 +0100
+
 mysqlcc (0.9.4-4) unstable; urgency=high
 
   * Fix a rather critical NULL deference when new table rows are inserted.

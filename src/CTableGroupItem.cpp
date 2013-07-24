@@ -175,10 +175,10 @@ void CTableGroupItem::refreshWidget(bool b)
       w->horizontalHeader()->setLabel(0, tr("Table"));
       if (!notnew)
       {
-        w->horizontalHeader()->setLabel(1, tr("Records"));
-        w->horizontalHeader()->setLabel(2, tr("Size (bytes)"));
-        w->horizontalHeader()->setLabel(3, tr("Created"));
-        w->horizontalHeader()->setLabel(4, tr("Type"));
+        w->horizontalHeader()->setLabel(1, tr("Type"));
+        w->horizontalHeader()->setLabel(2, tr("Records"));
+        w->horizontalHeader()->setLabel(3, tr("Data Size (bytes)"));
+        w->horizontalHeader()->setLabel(4, tr("Index Size (bytes)"));
         w->horizontalHeader()->setLabel(5, tr("Comments"));
       }    
       int j = 0;
@@ -193,11 +193,29 @@ void CTableGroupItem::refreshWidget(bool b)
         w->setText(j,0, str0);
         if (!notnew)
         {
-          insertWidgetData(w, k++, j, 1, qry->row(3));
-          insertWidgetData(w, k++, j, 2, qry->row(5));
-          insertWidgetData(w, k++, j, 3, qry->row(10));
-          insertWidgetData(w, k++, j, 4, qry->row(1));
-          insertWidgetData(w, k++, j, 5, qry->row(14));          
+
+          if (
+            (((mysql()->mysql()->version().major == 4) && (mysql()->mysql()->version().minor >= 1)) || (mysql()->mysql()->version().major >= 5))
+          ) {
+
+            /* mysql server 4.1 or above */
+
+            insertWidgetData(w, k++, j, 1, qry->row(1));  /* Type */
+            insertWidgetData(w, k++, j, 2, qry->row(4));  /* Records */
+            insertWidgetData(w, k++, j, 3, qry->row(6));  /* Data Size */
+            insertWidgetData(w, k++, j, 4, qry->row(8));  /* Index Size */
+            insertWidgetData(w, k++, j, 5, qry->row(17)); /* Comments */
+
+          } else {
+
+            insertWidgetData(w, k++, j, 1, qry->row(1));  /* Type */
+            insertWidgetData(w, k++, j, 2, qry->row(3));  /* Records */
+            insertWidgetData(w, k++, j, 3, qry->row(5));  /* Data Size */
+            insertWidgetData(w, k++, j, 4, qry->row(7));  /* Index Size */
+            insertWidgetData(w, k++, j, 5, qry->row(14)); /* Comments */
+
+          }
+
         }
         j++;
       }
@@ -211,10 +229,10 @@ void CTableGroupItem::refreshWidget(bool b)
     w->horizontalHeader()->setLabel(0, tr("Table"));
     if (real_numCols > 1)
     {
-      w->horizontalHeader()->setLabel(1, tr("Records"));
-      w->horizontalHeader()->setLabel(2, tr("Size (bytes)"));
-      w->horizontalHeader()->setLabel(3, tr("Created"));
-      w->horizontalHeader()->setLabel(4, tr("Type"));
+      w->horizontalHeader()->setLabel(1, tr("Type"));
+      w->horizontalHeader()->setLabel(2, tr("Records"));
+      w->horizontalHeader()->setLabel(3, tr("Data Size (bytes)"));
+      w->horizontalHeader()->setLabel(4, tr("Index Size (bytes)"));
       w->horizontalHeader()->setLabel(5, tr("Comments"));
     }
     for (int i = 0; i < real_numRows; i++)

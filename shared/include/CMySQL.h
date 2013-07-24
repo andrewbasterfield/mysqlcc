@@ -151,6 +151,7 @@ private:
   ulong mysql_opt_max_allowed_packet;
   bool mysql_opt_load_local_infile;
   bool mysql_opt_compress;
+  bool mysql_opt_reconnect;
   bool emiterror;
   bool emitmessages;
   bool blocking_queries;    

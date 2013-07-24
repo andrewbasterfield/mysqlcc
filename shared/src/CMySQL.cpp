@@ -73,6 +73,7 @@ void CMySQL::init()
   mysql_client_flags = 0;
   mysql_client_ssl = false;
   mysql_opt_compress = false;
+  mysql_opt_reconnect = true;
   mysql_opt_timeout = 0;
   mysql_opt_select_limit = 1000;
   mysql_opt_net_buffer_length = 16384;
@@ -171,6 +172,8 @@ bool CMySQL::connect()
     disconnect();
   
   mysql = mysql_init(0);
+
+  mysql_options(mysql, MYSQL_OPT_RECONNECT, &mysql_opt_reconnect);
 
   if (mysql_opt_compress)
   {
